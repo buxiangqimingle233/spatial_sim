@@ -250,7 +250,7 @@ int FocusTrafficPattern::dest(int source)
     result = _trace[source][idx];
   }
   _trace_cnt[source] += 1;
-  cout << "source: " << source << " " << "index: "<< idx << " " << "result: " << result << endl;
+  // cout << "source: " << source << " " << "index: "<< idx << " " << "result: " << result << endl;
   return result;
 }
 

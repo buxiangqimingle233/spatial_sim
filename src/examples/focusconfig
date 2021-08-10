@@ -1,10 +1,10 @@
-topology = torus;
+topology = mesh;
 k = 4;
 n = 2;
 // Routing
-routing_function = dim_order;
+routing_function = min_adapt;
 // Flow control
-num_vcs = 2;
+num_vcs = 4;
 // Traffic
 traffic = focus;
-injection_rate = 0.15;
+injection_process = focus;

@@ -45,6 +45,14 @@ public:
 				Configuration const * const config = NULL);
 };
 
+class FocusInjectionProcess : public InjectionProcess {
+private:
+  vector<float> _inj_rate;
+public:
+  FocusInjectionProcess(int nodes, double rate);
+  virtual bool test(int source);
+};
+
 class BernoulliInjectionProcess : public InjectionProcess {
 public:
   BernoulliInjectionProcess(int nodes, double rate);

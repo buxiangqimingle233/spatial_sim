@@ -26,6 +26,7 @@
 */
 
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <cassert>
 #include <limits>
@@ -74,7 +75,10 @@ InjectionProcess * InjectionProcess::New(string const & inject, int nodes,
   vector<string> params = tokenize_str(param_str);
 
   InjectionProcess * result = NULL;
-  if(process_name == "bernoulli") {
+  if(process_name == "focus") {
+    result = new FocusInjectionProcess(nodes, load);
+  }
+  else if(process_name == "bernoulli") {
     result = new BernoulliInjectionProcess(nodes, load);
   } else if(process_name == "on_off") {
     bool missing_params = false;
@@ -130,6 +134,46 @@ InjectionProcess * InjectionProcess::New(string const & inject, int nodes,
     exit(-1);
   }
   return result;
+}
+
+//=============================================================
+void split(string& s, vector<float>& rate)
+{
+    size_t lastPos = s.find_first_not_of(' ');
+    size_t pos = s.find_first_of(' ', lastPos);
+    while(string::npos != pos || string::npos != lastPos) {
+        string ss = s.substr(lastPos, pos - lastPos);
+        rate.push_back(atof(ss.c_str()));
+        lastPos = s.find_first_not_of(' ', pos);
+        pos = s.find_first_of(' ', lastPos);
+    }
+}
+
+FocusInjectionProcess::FocusInjectionProcess(int nodes, double rate)
+  : InjectionProcess(nodes, rate)
+{
+  ifstream ifs;
+  ifs.open("rate.txt", ios::in);
+  if (!ifs.is_open()) 
+  {
+    cout << "Error: Trace file not found" << endl;
+    exit(-1);
+  }
+  string s;
+  getline(ifs, s);
+  split(s, _inj_rate);
+}
+
+bool FocusInjectionProcess::test(int source)
+{
+  assert((source >= 0) && (source < _nodes));
+  float result = 0.0;
+  size_t size = _inj_rate.size();
+  if (source < size) {
+    result = _inj_rate[source];
+  }
+  // cout << "source" << source << " " << "rate: " << result << endl;
+  return (RandomFloat() < result);
 }
 
 //=============================================================
