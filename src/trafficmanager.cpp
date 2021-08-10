@@ -1999,7 +1999,8 @@ void TrafficManager::DisplayStats(ostream & os) const {
 
         ofstream ofs("out.txt", ios::trunc);
         for (int i = 0; i < 1500; i++){
-            ofs << "Node: " << i << " average: " << _flat_stats[c]->NodeAverage(i) << " max: " << _flat_stats[c]->NodeMax(i) << " min: " << _flat_stats[c]->NodeMin(i) << endl;
+            // ofs << "Node: " << i << " average: " << _flat_stats[c]->NodeAverage(i) << " max: " << _flat_stats[c]->NodeMax(i) << " min: " << _flat_stats[c]->NodeMin(i) << endl;
+            ofs << i << "," << _flat_stats[c]->NodeAverage(i) << "," << _flat_stats[c]->NodeMax(i) << "," << _flat_stats[c]->NodeMin(i) << endl;
         }
 
         int count_sum, count_min, count_max;
