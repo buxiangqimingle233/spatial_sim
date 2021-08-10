@@ -62,6 +62,11 @@ void Stats::Clear( )
   
   _min = numeric_limits<double>::quiet_NaN();
   _max = -numeric_limits<double>::quiet_NaN();
+
+  for (int i = 0; i < 1500; i++){
+    _node_max[i] = -numeric_limits<double>::quiet_NaN();
+    _node_min[i] = numeric_limits<double>::quiet_NaN();
+  }  
   
   //  _reset = true;
 }
