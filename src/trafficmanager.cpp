@@ -674,6 +674,7 @@ void TrafficManager::_RetireFlit( Flit *f, int dest )
        (_flat_stats[f->cl]->Max() < (f->atime - f->itime)))
         _slowest_flit[f->cl] = f->id;
     _flat_stats[f->cl]->AddSample( f->atime - f->itime);
+    _flat_stats[f->cl]->AddNodeSample( f->atime - f->itime, dest);
     if(_pair_stats){
         _pair_flat[f->cl][f->src*_nodes+dest]->AddSample( f->atime - f->itime );
     }
@@ -1995,7 +1996,12 @@ void TrafficManager::DisplayStats(ostream & os) const {
             << "Fragmentation average = " << _frag_stats[c]->Average() << endl
             << "\tminimum = " << _frag_stats[c]->Min() << endl
             << "\tmaximum = " << _frag_stats[c]->Max() << endl;
-    
+
+        ofstream ofs("out.txt", ios::trunc);
+        for (int i = 0; i < 1500; i++){
+            ofs << "Node: " << i << " average: " << _flat_stats[c]->NodeAverage(i) << " max: " << _flat_stats[c]->NodeMax(i) << " min: " << _flat_stats[c]->NodeMin(i) << endl;
+        }
+
         int count_sum, count_min, count_max;
         double rate_sum, rate_min, rate_max;
         double rate_avg;

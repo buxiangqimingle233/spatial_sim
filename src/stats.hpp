@@ -35,6 +35,11 @@ class Stats : public Module {
   double _sample_sum;
   double _sample_squared_sum;
 
+  int _node_num_samples[1500];
+  double _node_sample_sum[1500];
+  double _node_min[1500];
+  double _node_max[1500];
+
   //bool _reset;
   double _min;
   double _max;
@@ -43,12 +48,17 @@ class Stats : public Module {
   double _bin_size;
 
   vector<int> _hist;
+  vector<int> _node_hist[1500];
 
 public:
   Stats( Module *parent, const string &name,
 	 double bin_size = 1.0, int num_bins = 10 );
 
   void Clear( );
+
+  double NodeAverage( int dest ) const;
+  double NodeMax( int dest ) const;
+  double NodeMin( int dest ) const;
 
   double Average( ) const;
   double Variance( ) const;
@@ -61,6 +71,11 @@ public:
   void AddSample( double val );
   inline void AddSample( int val ) {
     AddSample( (double)val );
+  }
+
+  void AddNodeSample( double val, int dest );
+  inline void AddNodeSample( int val, int dest ) {
+    AddNodeSample( (double)val, dest );
   }
 
   int GetBin(int b){ return _hist[b];}

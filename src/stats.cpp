@@ -56,7 +56,10 @@ void Stats::Clear( )
   _sample_squared_sum = 0.0;
 
   _hist.assign(_num_bins, 0);
-
+  for (int i = 0; i < 1500; i++){
+    _node_hist[i].assign(_num_bins, 0);
+  }
+  
   _min = numeric_limits<double>::quiet_NaN();
   _max = -numeric_limits<double>::quiet_NaN();
   
@@ -66,6 +69,11 @@ void Stats::Clear( )
 double Stats::Average( ) const
 {
   return _sample_sum / (double)_num_samples;
+}
+
+double Stats::NodeAverage( int dest ) const
+{
+  return _node_sample_sum[dest] / (double)_node_num_samples[dest];
 }
 
 double Stats::Variance( ) const
@@ -78,9 +86,19 @@ double Stats::Min( ) const
   return _min;
 }
 
+double Stats::NodeMin( int dest ) const
+{
+  return _node_min[dest];
+}
+
 double Stats::Max( ) const
 {
   return _max;
+}
+
+double Stats::NodeMax( int dest ) const
+{
+  return _node_max[dest];
 }
 
 double Stats::Sum( ) const
@@ -112,6 +130,22 @@ void Stats::AddSample( double val )
   b = (b >= _num_bins) ? (_num_bins - 1) : b;
 
   _hist[b]++;
+}
+
+void Stats::AddNodeSample( double val, int dest )
+{
+  ++_node_num_samples[dest];
+  _node_sample_sum[dest] += val;
+
+  // NOTE: the negation ensures that NaN values are handled correctly!
+  _node_max[dest] = !(val <= _node_max[dest]) ? val : _node_max[dest];
+  _node_min[dest] = !(val >= _node_min[dest]) ? val : _node_min[dest];
+
+  //double clamp between 0 and num_bins-1
+  int b = (int)fmax(floor( val / _bin_size ), 0.0);
+  b = (b >= _num_bins) ? (_num_bins - 1) : b;
+
+  _node_hist[dest][b]++;
 }
 
 void Stats::Display( ostream & os ) const
