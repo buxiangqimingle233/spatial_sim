@@ -26,6 +26,8 @@
 */
 
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include <sstream>
 #include <ctime>
 #include "random_utils.hpp"
@@ -65,7 +67,10 @@ TrafficPattern * TrafficPattern::New(string const & pattern, int nodes,
   vector<string> params = tokenize_str(param_str);
   
   TrafficPattern * result = NULL;
-  if(pattern_name == "bitcomp") {
+  if (pattern_name == "focus") {
+    result = new FocusTrafficPattern(nodes);
+  }
+  else if(pattern_name == "bitcomp") {
     result = new BitCompTrafficPattern(nodes);
   } else if(pattern_name == "transpose") {
     result = new TransposeTrafficPattern(nodes);
@@ -195,6 +200,57 @@ TrafficPattern * TrafficPattern::New(string const & pattern, int nodes,
     cout << "Error: Unknown traffic pattern: " << pattern << endl;
     exit(-1);
   }
+  return result;
+}
+
+void split(string& s, vector<int>& trace)
+{
+    size_t lastPos = s.find_first_not_of(' ');
+    size_t pos = s.find_first_of(' ', lastPos);
+    while(string::npos != pos || string::npos != lastPos) {
+        string ss = s.substr(lastPos, pos - lastPos);
+        trace.push_back(atoi(ss.c_str()));
+        lastPos = s.find_first_not_of(' ', pos);
+        pos = s.find_first_of(' ', lastPos);
+    }
+}
+
+FocusTrafficPattern::FocusTrafficPattern(int nodes)
+  : TrafficPattern(nodes)
+{
+
+  memset(_trace_len, 0, sizeof(_trace_len));
+  memset(_trace_cnt, 0, sizeof(_trace_cnt));
+
+  ifstream ifs;
+  ifs.open("trace.txt", ios::in);
+  if (!ifs.is_open()) 
+  {
+    cout << "Error: Trace file not found" << endl;
+    exit(-1);
+  }
+
+  string s;
+  while(getline(ifs, s))
+    {
+        int src = atoi(s.c_str());
+        getline(ifs, s);
+        split(s, _trace[src]);
+        _trace_len[src] = _trace[src].size();
+    }
+}
+
+int FocusTrafficPattern::dest(int source)
+{
+  assert((source >= 0) && (source < _nodes));
+  int idx = 0, result = 0;
+  if (_trace_len[source] != 0)
+  {
+    idx = _trace_cnt[source] % _trace_len[source];
+    result = _trace[source][idx];
+  }
+  _trace_cnt[source] += 1;
+  cout << "source: " << source << " " << "index: "<< idx << " " << "result: " << result << endl;
   return result;
 }
 

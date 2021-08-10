@@ -46,6 +46,17 @@ public:
 			      Configuration const * const config = NULL);
 };
 
+class FocusTrafficPattern : public TrafficPattern {
+protected:
+  vector<int> _trace[1500];
+  int _trace_len[1500];
+  int _trace_cnt[1500];
+
+public:
+  FocusTrafficPattern(int nodes);
+  virtual int dest(int source);
+};
+
 class PermutationTrafficPattern : public TrafficPattern {
 protected:
   PermutationTrafficPattern(int nodes);
