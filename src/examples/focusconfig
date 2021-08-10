@@ -1,6 +1,11 @@
 topology = mesh;
 k = 8;
 n = 2;
+
+packet_size = 1;
+warmup_periods = 2;
+sample_period = 100000;
+
 // Routing
 routing_function = min_adapt;
 // Flow control
