@@ -48,9 +48,14 @@ public:
 class FocusInjectionProcess : public InjectionProcess {
 private:
   vector<float> _inj_rate;
+  double _alpha;
+  double _beta;
+  vector<int> _initial;
+  vector<int> _state;
 public:
-  FocusInjectionProcess(int nodes, double rate);
+  FocusInjectionProcess(int nodes, double rate, double alpha, double beta, vector<int> initial);
   virtual bool test(int source);
+  virtual void reset();
 };
 
 class BernoulliInjectionProcess : public InjectionProcess {

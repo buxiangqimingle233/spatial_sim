@@ -6,6 +6,9 @@ packet_size = 1;
 warmup_periods = 2;
 sample_period = 100000;
 
+burst_alpha = 0.5;
+burst_beta = -1.0;
+
 // Routing
 routing_function = min_adapt;
 // Flow control
