@@ -48,8 +48,10 @@ public:
 class FocusInjectionProcess : public InjectionProcess {
 private:
   vector<float> _inj_rate;
-  double _alpha;
-  double _beta;
+  vector<float> _inj_alpha;
+  vector<float> _inj_beta;
+  // double _alpha;
+  // double _beta;
   vector<int> _initial;
   vector<int> _state;
 public:

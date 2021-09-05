@@ -36,127 +36,173 @@
 using namespace std;
 
 InjectionProcess::InjectionProcess(int nodes, double rate)
-  : _nodes(nodes), _rate(rate)
+    : _nodes(nodes), _rate(rate)
 {
-  if(nodes <= 0) {
+  if (nodes <= 0)
+  {
     cout << "Error: Number of nodes must be greater than zero." << endl;
     exit(-1);
   }
-  if((rate < 0.0) || (rate > 1.0)) {
+  if ((rate < 0.0) || (rate > 1.0))
+  {
     cout << "Error: Injection process must have load between 0.0 and 1.0."
-	 << endl;
+         << endl;
     exit(-1);
   }
 }
 
 void InjectionProcess::reset()
 {
-
 }
 
-InjectionProcess * InjectionProcess::New(string const & inject, int nodes, 
-					 double load, 
-					 Configuration const * const config)
+InjectionProcess *InjectionProcess::New(string const &inject, int nodes,
+                                        double load,
+                                        Configuration const *const config)
 {
   string process_name;
   string param_str;
   size_t left = inject.find_first_of('(');
-  if(left == string::npos) {
+  if (left == string::npos)
+  {
     process_name = inject;
-  } else {
+  }
+  else
+  {
     process_name = inject.substr(0, left);
     size_t right = inject.find_last_of(')');
-    if(right == string::npos) {
-      param_str = inject.substr(left+1);
-    } else {
-      param_str = inject.substr(left+1, right-left-1);
+    if (right == string::npos)
+    {
+      param_str = inject.substr(left + 1);
+    }
+    else
+    {
+      param_str = inject.substr(left + 1, right - left - 1);
     }
   }
   vector<string> params = tokenize_str(param_str);
 
-  InjectionProcess * result = NULL;
-  if(process_name == "focus") {
+  InjectionProcess *result = NULL;
+  if (process_name == "focus")
+  {
     // result = new FocusInjectionProcess(nodes, load);
     double alpha = numeric_limits<double>::quiet_NaN();
-    if(params.size() < 1) {
-      if(config) {
-	alpha = config->GetFloat("burst_alpha");
+    if (params.size() < 1)
+    {
+      if (config)
+      {
+        alpha = config->GetFloat("burst_alpha");
       }
-    } else {
+    }
+    else
+    {
       alpha = atof(params[0].c_str());
     }
     double beta = numeric_limits<double>::quiet_NaN();
-    if(params.size() < 2) {
-      if(config) {
-	beta = config->GetFloat("burst_beta");
+    if (params.size() < 2)
+    {
+      if (config)
+      {
+        beta = config->GetFloat("burst_beta");
       }
-    } else {
+    }
+    else
+    {
       beta = atof(params[1].c_str());
     }
-    
+
     vector<int> initial(nodes);
-    if(params.size() > 3) {
+    if (params.size() > 3)
+    {
       initial = tokenize_int(params[2]);
       initial.resize(nodes, initial.back());
-    } else {
-      for(int n = 0; n < nodes; ++n) {
-	initial[n] = RandomInt(1);
+    }
+    else
+    {
+      for (int n = 0; n < nodes; ++n)
+      {
+        initial[n] = RandomInt(1);
       }
     }
     result = new FocusInjectionProcess(nodes, load, alpha, beta, initial);
   }
-  else if(process_name == "bernoulli") {
+  else if (process_name == "bernoulli")
+  {
     result = new BernoulliInjectionProcess(nodes, load);
-  } else if(process_name == "on_off") {
+  }
+  else if (process_name == "on_off")
+  {
     bool missing_params = false;
     double alpha = numeric_limits<double>::quiet_NaN();
-    if(params.size() < 1) {
-      if(config) {
-	alpha = config->GetFloat("burst_alpha");
-      } else {
-	missing_params = true;
+    if (params.size() < 1)
+    {
+      if (config)
+      {
+        alpha = config->GetFloat("burst_alpha");
       }
-    } else {
+      else
+      {
+        missing_params = true;
+      }
+    }
+    else
+    {
       alpha = atof(params[0].c_str());
     }
     double beta = numeric_limits<double>::quiet_NaN();
-    if(params.size() < 2) {
-      if(config) {
-	beta = config->GetFloat("burst_beta");
-      } else {
-	missing_params = true;
+    if (params.size() < 2)
+    {
+      if (config)
+      {
+        beta = config->GetFloat("burst_beta");
       }
-    } else {
+      else
+      {
+        missing_params = true;
+      }
+    }
+    else
+    {
       beta = atof(params[1].c_str());
     }
     double r1 = numeric_limits<double>::quiet_NaN();
-    if(params.size() < 3) {
+    if (params.size() < 3)
+    {
       r1 = config ? config->GetFloat("burst_r1") : -1.0;
-    } else {
+    }
+    else
+    {
       r1 = atof(params[2].c_str());
     }
-    if(missing_params) {
+    if (missing_params)
+    {
       cout << "Missing parameters for injection process: " << inject << endl;
       exit(-1);
     }
-    if((alpha < 0.0 && beta < 0.0) || 
-       (alpha < 0.0 && r1 < 0.0) || 
-       (beta < 0.0 && r1 < 0.0) || 
-       (alpha >= 0.0 && beta >= 0.0 && r1 >= 0.0)) {
+    if ((alpha < 0.0 && beta < 0.0) ||
+        (alpha < 0.0 && r1 < 0.0) ||
+        (beta < 0.0 && r1 < 0.0) ||
+        (alpha >= 0.0 && beta >= 0.0 && r1 >= 0.0))
+    {
       cout << "Invalid parameters for injection process: " << inject << endl;
       exit(-1);
     }
     vector<int> initial(nodes);
-    if(params.size() > 3) {
+    if (params.size() > 3)
+    {
       initial = tokenize_int(params[2]);
       initial.resize(nodes, initial.back());
-    } else {
-      for(int n = 0; n < nodes; ++n) {
-	initial[n] = RandomInt(1);
+    }
+    else
+    {
+      for (int n = 0; n < nodes; ++n)
+      {
+        initial[n] = RandomInt(1);
       }
     }
     result = new OnOffInjectionProcess(nodes, load, alpha, beta, r1, initial);
-  } else {
+  }
+  else
+  {
     cout << "Invalid injection process: " << inject << endl;
     exit(-1);
   }
@@ -164,24 +210,25 @@ InjectionProcess * InjectionProcess::New(string const & inject, int nodes,
 }
 
 //=============================================================
-void split(string& s, vector<float>& rate)
+void split(string &s, vector<float> &rate)
 {
-    size_t lastPos = s.find_first_not_of(' ');
-    size_t pos = s.find_first_of(' ', lastPos);
-    while(string::npos != pos || string::npos != lastPos) {
-        string ss = s.substr(lastPos, pos - lastPos);
-        rate.push_back(atof(ss.c_str()));
-        lastPos = s.find_first_not_of(' ', pos);
-        pos = s.find_first_of(' ', lastPos);
-    }
+  size_t lastPos = s.find_first_not_of(' ');
+  size_t pos = s.find_first_of(' ', lastPos);
+  while (string::npos != pos || string::npos != lastPos)
+  {
+    string ss = s.substr(lastPos, pos - lastPos);
+    rate.push_back(atof(ss.c_str()));
+    lastPos = s.find_first_not_of(' ', pos);
+    pos = s.find_first_of(' ', lastPos);
+  }
 }
 
 FocusInjectionProcess::FocusInjectionProcess(int nodes, double rate, double alpha, double beta, vector<int> initial)
-  : InjectionProcess(nodes, rate), _alpha(alpha), _beta(beta), _initial(initial)
+    : InjectionProcess(nodes, rate), _initial(initial)
 {
   ifstream ifs;
   ifs.open("rate.txt", ios::in);
-  if (!ifs.is_open()) 
+  if (!ifs.is_open())
   {
     cout << "Error: Trace file not found" << endl;
     exit(-1);
@@ -189,8 +236,13 @@ FocusInjectionProcess::FocusInjectionProcess(int nodes, double rate, double alph
   string s;
   getline(ifs, s);
   split(s, _inj_rate);
-  _alpha = alpha;
-  _beta = beta;
+
+  getline(ifs, s);
+  split(s, _inj_alpha);
+
+  getline(ifs, s);
+  split(s, _inj_beta);
+
   reset();
 }
 
@@ -207,29 +259,27 @@ bool FocusInjectionProcess::test(int source)
   // if (source < size) {
   //   result = _inj_rate[source];
   // }
-  // // cout << "source" << source << " " << "rate: " << result << endl;
   // return (RandomFloat() < result);
 
   assert((source >= 0) && (source < _nodes));
-  int rate = _inj_rate[source];
+  float rate = _inj_rate[source];
+  float _alpha = _inj_alpha[source];
+  float _beta = _inj_beta[source];
 
-  if(_beta < 0.0) {
-    _beta = _alpha * (1.0 - rate) / rate;
-  }
+  double r1 = rate * (_alpha + _beta) / _alpha;
 
-  _state[source] = 
-    _state[source] ? (RandomFloat() >= _beta) : (RandomFloat() < _alpha);
+  _state[source] =
+      _state[source] ? (RandomFloat() >= _beta) : (RandomFloat() < _alpha);
 
   // generate packet
-  return _state[source] && (RandomFloat() < 1.0);
+  return _state[source] && (RandomFloat() < r1);
 }
 
-//=============================================================
+// =============================================================
 
 BernoulliInjectionProcess::BernoulliInjectionProcess(int nodes, double rate)
-  : InjectionProcess(nodes, rate)
+    : InjectionProcess(nodes, rate)
 {
-
 }
 
 bool BernoulliInjectionProcess::test(int source)
@@ -240,24 +290,29 @@ bool BernoulliInjectionProcess::test(int source)
 
 //=============================================================
 
-OnOffInjectionProcess::OnOffInjectionProcess(int nodes, double rate, 
-					     double alpha, double beta, 
-					     double r1, vector<int> initial)
-  : InjectionProcess(nodes, rate), 
-    _alpha(alpha), _beta(beta), _r1(r1), _initial(initial)
+OnOffInjectionProcess::OnOffInjectionProcess(int nodes, double rate,
+                                             double alpha, double beta,
+                                             double r1, vector<int> initial)
+    : InjectionProcess(nodes, rate),
+      _alpha(alpha), _beta(beta), _r1(r1), _initial(initial)
 {
   assert(alpha <= 1.0);
   assert(beta <= 1.0);
   assert(r1 <= 1.0);
-  if(alpha < 0.0) {
+  if (alpha < 0.0)
+  {
     assert(beta >= 0.0);
     assert(r1 >= 0.0);
     _alpha = beta * rate / (r1 - rate);
-  } else if(beta < 0.0) {
+  }
+  else if (beta < 0.0)
+  {
     assert(alpha >= 0.0);
     assert(r1 >= 0.0);
     _beta = alpha * (r1 - rate) / rate;
-  } else {
+  }
+  else
+  {
     assert(r1 < 0.0);
     _r1 = rate * (alpha + beta) / alpha;
   }
@@ -274,8 +329,8 @@ bool OnOffInjectionProcess::test(int source)
   assert((source >= 0) && (source < _nodes));
 
   // advance state
-  _state[source] = 
-    _state[source] ? (RandomFloat() >= _beta) : (RandomFloat() < _alpha);
+  _state[source] =
+      _state[source] ? (RandomFloat() >= _beta) : (RandomFloat() < _alpha);
 
   // generate packet
   return _state[source] && (RandomFloat() < _r1);
