@@ -39,6 +39,7 @@
 #include "random_utils.hpp" 
 #include "vc.hpp"
 #include "packet_reply_info.hpp"
+#include "focus.hpp"
 
 TrafficManager * TrafficManager::New(Configuration const & config,
                                      vector<Network *> const & net)
@@ -674,11 +675,17 @@ void TrafficManager::_RetireFlit( Flit *f, int dest )
        (_flat_stats[f->cl]->Max() < (f->atime - f->itime)))
         _slowest_flit[f->cl] = f->id;
     _flat_stats[f->cl]->AddSample( f->atime - f->itime);
+    // WZ: added analysis for focus
     _flat_stats[f->cl]->AddNodeSample( f->atime - f->itime, dest);
     if(_pair_stats){
         _pair_flat[f->cl][f->src*_nodes+dest]->AddSample( f->atime - f->itime );
     }
-      
+
+    if ( f->head ) {
+        // Tell the focus kernel that a packet has arrived
+        focus::FocusInjectionKernel::getKernel()->updateFocusKernel(f->src, f->dest);
+    }
+
     if ( f->tail ) {
         Flit * head;
         if(f->head) {
@@ -789,13 +796,23 @@ void TrafficManager::_GeneratePacket( int source, int stype,
     assert(stype!=0);
 
     Flit::FlitType packet_type = Flit::ANY_TYPE;
-    int size = _GetNextPacketSize(cl); //input size 
+
+    // Flow destination
+    // int size = _GetNextPacketSize(cl); // input size 
+    int size = _FocusGetNextPacketSize(source);
+
+    // Flow id
     int pid = _cur_pid++;
     assert(_cur_pid);
+
+    // Flow size
     int packet_destination = _traffic_pattern[cl]->dest(source);
+
     bool record = false;
     bool watch = gWatchOut && (_packets_to_watch.count(pid) > 0);
-    if(_use_read_write[cl]){
+    // bool watch = true;
+
+    if(_use_read_write[cl]) {
         if(stype > 0) {
             if (stype == 1) {
                 packet_type = Flit::READ_REQUEST;
@@ -920,7 +937,7 @@ void TrafficManager::_GeneratePacket( int source, int stype,
     }
 }
 
-void TrafficManager::_Inject(){
+void TrafficManager::_Inject() {
 
     for ( int input = 0; input < _nodes; ++input ) {
         for ( int c = 0; c < _classes; ++c ) {
@@ -930,11 +947,13 @@ void TrafficManager::_Inject(){
                 bool generated = false;
                 while( !generated && ( _qtime[input][c] <= _time ) ) {
                     int stype = _IssuePacket( input, c );
-	  
+
                     if ( stype != 0 ) { //generate a packet
                         _GeneratePacket( input, stype, c, 
                                          _include_queuing==1 ? 
                                          _qtime[input][c] : _time );
+                        // WZ: debug
+                        std::cout << "node: " << input << " time: " << _time << std::endl;
                         generated = true;
                     }
                     // only advance time if this is not a reply packet
@@ -942,7 +961,7 @@ void TrafficManager::_Inject(){
                         ++_qtime[input][c];
                     }
                 }
-	
+
                 if ( ( _sim_state == draining ) && 
                      ( _qtime[input][c] > _drain_time ) ) {
                     _qdrained[input][c] = true;
@@ -2252,6 +2271,11 @@ void TrafficManager::_LoadWatchList(const string & filename){
     } else {
         Error("Unable to open flit watch file: " + filename);
     }
+}
+
+int TrafficManager::_FocusGetNextPacketSize(int source) const
+{
+    return focus::FocusInjectionKernel::getKernel()->flowsize(source);
 }
 
 int TrafficManager::_GetNextPacketSize(int cl) const

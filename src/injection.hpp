@@ -46,16 +46,9 @@ public:
 };
 
 class FocusInjectionProcess : public InjectionProcess {
-private:
-  vector<float> _inj_rate;
-  vector<float> _inj_alpha;
-  vector<float> _inj_beta;
-  // double _alpha;
-  // double _beta;
-  vector<int> _initial;
-  vector<int> _state;
+
 public:
-  FocusInjectionProcess(int nodes, double rate, double alpha, double beta, vector<int> initial);
+  FocusInjectionProcess(int nodes, double rate);
   virtual bool test(int source);
   virtual void reset();
 };

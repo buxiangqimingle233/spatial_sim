@@ -32,6 +32,7 @@
 #include <limits>
 #include "random_utils.hpp"
 #include "injection.hpp"
+#include "focus.hpp"
 
 using namespace std;
 
@@ -84,32 +85,6 @@ InjectionProcess *InjectionProcess::New(string const &inject, int nodes,
   InjectionProcess *result = NULL;
   if (process_name == "focus")
   {
-    // result = new FocusInjectionProcess(nodes, load);
-    double alpha = numeric_limits<double>::quiet_NaN();
-    if (params.size() < 1)
-    {
-      if (config)
-      {
-        alpha = config->GetFloat("burst_alpha");
-      }
-    }
-    else
-    {
-      alpha = atof(params[0].c_str());
-    }
-    double beta = numeric_limits<double>::quiet_NaN();
-    if (params.size() < 2)
-    {
-      if (config)
-      {
-        beta = config->GetFloat("burst_beta");
-      }
-    }
-    else
-    {
-      beta = atof(params[1].c_str());
-    }
-
     vector<int> initial(nodes);
     if (params.size() > 3)
     {
@@ -123,7 +98,8 @@ InjectionProcess *InjectionProcess::New(string const &inject, int nodes,
         initial[n] = RandomInt(1);
       }
     }
-    result = new FocusInjectionProcess(nodes, load, alpha, beta, initial);
+    // result = new FocusInjectionProcess(nodes, load, alpha, beta, initial);
+    result = new FocusInjectionProcess(nodes, load);
   }
   else if (process_name == "bernoulli")
   {
@@ -223,56 +199,20 @@ void split(string &s, vector<float> &rate)
   }
 }
 
-FocusInjectionProcess::FocusInjectionProcess(int nodes, double rate, double alpha, double beta, vector<int> initial)
-    : InjectionProcess(nodes, rate), _initial(initial)
+FocusInjectionProcess::FocusInjectionProcess(int nodes, double rate): InjectionProcess(nodes, rate)
 {
-  ifstream ifs;
-  ifs.open("rate.txt", ios::in);
-  if (!ifs.is_open())
-  {
-    cout << "Error: Trace file not found" << endl;
-    exit(-1);
-  }
-  string s;
-  getline(ifs, s);
-  split(s, _inj_rate);
-
-  getline(ifs, s);
-  split(s, _inj_alpha);
-
-  getline(ifs, s);
-  split(s, _inj_beta);
-
   reset();
 }
 
 void FocusInjectionProcess::reset()
 {
-  _state = _initial;
+  focus::FocusInjectionKernel::renewKernel();
 }
 
 bool FocusInjectionProcess::test(int source)
 {
-  // assert((source >= 0) && (source < _nodes));
-  // float result = 0.0;
-  // size_t size = _inj_rate.size();
-  // if (source < size) {
-  //   result = _inj_rate[source];
-  // }
-  // return (RandomFloat() < result);
-
   assert((source >= 0) && (source < _nodes));
-  float rate = _inj_rate[source];
-  float _alpha = _inj_alpha[source];
-  float _beta = _inj_beta[source];
-
-  double r1 = rate * (_alpha + _beta) / _alpha;
-
-  _state[source] =
-      _state[source] ? (RandomFloat() >= _beta) : (RandomFloat() < _alpha);
-
-  // generate packet
-  return _state[source] && (RandomFloat() < r1);
+  return focus::FocusInjectionKernel::getKernel()->test(source);
 }
 
 // =============================================================

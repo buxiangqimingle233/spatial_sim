@@ -47,10 +47,6 @@ public:
 };
 
 class FocusTrafficPattern : public TrafficPattern {
-protected:
-  vector<int> _trace[1500];
-  int _trace_len[1500];
-  int _trace_cnt[1500];
 
 public:
   FocusTrafficPattern(int nodes);

@@ -155,6 +155,7 @@ void Stats::AddNodeSample( double val, int dest )
 
 void Stats::Display( ostream & os ) const
 {
+  
   os << *this << endl;
 }
 

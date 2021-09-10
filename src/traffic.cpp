@@ -32,6 +32,7 @@
 #include <ctime>
 #include "random_utils.hpp"
 #include "traffic.hpp"
+#include "focus.hpp"
 
 TrafficPattern::TrafficPattern(int nodes)
 : _nodes(nodes)
@@ -218,40 +219,12 @@ void split(string& s, vector<int>& trace)
 FocusTrafficPattern::FocusTrafficPattern(int nodes)
   : TrafficPattern(nodes)
 {
-
-  memset(_trace_len, 0, sizeof(_trace_len));
-  memset(_trace_cnt, 0, sizeof(_trace_cnt));
-
-  ifstream ifs;
-  ifs.open("trace.txt", ios::in);
-  if (!ifs.is_open()) 
-  {
-    cout << "Error: Trace file not found" << endl;
-    exit(-1);
-  }
-
-  string s;
-  while(getline(ifs, s))
-    {
-        int src = atoi(s.c_str());
-        getline(ifs, s);
-        split(s, _trace[src]);
-        _trace_len[src] = _trace[src].size();
-    }
+  
 }
 
 int FocusTrafficPattern::dest(int source)
 {
-  assert((source >= 0) && (source < _nodes));
-  int idx = 0, result = 0;
-  if (_trace_len[source] != 0)
-  {
-    idx = _trace_cnt[source] % _trace_len[source];
-    result = _trace[source][idx];
-  }
-  _trace_cnt[source] += 1;
-  // cout << "source: " << source << " " << "index: "<< idx << " " << "result: " << result << endl;
-  return result;
+  return focus::FocusInjectionKernel::getKernel()->dest(source);
 }
 
 PermutationTrafficPattern::PermutationTrafficPattern(int nodes)

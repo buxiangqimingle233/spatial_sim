@@ -27,9 +27,10 @@
 LEX = flex
 YACC   = bison -y
 DEFINE = 
-INCPATH = -I. -Iarbiters -Iallocators -Irouters -Inetworks -Ipower
+INCPATH = -I. -Iarbiters -Iallocators -Irouters -Inetworks -Ipower -Ifocus
 CPPFLAGS += -Wall $(INCPATH) $(DEFINE)
-CPPFLAGS += -O3
+# FIXME: -O0 for debug, set -O3 when release
+CPPFLAGS += -O0
 CPPFLAGS += -g
 LFLAGS +=
 
@@ -39,7 +40,7 @@ PROG := booksim
 CPP_SRCS = $(wildcard *.cpp) $(wildcard */*.cpp)
 CPP_HDRS = $(wildcard *.hpp) $(wildcard */*.hpp)
 CPP_DEPS = $(CPP_SRCS:.cpp=.d)
-CPP_OBJS = $(CPP_SRCS:.cpp=.o)
+CPP_OBJS = $(CPP_SRCS:.cpp=.o) 
 
 LEX_SRCS = lex.yy.c
 LEX_OBJS = lex.yy.o

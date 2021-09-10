@@ -287,6 +287,9 @@ protected:
   virtual string _OverallStatsCSV(int c = 0) const;
 
   int _GetNextPacketSize(int cl) const;
+
+  int _FocusGetNextPacketSize(int source) const;
+
   double _GetAveragePacketSize(int cl) const;
 
 public:
