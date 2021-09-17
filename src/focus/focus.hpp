@@ -50,6 +50,7 @@ public:
 
     int getDestination() { return _dest; };
     int getFlowSize() { return _size; };
+    int getInterval() { return _computing_time; }
     int forward(bool token); // return whether this flow is to be activate
     void arriveDependentFlow(int source);
 };
@@ -58,7 +59,6 @@ public:
 class Node {
 
 protected:
-    bool _is_mc; // whether this node is mapped as memory controller
     int _node_id;
 
 protected:
@@ -68,9 +68,13 @@ protected:
 public:
     // Node() {}
     Node(std::ifstream& ifs);
+    Node(std::ifstream& ifs, int node_id);
     int test(); // whether to inject a packet
+    // FIXME: update with arguments: flow_id
     int getDestination(); // the destination of active flow with token
     int getFlowSize();
+    int getFlowID();
+    int getInterval(int flow_id);
 
     bool checkAval(int raising_node);
     void receiveFlow(int source);
@@ -100,7 +104,11 @@ public:
     // API for TrafficPattern
     int dest(int source);
     // API for getting flow size
-    int flowsize(int source);
+    int flowSize(int source);
+    // API for generating flows
+    int flowID(int source);
+    // API for getting interval
+    int interval(int source, int flow_id);
 
 // For iteration with the booksim kernels
 public:

@@ -51,7 +51,7 @@ int Flow::forward(bool token) {
         }
         // Computation is done, waiting the destination node to be available
         case FlowState::Blocked: {
-            if (token && canIssue()) {
+            if (token) {
                 if (_iter > _max_iter) {
                     next_state = FlowState::Done;
                     should_issue = false;
@@ -80,7 +80,8 @@ int Flow::forward(bool token) {
 
 bool Flow::canIssue() {
     // TODO: Deprecated
-    return (_state == FlowState::Blocked) && (FocusInjectionKernel::getKernel()->checkAval(_dest, _src)); 
+    // return (_state == FlowState::Blocked) && (FocusInjectionKernel::getKernel()->checkAval(_dest, _src)); 
+    return (_state == FlowState::Blocked);
 }
 
 bool Flow::isBuffered(int source_node) {
@@ -97,9 +98,9 @@ void Flow::arriveDependentFlow(int source) {
     }
 }
 
-Node::Node(std::ifstream& ifs): _is_mc(false), _node_id(-1), _flow_with_token(0) {
+Node::Node(std::ifstream& ifs): _node_id(-1), _flow_with_token(0) {
     int flow_size;
-    ifs >> _node_id >> _is_mc >> flow_size;
+    ifs >> _node_id >> flow_size;
 
     for (int _ = 0; _ < flow_size; ++_) {
         int ct, mi, d, s, size, wf;
@@ -108,6 +109,20 @@ Node::Node(std::ifstream& ifs): _is_mc(false), _node_id(-1), _flow_with_token(0)
         _out_flows.push_back(flow);
     }
 }
+
+Node::Node(std::ifstream& ifs, int node_id): _node_id(node_id), _flow_with_token(0) {
+    int flow_size;
+    ifs >> flow_size;
+
+    for (int _ = 0; _ < flow_size; ++_) {
+        int ct, mi, d, s, size, wf;
+        ifs >> ct >> mi >> d >> s >> size >> wf;
+        Flow flow(ct, mi, d, s, size, wf);
+        _out_flows.push_back(flow);
+    }
+}
+
+
 
 bool Node::checkAval(int raising_node) {
     // TODO: Deprecated
@@ -125,7 +140,6 @@ bool Node::checkAval(int raising_node) {
 }
 
 int Node::test() {
-    // std::cout << "invoke test" << std::endl;
 
     if (_out_flows.size() == 0) {
         return 0;
@@ -160,6 +174,14 @@ int Node::getFlowSize() {
     return _out_flows[_flow_with_token].getFlowSize();
 }
 
+int Node::getFlowID() {
+    return _flow_with_token;
+}
+
+int Node::getInterval(int flow_id) {
+    return _out_flows[flow_id].getInterval();
+}
+
 void Node::receiveFlow(int source) {
     // FIXME: It's wrong when a PE is mapped with multiple flows
     for (auto& f : _out_flows) {
@@ -181,13 +203,16 @@ FocusInjectionKernel::FocusInjectionKernel() {
         exit(-1);
     }
 
-    while (!ifs.eof()) {
-        Node node(ifs);
+    int node_id;
+    while ((ifs >> node_id) && !ifs.eof()) {
+        Node node(ifs, node_id);
         _nodes.push_back(node);
     }
+
 }
 
 FocusInjectionKernel::FocusInjectionKernel(int nodes) {
+
     // FocusInjectionKernel();
     if (static_cast<int>(_nodes.size()) != nodes) {
         std::cerr << "ERROR: Nodes in trace file does not match specs for Booksim !" << std::endl;
@@ -213,6 +238,7 @@ void FocusInjectionKernel::renewKernel() {
 }
 
 void FocusInjectionKernel::checkNodes(int nid) {
+
     if (nid >= static_cast<int>(_nodes.size()) || nid < 0) {
         std::cerr << "ERROR focus: node " << nid << " is not recorded in the trace file." << std::endl;
         exit(-1);
@@ -229,9 +255,17 @@ int FocusInjectionKernel::dest(int source) {
     return _nodes[source].getDestination();
 }
 
-int FocusInjectionKernel::flowsize(int source) {
+int FocusInjectionKernel::flowSize(int source) {
     checkNodes(source);
     return _nodes[source].getFlowSize();
+}
+
+int FocusInjectionKernel::flowID(int source) {
+    return _nodes[source].getFlowID();
+}
+
+int FocusInjectionKernel::interval(int source, int flow_id) {
+    return _nodes[source].getInterval(flow_id);
 }
 
 void FocusInjectionKernel::updateFocusKernel(int source, int dest) {

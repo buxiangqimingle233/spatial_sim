@@ -65,7 +65,7 @@ TrafficManager::TrafficManager( const Configuration &config, const vector<Networ
 
     _vcs = config.GetInt("num_vcs");
     _subnets = config.GetInt("subnets");
- 
+
     _subnet.resize(Flit::NUM_FLIT_TYPES);
     _subnet[Flit::READ_REQUEST] = config.GetInt("read_request_subnet");
     _subnet[Flit::READ_REPLY] = config.GetInt("read_reply_subnet");
@@ -670,13 +670,12 @@ void TrafficManager::_RetireFlit( Flit *f, int dest )
         err << "Flit " << f->id << " arrived at incorrect output " << dest;
         Error( err.str( ) );
     }
-  
+
     if((_slowest_flit[f->cl] < 0) ||
        (_flat_stats[f->cl]->Max() < (f->atime - f->itime)))
         _slowest_flit[f->cl] = f->id;
     _flat_stats[f->cl]->AddSample( f->atime - f->itime);
-    // WZ: added analysis for focus
-    _flat_stats[f->cl]->AddNodeSample( f->atime - f->itime, dest);
+
     if(_pair_stats){
         _pair_flat[f->cl][f->src*_nodes+dest]->AddSample( f->atime - f->itime );
     }
@@ -710,7 +709,7 @@ void TrafficManager::_RetireFlit( Flit *f, int dest )
                        << ")." << endl;
         }
 
-        //code the source of request, look carefully, its tricky ;)
+        // code the source of request, look carefully, its tricky ;)
         if (f->type == Flit::READ_REQUEST || f->type == Flit::WRITE_REQUEST) {
             PacketReplyInfo* rinfo = PacketReplyInfo::New();
             rinfo->source = f->src;
@@ -736,6 +735,12 @@ void TrafficManager::_RetireFlit( Flit *f, int dest )
             if((_slowest_packet[f->cl] < 0) ||
                (_plat_stats[f->cl]->Max() < (f->atime - head->itime)))
                 _slowest_packet[f->cl] = f->pid;
+
+            // WZ: added analysis for focus
+            double interval = focus::FocusInjectionKernel::getKernel()->interval(head->src, head->_flow_id);
+            _plat_stats[f->cl]->AddNodeSample( f->atime - head->ctime, dest, interval );
+            // _plat_stats[f->cl]->AddNodeSlowdownSample(interval, f->atime - head->ctime, dest);
+
             _plat_stats[f->cl]->AddSample( f->atime - head->ctime);
             _nlat_stats[f->cl]->AddSample( f->atime - head->itime);
             _frag_stats[f->cl]->AddSample( (f->atime - head->atime) - (f->id - head->id) );
@@ -762,7 +767,7 @@ void TrafficManager::_RetireFlit( Flit *f, int dest )
 int TrafficManager::_IssuePacket( int source, int cl )
 {
     int result = 0;
-    if(_use_read_write[cl]){ //use read and write
+    if(_use_read_write[cl]) { //use read and write
         //check queue for waiting replies.
         //check to make sure it is on time yet
         if (!_repliesPending[source].empty()) {
@@ -770,10 +775,10 @@ int TrafficManager::_IssuePacket( int source, int cl )
                 result = -1;
             }
         } else {
-      
+            
             //produce a packet
             if(_injection_process[cl]->test(source)) {
-	
+                
                 //coin toss to determine request type.
                 result = (RandomFloat() < _write_fraction[cl]) ? 2 : 1;
 	
@@ -881,6 +886,7 @@ void TrafficManager::_GeneratePacket( int source, int stype,
         f->ctime  = time;
         f->record = record;
         f->cl     = cl;
+        f->setFlowID(focus::FocusInjectionKernel::getKernel()->flowID(source));
 
         _total_in_flight_flits[f->cl].insert(make_pair(f->id, f));
         if(record) {
@@ -946,6 +952,7 @@ void TrafficManager::_Inject() {
             if ( _partial_packets[input][c].empty() ) {
                 bool generated = false;
                 while( !generated && ( _qtime[input][c] <= _time ) ) {
+
                     int stype = _IssuePacket( input, c );
 
                     if ( stype != 0 ) { //generate a packet
@@ -953,7 +960,7 @@ void TrafficManager::_Inject() {
                                          _include_queuing==1 ? 
                                          _qtime[input][c] : _time );
                         // WZ: debug
-                        std::cout << "node: " << input << " time: " << _time << std::endl;
+                        // std::cout << "node: " << input << " time: " << _time << std::endl;
                         generated = true;
                     }
                     // only advance time if this is not a reply packet
@@ -1288,7 +1295,7 @@ void TrafficManager::_Step( )
 
     ++_time;
     assert(_time);
-    if(gTrace){
+    if(gTrace) {
         cout<<"TIME "<<_time<<endl;
     }
 
@@ -1447,6 +1454,7 @@ bool TrafficManager::_SingleSim( )
            ( ( _sim_state != running ) || 
              ( converged < 3 ) ) ) {
     
+        // WZ
         if ( clear_last || (( ( _sim_state == warming_up ) && ( ( total_phases % 2 ) == 0 ) )) ) {
             clear_last = false;
             _ClearStats( );
@@ -1661,6 +1669,8 @@ bool TrafficManager::Run( )
             _traffic_pattern[c]->reset();
             _injection_process[c]->reset();
         }
+
+
 
         if ( !_SingleSim( ) ) {
             cout << "Simulation unstable, ending ..." << endl;
@@ -2016,11 +2026,7 @@ void TrafficManager::DisplayStats(ostream & os) const {
             << "\tminimum = " << _frag_stats[c]->Min() << endl
             << "\tmaximum = " << _frag_stats[c]->Max() << endl;
 
-        ofstream ofs("out.txt", ios::trunc);
-        for (int i = 0; i < 1500; i++){
-            // ofs << "Node: " << i << " average: " << _flat_stats[c]->NodeAverage(i) << " max: " << _flat_stats[c]->NodeMax(i) << " min: " << _flat_stats[c]->NodeMin(i) << endl;
-            ofs << i << "," << _flat_stats[c]->NodeAverage(i) << "," << _flat_stats[c]->NodeMax(i) << "," << _flat_stats[c]->NodeMin(i) << endl;
-        }
+        _plat_stats[c]->Dump();
 
         int count_sum, count_min, count_max;
         double rate_sum, rate_min, rate_max;
@@ -2275,7 +2281,7 @@ void TrafficManager::_LoadWatchList(const string & filename){
 
 int TrafficManager::_FocusGetNextPacketSize(int source) const
 {
-    return focus::FocusInjectionKernel::getKernel()->flowsize(source);
+    return focus::FocusInjectionKernel::getKernel()->flowSize(source);
 }
 
 int TrafficManager::_GetNextPacketSize(int cl) const

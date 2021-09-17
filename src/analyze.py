@@ -1,6 +1,6 @@
 import pandas as pd
-with open("rate.txt", "r") as f:
-    df = pd.Series(f.readline().split(" "))
 
-df = df.astype("float")
-print(len(df))
+df = pd.read_csv(open("out.txt", "r"), header=None)
+df.columns = ["node", "avg", "max", "min"]
+max_avg = df["max"].max()
+print(max_avg)

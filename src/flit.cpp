@@ -80,6 +80,7 @@ void Flit::Reset()
   intm =-1;
   ph = -1;
   data = 0;
+  _flow_id = 0;
 }  
 
 Flit * Flit::New() {
@@ -104,4 +105,8 @@ void Flit::FreeAll() {
     delete _all.top();
     _all.pop();
   }
+}
+
+void Flit::setFlowID(int flow_id) {
+  _flow_id = flow_id;
 }

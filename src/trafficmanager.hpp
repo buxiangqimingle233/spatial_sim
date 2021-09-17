@@ -139,17 +139,17 @@ protected:
 
   // ============ Statistics ============
 
-  vector<Stats *> _plat_stats;     
+  vector<Stats *> _plat_stats;     // packet overall latencies, arrival time of tail flits - created time of head flits
   vector<double> _overall_min_plat;  
   vector<double> _overall_avg_plat;  
   vector<double> _overall_max_plat;  
 
-  vector<Stats *> _nlat_stats;     
+  vector<Stats *> _nlat_stats;     // Network latencies, arrival time of tail flits - injected time of head flits
   vector<double> _overall_min_nlat;  
   vector<double> _overall_avg_nlat;  
   vector<double> _overall_max_nlat;  
 
-  vector<Stats *> _flat_stats;     
+  vector<Stats *> _flat_stats;     // flit latencies, flit arrival time - flit injected time
   vector<double> _overall_min_flat;  
   vector<double> _overall_avg_flat;  
   vector<double> _overall_max_flat;  

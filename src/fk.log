@@ -1,26 +1,28 @@
-BEGIN Configuration File: examples/testconfig
+BEGIN Configuration File: examples/focusconfig
 topology = mesh;
-k = 2;
-n = 1;
+k = 16;
+n = 2;
 
 sim_type = throughput;
 
 packet_size = 1;
-warmup_periods = 3;
-sample_period = 1000;
+warmup_periods = 1;
+sample_period = 30000;
 max_samples = 20;
 
+burst_alpha = 0.5;
+burst_beta = -1.0;
+
+// Routing
 
 // routing_function = dim_order;
 // routing_function = min_adapt;
 routing_function = xy_yx;
 // routing_function = romm;
 
-// watch_packets = {100,200,300,400};
-// watch_out = -;
-// viewer_trace = 1;
 
 // Flow control
+
 num_vcs = 8;
 vc_buf_size = 4;
 
@@ -28,1427 +30,197 @@ vc_buf_size = 4;
 traffic = focus;
 injection_process = focus;
 
-END Configuration File: examples/testconfig
-node: 1 time: 3
-node: 0 time: 18
-node: 1 time: 18
-node: 0 time: 20
-node: 0 time: 33
-node: 1 time: 33
-node: 0 time: 36
-node: 0 time: 48
-node: 1 time: 48
-node: 0 time: 50
-node: 0 time: 63
-node: 1 time: 63
-node: 0 time: 66
-node: 0 time: 78
-node: 1 time: 78
-node: 0 time: 80
-node: 0 time: 93
-node: 1 time: 93
-node: 0 time: 96
-node: 0 time: 108
-node: 1 time: 108
-node: 0 time: 110
-node: 0 time: 123
-node: 1 time: 123
-node: 0 time: 126
-node: 0 time: 138
-node: 1 time: 138
-node: 0 time: 140
-node: 0 time: 153
-node: 1 time: 153
-node: 0 time: 156
-node: 0 time: 168
-node: 1 time: 168
-node: 0 time: 170
-node: 0 time: 183
-node: 1 time: 183
-node: 0 time: 186
-node: 0 time: 198
-node: 1 time: 198
-node: 0 time: 200
-node: 0 time: 213
-node: 1 time: 213
-node: 0 time: 216
-node: 0 time: 228
-node: 1 time: 228
-node: 0 time: 230
-node: 0 time: 243
-node: 1 time: 243
-node: 0 time: 246
-node: 0 time: 258
-node: 1 time: 258
-node: 0 time: 260
-node: 0 time: 273
-node: 1 time: 273
-node: 0 time: 276
-node: 0 time: 288
-node: 1 time: 288
-node: 0 time: 290
-node: 0 time: 303
-node: 1 time: 303
-node: 0 time: 306
-node: 0 time: 318
-node: 1 time: 318
-node: 0 time: 320
-node: 0 time: 333
-node: 1 time: 333
-node: 0 time: 336
-node: 0 time: 348
-node: 1 time: 348
-node: 0 time: 350
-node: 0 time: 363
-node: 1 time: 363
-node: 0 time: 366
-node: 0 time: 378
-node: 1 time: 378
-node: 0 time: 380
-node: 0 time: 393
-node: 1 time: 393
-node: 0 time: 396
-node: 0 time: 408
-node: 1 time: 408
-node: 0 time: 410
-node: 0 time: 423
-node: 1 time: 423
-node: 0 time: 426
-node: 0 time: 438
-node: 1 time: 438
-node: 0 time: 440
-node: 0 time: 453
-node: 1 time: 453
-node: 0 time: 456
-node: 0 time: 468
-node: 1 time: 468
-node: 0 time: 470
-node: 0 time: 483
-node: 1 time: 483
-node: 0 time: 486
-node: 0 time: 498
-node: 1 time: 498
-node: 0 time: 500
-node: 0 time: 513
-node: 1 time: 513
-node: 0 time: 516
-node: 0 time: 528
-node: 1 time: 528
-node: 0 time: 530
-node: 0 time: 543
-node: 1 time: 543
-node: 0 time: 546
-node: 0 time: 558
-node: 1 time: 558
-node: 0 time: 560
-node: 0 time: 573
-node: 1 time: 573
-node: 0 time: 576
-node: 0 time: 588
-node: 1 time: 588
-node: 0 time: 590
-node: 0 time: 603
-node: 1 time: 603
-node: 0 time: 606
-node: 0 time: 618
-node: 1 time: 618
-node: 0 time: 620
-node: 0 time: 633
-node: 1 time: 633
-node: 0 time: 636
-node: 0 time: 648
-node: 1 time: 648
-node: 0 time: 650
-node: 0 time: 663
-node: 1 time: 663
-node: 0 time: 666
-node: 0 time: 678
-node: 1 time: 678
-node: 0 time: 680
-node: 0 time: 693
-node: 1 time: 693
-node: 0 time: 696
-node: 0 time: 708
-node: 1 time: 708
-node: 0 time: 710
-node: 0 time: 723
-node: 1 time: 723
-node: 0 time: 726
-node: 0 time: 738
-node: 1 time: 738
-node: 0 time: 740
-node: 0 time: 753
-node: 1 time: 753
-node: 0 time: 756
-node: 0 time: 768
-node: 1 time: 768
-node: 0 time: 770
-node: 0 time: 783
-node: 1 time: 783
-node: 0 time: 786
-node: 0 time: 798
-node: 1 time: 798
-node: 0 time: 800
-node: 0 time: 813
-node: 1 time: 813
-node: 0 time: 816
-node: 0 time: 828
-node: 1 time: 828
-node: 0 time: 830
-node: 0 time: 843
-node: 1 time: 843
-node: 0 time: 846
-node: 0 time: 858
-node: 1 time: 858
-node: 0 time: 860
-node: 0 time: 873
-node: 1 time: 873
-node: 0 time: 876
-node: 0 time: 888
-node: 1 time: 888
-node: 0 time: 890
-node: 0 time: 903
-node: 1 time: 903
-node: 0 time: 906
-node: 0 time: 918
-node: 1 time: 918
-node: 0 time: 920
-node: 0 time: 933
-node: 1 time: 933
-node: 0 time: 936
-node: 0 time: 948
-node: 1 time: 948
-node: 0 time: 950
-node: 0 time: 963
-node: 1 time: 963
-node: 0 time: 966
-node: 0 time: 978
-node: 1 time: 978
-node: 0 time: 980
-node: 0 time: 993
-node: 1 time: 993
-node: 0 time: 996
+END Configuration File: examples/focusconfig
 Class 0:
-Packet latency average = 145.164
+Packet latency average = 73.9808
 	minimum = 13
-	maximum = 791
-Network latency average = 16.6667
+	maximum = 1069
+Network latency average = 38.713
 	minimum = 13
-	maximum = 23
-Slowest packet = 0
-Flit latency average = 11.3347
+	maximum = 197
+Slowest packet = 3
+Flit latency average = 37.2043
 	minimum = 9
-	maximum = 12
-Slowest flit = 0
-Fragmentation average = 0.666667
+	maximum = 136
+Slowest flit = 41846
+Fragmentation average = 1.37934
 	minimum = 0
-	maximum = 2
-Injected packet rate average = 0.0995
-	minimum = 0.067 (at node 1)
-	maximum = 0.132 (at node 0)
-Accepted packet rate average = 0.0975
-	minimum = 0.065 (at node 0)
-	maximum = 0.13 (at node 1)
-Injected flit rate average = 0.4975
-	minimum = 0.33 (at node 0)
-	maximum = 0.665 (at node 1)
-Accepted flit rate average= 0.4915
-	minimum = 0.325 (at node 1)
-	maximum = 0.658 (at node 0)
-Injected packet length average = 5
-Accepted packet length average = 5.04103
-Total in-flight flits = 17 (0 measured)
+	maximum = 137
+Injected packet rate average = 0.00236042
+	minimum = 0 (at node 0)
+	maximum = 0.108367 (at node 127)
+Accepted packet rate average = 0.00235742
+	minimum = 0 (at node 30)
+	maximum = 0.0304333 (at node 31)
+Injected flit rate average = 0.0123095
+	minimum = 0 (at node 0)
+	maximum = 0.6621 (at node 127)
+Accepted flit rate average= 0.0122982
+	minimum = 0 (at node 30)
+	maximum = 0.0906 (at node 12)
+Injected packet length average = 5.21497
+Accepted packet length average = 5.21679
+Total in-flight flits = 93 (0 measured)
 latency change    = 1
 throughput change = 1
-node: 0 time: 1008
-node: 1 time: 1008
-node: 0 time: 1010
-node: 0 time: 1023
-node: 1 time: 1023
-node: 0 time: 1026
-node: 0 time: 1038
-node: 1 time: 1038
-node: 0 time: 1040
-node: 0 time: 1053
-node: 1 time: 1053
-node: 0 time: 1056
-node: 0 time: 1068
-node: 1 time: 1068
-node: 0 time: 1070
-node: 0 time: 1083
-node: 1 time: 1083
-node: 0 time: 1086
-node: 0 time: 1098
-node: 1 time: 1098
-node: 0 time: 1100
-node: 0 time: 1113
-node: 1 time: 1113
-node: 0 time: 1116
-node: 0 time: 1128
-node: 1 time: 1128
-node: 0 time: 1130
-node: 0 time: 1143
-node: 1 time: 1143
-node: 0 time: 1146
-node: 0 time: 1158
-node: 1 time: 1158
-node: 0 time: 1160
-node: 0 time: 1173
-node: 1 time: 1173
-node: 0 time: 1176
-node: 0 time: 1188
-node: 1 time: 1188
-node: 0 time: 1190
-node: 0 time: 1203
-node: 1 time: 1203
-node: 0 time: 1206
-node: 0 time: 1218
-node: 1 time: 1218
-node: 0 time: 1220
-node: 0 time: 1233
-node: 1 time: 1233
-node: 0 time: 1236
-node: 0 time: 1248
-node: 1 time: 1248
-node: 0 time: 1250
-node: 0 time: 1263
-node: 1 time: 1263
-node: 0 time: 1266
-node: 0 time: 1278
-node: 1 time: 1278
-node: 0 time: 1280
-node: 0 time: 1293
-node: 1 time: 1293
-node: 0 time: 1296
-node: 0 time: 1308
-node: 1 time: 1308
-node: 0 time: 1310
-node: 0 time: 1323
-node: 1 time: 1323
-node: 0 time: 1326
-node: 0 time: 1338
-node: 1 time: 1338
-node: 0 time: 1340
-node: 0 time: 1353
-node: 1 time: 1353
-node: 0 time: 1356
-node: 0 time: 1368
-node: 1 time: 1368
-node: 0 time: 1370
-node: 0 time: 1383
-node: 1 time: 1383
-node: 0 time: 1386
-node: 0 time: 1398
-node: 1 time: 1398
-node: 0 time: 1400
-node: 0 time: 1413
-node: 1 time: 1413
-node: 0 time: 1416
-node: 0 time: 1428
-node: 1 time: 1428
-node: 0 time: 1430
-node: 0 time: 1443
-node: 1 time: 1443
-node: 0 time: 1446
-node: 0 time: 1458
-node: 1 time: 1458
-node: 0 time: 1460
-node: 0 time: 1473
-node: 1 time: 1473
-node: 0 time: 1476
-node: 0 time: 1488
-node: 1 time: 1488
-node: 0 time: 1490
-node: 0 time: 1503
-node: 1 time: 1503
-node: 0 time: 1506
-node: 0 time: 1518
-node: 1 time: 1518
-node: 0 time: 1520
-node: 0 time: 1533
-node: 1 time: 1533
-node: 0 time: 1536
-node: 0 time: 1548
-node: 1 time: 1548
-node: 0 time: 1550
-node: 0 time: 1563
-node: 1 time: 1563
-node: 0 time: 1566
-node: 0 time: 1578
-node: 1 time: 1578
-node: 0 time: 1580
-node: 0 time: 1593
-node: 1 time: 1593
-node: 0 time: 1596
-node: 0 time: 1608
-node: 1 time: 1608
-node: 0 time: 1610
-node: 0 time: 1623
-node: 1 time: 1623
-node: 0 time: 1626
-node: 0 time: 1638
-node: 1 time: 1638
-node: 0 time: 1640
-node: 0 time: 1653
-node: 1 time: 1653
-node: 0 time: 1656
-node: 0 time: 1668
-node: 1 time: 1668
-node: 0 time: 1670
-node: 0 time: 1683
-node: 1 time: 1683
-node: 0 time: 1686
-node: 0 time: 1698
-node: 1 time: 1698
-node: 0 time: 1700
-node: 0 time: 1713
-node: 1 time: 1713
-node: 0 time: 1716
-node: 0 time: 1728
-node: 1 time: 1728
-node: 0 time: 1730
-node: 0 time: 1743
-node: 1 time: 1743
-node: 0 time: 1746
-node: 0 time: 1758
-node: 1 time: 1758
-node: 0 time: 1760
-node: 0 time: 1773
-node: 1 time: 1773
-node: 0 time: 1776
-node: 0 time: 1788
-node: 1 time: 1788
-node: 0 time: 1790
-node: 0 time: 1803
-node: 1 time: 1803
-node: 0 time: 1806
-node: 0 time: 1818
-node: 1 time: 1818
-node: 0 time: 1820
-node: 0 time: 1833
-node: 1 time: 1833
-node: 0 time: 1836
-node: 0 time: 1848
-node: 1 time: 1848
-node: 0 time: 1850
-node: 0 time: 1863
-node: 1 time: 1863
-node: 0 time: 1866
-node: 0 time: 1878
-node: 1 time: 1878
-node: 0 time: 1880
-node: 0 time: 1893
-node: 1 time: 1893
-node: 0 time: 1896
-node: 0 time: 1908
-node: 1 time: 1908
-node: 0 time: 1910
-node: 0 time: 1923
-node: 1 time: 1923
-node: 0 time: 1926
-node: 0 time: 1938
-node: 1 time: 1938
-node: 0 time: 1940
-node: 0 time: 1953
-node: 1 time: 1953
-node: 0 time: 1956
-node: 0 time: 1968
-node: 1 time: 1968
-node: 0 time: 1970
-node: 0 time: 1983
-node: 1 time: 1983
-node: 0 time: 1986
-node: 0 time: 1998
-node: 1 time: 1998
+Warmed up ...Time used is 30000 cycles
 Class 0:
-Packet latency average = 279.167
+Packet latency average = 77.0255
 	minimum = 13
-	maximum = 1595
-Network latency average = 16.6667
+	maximum = 1016
+Network latency average = 40.4228
 	minimum = 13
-	maximum = 23
-Slowest packet = 0
-Flit latency average = 11.3347
+	maximum = 202
+Slowest packet = 18130
+Flit latency average = 38.995
 	minimum = 9
-	maximum = 12
-Slowest flit = 0
-Fragmentation average = 0.666667
+	maximum = 136
+Slowest flit = 168115
+Fragmentation average = 1.42822
 	minimum = 0
-	maximum = 2
-Injected packet rate average = 0.09975
-	minimum = 0.067 (at node 1)
-	maximum = 0.1325 (at node 0)
-Accepted packet rate average = 0.099
-	minimum = 0.066 (at node 0)
-	maximum = 0.132 (at node 1)
-Injected flit rate average = 0.4985
-	minimum = 0.331 (at node 0)
-	maximum = 0.666 (at node 1)
-Accepted flit rate average= 0.496
-	minimum = 0.33 (at node 1)
-	maximum = 0.662 (at node 0)
-Injected packet length average = 4.99749
-Accepted packet length average = 5.0101
-Total in-flight flits = 18 (0 measured)
-latency change    = 0.480009
-throughput change = 0.00907258
-node: 0 time: 2000
-node: 0 time: 2013
-node: 1 time: 2013
-node: 0 time: 2016
-node: 0 time: 2028
-node: 1 time: 2028
-node: 0 time: 2030
-node: 0 time: 2043
-node: 1 time: 2043
-node: 0 time: 2046
-node: 0 time: 2058
-node: 1 time: 2058
-node: 0 time: 2060
-node: 0 time: 2073
-node: 1 time: 2073
-node: 0 time: 2076
-node: 0 time: 2088
-node: 1 time: 2088
-node: 0 time: 2090
-node: 0 time: 2103
-node: 1 time: 2103
-node: 0 time: 2106
-node: 0 time: 2118
-node: 1 time: 2118
-node: 0 time: 2120
-node: 0 time: 2133
-node: 1 time: 2133
-node: 0 time: 2136
-node: 0 time: 2148
-node: 1 time: 2148
-node: 0 time: 2150
-node: 0 time: 2163
-node: 1 time: 2163
-node: 0 time: 2166
-node: 0 time: 2178
-node: 1 time: 2178
-node: 0 time: 2180
-node: 0 time: 2193
-node: 1 time: 2193
-node: 0 time: 2196
-node: 0 time: 2208
-node: 1 time: 2208
-node: 0 time: 2210
-node: 0 time: 2223
-node: 1 time: 2223
-node: 0 time: 2226
-node: 0 time: 2238
-node: 1 time: 2238
-node: 0 time: 2240
-node: 0 time: 2253
-node: 1 time: 2253
-node: 0 time: 2256
-node: 0 time: 2268
-node: 1 time: 2268
-node: 0 time: 2270
-node: 0 time: 2283
-node: 1 time: 2283
-node: 0 time: 2286
-node: 0 time: 2298
-node: 1 time: 2298
-node: 0 time: 2300
-node: 0 time: 2313
-node: 1 time: 2313
-node: 0 time: 2316
-node: 0 time: 2328
-node: 1 time: 2328
-node: 0 time: 2330
-node: 0 time: 2343
-node: 1 time: 2343
-node: 0 time: 2346
-node: 0 time: 2358
-node: 1 time: 2358
-node: 0 time: 2360
-node: 0 time: 2373
-node: 1 time: 2373
-node: 0 time: 2376
-node: 0 time: 2388
-node: 1 time: 2388
-node: 0 time: 2390
-node: 0 time: 2403
-node: 1 time: 2403
-node: 0 time: 2406
-node: 0 time: 2418
-node: 1 time: 2418
-node: 0 time: 2420
-node: 0 time: 2433
-node: 1 time: 2433
-node: 0 time: 2436
-node: 0 time: 2448
-node: 1 time: 2448
-node: 0 time: 2450
-node: 0 time: 2463
-node: 1 time: 2463
-node: 0 time: 2466
-node: 0 time: 2478
-node: 1 time: 2478
-node: 0 time: 2480
-node: 0 time: 2493
-node: 1 time: 2493
-node: 0 time: 2496
-node: 0 time: 2508
-node: 1 time: 2508
-node: 0 time: 2510
-node: 0 time: 2523
-node: 1 time: 2523
-node: 0 time: 2526
-node: 0 time: 2538
-node: 1 time: 2538
-node: 0 time: 2540
-node: 0 time: 2553
-node: 1 time: 2553
-node: 0 time: 2556
-node: 0 time: 2568
-node: 1 time: 2568
-node: 0 time: 2570
-node: 0 time: 2583
-node: 1 time: 2583
-node: 0 time: 2586
-node: 0 time: 2598
-node: 1 time: 2598
-node: 0 time: 2600
-node: 0 time: 2613
-node: 1 time: 2613
-node: 0 time: 2616
-node: 0 time: 2628
-node: 1 time: 2628
-node: 0 time: 2630
-node: 0 time: 2643
-node: 1 time: 2643
-node: 0 time: 2646
-node: 0 time: 2658
-node: 1 time: 2658
-node: 0 time: 2660
-node: 0 time: 2673
-node: 1 time: 2673
-node: 0 time: 2676
-node: 0 time: 2688
-node: 1 time: 2688
-node: 0 time: 2690
-node: 0 time: 2703
-node: 1 time: 2703
-node: 0 time: 2706
-node: 0 time: 2718
-node: 1 time: 2718
-node: 0 time: 2720
-node: 0 time: 2733
-node: 1 time: 2733
-node: 0 time: 2736
-node: 0 time: 2748
-node: 1 time: 2748
-node: 0 time: 2750
-node: 0 time: 2763
-node: 1 time: 2763
-node: 0 time: 2766
-node: 0 time: 2778
-node: 1 time: 2778
-node: 0 time: 2780
-node: 0 time: 2793
-node: 1 time: 2793
-node: 0 time: 2796
-node: 0 time: 2808
-node: 1 time: 2808
-node: 0 time: 2810
-node: 0 time: 2823
-node: 1 time: 2823
-node: 0 time: 2826
-node: 0 time: 2838
-node: 1 time: 2838
-node: 0 time: 2840
-node: 0 time: 2853
-node: 1 time: 2853
-node: 0 time: 2856
-node: 0 time: 2868
-node: 1 time: 2868
-node: 0 time: 2870
-node: 0 time: 2883
-node: 1 time: 2883
-node: 0 time: 2886
-node: 0 time: 2898
-node: 1 time: 2898
-node: 0 time: 2900
-node: 0 time: 2913
-node: 1 time: 2913
-node: 0 time: 2916
-node: 0 time: 2928
-node: 1 time: 2928
-node: 0 time: 2930
-node: 0 time: 2943
-node: 1 time: 2943
-node: 0 time: 2946
-node: 0 time: 2958
-node: 1 time: 2958
-node: 0 time: 2960
-node: 0 time: 2973
-node: 1 time: 2973
-node: 0 time: 2976
-node: 0 time: 2988
-node: 1 time: 2988
-node: 0 time: 2990
+	maximum = 145
+Injected packet rate average = 0.00212669
+	minimum = 0 (at node 0)
+	maximum = 0.109233 (at node 127)
+Accepted packet rate average = 0.00212539
+	minimum = 0 (at node 30)
+	maximum = 0.0308667 (at node 31)
+Injected flit rate average = 0.0113677
+	minimum = 0 (at node 0)
+	maximum = 0.668333 (at node 127)
+Accepted flit rate average= 0.0113654
+	minimum = 0 (at node 30)
+	maximum = 0.0931667 (at node 143)
+Injected packet length average = 5.34525
+Accepted packet length average = 5.34742
+Total in-flight flits = 109 (109 measured)
+latency change    = 0.039529
+throughput change = 0.082075
 Class 0:
-Packet latency average = 683.829
+Packet latency average = 75.5386
 	minimum = 13
-	maximum = 2399
-Network latency average = 16.6985
+	maximum = 1016
+Network latency average = 40.4252
 	minimum = 13
-	maximum = 23
-Slowest packet = 395
-Flit latency average = 11.3273
+	maximum = 218
+Slowest packet = 18130
+Flit latency average = 39.067
 	minimum = 9
-	maximum = 12
-Slowest flit = 1992
-Fragmentation average = 0.673367
+	maximum = 145
+Slowest flit = 266618
+Fragmentation average = 1.38991
 	minimum = 0
-	maximum = 2
-Injected packet rate average = 0.0995
-	minimum = 0.066 (at node 1)
-	maximum = 0.133 (at node 0)
-Accepted packet rate average = 0.0995
-	minimum = 0.067 (at node 0)
-	maximum = 0.132 (at node 1)
-Injected flit rate average = 0.4995
-	minimum = 0.333 (at node 0)
-	maximum = 0.666 (at node 1)
-Accepted flit rate average= 0.498
-	minimum = 0.33 (at node 1)
-	maximum = 0.666 (at node 0)
-Injected packet length average = 5.0201
-Accepted packet length average = 5.00503
-Total in-flight flits = 15 (0 measured)
-latency change    = 0.59176
-throughput change = 0.00401606
-Warmed up ...Time used is 3000 cycles
-node: 0 time: 3003
-node: 1 time: 3003
-node: 0 time: 3006
-node: 0 time: 3018
-node: 1 time: 3018
-node: 0 time: 3020
-node: 0 time: 3033
-node: 1 time: 3033
-node: 0 time: 3036
-node: 0 time: 3048
-node: 1 time: 3048
-node: 0 time: 3050
-node: 0 time: 3063
-node: 1 time: 3063
-node: 0 time: 3066
-node: 0 time: 3078
-node: 1 time: 3078
-node: 0 time: 3080
-node: 0 time: 3093
-node: 1 time: 3093
-node: 0 time: 3096
-node: 0 time: 3108
-node: 1 time: 3108
-node: 0 time: 3110
-node: 0 time: 3123
-node: 1 time: 3123
-node: 0 time: 3126
-node: 0 time: 3138
-node: 1 time: 3138
-node: 0 time: 3140
-node: 0 time: 3153
-node: 1 time: 3153
-node: 0 time: 3156
-node: 0 time: 3168
-node: 1 time: 3168
-node: 0 time: 3170
-node: 0 time: 3183
-node: 1 time: 3183
-node: 0 time: 3186
-node: 0 time: 3198
-node: 1 time: 3198
-node: 0 time: 3200
-node: 0 time: 3213
-node: 1 time: 3213
-node: 0 time: 3216
-node: 0 time: 3228
-node: 1 time: 3228
-node: 0 time: 3230
-node: 0 time: 3243
-node: 1 time: 3243
-node: 0 time: 3246
-node: 0 time: 3258
-node: 1 time: 3258
-node: 0 time: 3260
-node: 0 time: 3273
-node: 1 time: 3273
-node: 0 time: 3276
-node: 0 time: 3288
-node: 1 time: 3288
-node: 0 time: 3290
-node: 0 time: 3303
-node: 1 time: 3303
-node: 0 time: 3306
-node: 0 time: 3318
-node: 1 time: 3318
-node: 0 time: 3320
-node: 0 time: 3333
-node: 1 time: 3333
-node: 0 time: 3336
-node: 0 time: 3348
-node: 1 time: 3348
-node: 0 time: 3350
-node: 0 time: 3363
-node: 1 time: 3363
-node: 0 time: 3366
-node: 0 time: 3378
-node: 1 time: 3378
-node: 0 time: 3380
-node: 0 time: 3393
-node: 1 time: 3393
-node: 0 time: 3396
-node: 0 time: 3408
-node: 1 time: 3408
-node: 0 time: 3410
-node: 0 time: 3423
-node: 1 time: 3423
-node: 0 time: 3426
-node: 0 time: 3438
-node: 1 time: 3438
-node: 0 time: 3440
-node: 0 time: 3453
-node: 1 time: 3453
-node: 0 time: 3456
-node: 0 time: 3468
-node: 1 time: 3468
-node: 0 time: 3470
-node: 0 time: 3483
-node: 1 time: 3483
-node: 0 time: 3486
-node: 0 time: 3498
-node: 1 time: 3498
-node: 0 time: 3500
-node: 0 time: 3513
-node: 1 time: 3513
-node: 0 time: 3516
-node: 0 time: 3528
-node: 1 time: 3528
-node: 0 time: 3530
-node: 0 time: 3543
-node: 1 time: 3543
-node: 0 time: 3546
-node: 0 time: 3558
-node: 1 time: 3558
-node: 0 time: 3560
-node: 0 time: 3573
-node: 1 time: 3573
-node: 0 time: 3576
-node: 0 time: 3588
-node: 1 time: 3588
-node: 0 time: 3590
-node: 0 time: 3603
-node: 1 time: 3603
-node: 0 time: 3606
-node: 0 time: 3618
-node: 1 time: 3618
-node: 0 time: 3620
-node: 0 time: 3633
-node: 1 time: 3633
-node: 0 time: 3636
-node: 0 time: 3648
-node: 1 time: 3648
-node: 0 time: 3650
-node: 0 time: 3663
-node: 1 time: 3663
-node: 0 time: 3666
-node: 0 time: 3678
-node: 1 time: 3678
-node: 0 time: 3680
-node: 0 time: 3693
-node: 1 time: 3693
-node: 0 time: 3696
-node: 0 time: 3708
-node: 1 time: 3708
-node: 0 time: 3710
-node: 0 time: 3723
-node: 1 time: 3723
-node: 0 time: 3726
-node: 0 time: 3738
-node: 1 time: 3738
-node: 0 time: 3740
-node: 0 time: 3753
-node: 1 time: 3753
-node: 0 time: 3756
-node: 0 time: 3768
-node: 1 time: 3768
-node: 0 time: 3770
-node: 0 time: 3783
-node: 1 time: 3783
-node: 0 time: 3786
-node: 0 time: 3798
-node: 1 time: 3798
-node: 0 time: 3800
-node: 0 time: 3813
-node: 1 time: 3813
-node: 0 time: 3816
-node: 0 time: 3828
-node: 1 time: 3828
-node: 0 time: 3830
-node: 0 time: 3843
-node: 1 time: 3843
-node: 0 time: 3846
-node: 0 time: 3858
-node: 1 time: 3858
-node: 0 time: 3860
-node: 0 time: 3873
-node: 1 time: 3873
-node: 0 time: 3876
-node: 0 time: 3888
-node: 1 time: 3888
-node: 0 time: 3890
-node: 0 time: 3903
-node: 1 time: 3903
-node: 0 time: 3906
-node: 0 time: 3918
-node: 1 time: 3918
-node: 0 time: 3920
-node: 0 time: 3933
-node: 1 time: 3933
-node: 0 time: 3936
-node: 0 time: 3948
-node: 1 time: 3948
-node: 0 time: 3950
-node: 0 time: 3963
-node: 1 time: 3963
-node: 0 time: 3966
-node: 0 time: 3978
-node: 1 time: 3978
-node: 0 time: 3980
-node: 0 time: 3993
-node: 1 time: 3993
-node: 0 time: 3996
+	maximum = 162
+Injected packet rate average = 0.00212018
+	minimum = 0 (at node 0)
+	maximum = 0.1093 (at node 127)
+Accepted packet rate average = 0.00212018
+	minimum = 0 (at node 30)
+	maximum = 0.0308833 (at node 31)
+Injected flit rate average = 0.0113146
+	minimum = 0 (at node 0)
+	maximum = 0.668667 (at node 127)
+Accepted flit rate average= 0.0113143
+	minimum = 0 (at node 30)
+	maximum = 0.0930667 (at node 143)
+Injected packet length average = 5.33664
+Accepted packet length average = 5.33649
+Total in-flight flits = 96 (96 measured)
+latency change    = 0.0196837
+throughput change = 0.00451124
 Class 0:
-Packet latency average = 935.716
+Packet latency average = 75.024
 	minimum = 13
-	maximum = 3191
-Network latency average = 16.6345
+	maximum = 1016
+Network latency average = 40.3801
 	minimum = 13
-	maximum = 23
-Slowest packet = 599
-Flit latency average = 11.338
+	maximum = 218
+Slowest packet = 18130
+Flit latency average = 39.0523
 	minimum = 9
-	maximum = 12
-Slowest flit = 2982
-Fragmentation average = 0.659898
+	maximum = 145
+Slowest flit = 266618
+Fragmentation average = 1.35894
 	minimum = 0
-	maximum = 2
-Injected packet rate average = 0.1005
-	minimum = 0.067 (at node 1)
-	maximum = 0.134 (at node 0)
-Accepted packet rate average = 0.1
-	minimum = 0.066 (at node 0)
-	maximum = 0.134 (at node 1)
-Injected flit rate average = 0.501
-	minimum = 0.335 (at node 0)
-	maximum = 0.667 (at node 1)
-Accepted flit rate average= 0.5015
-	minimum = 0.335 (at node 1)
-	maximum = 0.668 (at node 0)
-Injected packet length average = 4.98507
-Accepted packet length average = 5.015
-Total in-flight flits = 17 (17 measured)
-latency change    = 0.269191
-throughput change = 0.00697906
-node: 0 time: 4008
-node: 1 time: 4008
-node: 0 time: 4010
-node: 0 time: 4023
-node: 1 time: 4023
-node: 0 time: 4026
-node: 0 time: 4038
-node: 1 time: 4038
-node: 0 time: 4040
-node: 0 time: 4053
-node: 1 time: 4053
-node: 0 time: 4056
-node: 0 time: 4068
-node: 1 time: 4068
-node: 0 time: 4070
-node: 0 time: 4083
-node: 1 time: 4083
-node: 0 time: 4086
-node: 0 time: 4098
-node: 1 time: 4098
-node: 0 time: 4100
-node: 0 time: 4113
-node: 1 time: 4113
-node: 0 time: 4116
-node: 0 time: 4128
-node: 1 time: 4128
-node: 0 time: 4130
-node: 0 time: 4143
-node: 1 time: 4143
-node: 0 time: 4146
-node: 0 time: 4158
-node: 1 time: 4158
-node: 0 time: 4160
-node: 0 time: 4173
-node: 1 time: 4173
-node: 0 time: 4176
-node: 0 time: 4188
-node: 1 time: 4188
-node: 0 time: 4190
-node: 0 time: 4203
-node: 1 time: 4203
-node: 0 time: 4206
-node: 0 time: 4218
-node: 1 time: 4218
-node: 0 time: 4220
-node: 0 time: 4233
-node: 1 time: 4233
-node: 0 time: 4236
-node: 0 time: 4248
-node: 1 time: 4248
-node: 0 time: 4250
-node: 0 time: 4263
-node: 1 time: 4263
-node: 0 time: 4266
-node: 0 time: 4278
-node: 1 time: 4278
-node: 0 time: 4280
-node: 0 time: 4293
-node: 1 time: 4293
-node: 0 time: 4296
-node: 0 time: 4308
-node: 1 time: 4308
-node: 0 time: 4310
-node: 0 time: 4323
-node: 1 time: 4323
-node: 0 time: 4326
-node: 0 time: 4338
-node: 1 time: 4338
-node: 0 time: 4340
-node: 0 time: 4353
-node: 1 time: 4353
-node: 0 time: 4356
-node: 0 time: 4368
-node: 1 time: 4368
-node: 0 time: 4370
-node: 0 time: 4383
-node: 1 time: 4383
-node: 0 time: 4386
-node: 0 time: 4398
-node: 1 time: 4398
-node: 0 time: 4400
-node: 0 time: 4413
-node: 1 time: 4413
-node: 0 time: 4416
-node: 0 time: 4428
-node: 1 time: 4428
-node: 0 time: 4430
-node: 0 time: 4443
-node: 1 time: 4443
-node: 0 time: 4446
-node: 0 time: 4458
-node: 1 time: 4458
-node: 0 time: 4460
-node: 0 time: 4473
-node: 1 time: 4473
-node: 0 time: 4476
-node: 0 time: 4488
-node: 1 time: 4488
-node: 0 time: 4490
-node: 0 time: 4503
-node: 1 time: 4503
-node: 0 time: 4506
-node: 0 time: 4518
-node: 1 time: 4518
-node: 0 time: 4520
-node: 0 time: 4533
-node: 1 time: 4533
-node: 0 time: 4536
-node: 0 time: 4548
-node: 1 time: 4548
-node: 0 time: 4550
-node: 0 time: 4563
-node: 1 time: 4563
-node: 0 time: 4566
-node: 0 time: 4578
-node: 1 time: 4578
-node: 0 time: 4580
-node: 0 time: 4593
-node: 1 time: 4593
-node: 0 time: 4596
-node: 0 time: 4608
-node: 1 time: 4608
-node: 0 time: 4610
-node: 0 time: 4623
-node: 1 time: 4623
-node: 0 time: 4626
-node: 0 time: 4638
-node: 1 time: 4638
-node: 0 time: 4640
-node: 0 time: 4653
-node: 1 time: 4653
-node: 0 time: 4656
-node: 0 time: 4668
-node: 1 time: 4668
-node: 0 time: 4670
-node: 0 time: 4683
-node: 1 time: 4683
-node: 0 time: 4686
-node: 0 time: 4698
-node: 1 time: 4698
-node: 0 time: 4700
-node: 0 time: 4713
-node: 1 time: 4713
-node: 0 time: 4716
-node: 0 time: 4728
-node: 1 time: 4728
-node: 0 time: 4730
-node: 0 time: 4743
-node: 1 time: 4743
-node: 0 time: 4746
-node: 0 time: 4758
-node: 1 time: 4758
-node: 0 time: 4760
-node: 0 time: 4773
-node: 1 time: 4773
-node: 0 time: 4776
-node: 0 time: 4788
-node: 1 time: 4788
-node: 0 time: 4790
-node: 0 time: 4803
-node: 1 time: 4803
-node: 0 time: 4806
-node: 0 time: 4818
-node: 1 time: 4818
-node: 0 time: 4820
-node: 0 time: 4833
-node: 1 time: 4833
-node: 0 time: 4836
-node: 0 time: 4848
-node: 1 time: 4848
-node: 0 time: 4850
-node: 0 time: 4863
-node: 1 time: 4863
-node: 0 time: 4866
-node: 0 time: 4878
-node: 1 time: 4878
-node: 0 time: 4880
-node: 0 time: 4893
-node: 1 time: 4893
-node: 0 time: 4896
-node: 0 time: 4908
-node: 1 time: 4908
-node: 0 time: 4910
-node: 0 time: 4923
-node: 1 time: 4923
-node: 0 time: 4926
-node: 0 time: 4938
-node: 1 time: 4938
-node: 0 time: 4940
-node: 0 time: 4953
-node: 1 time: 4953
-node: 0 time: 4956
-node: 0 time: 4968
-node: 1 time: 4968
-node: 0 time: 4970
-node: 0 time: 4983
-node: 1 time: 4983
-node: 0 time: 4986
-node: 0 time: 4998
-node: 1 time: 4998
+	maximum = 162
+Injected packet rate average = 0.00211549
+	minimum = 0 (at node 0)
+	maximum = 0.109289 (at node 127)
+Accepted packet rate average = 0.00211393
+	minimum = 0 (at node 30)
+	maximum = 0.0308778 (at node 31)
+Injected flit rate average = 0.0112949
+	minimum = 0 (at node 0)
+	maximum = 0.668689 (at node 127)
+Accepted flit rate average= 0.011285
+	minimum = 0 (at node 30)
+	maximum = 0.0929333 (at node 143)
+Injected packet length average = 5.33914
+Accepted packet length average = 5.33838
+Total in-flight flits = 453 (453 measured)
+latency change    = 0.00686006
+throughput change = 0.00259994
 Class 0:
-Packet latency average = 1073.82
+Packet latency average = 74.8479
 	minimum = 13
-	maximum = 3995
-Network latency average = 16.6508
+	maximum = 1016
+Network latency average = 40.3989
 	minimum = 13
-	maximum = 23
-Slowest packet = 599
-Flit latency average = 11.3363
+	maximum = 218
+Slowest packet = 18130
+Flit latency average = 39.0956
 	minimum = 9
-	maximum = 12
-Slowest flit = 2982
-Fragmentation average = 0.663317
+	maximum = 145
+Slowest flit = 266618
+Fragmentation average = 1.36045
 	minimum = 0
-	maximum = 2
-Injected packet rate average = 0.10025
-	minimum = 0.067 (at node 1)
-	maximum = 0.1335 (at node 0)
-Accepted packet rate average = 0.10025
-	minimum = 0.0665 (at node 0)
-	maximum = 0.134 (at node 1)
-Injected flit rate average = 0.50025
-	minimum = 0.3335 (at node 0)
-	maximum = 0.667 (at node 1)
-Accepted flit rate average= 0.501
-	minimum = 0.335 (at node 1)
-	maximum = 0.667 (at node 0)
-Injected packet length average = 4.99002
-Accepted packet length average = 4.99751
-Total in-flight flits = 18 (18 measured)
-latency change    = 0.128607
-throughput change = 0.000998004
-node: 0 time: 5000
-node: 0 time: 5013
-node: 1 time: 5013
-node: 0 time: 5016
-node: 0 time: 5028
-node: 1 time: 5028
-node: 0 time: 5030
-node: 0 time: 5043
-node: 1 time: 5043
-node: 0 time: 5046
-node: 0 time: 5058
-node: 1 time: 5058
-node: 0 time: 5060
-node: 0 time: 5073
-node: 1 time: 5073
-node: 0 time: 5076
-node: 0 time: 5088
-node: 1 time: 5088
-node: 0 time: 5090
-node: 0 time: 5103
-node: 1 time: 5103
-node: 0 time: 5106
-node: 0 time: 5118
-node: 1 time: 5118
-node: 0 time: 5120
-node: 0 time: 5133
-node: 1 time: 5133
-node: 0 time: 5136
-node: 0 time: 5148
-node: 1 time: 5148
-node: 0 time: 5150
-node: 0 time: 5163
-node: 1 time: 5163
-node: 0 time: 5166
-node: 0 time: 5178
-node: 1 time: 5178
-node: 0 time: 5180
-node: 0 time: 5193
-node: 1 time: 5193
-node: 0 time: 5196
-node: 0 time: 5208
-node: 1 time: 5208
-node: 0 time: 5210
-node: 0 time: 5223
-node: 1 time: 5223
-node: 0 time: 5226
-node: 0 time: 5238
-node: 1 time: 5238
-node: 0 time: 5240
-node: 0 time: 5253
-node: 1 time: 5253
-node: 0 time: 5256
-node: 0 time: 5268
-node: 1 time: 5268
-node: 0 time: 5270
-node: 0 time: 5283
-node: 1 time: 5283
-node: 0 time: 5286
-node: 0 time: 5298
-node: 1 time: 5298
-node: 0 time: 5300
-node: 0 time: 5313
-node: 1 time: 5313
-node: 0 time: 5316
-node: 0 time: 5328
-node: 1 time: 5328
-node: 0 time: 5330
-node: 0 time: 5343
-node: 1 time: 5343
-node: 0 time: 5346
-node: 0 time: 5358
-node: 1 time: 5358
-node: 0 time: 5360
-node: 0 time: 5373
-node: 1 time: 5373
-node: 0 time: 5376
-node: 0 time: 5388
-node: 1 time: 5388
-node: 0 time: 5390
-node: 0 time: 5403
-node: 1 time: 5403
-node: 0 time: 5406
-node: 0 time: 5418
-node: 1 time: 5418
-node: 0 time: 5420
-node: 0 time: 5433
-node: 1 time: 5433
-node: 0 time: 5436
-node: 0 time: 5448
-node: 1 time: 5448
-node: 0 time: 5450
-node: 0 time: 5463
-node: 1 time: 5463
-node: 0 time: 5466
-node: 0 time: 5478
-node: 1 time: 5478
-node: 0 time: 5480
-node: 0 time: 5493
-node: 1 time: 5493
-node: 0 time: 5496
-node: 0 time: 5508
-node: 1 time: 5508
-node: 0 time: 5510
-node: 0 time: 5523
-node: 1 time: 5523
-node: 0 time: 5526
-node: 0 time: 5538
-node: 1 time: 5538
-node: 0 time: 5540
-node: 0 time: 5553
-node: 1 time: 5553
-node: 0 time: 5556
-node: 0 time: 5568
-node: 1 time: 5568
-node: 0 time: 5570
-node: 0 time: 5583
-node: 1 time: 5583
-node: 0 time: 5586
-node: 0 time: 5598
-node: 1 time: 5598
-node: 0 time: 5600
-node: 0 time: 5613
-node: 1 time: 5613
-node: 0 time: 5616
-node: 0 time: 5628
-node: 1 time: 5628
-node: 0 time: 5630
-node: 0 time: 5643
-node: 1 time: 5643
-node: 0 time: 5646
-node: 0 time: 5658
-node: 1 time: 5658
-node: 0 time: 5660
-node: 0 time: 5673
-node: 1 time: 5673
-node: 0 time: 5676
-node: 0 time: 5688
-node: 1 time: 5688
-node: 0 time: 5690
-node: 0 time: 5703
-node: 1 time: 5703
-node: 0 time: 5706
-node: 0 time: 5718
-node: 1 time: 5718
-node: 0 time: 5720
-node: 0 time: 5733
-node: 1 time: 5733
-node: 0 time: 5736
-node: 0 time: 5748
-node: 1 time: 5748
-node: 0 time: 5750
-node: 0 time: 5763
-node: 1 time: 5763
-node: 0 time: 5766
-node: 0 time: 5778
-node: 1 time: 5778
-node: 0 time: 5780
-node: 0 time: 5793
-node: 1 time: 5793
-node: 0 time: 5796
-node: 0 time: 5808
-node: 1 time: 5808
-node: 0 time: 5810
-node: 0 time: 5823
-node: 1 time: 5823
-node: 0 time: 5826
-node: 0 time: 5838
-node: 1 time: 5838
-node: 0 time: 5840
-node: 0 time: 5853
-node: 1 time: 5853
-node: 0 time: 5856
-node: 0 time: 5868
-node: 1 time: 5868
-node: 0 time: 5870
-node: 0 time: 5883
-node: 1 time: 5883
-node: 0 time: 5886
-node: 0 time: 5898
-node: 1 time: 5898
-node: 0 time: 5900
-node: 0 time: 5913
-node: 1 time: 5913
-node: 0 time: 5916
-node: 0 time: 5928
-node: 1 time: 5928
-node: 0 time: 5930
-node: 0 time: 5943
-node: 1 time: 5943
-node: 0 time: 5946
-node: 0 time: 5958
-node: 1 time: 5958
-node: 0 time: 5960
-node: 0 time: 5973
-node: 1 time: 5973
-node: 0 time: 5976
-node: 0 time: 5988
-node: 1 time: 5988
-node: 0 time: 5990
-Class 0:
-Packet latency average = 1213.17
-	minimum = 13
-	maximum = 4799
-Network latency average = 16.6667
-	minimum = 13
-	maximum = 23
-Slowest packet = 599
-Flit latency average = 11.3333
-	minimum = 9
-	maximum = 12
-Slowest flit = 2982
-Fragmentation average = 0.666667
-	minimum = 0
-	maximum = 2
-Injected packet rate average = 0.1
-	minimum = 0.0666667 (at node 1)
-	maximum = 0.133333 (at node 0)
-Accepted packet rate average = 0.1
-	minimum = 0.0666667 (at node 0)
-	maximum = 0.133333 (at node 1)
-Injected flit rate average = 0.5
-	minimum = 0.333333 (at node 0)
-	maximum = 0.666667 (at node 1)
-Accepted flit rate average= 0.5
-	minimum = 0.333333 (at node 1)
-	maximum = 0.666667 (at node 0)
-Injected packet length average = 5
-Accepted packet length average = 5
-Total in-flight flits = 15 (15 measured)
-latency change    = 0.114865
-throughput change = 0.002
+	maximum = 162
+Injected packet rate average = 0.00211074
+	minimum = 0 (at node 0)
+	maximum = 0.109183 (at node 127)
+Accepted packet rate average = 0.00211064
+	minimum = 0 (at node 30)
+	maximum = 0.0308667 (at node 31)
+Injected flit rate average = 0.011252
+	minimum = 0 (at node 0)
+	maximum = 0.668417 (at node 127)
+Accepted flit rate average= 0.0112519
+	minimum = 0 (at node 30)
+	maximum = 0.0925 (at node 143)
+Injected packet length average = 5.33083
+Accepted packet length average = 5.33104
+Total in-flight flits = 91 (91 measured)
+latency change    = 0.00235208
+throughput change = 0.00293835
 Draining remaining packets ...
-Time taken is 6014 cycles
+Time taken is 150053 cycles
 ====== Overall Traffic Statistics ======
 ====== Traffic class 0 ======
-Packet latency average = 1215.17 (1 samples)
+Packet latency average = 74.839 (1 samples)
 	minimum = 13 (1 samples)
-	maximum = 4811 (1 samples)
-Network latency average = 16.6667 (1 samples)
+	maximum = 1016 (1 samples)
+Network latency average = 40.3988 (1 samples)
 	minimum = 13 (1 samples)
-	maximum = 23 (1 samples)
-Flit latency average = 11.3333 (1 samples)
+	maximum = 218 (1 samples)
+Flit latency average = 39.0959 (1 samples)
 	minimum = 9 (1 samples)
-	maximum = 12 (1 samples)
-Fragmentation average = 0.666667 (1 samples)
+	maximum = 145 (1 samples)
+Fragmentation average = 1.36009 (1 samples)
 	minimum = 0 (1 samples)
-	maximum = 2 (1 samples)
-Injected packet rate average = 0.1 (1 samples)
-	minimum = 0.0666667 (1 samples)
-	maximum = 0.133333 (1 samples)
-Accepted packet rate average = 0.1 (1 samples)
-	minimum = 0.0666667 (1 samples)
-	maximum = 0.133333 (1 samples)
-Injected flit rate average = 0.5 (1 samples)
-	minimum = 0.333333 (1 samples)
-	maximum = 0.666667 (1 samples)
-Accepted flit rate average = 0.5 (1 samples)
-	minimum = 0.333333 (1 samples)
-	maximum = 0.666667 (1 samples)
-Injected packet size average = 5 (1 samples)
-Accepted packet size average = 5 (1 samples)
-Hops average = 2 (1 samples)
-Total run time 0.122009
+	maximum = 162 (1 samples)
+Injected packet rate average = 0.00211074 (1 samples)
+	minimum = 0 (1 samples)
+	maximum = 0.109183 (1 samples)
+Accepted packet rate average = 0.00211064 (1 samples)
+	minimum = 0 (1 samples)
+	maximum = 0.0308667 (1 samples)
+Injected flit rate average = 0.011252 (1 samples)
+	minimum = 0 (1 samples)
+	maximum = 0.668417 (1 samples)
+Accepted flit rate average = 0.0112519 (1 samples)
+	minimum = 0 (1 samples)
+	maximum = 0.0925 (1 samples)
+Injected packet size average = 5.33083 (1 samples)
+Accepted packet size average = 5.33104 (1 samples)
+Hops average = 6.50691 (1 samples)
+Total run time 71.6798

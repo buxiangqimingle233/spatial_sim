@@ -1,11 +1,11 @@
 topology = mesh;
-k = 2;
-n = 1;
+k = 16;
+n = 2;
 
 sim_type = throughput;
 
 packet_size = 1;
-warmup_periods = 3;
+warmup_periods = 1;
 sample_period = 1000;
 max_samples = 20;
 

@@ -212,6 +212,7 @@ void FocusInjectionProcess::reset()
 bool FocusInjectionProcess::test(int source)
 {
   assert((source >= 0) && (source < _nodes));
+  
   return focus::FocusInjectionKernel::getKernel()->test(source);
 }
 

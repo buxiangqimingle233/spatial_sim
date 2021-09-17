@@ -35,6 +35,7 @@
 
 #include "booksim.hpp"
 #include <iostream>
+#include <fstream>
 #include <sstream>
 #include <limits>
 #include <cmath>
@@ -56,18 +57,21 @@ void Stats::Clear( )
   _sample_squared_sum = 0.0;
 
   _hist.assign(_num_bins, 0);
-  for (int i = 0; i < 1500; i++){
+  for (int i = 0; i < MAX_NODES; i++) {
     _node_hist[i].assign(_num_bins, 0);
   }
   
   _min = numeric_limits<double>::quiet_NaN();
   _max = -numeric_limits<double>::quiet_NaN();
 
-  for (int i = 0; i < 1500; i++){
+  for (int i = 0; i < MAX_NODES; i++){
     _node_max[i] = -numeric_limits<double>::quiet_NaN();
     _node_min[i] = numeric_limits<double>::quiet_NaN();
+    _node_slowdown_sum[i] = 0;
+    _node_num_samples[i] = 0;
+    _node_sample_sum[i] = 0;
   }  
-  
+
   //  _reset = true;
 }
 
@@ -78,7 +82,7 @@ double Stats::Average( ) const
 
 double Stats::NodeAverage( int dest ) const
 {
-  return _node_sample_sum[dest] / (double)_node_num_samples[dest];
+  return _node_sample_sum[dest] / ((double)_node_num_samples[dest] + 1e-5);
 }
 
 double Stats::Variance( ) const
@@ -94,6 +98,11 @@ double Stats::Min( ) const
 double Stats::NodeMin( int dest ) const
 {
   return _node_min[dest];
+}
+
+double Stats::NodeSlowdown( int dest ) const
+{
+  return _node_slowdown_sum[dest] / ((double)_node_num_samples[dest] + 1e-5);
 }
 
 double Stats::Max( ) const
@@ -137,6 +146,12 @@ void Stats::AddSample( double val )
   _hist[b]++;
 }
 
+void Stats::AddNodeSample( double val, int dest, double interval ) {
+  AddNodeSample(val, dest);
+  double slowdown = fmax(val / interval, 1.0);
+  _node_slowdown_sum[dest] += slowdown;
+}
+
 void Stats::AddNodeSample( double val, int dest )
 {
   ++_node_num_samples[dest];
@@ -155,8 +170,15 @@ void Stats::AddNodeSample( double val, int dest )
 
 void Stats::Display( ostream & os ) const
 {
-  
   os << *this << endl;
+}
+
+void Stats::Dump() {
+  ofstream ofs("out.txt", ios::trunc);
+  for (int i = 0; i < MAX_NODES; i++) {
+    // ofs << "Node: " << i << " average: " << _flat_stats[c]->NodeAverage(i) << " max: " << _flat_stats[c]->NodeMax(i) << " min: " << _flat_stats[c]->NodeMin(i) << endl;
+    ofs << i << "," << NodeAverage(i) << "," << NodeMax(i) << "," << NodeMin(i) << "," << NodeSlowdown(i) << endl;
+  }
 }
 
 ostream & operator<<(ostream & os, const Stats & s) {

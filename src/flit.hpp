@@ -83,10 +83,14 @@ public:
   // Lookahead route info
   OutputSet la_route_set;
 
+  // Which flow
+  int _flow_id;
+
   void Reset();
 
   static Flit * New();
   void Free();
+  void setFlowID(int flow_id);
   static void FreeAll();
 
 private:

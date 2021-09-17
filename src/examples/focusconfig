@@ -5,8 +5,8 @@ n = 2;
 sim_type = throughput;
 
 packet_size = 1;
-warmup_periods = 3;
-sample_period = 10000;
+warmup_periods = 1;
+sample_period = 30000;
 max_samples = 20;
 
 burst_alpha = 0.5;

@@ -30,15 +30,18 @@
 
 #include "module.hpp"
 
+const int MAX_NODES = 1500;
+
 class Stats : public Module {
   int    _num_samples;
   double _sample_sum;
   double _sample_squared_sum;
 
-  int _node_num_samples[1500];
-  double _node_sample_sum[1500];
-  double _node_min[1500];
-  double _node_max[1500];
+  int _node_num_samples[MAX_NODES];
+  double _node_sample_sum[MAX_NODES];
+  double _node_min[MAX_NODES];
+  double _node_max[MAX_NODES];
+  double _node_slowdown_sum[MAX_NODES];
 
   //bool _reset;
   double _min;
@@ -48,7 +51,7 @@ class Stats : public Module {
   double _bin_size;
 
   vector<int> _hist;
-  vector<int> _node_hist[1500];
+  vector<int> _node_hist[MAX_NODES];
 
 public:
   Stats( Module *parent, const string &name,
@@ -59,6 +62,7 @@ public:
   double NodeAverage( int dest ) const;
   double NodeMax( int dest ) const;
   double NodeMin( int dest ) const;
+  double NodeSlowdown( int dest ) const;
 
   double Average( ) const;
   double Variance( ) const;
@@ -74,13 +78,15 @@ public:
   }
 
   void AddNodeSample( double val, int dest );
-  inline void AddNodeSample( int val, int dest ) {
-    AddNodeSample( (double)val, dest );
-  }
+  // inline void AddNodeSample( int val, int dest ) {
+  //   AddNodeSample( (double)val, dest );
+  // }
+  void AddNodeSample( double val, int dest, double interval);
 
   int GetBin(int b){ return _hist[b];}
 
   void Display( ostream & os = cout ) const;
+  void Dump();
 
   friend ostream & operator<<(ostream & os, const Stats & s);
 
