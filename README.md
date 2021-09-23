@@ -1,8 +1,8 @@
 # Trace-Enabled BookSim Simulator
 
-This project is the cycle-accurate on-chip interconnection simulator, which is based on Booksim ( further described in below ). We modify the simulation kernel of Booksim to enable users to specify the traffic with trace files. 
+This project is the cycle-accurate on-chip interconnection simulator, which is based on Booksim. We modify its simulation kernel to enable users to specify traffic with trace files. 
 
-The trace file describes the traffic as a communication graph, where each node denotes a computation core and its attached router, and edges are traffic flows between cores. A typical representation of a node is: 
+The trace file describes a communication graph, where each node denotes a computation core alongwith its attached router, and edges are traffic flows between cores. A typical representation of a node is: 
 
 ```pseudocode
 0 2
@@ -10,14 +10,12 @@ The trace file describes the traffic as a communication graph, where each node d
 4608 32 2 17 143 0
 ```
 
-The first line is the global id of the node and its attached flow number. If a flow is attached to a node, it's injected by it. The two subsequent lines describe the traffic flows, which are given by *interval, max_iteration_cnt, waiting_flow_cnt, flits_per_message, dest_id, source_id* 
+The first line is the global id of the node along with its attached flow number. If a flow is attached to a node, it's injected by the node. The two subsequent lines describe the traffic flows attached to node $0$, which are given by *interval, max_iteration_cnt, waiting_flow_cnt, flits_per_message, dest_id, source_id* 
 
-We model the collective communication as set of point-to-point traffic flows between all source nodes and all destinations. 
-
-* The number of simulated cores should not exceed 1500
+* We model the collective communication as set of point-to-point traffic flows between all source nodes and all destinations. 
+* The number of simulated cores should not exceed 1500.
 * Set `traffic = focus` and `injection_process = focus` in the config files, the example configuration file is **src/examples/focusconfig**
 * We just support repeated traffic flows now.
-
 
 
 
