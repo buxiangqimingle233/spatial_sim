@@ -20,6 +20,7 @@ class Flow {
 // Unchangable features
 protected:
     int _computing_time; // computing time
+    int _interval;
     long long _max_iter; // we model the traffic flow as a regurally happened issue
     int _wait_flows; // number of depending flows
     int _size; // flits per packet
@@ -41,6 +42,7 @@ public:
         _size(size), _dest(dest), _src(src), _slept_time(0), _iter(0) { 
             _state = FlowState::Init;
             _iter = _slept_time = 0;
+            _interval = _size > _computing_time ? _size + 20 : _computing_time;
             _dependent_flows = std::map<int, int>();
         };
 
@@ -50,9 +52,10 @@ public:
 
     int getDestination() { return _dest; };
     int getFlowSize() { return _size; };
-    int getInterval() { return _computing_time; }
+    int getComputingTime() { return _computing_time; }
     int forward(bool token); // return whether this flow is to be activate
     void arriveDependentFlow(int source);
+    void testDependentFlow();
 };
 
 // vertex-centric programming model
@@ -74,7 +77,7 @@ public:
     int getDestination(); // the destination of active flow with token
     int getFlowSize();
     int getFlowID();
-    int getInterval(int flow_id);
+    int getComputingTime(int flow_id);
 
     bool checkAval(int raising_node);
     void receiveFlow(int source);

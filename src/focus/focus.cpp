@@ -22,8 +22,7 @@ int Flow::forward(bool token) {
                     available_flows.push_back(it);
                 }
             }
-            // FIXME: deadlock may happened, please prevent the deadlocks in generating trace files.
-            // TODO: not accurate, only accumulate number
+            // FIXME: not accurate here
             if (static_cast<int>(available_flows.size()) >= _wait_flows) {
                 for (auto it: available_flows) {
                     it->second--;
@@ -38,7 +37,7 @@ int Flow::forward(bool token) {
         }
         // Is doing computing now, the flow is sleeping ...
         case FlowState::Computing: {
-            if (_slept_time < _computing_time) {
+            if (_slept_time < _interval) {
                 _slept_time++;
                 next_state = FlowState::Computing;
                 should_issue = false;
@@ -50,6 +49,7 @@ int Flow::forward(bool token) {
             break;
         }
         // Computation is done, waiting the destination node to be available
+        // Update: Blocked state now dictates the state waiting for token. 
         case FlowState::Blocked: {
             if (token) {
                 if (_iter > _max_iter) {
@@ -148,7 +148,7 @@ int Node::test() {
     // select a flow to issue, using Round-Robin scheduling
     int sel_flow = _flow_with_token;
     int size_ = _out_flows.size();
-    for (int bias = 0; bias < size_; ++bias) {
+    for (int bias = 1; bias <= size_; ++bias) {
         int idx = (bias + _flow_with_token) %size_;
         if (_out_flows[idx].canIssue()) {
             sel_flow = idx;
@@ -178,8 +178,8 @@ int Node::getFlowID() {
     return _flow_with_token;
 }
 
-int Node::getInterval(int flow_id) {
-    return _out_flows[flow_id].getInterval();
+int Node::getComputingTime(int flow_id) {
+    return _out_flows[flow_id].getComputingTime();
 }
 
 void Node::receiveFlow(int source) {
@@ -208,6 +208,8 @@ FocusInjectionKernel::FocusInjectionKernel() {
         Node node(ifs, node_id);
         _nodes.push_back(node);
     }
+
+    
 
 }
 
@@ -265,7 +267,7 @@ int FocusInjectionKernel::flowID(int source) {
 }
 
 int FocusInjectionKernel::interval(int source, int flow_id) {
-    return _nodes[source].getInterval(flow_id);
+    return _nodes[source].getComputingTime(flow_id);
 }
 
 void FocusInjectionKernel::updateFocusKernel(int source, int dest) {
