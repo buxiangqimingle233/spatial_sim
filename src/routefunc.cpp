@@ -39,6 +39,7 @@
 #include <map>
 #include <cstdlib>
 #include <cassert>
+#include <fstream>
 
 #include "booksim.hpp"
 #include "routefunc.hpp"
@@ -813,6 +814,7 @@ int rand_min_intr_mesh( int src, int dest )
 
 void romm_mesh( const Router *r, const Flit *f, int in_channel, OutputSet *outputs, bool inject )
 {
+
   int vcBegin = 0, vcEnd = gNumVCs-1;
   if ( f->type == Flit::READ_REQUEST ) {
     vcBegin = gReadReqBeginVC;
@@ -836,6 +838,12 @@ void romm_mesh( const Router *r, const Flit *f, int in_channel, OutputSet *outpu
     out_port = -1;
 
   } else {
+
+    // TODO: dump
+    // std::ofstream ofs;
+    // ofs.open("in_flight_flits.txt", std::ofstream::out | std::ofstream::app);
+    // ofs << "## " << r->GetID( ) << std::endl;
+    // ofs.close();
 
     if ( in_channel == 2*gN ) {
       f->ph   = 0;  // Phase 0
@@ -968,7 +976,7 @@ void min_adapt_mesh( const Router *r, const Flit *f, int in_channel, OutputSet *
   }
   
   // DOR for the escape channel (VC 0), low priority 
-  int out_port = dor_next_mesh( r->GetID( ), f->dest );    
+  int out_port = dor_next_mesh( r->GetID( ), f->dest );
   outputs->AddRange( out_port, 0, vcBegin, vcBegin );
   
   if ( f->watch ) {

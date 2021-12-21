@@ -87,9 +87,16 @@ Power_Module::Power_Module(Network * n , const Configuration &config)
   Co = (1.0 + 2.0) * Cd_pwr ;
 
   Vdd    = pconfig.GetFloat("Vdd");
-  FO4    = R * ( 3.0 * Cd + 12 * Cg + 12 * Cgdl);		     
+  FO4    = R * ( 3.0 * Cd + 12 * Cg + 12 * Cgdl);		    
+
   tCLK   = 20 * FO4;
   fCLK   = 1.0 / tCLK;              
+
+  // FIXME: 
+  tCLK   = 0.5 * 10e-9;
+  fCLK   = 2 * 10e9;
+
+  std::cerr << "ffffffffffff " << fCLK << std::endl;
 
   H_INVD2=(double)pconfig.GetInt("H_INVD2");
   W_INVD2=(double)pconfig.GetInt("W_INVD2") ;

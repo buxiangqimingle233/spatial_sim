@@ -50,8 +50,10 @@ protected:
   static int const STALL_BUFFER_RESERVED;
   static int const STALL_CROSSBAR_CONFLICT;
 
+public:
   int _id;
-  
+
+protected:
   int _inputs;
   int _outputs;
   

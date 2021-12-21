@@ -978,6 +978,7 @@ void TrafficManager::_Inject() {
     }
 }
 
+
 void TrafficManager::_Step( )
 {
     bool flits_in_flight = false;
@@ -990,7 +991,7 @@ void TrafficManager::_Step( )
     }
 
     vector<map<int, Flit *> > flits(_subnets);
-  
+
     for ( int subnet = 0; subnet < _subnets; ++subnet ) {
         for ( int n = 0; n < _nodes; ++n ) {
             Flit * const f = _net[subnet]->ReadFlit( n );
@@ -1299,6 +1300,17 @@ void TrafficManager::_Step( )
         cout<<"TIME "<<_time<<endl;
     }
 
+    // TODO: WZ's hack
+    int waiting_flits = 0;
+    for (int n = 0; n < _nodes; ++n) {
+        waiting_flits += _partial_packets[n][0].size();
+    }
+    if (_time > 10000 && _time < 20000) {
+        ofstream ofs("in_flight_flits.txt", std::ofstream::out | std::ofstream::app);
+        // ofs << _time << " " << _total_in_flight_flits[0].size() << std::endl;
+        ofs << _time << " " << waiting_flits << std::endl;
+        ofs.close();
+    }
 }
   
 bool TrafficManager::_PacketsOutstanding( ) const
