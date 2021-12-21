@@ -92,11 +92,9 @@ Power_Module::Power_Module(Network * n , const Configuration &config)
   tCLK   = 20 * FO4;
   fCLK   = 1.0 / tCLK;              
 
-  // FIXME: 
+  // FIXME: we set clock as 500 MHz
   tCLK   = 0.5 * 10e-9;
   fCLK   = 2 * 10e9;
-
-  std::cerr << "ffffffffffff " << fCLK << std::endl;
 
   H_INVD2=(double)pconfig.GetInt("H_INVD2");
   W_INVD2=(double)pconfig.GetInt("W_INVD2") ;

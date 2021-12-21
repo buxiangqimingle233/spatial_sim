@@ -278,6 +278,8 @@ protected:
 
   virtual bool _SingleSim( );
 
+  virtual bool _FOCUS_SingleSim( );
+
   void _DisplayRemaining( ostream & os = cout ) const;
   
   void _LoadWatchList(const string & filename);

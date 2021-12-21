@@ -1,1 +1,0 @@
-./booksim examples/focusconfig

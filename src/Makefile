@@ -28,7 +28,9 @@ LEX = flex
 YACC   = bison -y
 DEFINE = 
 INCPATH = -I. -Iarbiters -Iallocators -Irouters -Inetworks -Ipower -Ifocus
-CPPFLAGS += -Wall $(INCPATH) $(DEFINE)
+CPPFLAGS += -Wall $(INCPATH) $(DEFINE) 
+CPPFLAGS += -DDUMP_WAITING_FLITS -DFOCUS
+
 # FIXME: -O0 for debug, set -O3 when release
 CPPFLAGS += -O0
 CPPFLAGS += -g

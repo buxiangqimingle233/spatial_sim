@@ -1,0 +1,1 @@
+../src/booksim ../src/examples/focusconfig

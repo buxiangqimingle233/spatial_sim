@@ -29,7 +29,7 @@ protected:
 
 // DFA attributes
 protected:
-    enum FlowState { Waiting, Computing, Blocked, Done, Init };
+    enum FlowState { Waiting, Computing, Blocked, Closed, Init };
     int _slept_time;
     long long _iter;
     FlowState _state;
@@ -46,16 +46,14 @@ public:
             _dependent_flows = std::map<int, int>();
         };
 
-    bool isBuffered(int source_node);
     // For the nodes with multiple flows to issue to check which
-    bool canIssue();
-
+    bool canIssue() { return _state == FlowState::Blocked; };
+    bool isClosed() { return _state == FlowState::Closed; };
     int getDestination() { return _dest; };
     int getFlowSize() { return _size; };
     int getComputingTime() { return _computing_time; }
     int forward(bool token); // return whether this flow is to be activate
     void arriveDependentFlow(int source);
-    void testDependentFlow();
 };
 
 // vertex-centric programming model
@@ -72,15 +70,16 @@ public:
     // Node() {}
     Node(std::ifstream& ifs);
     Node(std::ifstream& ifs, int node_id);
+
     int test(); // whether to inject a packet
-    // FIXME: update with arguments: flow_id
+    // TODO: update with arguments: flow_id
     int getDestination(); // the destination of active flow with token
     int getFlowSize();
     int getFlowID();
     int getComputingTime(int flow_id);
 
-    bool checkAval(int raising_node);
     void receiveFlow(int source);
+    bool isClosed();
 };
 
 
@@ -95,8 +94,6 @@ public:
     FocusInjectionKernel();
     FocusInjectionKernel(int nodes);
     
-    bool checkAval(int dst, int src);
-
     static std::shared_ptr<FocusInjectionKernel> getKernel();
     static void renewKernel();    
 
@@ -116,10 +113,10 @@ public:
 // For iteration with the booksim kernels
 public:
     void updateFocusKernel(int source, int dest);
+    bool allNodeClosed();
 
     // For debugging
     void debug() {
-        // std::cout << "FFF" << std::endl;
         for (int i = 0; i < 100; ++i) {
             for (auto& n : _nodes) {
                 std::cout << n.test() << std::endl;

@@ -40,6 +40,7 @@
 #include "vc.hpp"
 #include "packet_reply_info.hpp"
 #include "focus.hpp"
+#include "monitor/monitor.hpp"
 
 TrafficManager * TrafficManager::New(Configuration const & config,
                                      vector<Network *> const & net)
@@ -1300,17 +1301,20 @@ void TrafficManager::_Step( )
         cout<<"TIME "<<_time<<endl;
     }
 
-    // TODO: WZ's hack
+    // dump waiting flits
+#ifdef DUMP_WAITING_FLITS
     int waiting_flits = 0;
     for (int n = 0; n < _nodes; ++n) {
         waiting_flits += _partial_packets[n][0].size();
     }
+    int in_flight_flits = _total_in_flight_flits[0].size();
     if (_time > 10000 && _time < 20000) {
-        ofstream ofs("in_flight_flits.txt", std::ofstream::out | std::ofstream::app);
-        // ofs << _time << " " << _total_in_flight_flits[0].size() << std::endl;
-        ofs << _time << " " << waiting_flits << std::endl;
+        ofstream ofs("dump_flits.txt", std::ofstream::out | std::ofstream::app);
+        ofs << _time << " " << waiting_flits << " " << in_flight_flits << std::endl;
         ofs.close();
     }
+#endif
+
 }
   
 bool TrafficManager::_PacketsOutstanding( ) const
@@ -1472,7 +1476,6 @@ bool TrafficManager::_SingleSim( )
             _ClearStats( );
         }
     
-    
         for ( int iter = 0; iter < _sample_period; ++iter )
             _Step( );
     
@@ -1480,7 +1483,7 @@ bool TrafficManager::_SingleSim( )
 
         UpdateStats();
         DisplayStats();
-    
+
         int lat_exc_class = -1;
         int lat_chg_exc_class = -1;
         int acc_chg_exc_class = -1;
@@ -1648,6 +1651,29 @@ bool TrafficManager::_SingleSim( )
     return ( converged > 0 );
 }
 
+
+bool TrafficManager::_FOCUS_SingleSim( ) {
+
+    _ClearStats( );
+
+    auto monitor = focus::Monitor::getMonitor();
+    monitor->reset();
+
+    for ( int iter = 0; iter < _sample_period; ++iter ) {
+        _Step( );
+        bool terminate = !monitor->update(focus::FocusInjectionKernel::getKernel(), _total_in_flight_flits, _time);
+        if (terminate) {
+            std::cout << "WUHU: " << _time << std::endl;
+            break;
+        }
+    }
+
+    UpdateStats();
+    DisplayStats();
+
+    return true;
+}
+
 bool TrafficManager::Run( )
 {
     for ( int sim = 0; sim < _total_sims; ++sim ) {
@@ -1682,13 +1708,14 @@ bool TrafficManager::Run( )
             _injection_process[c]->reset();
         }
 
-
-
+#ifdef FOCUS
+        _FOCUS_SingleSim();
+#else
         if ( !_SingleSim( ) ) {
             cout << "Simulation unstable, ending ..." << endl;
             return false;
         }
-
+#endif
         // Empty any remaining packets
         cout << "Draining remaining packets ..." << endl;
         _empty_network = true;
@@ -1713,7 +1740,7 @@ bool TrafficManager::Run( )
                 packets_left |= !_total_in_flight_flits[c].empty();
             }
         }
-        //wait until all the credits are drained as well
+        // wait until all the credits are drained as well
         while(Credit::OutStanding()!=0){
             _Step();
         }
@@ -2037,9 +2064,9 @@ void TrafficManager::DisplayStats(ostream & os) const {
             << "Fragmentation average = " << _frag_stats[c]->Average() << endl
             << "\tminimum = " << _frag_stats[c]->Min() << endl
             << "\tmaximum = " << _frag_stats[c]->Max() << endl;
-
+#ifdef FOCUS
         _plat_stats[c]->Dump();
-
+#endif
         int count_sum, count_min, count_max;
         double rate_sum, rate_min, rate_max;
         double rate_avg;

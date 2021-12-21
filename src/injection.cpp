@@ -98,7 +98,6 @@ InjectionProcess *InjectionProcess::New(string const &inject, int nodes,
         initial[n] = RandomInt(1);
       }
     }
-    // result = new FocusInjectionProcess(nodes, load, alpha, beta, initial);
     result = new FocusInjectionProcess(nodes, load);
   }
   else if (process_name == "bernoulli")

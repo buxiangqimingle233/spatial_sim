@@ -6,7 +6,7 @@ namespace focus {
 std::shared_ptr<FocusInjectionKernel> FocusInjectionKernel::_kernel = NULL;
 
 int Flow::forward(bool token) {
-    FlowState next_state = FlowState::Done;
+    FlowState next_state = FlowState::Closed;
     int should_issue = false;
 
     switch (_state) {
@@ -22,7 +22,7 @@ int Flow::forward(bool token) {
                     available_flows.push_back(it);
                 }
             }
-            // FIXME: not accurate here
+            // FIXME: we just maintain the number of dependent flows
             if (static_cast<int>(available_flows.size()) >= _wait_flows) {
                 for (auto it: available_flows) {
                     it->second--;
@@ -48,12 +48,13 @@ int Flow::forward(bool token) {
             }
             break;
         }
-        // Computation is done, waiting the destination node to be available
+        // Computation is done, 
+        // TODO: waiting the destination node to be available [ not implemented yet ]
         // Update: Blocked state now dictates the state waiting for token. 
         case FlowState::Blocked: {
             if (token) {
                 if (_iter > _max_iter) {
-                    next_state = FlowState::Done;
+                    next_state = FlowState::Closed;
                     should_issue = false;
                 } else {
                     _iter++;
@@ -68,7 +69,7 @@ int Flow::forward(bool token) {
         }
         // Dead here
         default: {
-            next_state = FlowState::Done;
+            next_state = FlowState::Closed;
             should_issue = false;
             break;
         }
@@ -76,18 +77,6 @@ int Flow::forward(bool token) {
 
     _state = next_state;
     return should_issue;
-}
-
-bool Flow::canIssue() {
-    // TODO: Deprecated
-    // return (_state == FlowState::Blocked) && (FocusInjectionKernel::getKernel()->checkAval(_dest, _src)); 
-    return (_state == FlowState::Blocked);
-}
-
-bool Flow::isBuffered(int source_node) {
-    // TODO: Deprecated
-    // return std::find(_dependent_flows.begin(), _dependent_flows.end(), source_node) != _dependent_flows.end();
-    return false;
 }
 
 void Flow::arriveDependentFlow(int source) {
@@ -120,23 +109,6 @@ Node::Node(std::ifstream& ifs, int node_id): _node_id(node_id), _flow_with_token
         Flow flow(ct, mi, d, s, size, wf);
         _out_flows.push_back(flow);
     }
-}
-
-
-
-bool Node::checkAval(int raising_node) {
-    // TODO: Deprecated
-    return true;
-    /*
-    if (_is_mc) { // memory controller will not block any incoming traffic flows
-        return true;
-    } else {
-        bool aval = true;
-        for (Flow& f: _out_flows) {
-            aval &= !f.isBuffered(raising_node);
-        }
-        return aval;
-    }*/
 }
 
 int Node::test() {
@@ -189,9 +161,13 @@ void Node::receiveFlow(int source) {
     }
 }
 
-bool FocusInjectionKernel::checkAval(int dst, int src) {
-    // FIXME: if the destination node is not in the array
-    return _nodes[dst].checkAval(src);
+bool Node::isClosed() {
+    for (Flow& it: _out_flows) {
+        if (!it.isClosed()) {
+            return false;
+        }
+    }
+    return true;
 }
 
 FocusInjectionKernel::FocusInjectionKernel() {
@@ -208,8 +184,6 @@ FocusInjectionKernel::FocusInjectionKernel() {
         Node node(ifs, node_id);
         _nodes.push_back(node);
     }
-
-    
 
 }
 
@@ -232,7 +206,7 @@ std::shared_ptr<FocusInjectionKernel> FocusInjectionKernel::getKernel() {
 }
 
 void FocusInjectionKernel::renewKernel() {
-    std::cerr << "Warning: injection kernel is renewed" << std::endl;
+    std::cerr << "INFO: injection kernel is renewed" << std::endl;
     if (_kernel) {
         _kernel.reset();
         _kernel = std::make_shared<FocusInjectionKernel>();
@@ -274,6 +248,15 @@ void FocusInjectionKernel::updateFocusKernel(int source, int dest) {
     checkNodes(source);
     checkNodes(dest);
     _nodes[dest].receiveFlow(source);
+}
+
+bool FocusInjectionKernel::allNodeClosed() {
+    for (Node& node: _nodes) {
+        if (!node.isClosed()) {
+            return false;
+        }
+    }
+    return true;
 }
 
 }
