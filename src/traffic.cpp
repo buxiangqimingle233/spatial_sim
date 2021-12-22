@@ -227,6 +227,10 @@ int FocusTrafficPattern::dest(int source)
   return focus::FocusInjectionKernel::getKernel()->dest(source);
 }
 
+int FocusTrafficPattern::sync_dest(int source, int time) {
+  return focus::FocusInjectionKernel::getKernel()->sync_dest(source, time);
+}
+
 PermutationTrafficPattern::PermutationTrafficPattern(int nodes)
   : TrafficPattern(nodes)
 {

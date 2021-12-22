@@ -50,8 +50,18 @@ class FocusInjectionProcess : public InjectionProcess {
 public:
   FocusInjectionProcess(int nodes, double rate);
   virtual bool test(int source);
+  virtual bool sync_test(int source, int time);
   virtual void reset();
 };
+
+// class SyncFocusInjectionProcess : public InjectionProcess {
+
+// public: 
+//   SyncFocusInjectionProcess(int nodes, double rate);
+//   virtual bool test(int source);
+//   virtual bool test(int source, int time);
+//   virtual void reset();
+// };
 
 class BernoulliInjectionProcess : public InjectionProcess {
 public:

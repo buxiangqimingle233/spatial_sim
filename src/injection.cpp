@@ -215,6 +215,13 @@ bool FocusInjectionProcess::test(int source)
   return focus::FocusInjectionKernel::getKernel()->test(source);
 }
 
+bool FocusInjectionProcess::sync_test(int source, int time)
+{
+  assert((source >= 0) && (source < _nodes));
+
+  return focus::FocusInjectionKernel::getKernel()->sync_test(source, time);
+}
+
 // =============================================================
 
 BernoulliInjectionProcess::BernoulliInjectionProcess(int nodes, double rate)

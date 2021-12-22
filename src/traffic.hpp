@@ -51,6 +51,7 @@ class FocusTrafficPattern : public TrafficPattern {
 public:
   FocusTrafficPattern(int nodes);
   virtual int dest(int source);
+  virtual int sync_dest(int source, int time);
 };
 
 class PermutationTrafficPattern : public TrafficPattern {

@@ -1,7 +1,8 @@
 #include "focus.hpp"
 #include <iostream>
 
-namespace focus {
+namespace focus 
+{
 
 std::shared_ptr<FocusInjectionKernel> FocusInjectionKernel::_kernel = NULL;
 
@@ -87,6 +88,8 @@ void Flow::arriveDependentFlow(int source) {
     }
 }
 
+Node::Node():_node_id(-1), _flow_with_token(0) { }
+
 Node::Node(std::ifstream& ifs): _node_id(-1), _flow_with_token(0) {
     int flow_size;
     ifs >> _node_id >> flow_size;
@@ -156,7 +159,7 @@ int Node::getComputingTime(int flow_id) {
 
 void Node::receiveFlow(int source) {
     // FIXME: It's wrong when a PE is mapped with multiple flows
-    for (auto& f : _out_flows) {
+    for (auto f : _out_flows) {
         f.arriveDependentFlow(source);
     }
 }
@@ -170,7 +173,58 @@ bool Node::isClosed() {
     return true;
 }
 
-FocusInjectionKernel::FocusInjectionKernel() {
+SyncNode::SyncNode(std::ifstream& ifs, int node_id): Node(), _bits_to_issue(-1), _dst_to_issue(-1) {
+    _node_id = node_id;
+
+    int pkt_num;
+    ifs >> pkt_num;
+
+    for (int _ = 0; _ < pkt_num; ++_) {
+        int offset, dest_id;
+        ifs >> offset >> dest_id;
+        _lut.push(std::make_pair(offset, dest_id));
+    }
+}
+
+bool SyncNode::isClosed() {
+    return _lut.empty();
+}
+
+int SyncNode::test(int time) {
+
+    if (isClosed()) {
+        return 0;
+    }
+
+    int bits_to_issue = 0;
+    int dest = _lut.front().second;
+
+    while (!_lut.empty() && _lut.front().first <= time && _lut.front().second == dest) {
+        bits_to_issue++;
+        _lut.pop();
+    }
+
+    if (bits_to_issue > 0) {
+        // TODO: considering flit size
+        _bits_to_issue = 1;
+        _dst_to_issue = dest;
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+int SyncNode::getDestination() {
+    return _dst_to_issue;
+}
+
+int SyncNode::getFlowSize() {
+    return _bits_to_issue;
+}
+
+FocusInjectionKernel::FocusInjectionKernel(int nodes) {
+    _nodes.resize(nodes, NULL);
+    
     std::ifstream ifs;
     ifs.open("trace.txt", std::ios::in);
 
@@ -181,26 +235,39 @@ FocusInjectionKernel::FocusInjectionKernel() {
 
     int node_id;
     while ((ifs >> node_id) && !ifs.eof()) {
-        Node node(ifs, node_id);
-        _nodes.push_back(node);
+        if (node_id > nodes) {
+            std::cerr << "Node " << node_id << " specified in trace file exceeds node range" << std::endl;
+        }
+        // FIXME: ??
+#ifdef SYNC_SIM
+        SyncNode* node = new SyncNode(ifs, node_id);
+#else
+        Node* node = new Node(ifs, node_id);
+#endif
+        _nodes[node_id] = node;
     }
 
-}
-
-FocusInjectionKernel::FocusInjectionKernel(int nodes) {
-
-    // FocusInjectionKernel();
-    if (static_cast<int>(_nodes.size()) != nodes) {
-        std::cerr << "ERROR: Nodes in trace file does not match specs for Booksim !" << std::endl;
-        exit(-1);
+    for (Node*& node : _nodes) {
+        if (node == NULL) {
+#ifdef SYNC_SIM
+            node = new SyncNode();
+#else
+            node = new Node();
+#endif  
+        }
     }
+
+    // if (static_cast<int>(_nodes.size()) != nodes) {
+    //     std::cerr << "ERROR: Nodes in trace file does not match specs for Booksim !" << std::endl;
+    //     exit(-1);
+    // }
 }
 
 std::shared_ptr<FocusInjectionKernel> FocusInjectionKernel::getKernel() {
     if (_kernel) {
         return _kernel;
     } else {
-        _kernel = std::make_shared<FocusInjectionKernel>();
+        _kernel = std::make_shared<FocusInjectionKernel>(cl0_nodes);
         return _kernel;
     }
 }
@@ -209,54 +276,71 @@ void FocusInjectionKernel::renewKernel() {
     std::cerr << "INFO: injection kernel is renewed" << std::endl;
     if (_kernel) {
         _kernel.reset();
-        _kernel = std::make_shared<FocusInjectionKernel>();
+        _kernel = std::make_shared<FocusInjectionKernel>(cl0_nodes);
     }
 }
 
 void FocusInjectionKernel::checkNodes(int nid) {
-
     if (nid >= static_cast<int>(_nodes.size()) || nid < 0) {
         std::cerr << "ERROR focus: node " << nid << " is not recorded in the trace file." << std::endl;
         exit(-1);
     }
 }
- 
+
 bool FocusInjectionKernel::test(int source) {
     checkNodes(source);
-    return _nodes[source].test();
+    return _nodes[source]->test();
 }
 
 int FocusInjectionKernel::dest(int source) {
     checkNodes(source);
-    return _nodes[source].getDestination();
+    return _nodes[source]->getDestination();
 }
 
 int FocusInjectionKernel::flowSize(int source) {
     checkNodes(source);
-    return _nodes[source].getFlowSize();
+    return _nodes[source]->getFlowSize();
 }
 
 int FocusInjectionKernel::flowID(int source) {
-    return _nodes[source].getFlowID();
+    checkNodes(source);
+    return _nodes[source]->getFlowID();
 }
 
 int FocusInjectionKernel::interval(int source, int flow_id) {
-    return _nodes[source].getComputingTime(flow_id);
+    checkNodes(source);
+    return _nodes[source]->getComputingTime(flow_id);
 }
 
 void FocusInjectionKernel::updateFocusKernel(int source, int dest) {
     checkNodes(source);
     checkNodes(dest);
-    _nodes[dest].receiveFlow(source);
+    _nodes[dest]->receiveFlow(source);
 }
 
 bool FocusInjectionKernel::allNodeClosed() {
-    for (Node& node: _nodes) {
-        if (!node.isClosed()) {
+    for (Node* node: _nodes) {
+        if (!node->isClosed()) {
             return false;
         }
     }
     return true;
 }
+
+bool FocusInjectionKernel::sync_test(int source, int time) {
+    checkNodes(source);
+    return dynamic_cast<SyncNode*>(_nodes[source])->test(time);
+}
+
+int FocusInjectionKernel::sync_dest(int source, int time) {
+    checkNodes(source);
+    return dynamic_cast<SyncNode*>(_nodes[source])->getDestination();
+}
+
+int FocusInjectionKernel::sync_flowSize(int source, int time) {
+    checkNodes(source);
+    return dynamic_cast<SyncNode*>(_nodes[source])->getFlowSize();
+}
+
 
 }

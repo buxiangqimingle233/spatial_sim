@@ -40,7 +40,7 @@
 #include "vc.hpp"
 #include "packet_reply_info.hpp"
 #include "focus.hpp"
-#include "monitor/monitor.hpp"
+#include "monitor.hpp"
 
 TrafficManager * TrafficManager::New(Configuration const & config,
                                      vector<Network *> const & net)
@@ -57,12 +57,17 @@ TrafficManager * TrafficManager::New(Configuration const & config,
     return result;
 }
 
+int focus::cl0_nodes = -1;
+int focus::cl0_routers = -1;
+
 TrafficManager::TrafficManager( const Configuration &config, const vector<Network *> & net )
     : Module( 0, "traffic_manager" ), _net(net), _empty_network(false), _deadlock_timer(0), _reset_time(0), _drain_time(-1), _cur_id(0), _cur_pid(0), _time(0)
 {
-
     _nodes = _net[0]->NumNodes( );
+    focus::cl0_nodes = _nodes;
+
     _routers = _net[0]->NumRouters( );
+    focus::cl0_routers = _routers;
 
     _vcs = config.GetInt("num_vcs");
     _subnets = config.GetInt("subnets");
@@ -681,10 +686,12 @@ void TrafficManager::_RetireFlit( Flit *f, int dest )
         _pair_flat[f->cl][f->src*_nodes+dest]->AddSample( f->atime - f->itime );
     }
 
+#ifndef SYNC_SIM
     if ( f->head ) {
         // Tell the focus kernel that a packet has arrived
         focus::FocusInjectionKernel::getKernel()->updateFocusKernel(f->src, f->dest);
     }
+#endif
 
     if ( f->tail ) {
         Flit * head;
@@ -737,11 +744,12 @@ void TrafficManager::_RetireFlit( Flit *f, int dest )
                (_plat_stats[f->cl]->Max() < (f->atime - head->itime)))
                 _slowest_packet[f->cl] = f->pid;
 
-            // WZ: added analysis for focus
+#ifndef SYNC_SIM
+            // WZ: added analysis for focus 
             double interval = focus::FocusInjectionKernel::getKernel()->interval(head->src, head->_flow_id);
             _plat_stats[f->cl]->AddNodeSample( f->atime - head->ctime, dest, interval );
             // _plat_stats[f->cl]->AddNodeSlowdownSample(interval, f->atime - head->ctime, dest);
-
+#endif
             _plat_stats[f->cl]->AddSample( f->atime - head->ctime);
             _nlat_stats[f->cl]->AddSample( f->atime - head->itime);
             _frag_stats[f->cl]->AddSample( (f->atime - head->atime) - (f->id - head->id) );
@@ -778,16 +786,23 @@ int TrafficManager::_IssuePacket( int source, int cl )
         } else {
             
             //produce a packet
+#ifdef SYNC_SIM
+            if (dynamic_cast<FocusInjectionProcess*>(_injection_process[cl])->sync_test(source, _time)) {
+#else     
             if(_injection_process[cl]->test(source)) {
-                
+#endif
                 //coin toss to determine request type.
                 result = (RandomFloat() < _write_fraction[cl]) ? 2 : 1;
-	
+    
                 _requestsOutstanding[source]++;
             }
         }
     } else { //normal mode
+#ifdef SYNC_SIM
+        result = dynamic_cast<FocusInjectionProcess*>(_injection_process[cl])->sync_test(source, _time);
+#else
         result = _injection_process[cl]->test(source) ? 1 : 0;
+#endif
         _requestsOutstanding[source]++;
     } 
     if(result != 0) {
@@ -804,15 +819,26 @@ void TrafficManager::_GeneratePacket( int source, int stype,
     Flit::FlitType packet_type = Flit::ANY_TYPE;
 
     // Flow destination
+
+    // FIXME: use some macros to recover this booksim method
     // int size = _GetNextPacketSize(cl); // input size 
-    int size = _FocusGetNextPacketSize(source);
+
+#ifdef SYNC_SIM
+    int size = focus::FocusInjectionKernel::getKernel()->sync_flowSize(source, time);
+#else
+    int size = focus::FocusInjectionKernel::getKernel()->flowSize(source);
+#endif
 
     // Flow id
     int pid = _cur_pid++;
     assert(_cur_pid);
 
     // Flow size
+#ifdef SYNC_SIM
+    int packet_destination = dynamic_cast<FocusTrafficPattern*>(_traffic_pattern[cl])->sync_dest(source, time);
+#else
     int packet_destination = _traffic_pattern[cl]->dest(source);
+#endif
 
     bool record = false;
     bool watch = gWatchOut && (_packets_to_watch.count(pid) > 0);
@@ -887,7 +913,10 @@ void TrafficManager::_GeneratePacket( int source, int stype,
         f->ctime  = time;
         f->record = record;
         f->cl     = cl;
+
+#ifndef SYNC_SIM
         f->setFlowID(focus::FocusInjectionKernel::getKernel()->flowID(source));
+#endif
 
         _total_in_flight_flits[f->cl].insert(make_pair(f->id, f));
         if(record) {
@@ -1659,14 +1688,24 @@ bool TrafficManager::_FOCUS_SingleSim( ) {
     auto monitor = focus::Monitor::getMonitor();
     monitor->reset();
 
-    for ( int iter = 0; iter < _sample_period; ++iter ) {
+    auto fk = focus::FocusInjectionKernel::getKernel();
+
+    int cycle = 0;
+    for ( ;cycle < _sample_period; ++cycle ) {
         _Step( );
         bool terminate = !monitor->update(focus::FocusInjectionKernel::getKernel(), _total_in_flight_flits, _time);
         if (terminate) {
-            std::cout << "WUHU: " << _time << std::endl;
             break;
         }
     }
+
+    if (cycle >= _sample_period) {
+        std::cerr << "WARNING: Simulation is not finished. Please enlarge the sample period. " << std::endl;
+        UpdateStats();
+        return false;
+    }
+
+    std::cout << "INFO: Simulation completes, using " << cycle << " cycles in total" << std::endl;
 
     UpdateStats();
     DisplayStats();
@@ -1708,8 +1747,11 @@ bool TrafficManager::Run( )
             _injection_process[c]->reset();
         }
 
-#ifdef FOCUS
-        _FOCUS_SingleSim();
+#ifdef SIM_ONCE
+        if (!_FOCUS_SingleSim()) {
+            std::cerr << "Simulation uncompleted, ending ..." << std::endl;
+            return false;
+        };
 #else
         if ( !_SingleSim( ) ) {
             cout << "Simulation unstable, ending ..." << endl;
@@ -1756,11 +1798,13 @@ bool TrafficManager::Run( )
         _UpdateOverallStats();
     }
   
+#ifndef SIM_ONCE
     DisplayOverallStats();
     if(_print_csv_results) {
         DisplayOverallStatsCSV();
     }
-  
+#endif
+
     return true;
 }
 

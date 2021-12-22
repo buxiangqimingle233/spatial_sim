@@ -7,9 +7,13 @@
 #include <map>
 #include <memory>
 #include <algorithm>
+#include <queue>
 
 namespace focus
 {
+
+extern int cl0_nodes;
+extern int cl0_routers;
 
 typedef int FlowID;
 
@@ -47,6 +51,7 @@ public:
         };
 
     // For the nodes with multiple flows to issue to check which
+    void setState(FlowState state) { _state = state; }
     bool canIssue() { return _state == FlowState::Blocked; };
     bool isClosed() { return _state == FlowState::Closed; };
     int getDestination() { return _dest; };
@@ -61,43 +66,59 @@ class Node {
 
 protected:
     int _node_id;
-
-protected:
     int _flow_with_token; // if a flow is to inject, it dictates which one
     std::vector<Flow> _out_flows;
 
 public:
-    // Node() {}
+    Node();
     Node(std::ifstream& ifs);
     Node(std::ifstream& ifs, int node_id);
 
     int test(); // whether to inject a packet
+
+    // General API
     // TODO: update with arguments: flow_id
-    int getDestination(); // the destination of active flow with token
-    int getFlowSize();
+    virtual int getDestination(); // the destination of active flow with token
+    virtual int getFlowSize();
+    virtual bool isClosed();
+
+    // Optional for Async
     int getFlowID();
     int getComputingTime(int flow_id);
-
     void receiveFlow(int source);
-    bool isClosed();
+};
+
+class SyncNode: public Node {
+
+protected:
+    std::queue<std::pair<int, int> > _lut;
+    int _bits_to_issue, _dst_to_issue;
+
+public:
+    SyncNode(): Node(), _bits_to_issue(-1), _dst_to_issue(-1) { }
+    SyncNode(std::ifstream& ifs, int node_id);
+
+    int test(int time);
+    virtual bool isClosed();
+    virtual int getDestination(); 
+    virtual int getFlowSize();
 };
 
 
 class FocusInjectionKernel {
 
 protected:
-    std::vector<Node> _nodes;
+    std::vector<Node*> _nodes;
     static std::shared_ptr<FocusInjectionKernel> _kernel;
     void checkNodes(int nid);
 
 public:
-    FocusInjectionKernel();
     FocusInjectionKernel(int nodes);
     
     static std::shared_ptr<FocusInjectionKernel> getKernel();
     static void renewKernel();    
 
-// For statistics
+// APIs for async simulation
 public:
     // API for InjectionProcess
     bool test(int source);
@@ -110,6 +131,12 @@ public:
     // API for getting interval
     int interval(int source, int flow_id);
 
+// APIs for sync simulation
+public:
+    bool sync_test(int source, int time);
+    int sync_dest(int source, int time);
+    int sync_flowSize(int source, int time);
+
 // For iteration with the booksim kernels
 public:
     void updateFocusKernel(int source, int dest);
@@ -118,13 +145,13 @@ public:
     // For debugging
     void debug() {
         for (int i = 0; i < 100; ++i) {
-            for (auto& n : _nodes) {
-                std::cout << n.test() << std::endl;
+            for (auto n : _nodes) {
+                std::cout << n->test() << std::endl;
             }
         }
     }
 };
 
-}
+};
 
 #endif

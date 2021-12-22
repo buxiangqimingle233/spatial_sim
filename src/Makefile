@@ -27,9 +27,14 @@
 LEX = flex
 YACC   = bison -y
 DEFINE = 
-INCPATH = -I. -Iarbiters -Iallocators -Irouters -Inetworks -Ipower -Ifocus
+INCPATH = -I. -Iarbiters -Iallocators -Irouters -Inetworks -Ipower -Ifocus -Imonitor
 CPPFLAGS += -Wall $(INCPATH) $(DEFINE) 
-CPPFLAGS += -DDUMP_WAITING_FLITS -DFOCUS
+
+# Set working modes for simulator
+# SYNC_SIM: enable snn simluation
+# SIM_ONCE: run the trace only once for accurate processing time
+# DUMP_WAITING_FLITS: dump number of waiting flits at each cycle ( from 10k to 20k )
+CPPFLAGS += -DDUMP_WAITING_FLITS -DSIM_ONCE -DSYNC_SIM
 
 # FIXME: -O0 for debug, set -O3 when release
 CPPFLAGS += -O0
