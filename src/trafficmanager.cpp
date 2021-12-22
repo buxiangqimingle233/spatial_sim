@@ -59,15 +59,19 @@ TrafficManager * TrafficManager::New(Configuration const & config,
 
 int focus::cl0_nodes = -1;
 int focus::cl0_routers = -1;
+int focus::channel_width = -1;
 
 TrafficManager::TrafficManager( const Configuration &config, const vector<Network *> & net )
-    : Module( 0, "traffic_manager" ), _net(net), _empty_network(false), _deadlock_timer(0), _reset_time(0), _drain_time(-1), _cur_id(0), _cur_pid(0), _time(0)
+    : Module( 0, "traffic_manager" ), _net(net), _empty_network(false), _deadlock_timer(0),
+      _reset_time(0), _drain_time(-1), _cur_id(0), _cur_pid(0), _time(0)
 {
     _nodes = _net[0]->NumNodes( );
     focus::cl0_nodes = _nodes;
 
     _routers = _net[0]->NumRouters( );
     focus::cl0_routers = _routers;
+
+    focus::channel_width = config.GetInt("channel_width");
 
     _vcs = config.GetInt("num_vcs");
     _subnets = config.GetInt("subnets");
@@ -793,7 +797,7 @@ int TrafficManager::_IssuePacket( int source, int cl )
 #endif
                 //coin toss to determine request type.
                 result = (RandomFloat() < _write_fraction[cl]) ? 2 : 1;
-    
+
                 _requestsOutstanding[source]++;
             }
         }
@@ -1507,8 +1511,6 @@ bool TrafficManager::_SingleSim( )
     
         for ( int iter = 0; iter < _sample_period; ++iter )
             _Step( );
-    
-        //cout << _sim_state << endl;
 
         UpdateStats();
         DisplayStats();
@@ -1688,19 +1690,26 @@ bool TrafficManager::_FOCUS_SingleSim( ) {
     auto monitor = focus::Monitor::getMonitor();
     monitor->reset();
 
-    auto fk = focus::FocusInjectionKernel::getKernel();
-
     int cycle = 0;
-    for ( ;cycle < _sample_period; ++cycle ) {
+    int terminate = -1;
+    for ( ; cycle < _sample_period; ++cycle ) {
         _Step( );
-        bool terminate = !monitor->update(focus::FocusInjectionKernel::getKernel(), _total_in_flight_flits, _time);
-        if (terminate) {
+        // focus::FocusInjectionKernel::getKernel()->checkState(0);
+        int terminate = monitor->update(focus::FocusInjectionKernel::getKernel(), _total_in_flight_flits, _time);
+        if (terminate == 0) {
             break;
         }
     }
 
     if (cycle >= _sample_period) {
         std::cerr << "WARNING: Simulation is not finished. Please enlarge the sample period. " << std::endl;
+        if (terminate == 1) {
+            std::cerr << "Communication hasn't been finished" << std::endl;
+        } else if (terminate == 2) {
+            std::cerr << "Computation hasn't been finished" << std::endl;
+        } else {
+            std::cerr << "Both communication and computation haven't been finished" << std::endl;
+        }
         UpdateStats();
         return false;
     }

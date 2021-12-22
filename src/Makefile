@@ -34,7 +34,12 @@ CPPFLAGS += -Wall $(INCPATH) $(DEFINE)
 # SYNC_SIM: enable snn simluation
 # SIM_ONCE: run the trace only once for accurate processing time
 # DUMP_WAITING_FLITS: dump number of waiting flits at each cycle ( from 10k to 20k )
-CPPFLAGS += -DDUMP_WAITING_FLITS -DSIM_ONCE -DSYNC_SIM
+
+# SNN
+# CPPFLAGS += -DDUMP_WAITING_FLITS -DSIM_ONCE -DSYNC_SIM
+
+# ANN
+CPPFLAGS += -DSIM_ONCE
 
 # FIXME: -O0 for debug, set -O3 when release
 CPPFLAGS += -O0

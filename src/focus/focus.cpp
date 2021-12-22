@@ -1,5 +1,6 @@
 #include "focus.hpp"
 #include <iostream>
+#include <math.h>
 
 namespace focus 
 {
@@ -17,16 +18,25 @@ int Flow::forward(bool token) {
             break;
         }
         case FlowState::Waiting: {
-            std::vector<std::map<int, int>::iterator> available_flows;
-            for (auto it = _dependent_flows.begin(); it != _dependent_flows.end(); ++it) {
-                if (it->second > 0) {
-                    available_flows.push_back(it);
-                }
+            // FIXME: we just check the number of arrival packets. It'll be wrong when 
+            // multiple packets belong to one traffic flow. 
+
+            // std::vector<std::map<int, int>::iterator> available_flows;
+            // for (auto it = _dependent_flows.begin(); it != _dependent_flows.end(); ++it) {
+            //     if (it->second > 0) {
+            //         available_flows.push_back(it);
+            //     }
+            // }
+            // if (static_cast<int>(available_flows.size()) >= _wait_flows) {
+            //     for (auto it: available_flows) {
+            //         it->second--;
+            //     }
+            if (_wait_flows != 0) {
+                // std::cout << "dependent flows: " << _dependent_flows.size() << std::endl;
             }
-            // FIXME: we just maintain the number of dependent flows
-            if (static_cast<int>(available_flows.size()) >= _wait_flows) {
-                for (auto it: available_flows) {
-                    it->second--;
+            if (_dependent_flows.size() >= static_cast<unsigned>(_wait_flows)) {
+                for (int _; _ < _wait_flows; ++_) {
+                    _dependent_flows.pop();
                 }
                 next_state = FlowState::Computing;
                 should_issue = false;
@@ -81,11 +91,12 @@ int Flow::forward(bool token) {
 }
 
 void Flow::arriveDependentFlow(int source) {
-    if (_dependent_flows.find(source) == _dependent_flows.end()) {
-        _dependent_flows.insert(std::make_pair(source, 1));
-    } else {
-        _dependent_flows[source]++;
-    }
+    _dependent_flows.push(source);
+    // if (_dependent_flows.find(source) == _dependent_flows.end()) {
+    //     _dependent_flows.insert(std::make_pair(source, 1));
+    // } else {
+    //     _dependent_flows[source]++;
+    // }
 }
 
 Node::Node():_node_id(-1), _flow_with_token(0) { }
@@ -95,6 +106,7 @@ Node::Node(std::ifstream& ifs): _node_id(-1), _flow_with_token(0) {
     ifs >> _node_id >> flow_size;
 
     for (int _ = 0; _ < flow_size; ++_) {
+        // interval, max_iteration_cnt, waiting_flow_cnt, flits_per_message, dest_id, source_id
         int ct, mi, d, s, size, wf;
         ifs >> ct >> mi >> d >> s >> size >> wf;
         Flow flow(ct, mi, d, s, size, wf);
@@ -107,9 +119,9 @@ Node::Node(std::ifstream& ifs, int node_id): _node_id(node_id), _flow_with_token
     ifs >> flow_size;
 
     for (int _ = 0; _ < flow_size; ++_) {
-        int ct, mi, d, s, size, wf;
-        ifs >> ct >> mi >> d >> s >> size >> wf;
-        Flow flow(ct, mi, d, s, size, wf);
+        int ct, mi, d, s, size, dst;
+        ifs >> ct >> mi >> d >> size >> s >> dst;
+        Flow flow(ct, mi, d, size, s, dst);
         _out_flows.push_back(flow);
     }
 }
@@ -159,7 +171,7 @@ int Node::getComputingTime(int flow_id) {
 
 void Node::receiveFlow(int source) {
     // FIXME: It's wrong when a PE is mapped with multiple flows
-    for (auto f : _out_flows) {
+    for (auto& f : _out_flows) {
         f.arriveDependentFlow(source);
     }
 }
@@ -173,7 +185,7 @@ bool Node::isClosed() {
     return true;
 }
 
-SyncNode::SyncNode(std::ifstream& ifs, int node_id): Node(), _bits_to_issue(-1), _dst_to_issue(-1) {
+SyncNode::SyncNode(std::ifstream& ifs, int node_id): Node(), _flits_to_issue(-1), _dst_to_issue(-1) {
     _node_id = node_id;
 
     int pkt_num;
@@ -205,8 +217,7 @@ int SyncNode::test(int time) {
     }
 
     if (bits_to_issue > 0) {
-        // TODO: considering flit size
-        _bits_to_issue = 1;
+        _flits_to_issue = ceil(bits_to_issue / (double) channel_width);
         _dst_to_issue = dest;
         return 1;
     } else {
@@ -219,7 +230,7 @@ int SyncNode::getDestination() {
 }
 
 int SyncNode::getFlowSize() {
-    return _bits_to_issue;
+    return _flits_to_issue;
 }
 
 FocusInjectionKernel::FocusInjectionKernel(int nodes) {

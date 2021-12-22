@@ -14,6 +14,7 @@ namespace focus
 
 extern int cl0_nodes;
 extern int cl0_routers;
+extern int channel_width;
 
 typedef int FlowID;
 
@@ -37,7 +38,8 @@ protected:
     int _slept_time;
     long long _iter;
     FlowState _state;
-    std::map<int, int> _dependent_flows;
+    // std::map<int, int> _dependent_flows;
+    std::queue<int> _dependent_flows;
 
 public:
     // Flow() { };
@@ -47,7 +49,7 @@ public:
             _state = FlowState::Init;
             _iter = _slept_time = 0;
             _interval = _size > _computing_time ? _size + 20 : _computing_time;
-            _dependent_flows = std::map<int, int>();
+            _dependent_flows = std::queue<int>();
         };
 
     // For the nodes with multiple flows to issue to check which
@@ -59,6 +61,8 @@ public:
     int getComputingTime() { return _computing_time; }
     int forward(bool token); // return whether this flow is to be activate
     void arriveDependentFlow(int source);
+
+    int getState() { return _state; }
 };
 
 // vertex-centric programming model
@@ -86,16 +90,22 @@ public:
     int getFlowID();
     int getComputingTime(int flow_id);
     void receiveFlow(int source);
+    
+
+    // for debug
+    int getState() {
+        return _out_flows[0].getState();
+    }
 };
 
 class SyncNode: public Node {
 
 protected:
     std::queue<std::pair<int, int> > _lut;
-    int _bits_to_issue, _dst_to_issue;
+    int _flits_to_issue, _dst_to_issue;
 
 public:
-    SyncNode(): Node(), _bits_to_issue(-1), _dst_to_issue(-1) { }
+    SyncNode(): Node(), _flits_to_issue(-1), _dst_to_issue(-1) { }
     SyncNode(std::ifstream& ifs, int node_id);
 
     int test(int time);
@@ -149,6 +159,10 @@ public:
                 std::cout << n->test() << std::endl;
             }
         }
+    }
+
+    void checkState(int id) {
+        printf("STATE %d\n", _nodes[id]->getState());
     }
 };
 

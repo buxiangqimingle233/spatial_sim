@@ -52,7 +52,7 @@ public:
         _enable = false;
     }
 
-    bool update(std::shared_ptr<FocusInjectionKernel> injection_kernel, 
+    int update(std::shared_ptr<FocusInjectionKernel> injection_kernel, 
                 const std::vector<std::map<int, Flit *>>& _total_in_flight_flits,
                 int time)
     {
@@ -67,10 +67,14 @@ public:
 
         if (traffic_drained && credit_drained && compute_finished) {
             finish_monitor(time);
-            return false;
+            return 0;
+        } else if ((!traffic_drained || !credit_drained) && compute_finished) {
+            return 1;
+        } else if ((traffic_drained && credit_drained) && !compute_finished) {
+            return 2;
         }
 
-        return true;
+        return 3;
     }
 
 };
