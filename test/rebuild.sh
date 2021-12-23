@@ -1,2 +1,2 @@
 cd ../src
-make clean && make -j
+make clean && make snn -j

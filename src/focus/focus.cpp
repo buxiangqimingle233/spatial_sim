@@ -237,7 +237,7 @@ FocusInjectionKernel::FocusInjectionKernel(int nodes) {
     _nodes.resize(nodes, NULL);
     
     std::ifstream ifs;
-    ifs.open("trace.txt", std::ios::in);
+    ifs.open(trace, std::ios::in);
 
     if (!ifs.is_open()) {
         std::cout << "Error: Trace file not found" << std::endl;
@@ -284,7 +284,7 @@ std::shared_ptr<FocusInjectionKernel> FocusInjectionKernel::getKernel() {
 }
 
 void FocusInjectionKernel::renewKernel() {
-    std::cerr << "INFO: injection kernel is renewed" << std::endl;
+    std::cout << "INFO: injection kernel is renewed" << std::endl;
     if (_kernel) {
         _kernel.reset();
         _kernel = std::make_shared<FocusInjectionKernel>(cl0_nodes);

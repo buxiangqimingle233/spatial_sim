@@ -1,1 +1,1 @@
-../src/booksim ../src/examples/focusconfig
+../src/booksim ../src/examples/snnconfig eg_b4_3x3/traces/t_0.txt

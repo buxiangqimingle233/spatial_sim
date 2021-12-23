@@ -39,7 +39,7 @@ CPPFLAGS += -Wall $(INCPATH) $(DEFINE)
 # CPPFLAGS += -DDUMP_WAITING_FLITS -DSIM_ONCE -DSYNC_SIM
 
 # ANN
-CPPFLAGS += -DSIM_ONCE
+# CPPFLAGS += -DSIM_ONCE
 
 # FIXME: -O0 for debug, set -O3 when release
 CPPFLAGS += -O0
@@ -47,6 +47,14 @@ CPPFLAGS += -g
 LFLAGS +=
 
 PROG := booksim
+
+SNN := snnn
+$(SNN): $(PROG) 
+$(SNN): CPPFLAGS += -DDUMP_WAITING_FLITS -DSIM_ONCE -DSYNC_SIM
+
+ANN := annn
+$(ANN): $(PROG)
+$(ANN): CPPFLAGS += -DDUMP_WAITING_FLITS -DSIM_ONCE
 
 # simulator source files
 CPP_SRCS = $(wildcard *.cpp) $(wildcard */*.cpp)
@@ -65,36 +73,41 @@ OBJS :=  $(CPP_OBJS) $(LEX_OBJS) $(YACC_OBJS)
 
 .PHONY: clean
 
-all: $(PROG)
+# all: $(PROG)
+all: $(SNN)
+
+snn: $(SNN)
+
+ann: $(ANN)
 
 $(PROG): $(OBJS)
-	 $(CXX) $(LFLAGS) $^ -o $@
+	$(CXX) $(LFLAGS) $^ -o $@
 
 $(LEX_SRCS): config.l
-	$(LEX) $<
+	@$(LEX) $<
 
 $(YACC_SRCS) $(YACC_HDRS): config.y
-	$(YACC) -d $<
+	@$(YACC) -d $<
 
 $(LEX_OBJS): $(LEX_SRCS) $(YACC_HDRS)
-	$(CC) $(CPPFLAGS) -c $< -o $@
+	@$(CC) $(CPPFLAGS) -c $< -o $@
 
 $(YACC_OBJS): $(YACC_SRCS)
-	$(CC) $(CPPFLAGS) -c $< -o $@
+	@$(CC) $(CPPFLAGS) -c $< -o $@
 
 %.o: %.cpp
-	$(CXX) $(CPPFLAGS) -MMD -c $< -o $@
+	@$(CXX) $(CPPFLAGS) -MMD -c $< -o $@
 
 clean:
-	rm -f $(YACC_SRCS) $(YACC_HDRS)
-	rm -f $(LEX_SRCS)
-	rm -f $(CPP_DEPS)
-	rm -f $(OBJS)
+	@rm -f $(YACC_SRCS) $(YACC_HDRS)
+	@rm -f $(LEX_SRCS)
+	@rm -f $(CPP_DEPS)
+	@rm -f $(OBJS)
 	rm -f $(PROG)
 
 distclean: clean
-	rm -f *~ */*~
-	rm -f *.o */*.o
-	rm -f *.d */*.d
+	@rm -f *~ */*~
+	@rm -f *.o */*.o
+	@rm -f *.d */*.d
 
 -include $(CPP_DEPS)

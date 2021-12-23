@@ -8,6 +8,7 @@
 #include <memory>
 #include <algorithm>
 #include <queue>
+#include <string.h>
 
 namespace focus
 {
@@ -15,6 +16,7 @@ namespace focus
 extern int cl0_nodes;
 extern int cl0_routers;
 extern int channel_width;
+extern std::string trace;
 
 typedef int FlowID;
 

@@ -1714,10 +1714,10 @@ bool TrafficManager::_FOCUS_SingleSim( ) {
         return false;
     }
 
-    std::cout << "INFO: Simulation completes, using " << cycle << " cycles in total" << std::endl;
+    // std::cout << "INFO: Simulation completes, using " << cycle << " cycles in total" << std::endl;
 
     UpdateStats();
-    DisplayStats();
+    // DisplayStats();
 
     return true;
 }

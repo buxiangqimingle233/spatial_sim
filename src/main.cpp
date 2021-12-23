@@ -53,7 +53,7 @@
 #include "network.hpp"
 #include "injection.hpp"
 #include "power_module.hpp"
-
+#include "focus.hpp"
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -89,7 +89,7 @@ int gNodes;
 bool gTrace;
 
 ostream * gWatchOut;
-
+string focus::trace = "trace.txt";
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -157,11 +157,13 @@ int main( int argc, char **argv )
   BookSimConfig config;
 
 
-  if ( !ParseArgs( &config, argc, argv ) ) {
+  if ( !ParseArgs( &config, argc - 1, argv ) ) {
     cerr << "Usage: " << argv[0] << " configfile... [param=value...]" << endl;
     return 0;
  } 
 
+  focus::trace = string(argv[argc - 1]);
+  std::cout << "Trace file: " << focus::trace << std::endl;
   
   /*initialize routing, traffic, injection functions
    */
