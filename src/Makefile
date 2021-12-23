@@ -30,17 +30,6 @@ DEFINE =
 INCPATH = -I. -Iarbiters -Iallocators -Irouters -Inetworks -Ipower -Ifocus -Imonitor
 CPPFLAGS += -Wall $(INCPATH) $(DEFINE) 
 
-# Set working modes for simulator
-# SYNC_SIM: enable snn simluation
-# SIM_ONCE: run the trace only once for accurate processing time
-# DUMP_WAITING_FLITS: dump number of waiting flits at each cycle ( from 10k to 20k )
-
-# SNN
-# CPPFLAGS += -DDUMP_WAITING_FLITS -DSIM_ONCE -DSYNC_SIM
-
-# ANN
-# CPPFLAGS += -DSIM_ONCE
-
 # FIXME: -O0 for debug, set -O3 when release
 CPPFLAGS += -O0
 CPPFLAGS += -g
@@ -48,9 +37,14 @@ LFLAGS +=
 
 PROG := booksim
 
+# Define macros to set working modes of simulator
+# SYNC_SIM: enable snn simluation
+# SIM_ONCE: run the trace only once for accurate processing time
+# DUMP_WAITING_FLITS: dump number of waiting flits at each cycle ( from 10k to 20k )
+
 SNN := snnn
 $(SNN): $(PROG) 
-$(SNN): CPPFLAGS += -DDUMP_WAITING_FLITS -DSIM_ONCE -DSYNC_SIM
+$(SNN): CPPFLAGS += -DSIM_ONCE -DSYNC_SIM
 
 ANN := annn
 $(ANN): $(PROG)
@@ -81,7 +75,7 @@ snn: $(SNN)
 ann: $(ANN)
 
 $(PROG): $(OBJS)
-	$(CXX) $(LFLAGS) $^ -o $@
+	@$(CXX) $(LFLAGS) $^ -o $@
 
 $(LEX_SRCS): config.l
 	@$(LEX) $<
@@ -103,7 +97,7 @@ clean:
 	@rm -f $(LEX_SRCS)
 	@rm -f $(CPP_DEPS)
 	@rm -f $(OBJS)
-	rm -f $(PROG)
+	@rm -f $(PROG)
 
 distclean: clean
 	@rm -f *~ */*~
