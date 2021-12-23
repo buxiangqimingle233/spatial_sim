@@ -75,7 +75,7 @@ snn: $(SNN)
 ann: $(ANN)
 
 $(PROG): $(OBJS)
-	@$(CXX) $(LFLAGS) $^ -o $@
+	$(CXX) $(LFLAGS) $^ -o $@
 
 $(LEX_SRCS): config.l
 	@$(LEX) $<
@@ -90,14 +90,14 @@ $(YACC_OBJS): $(YACC_SRCS)
 	@$(CC) $(CPPFLAGS) -c $< -o $@
 
 %.o: %.cpp
-	@$(CXX) $(CPPFLAGS) -MMD -c $< -o $@
+	$(CXX) $(CPPFLAGS) -MMD -c $< -o $@
 
 clean:
 	@rm -f $(YACC_SRCS) $(YACC_HDRS)
 	@rm -f $(LEX_SRCS)
 	@rm -f $(CPP_DEPS)
-	@rm -f $(OBJS)
-	@rm -f $(PROG)
+	rm -f $(OBJS)
+	rm -f $(PROG)
 
 distclean: clean
 	@rm -f *~ */*~
