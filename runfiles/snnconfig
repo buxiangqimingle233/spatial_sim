@@ -1,5 +1,5 @@
 topology = mesh;
-k = 3;
+k = 5;
 n = 2;
 
 sim_type = throughput;
@@ -9,6 +9,15 @@ warmup_periods = 1;
 
 sample_period = 400000;
 max_samples = 5;
+
+// Flow control
+num_vcs = 2;
+vc_buf_size = 2;
+
+// Traffic
+traffic = focus;
+injection_process = focus;
+
 
 burst_alpha = 0.5;
 burst_beta = -1.0;
@@ -24,11 +33,4 @@ channel_width = 256;
 routing_function = xy_yx;
 
 
-// Flow control
-num_vcs = 2;
-vc_buf_size = 2;
-
-// Traffic
-traffic = focus;
-injection_process = focus;
 

@@ -35,7 +35,7 @@ CPPFLAGS += -O0
 CPPFLAGS += -g
 LFLAGS +=
 
-PROG := booksim
+PROG := SNNSimulator 
 
 # Define macros to set working modes of simulator
 # SYNC_SIM: enable snn simluation
@@ -75,7 +75,7 @@ snn: $(SNN)
 ann: $(ANN)
 
 $(PROG): $(OBJS)
-	$(CXX) $(LFLAGS) $^ -o $@
+	@$(CXX) $(LFLAGS) $^ -o $@
 
 $(LEX_SRCS): config.l
 	@$(LEX) $<
@@ -97,7 +97,7 @@ clean:
 	@rm -f $(LEX_SRCS)
 	@rm -f $(CPP_DEPS)
 	rm -f $(OBJS)
-	rm -f $(PROG)
+	@rm -f $(PROG)
 
 distclean: clean
 	@rm -f *~ */*~
