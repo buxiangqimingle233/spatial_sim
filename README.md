@@ -11,13 +11,11 @@ The trace file describes a communication graph, where each node denotes a comput
 The first way to describe a communication graph is to build multiple Finite State Machines (FSM) for nodes. The FSM specifies a bunch of discrete packets with equally space. The details are described as follows: 
 
 ```pseudocode
-
 0 2
 
 4608 32 2 17 51 0
 
 4608 32 2 17 143 0
-
 ```
 
 The first line is the global id of the node along with its attached flow number. If a flow is attached to a node, it's injected by the node. The two subsequent lines describe the traffic flows attached to node $0$, which are given by **interval, max_iteration_cnt, waiting_flow_cnt, flits_per_message, dest_id, source_id** 
@@ -27,7 +25,6 @@ The first line is the global id of the node along with its attached flow number.
 The second way to describe traffic is to maintain a look up table of packet issuing time for each node. The details are described as follows. Each entry denotes when to issue a bit. 
 
 ```pseudocode
-
 1 7
 99 6
 99 11
@@ -36,7 +33,6 @@ The second way to describe traffic is to maintain a look up table of packet issu
 473 11
 473 2
 1023 6
-
 ```
 
 * We model the collective communication as set of point-to-point traffic flows between all source nodes and all destinations. 
