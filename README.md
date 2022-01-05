@@ -4,7 +4,7 @@
 
 This project is the cycle-accurate spatial architecture simulator. This project is based on Booksim, and modify its simulation kernel to enable users to specify traffic with trace files. 
 
-### Primaries
+### Traffic Specs
 
 The trace file describes a communication graph, where each node denotes a computation core alongwith its attached router, and edges are traffic flows between cores. We support two methods to specifiy a communication. 
 
@@ -12,9 +12,7 @@ The first way to describe a communication graph is to build multiple Finite Stat
 
 ```pseudocode
 0 2
-
 4608 32 2 17 51 0
-
 4608 32 2 17 143 0
 ```
 
