@@ -152,7 +152,8 @@ public:
 // For iteration with the booksim kernels
 public:
     void updateFocusKernel(int source, int dest);
-    bool allNodeClosed();
+    bool allNodesClosed();
+    float closeRatio();
 
     // For debugging
     void debug() {

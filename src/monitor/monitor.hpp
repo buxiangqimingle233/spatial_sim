@@ -58,7 +58,11 @@ public:
     {
         // computation of node is finished && no flits are in flight
 
-        bool compute_finished = injection_kernel->allNodeClosed();
+        bool compute_finished = injection_kernel->allNodesClosed();
+        // if (compute_finished) {
+        //     std::cout << "WUHU" << std::endl;
+        //     return 0;
+        // }
         bool traffic_drained = true;
         for (auto& c: _total_in_flight_flits) {
             traffic_drained &= c.empty();

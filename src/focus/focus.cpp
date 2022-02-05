@@ -48,7 +48,12 @@ int Flow::forward(bool token) {
         }
         // Is doing computing now, the flow is sleeping ...
         case FlowState::Computing: {
-            if (_slept_time < _interval) {
+            // We should issue the flow at the first iteration without waiting
+            if (_iter == 0) {
+                _slept_time = 0;
+                next_state = FlowState::Blocked;
+                should_issue = false;
+            } else if (_slept_time < _interval) {
                 _slept_time++;
                 next_state = FlowState::Computing;
                 should_issue = false;
@@ -329,13 +334,22 @@ void FocusInjectionKernel::updateFocusKernel(int source, int dest) {
     _nodes[dest]->receiveFlow(source);
 }
 
-bool FocusInjectionKernel::allNodeClosed() {
+bool FocusInjectionKernel::allNodesClosed() {
+    // FIXME: Instead of waiting for all nodes to close, we ternimate the simulation 
+    // when 95% nodes finish their tasks. In this way, 
+    // we mitigate long tail executing nodes and greatly accelerate the simulation. 
+    float close_ratio = closeRatio();
+    return close_ratio > 0.95;
+}
+
+float FocusInjectionKernel::closeRatio() {
+    int cnt = 0;
     for (Node* node: _nodes) {
-        if (!node->isClosed()) {
-            return false;
+        if (node->isClosed()) {
+            ++cnt;
         }
     }
-    return true;
+    return (float) cnt / _nodes.size();
 }
 
 bool FocusInjectionKernel::sync_test(int source, int time) {

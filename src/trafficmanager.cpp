@@ -1341,7 +1341,7 @@ void TrafficManager::_Step( )
         waiting_flits += _partial_packets[n][0].size();
     }
     int in_flight_flits = _total_in_flight_flits[0].size();
-    if (_time > 10000 && _time < 20000) {
+    if (_time < 10000) {
         ofstream ofs("dump_flits.txt", std::ofstream::out | std::ofstream::app);
         ofs << _time << " " << waiting_flits << " " << in_flight_flits << std::endl;
         ofs.close();
@@ -1696,6 +1696,10 @@ bool TrafficManager::_FOCUS_SingleSim( ) {
         _Step( );
         // focus::FocusInjectionKernel::getKernel()->checkState(0);
         int terminate = monitor->update(focus::FocusInjectionKernel::getKernel(), _total_in_flight_flits, _time);
+        if (_time % 10000 == 0) {
+            std::cout << "Simulate " << _time << " cycles" << std::endl;
+            std::cout << "Remain " << 1 - focus::FocusInjectionKernel::getKernel()->closeRatio() << " unclosed nodes" << std::endl; 
+        }
         if (terminate == 0) {
             break;
         }
@@ -1797,8 +1801,8 @@ bool TrafficManager::Run( )
         }
         _empty_network = false;
 
-        //for the love of god don't ever say "Time taken" anywhere else
-        //the power script depend on it
+        // for the love of god don't ever say "Time taken" anywhere else
+        // the power script depend on it
         cout << "Time taken is " << _time << " cycles" <<endl; 
 
         if(_stats_out) {

@@ -35,7 +35,7 @@ CPPFLAGS += -O0
 CPPFLAGS += -g
 LFLAGS +=
 
-PROG := SNNSimulator 
+PROG := simulator
 
 # Define macros to set working modes of simulator
 # SYNC_SIM: enable snn simluation
