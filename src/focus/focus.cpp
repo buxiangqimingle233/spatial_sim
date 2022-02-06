@@ -339,7 +339,7 @@ bool FocusInjectionKernel::allNodesClosed() {
     // when 95% nodes finish their tasks. In this way, 
     // we mitigate long tail executing nodes and greatly accelerate the simulation. 
     float close_ratio = closeRatio();
-    return close_ratio > 0.95;
+    return close_ratio > 0.90;
 }
 
 float FocusInjectionKernel::closeRatio() {
