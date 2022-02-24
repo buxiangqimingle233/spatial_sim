@@ -1,5 +1,6 @@
 #include "focus.hpp"
 #include <iostream>
+#include <algorithm>
 #include <math.h>
 
 namespace focus 
@@ -7,177 +8,176 @@ namespace focus
 
 std::shared_ptr<FocusInjectionKernel> FocusInjectionKernel::_kernel = NULL;
 
-int Flow::forward(bool token) {
+int Flow::forward(bool grant_arbit, bool grant_alloc) {
     FlowState next_state = FlowState::Closed;
-    int should_issue = false;
+    int issue = false;
 
     switch (_state) {
         case FlowState::Init: {
             next_state = FlowState::Waiting;
-            should_issue = false;
+            issue = false;
             break;
         }
         case FlowState::Waiting: {
-            // FIXME: we just check the number of arrival packets. It'll be wrong when 
-            // multiple packets belong to one traffic flow. 
-
-            // std::vector<std::map<int, int>::iterator> available_flows;
-            // for (auto it = _dependent_flows.begin(); it != _dependent_flows.end(); ++it) {
-            //     if (it->second > 0) {
-            //         available_flows.push_back(it);
-            //     }
-            // }
-            // if (static_cast<int>(available_flows.size()) >= _wait_flows) {
-            //     for (auto it: available_flows) {
-            //         it->second--;
-            //     }
-            if (_wait_flows != 0) {
-                // std::cout << "dependent flows: " << _dependent_flows.size() << std::endl;
-            }
-            if (_dependent_flows.size() >= static_cast<unsigned>(_wait_flows)) {
-                for (int _; _ < _wait_flows; ++_) {
-                    _dependent_flows.pop();
-                }
-                next_state = FlowState::Computing;
-                should_issue = false;
+            // FIXME: > or >=
+            if (_iter >= _max_iter) {
+                next_state = FlowState::Closed;
+                issue = false;
             } else {
-                next_state = FlowState::Waiting;
-                should_issue = false;
+                auto it = _received_packet.begin();
+                for (; it != _received_packet.end(); ++it) {
+                    // Exists an dependent flow unsatisfied
+                    if (it->second < _depend_flows[it->first]) {
+                        break;
+                    }
+                }
+                if (it != _received_packet.end()) {
+                    next_state = FlowState::Waiting;
+                    issue = false;
+                } else {
+                    next_state = FlowState::Computing;
+                    issue = false;
+                    // Comsume the received packets
+                    it = _received_packet.begin();
+                    for (; it != _received_packet.end(); ++it) {
+                        it->second -= _depend_flows[it->first];
+                    }
+                }
             }
             break;
         }
-        // Is doing computing now, the flow is sleeping ...
+        // We're doing computing now, the flow is sleeping ...
         case FlowState::Computing: {
             // We should issue the flow at the first iteration without waiting
             if (_iter == 0) {
                 _slept_time = 0;
-                next_state = FlowState::Blocked;
-                should_issue = false;
+                next_state = FlowState::Arbitrating;
+                issue = false;
             } else if (_slept_time < _interval) {
                 _slept_time++;
                 next_state = FlowState::Computing;
-                should_issue = false;
+                issue = false;
             } else {
                 _slept_time = 0;
-                next_state = FlowState::Blocked;
-                should_issue = false;
+                next_state = FlowState::Arbitrating;
+                issue = false;
             }
             break;
         }
-        // Computation is done, 
-        // TODO: waiting the destination node to be available [ not implemented yet ]
-        // Update: Blocked state now dictates the state waiting for token. 
-        case FlowState::Blocked: {
-            if (token) {
-                if (_iter > _max_iter) {
-                    next_state = FlowState::Closed;
-                    should_issue = false;
-                } else {
-                    _iter++;
-                    next_state = FlowState::Waiting;
-                    should_issue = true;
-                }
+        // Computation is done, waiting for arbitration flag
+        case FlowState::Arbitrating: {
+            if (grant_arbit && grant_alloc) {
+                next_state = FlowState::Commiting;
+                issue = true;
+            } else if (grant_arbit && !grant_alloc) {
+                next_state = FlowState::Arbitrating;
+                issue = false;
+            } else if (!grant_arbit) {
+                next_state = FlowState::Arbitrating;
+                issue = false;
+            }
+            break;
+        }
+        case FlowState::Commiting: {
+            if (grant_alloc) {
+                ++_iter;
+                next_state = FlowState::Waiting;
+                issue = false;
             } else {
-                next_state = FlowState::Blocked;
-                should_issue = false;
+                next_state = FlowState::Commiting;
+                issue = false;
             }
             break;
         }
         // Dead here
         default: {
             next_state = FlowState::Closed;
-            should_issue = false;
+            issue = false;
             break;
         }
     }
 
     _state = next_state;
-    return should_issue;
+    return issue;
 }
 
-void Flow::arriveDependentFlow(int source) {
-    _dependent_flows.push(source);
-    // if (_dependent_flows.find(source) == _dependent_flows.end()) {
-    //     _dependent_flows.insert(std::make_pair(source, 1));
-    // } else {
-    //     _dependent_flows[source]++;
-    // }
-}
-
-Node::Node():_node_id(-1), _flow_with_token(0) { }
-
-Node::Node(std::ifstream& ifs): _node_id(-1), _flow_with_token(0) {
-    int flow_size;
-    ifs >> _node_id >> flow_size;
-
-    for (int _ = 0; _ < flow_size; ++_) {
-        // interval, max_iteration_cnt, waiting_flow_cnt, flits_per_message, dest_id, source_id
-        int ct, mi, d, s, size, wf;
-        ifs >> ct >> mi >> d >> s >> size >> wf;
-        Flow flow(ct, mi, d, s, size, wf);
-        _out_flows.push_back(flow);
+void Flow::receiveDependentPacket(int flow_id) {
+    if (_received_packet.find(flow_id) == _received_packet.end()) {
+        throw "Receive the an independent packet " + flow_id;
     }
+    _received_packet[flow_id] += 1;
 }
 
-Node::Node(std::ifstream& ifs, int node_id): _node_id(node_id), _flow_with_token(0) {
-    int flow_size;
-    ifs >> flow_size;
-
-    for (int _ = 0; _ < flow_size; ++_) {
-        int ct, mi, d, s, size, dst;
-        ifs >> ct >> mi >> d >> size >> s >> dst;
-        Flow flow(ct, mi, d, size, s, dst);
-        _out_flows.push_back(flow);
-    }
-}
-
-int Node::test() {
-
+bool Node::step(bool buffer_empty) {
     if (_out_flows.size() == 0) {
-        return 0;
+        return false;
     }
-    
-    // select a flow to issue, using Round-Robin scheduling
-    int sel_flow = _flow_with_token;
+
     int size_ = _out_flows.size();
-    for (int bias = 1; bias <= size_; ++bias) {
-        int idx = (bias + _flow_with_token) %size_;
-        if (_out_flows[idx].canIssue()) {
-            sel_flow = idx;
-            break;
+    std::vector<int> ready_flows;
+    for (int i = 0; i < size_; ++i) {
+        if (_out_flows[i].canIssue()) {
+            ready_flows.push_back(i);
         }
     }
-    _flow_with_token = sel_flow;
+    std::random_shuffle(ready_flows.begin(), ready_flows.end());
 
-    bool should_issue = false;
-    for (int i = 0; i < size_; ++i) {
-        should_issue |= _out_flows[i].forward(i == sel_flow);
+    if (!buffer_empty) {
+        _flow_to_inject = _flow_to_inject;
+    } else if (buffer_empty && !ready_flows.empty()) {
+        _flow_to_inject = ready_flows[0];
+    } else {
+        _flow_to_inject = INVALID;
     }
 
-    return should_issue;
+    bool issue = false;
+    for (int i = 0; i < size_; ++i) {
+        issue |= _out_flows[i].forward(i == _flow_to_inject, buffer_empty);
+    }
+
+    return issue;
 }
 
 int Node::getDestination() {
-    return _out_flows[_flow_with_token].getDestination();
+    if (_flow_to_inject != INVALID) {
+        return _out_flows[_flow_to_inject].getDestination();
+    } else {
+        return INVALID;
+    }
 }
 
 int Node::getFlowSize() {
-    // std::cout << "Size: " << _out_flows[_flow_with_token].getFlowSize() << std::endl;
-    return _out_flows[_flow_with_token].getFlowSize();
+    if (_flow_to_inject != INVALID) {
+        return _out_flows[_flow_to_inject].getFlowSize();
+    } else {
+        return INVALID;
+    }
 }
 
 int Node::getFlowID() {
-    return _flow_with_token;
+    if (_flow_to_inject != INVALID) {
+        return _out_flows[_flow_to_inject].getFlowID();
+    } else {
+        return INVALID;
+    }
 }
 
 int Node::getComputingTime(int flow_id) {
-    return _out_flows[flow_id].getComputingTime();
+    if (_flow_to_inject != INVALID) {
+        return _out_flows[flow_id].getComputingTime();
+    } else {
+        return INVALID;
+    }
 }
 
-void Node::receiveFlow(int source) {
-    // FIXME: It's wrong when a PE is mapped with multiple flows
+void Node::receivePacket(int flow_id) {
+    // When the node receives a flow, it broadcast it to every operators
     for (auto& f : _out_flows) {
-        f.arriveDependentFlow(source);
+        try {
+            f.receiveDependentPacket(flow_id);
+        } catch (const char* msg) {
+            // do nothing ... 
+        }
     }
 }
 
@@ -240,6 +240,7 @@ int SyncNode::getFlowSize() {
 
 FocusInjectionKernel::FocusInjectionKernel(int nodes) {
     _nodes.resize(nodes, NULL);
+    _buffer_empty.resize(nodes, true);
     
     std::ifstream ifs;
     ifs.open(trace, std::ios::in);
@@ -254,12 +255,27 @@ FocusInjectionKernel::FocusInjectionKernel(int nodes) {
         if (node_id > nodes) {
             std::cerr << "Node " << node_id << " specified in trace file exceeds node range" << std::endl;
         }
-        // FIXME: ??
-#ifdef SYNC_SIM
-        SyncNode* node = new SyncNode(ifs, node_id);
-#else
-        Node* node = new Node(ifs, node_id);
-#endif
+
+        int flow_size;
+        ifs >> flow_size;
+        std::vector<Flow> flows;
+        for (int _ = 0; _ < flow_size; ++_) {
+            int flow_id, ct, mi, dep, size, src, dst;
+            ifs >> flow_id >> ct >> mi >> dep >> size >> dst >> src;
+
+            std::map<int, double> depend_flows;
+
+            for (int df = 0; df < dep; ++df) {
+                int df_id;
+                double df_cnt;
+                ifs >> df_id >> df_cnt;
+                depend_flows[df_id] = df_cnt;
+            }
+
+            flows.push_back(Flow(flow_id, ct, mi, depend_flows, size, src, dst));
+        }
+
+        Node* node = new Node(flows, node_id);
         _nodes[node_id] = node;
     }
 
@@ -272,11 +288,6 @@ FocusInjectionKernel::FocusInjectionKernel(int nodes) {
 #endif  
         }
     }
-
-    // if (static_cast<int>(_nodes.size()) != nodes) {
-    //     std::cerr << "ERROR: Nodes in trace file does not match specs for Booksim !" << std::endl;
-    //     exit(-1);
-    // }
 }
 
 std::shared_ptr<FocusInjectionKernel> FocusInjectionKernel::getKernel() {
@@ -303,9 +314,25 @@ void FocusInjectionKernel::checkNodes(int nid) {
     }
 }
 
+// Producer methods 
+void FocusInjectionKernel::step() {
+    int _size = _nodes.size();
+    for (int i = 0; i < _size; ++i) {
+        if (_nodes[i]->step(_buffer_empty[i])) {
+            _buffer_empty[i] = false;
+        }
+    }
+}
+
+// Consumer methods
 bool FocusInjectionKernel::test(int source) {
     checkNodes(source);
-    return _nodes[source]->test();
+    if (!_buffer_empty[source]) {
+        _buffer_empty[source] = true;
+        return true;
+    } else {
+        return false;
+    }
 }
 
 int FocusInjectionKernel::dest(int source) {
@@ -328,21 +355,31 @@ int FocusInjectionKernel::interval(int source, int flow_id) {
     return _nodes[source]->getComputingTime(flow_id);
 }
 
-void FocusInjectionKernel::updateFocusKernel(int source, int dest) {
+void FocusInjectionKernel::retirePacket(int source, int dest, int flow_id) {
     checkNodes(source);
     checkNodes(dest);
-    _nodes[dest]->receiveFlow(source);
+    _nodes[dest]->receivePacket(flow_id);
 }
 
-bool FocusInjectionKernel::allNodesClosed() {
+bool FocusInjectionKernel::allNodesClosed(int cycle) {
     // FIXME: Instead of waiting for all nodes to close, we ternimate the simulation 
     // when 95% nodes finish their tasks. In this way, 
     // we mitigate long tail executing nodes and greatly accelerate the simulation. 
-    float close_ratio = closeRatio();
-    return close_ratio > 0.90;
+    float close_ratio = closeRatio(cycle);
+    return close_ratio >= 1;
 }
 
-float FocusInjectionKernel::closeRatio() {
+void FocusInjectionKernel::dump(int cycle, std::ofstream& out) {
+    out << "cycle " << cycle << std::endl;
+    
+    for (Node* node: _nodes) {
+        node->dump(out);
+    }
+    out << std::endl;
+    out.flush();
+}
+
+float FocusInjectionKernel::closeRatio(int cycle) {
     int cnt = 0;
     for (Node* node: _nodes) {
         if (node->isClosed()) {

@@ -28,7 +28,7 @@ LEX = flex
 YACC   = bison -y
 DEFINE = 
 INCPATH = -I. -Iarbiters -Iallocators -Irouters -Inetworks -Ipower -Ifocus -Imonitor
-CPPFLAGS += -Wall $(INCPATH) $(DEFINE) 
+CPPFLAGS += -Wall $(INCPATH) $(DEFINE) -Wno-reorder
 
 # FIXME: -O0 for debug, set -O3 when release
 CPPFLAGS += -O0
@@ -41,6 +41,7 @@ PROG := simulator
 # SYNC_SIM: enable snn simluation
 # SIM_ONCE: run the trace only once for accurate processing time
 # DUMP_WAITING_FLITS: dump number of waiting flits at each cycle ( from 10k to 20k )
+# DUMP_NODE_STATE: dump node states at each cycle
 
 SNN := snnn
 $(SNN): $(PROG) 
@@ -48,7 +49,7 @@ $(SNN): CPPFLAGS += -DSIM_ONCE -DSYNC_SIM
 
 ANN := annn
 $(ANN): $(PROG)
-$(ANN): CPPFLAGS += -DDUMP_WAITING_FLITS -DSIM_ONCE
+$(ANN): CPPFLAGS += -DSIM_ONCE -DDUMP_NODE_STATE
 
 # simulator source files
 CPP_SRCS = $(wildcard *.cpp) $(wildcard */*.cpp)
@@ -68,7 +69,7 @@ OBJS :=  $(CPP_OBJS) $(LEX_OBJS) $(YACC_OBJS)
 .PHONY: clean
 
 # all: $(PROG)
-all: $(SNN)
+all: $(ANN)
 
 snn: $(SNN)
 

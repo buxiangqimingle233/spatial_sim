@@ -690,12 +690,7 @@ void TrafficManager::_RetireFlit( Flit *f, int dest )
         _pair_flat[f->cl][f->src*_nodes+dest]->AddSample( f->atime - f->itime );
     }
 
-#ifndef SYNC_SIM
-    if ( f->head ) {
-        // Tell the focus kernel that a packet has arrived
-        focus::FocusInjectionKernel::getKernel()->updateFocusKernel(f->src, f->dest);
-    }
-#endif
+
 
     if ( f->tail ) {
         Flit * head;
@@ -738,6 +733,10 @@ void TrafficManager::_RetireFlit( Flit *f, int dest )
       
         }
 
+#ifndef SYNC_SIM
+        focus::FocusInjectionKernel::getKernel()->retirePacket(head->src, head->dest, head->_flow_id);
+#endif
+
         // Only record statistics once per packet (at tail)
         // and based on the simulation state
         if ( ( _sim_state == warming_up ) || f->record ) {
@@ -752,7 +751,6 @@ void TrafficManager::_RetireFlit( Flit *f, int dest )
             // WZ: added analysis for focus 
             double interval = focus::FocusInjectionKernel::getKernel()->interval(head->src, head->_flow_id);
             _plat_stats[f->cl]->AddNodeSample( f->atime - head->ctime, dest, interval );
-            // _plat_stats[f->cl]->AddNodeSlowdownSample(interval, f->atime - head->ctime, dest);
 #endif
             _plat_stats[f->cl]->AddSample( f->atime - head->ctime);
             _nlat_stats[f->cl]->AddSample( f->atime - head->itime);
@@ -830,7 +828,8 @@ void TrafficManager::_GeneratePacket( int source, int stype,
 #ifdef SYNC_SIM
     int size = focus::FocusInjectionKernel::getKernel()->sync_flowSize(source, time);
 #else
-    int size = focus::FocusInjectionKernel::getKernel()->flowSize(source);
+    auto injection_kernel = focus::FocusInjectionKernel::getKernel();
+    int size = injection_kernel->flowSize(source);
 #endif
 
     // Flow id
@@ -863,7 +862,7 @@ void TrafficManager::_GeneratePacket( int source, int stype,
             }
         } else {
             PacketReplyInfo* rinfo = _repliesPending[source].front();
-            if (rinfo->type == Flit::READ_REQUEST) {//read reply
+            if (rinfo->type == Flit::READ_REQUEST) {    //read reply
                 size = _read_reply_size[cl];
                 packet_type = Flit::READ_REPLY;
             } else if(rinfo->type == Flit::WRITE_REQUEST) {  //write reply
@@ -882,10 +881,10 @@ void TrafficManager::_GeneratePacket( int source, int stype,
         }
     }
 
-    if ((packet_destination <0) || (packet_destination >= _nodes)) {
+    if ((packet_destination < 0) || (packet_destination >= _nodes)) {
         ostringstream err;
         err << "Incorrect packet destination " << packet_destination
-            << " for stype " << packet_type;
+            << " for stype " << packet_type << " at node " << source;
         Error( err.str( ) );
     }
 
@@ -981,7 +980,7 @@ void TrafficManager::_Inject() {
 
     for ( int input = 0; input < _nodes; ++input ) {
         for ( int c = 0; c < _classes; ++c ) {
-            // Potentially generate packets for any (input,class)
+            // Potentially generate packets for any (input, class)
             // that is currently empty
             if ( _partial_packets[input][c].empty() ) {
                 bool generated = false;
@@ -989,16 +988,15 @@ void TrafficManager::_Inject() {
 
                     int stype = _IssuePacket( input, c );
 
-                    if ( stype != 0 ) { //generate a packet
+                    if ( stype != 0 ) { // generate a packet
                         _GeneratePacket( input, stype, c, 
                                          _include_queuing==1 ? 
                                          _qtime[input][c] : _time );
-                        // WZ: debug
-                        // std::cout << "node: " << input << " time: " << _time << std::endl;
+
                         generated = true;
                     }
                     // only advance time if this is not a reply packet
-                    if(!_use_read_write[c] || (stype >= 0)){
+                    if(!_use_read_write[c] || (stype >= 0))  {
                         ++_qtime[input][c];
                     }
                 }
@@ -1066,8 +1064,11 @@ void TrafficManager::_Step( )
         _net[subnet]->ReadInputs( );
     }
   
+
     if ( !_empty_network ) {
-        _Inject();
+        // Injection Kernel: Produce
+        focus::FocusInjectionKernel::getKernel()->step();
+        _Inject();      // Consume
     }
 
     for(int subnet = 0; subnet < _subnets; ++subnet) {
@@ -1675,7 +1676,7 @@ bool TrafficManager::_SingleSim( )
                 }
             }
         }
-    } else {
+} else {
         cout << "Too many sample periods needed to converge" << endl;
     }
   
@@ -1684,32 +1685,47 @@ bool TrafficManager::_SingleSim( )
 
 
 bool TrafficManager::_FOCUS_SingleSim( ) {
-
+    using namespace focus;
     _ClearStats( );
 
-    auto monitor = focus::Monitor::getMonitor();
+#ifdef DUMP_NODE_STATE
+    // clear dump files
+    std::ofstream ofs_node("dump.log", std::ios::out);
+    ofs_node.close();
+#endif
+
+#ifdef DUMP_WAITING_FLITS
+    ofstream ofs_flit("dump_flits.txt", std::ofstream::out);
+    ofs_flit.close();
+#endif
+
+    auto monitor = Monitor::getMonitor();
     monitor->reset();
 
+    
     int cycle = 0;
-    int terminate = -1;
-    for ( ; cycle < _sample_period; ++cycle ) {
+    Monitor::STATE terminate = Monitor::STATE::RUNNING;
+    _sim_state = running;
+    for ( ; cycle < _sample_period && terminate != Monitor::STATE::FINISHED; ++cycle ) {
         _Step( );
-        // focus::FocusInjectionKernel::getKernel()->checkState(0);
-        int terminate = monitor->update(focus::FocusInjectionKernel::getKernel(), _total_in_flight_flits, _time);
-        if (_time % 10000 == 0) {
+        terminate = monitor->update(FocusInjectionKernel::getKernel(), _total_in_flight_flits, _time);
+
+        if (_time % 10000  == 0) {
             std::cout << "Simulate " << _time << " cycles" << std::endl;
-            std::cout << "Remain " << 1 - focus::FocusInjectionKernel::getKernel()->closeRatio() << " unclosed nodes" << std::endl; 
-        }
-        if (terminate == 0) {
-            break;
+            std::cout << "Remain " << 1 - FocusInjectionKernel::getKernel()->closeRatio(_time) << " unclosed nodes" << std::endl; 
+#ifdef DUMP_NODE_STATE
+            std::ofstream out("dump.log", std::ios::out|std::ios::app);
+            FocusInjectionKernel::getKernel()->dump(cycle, out);
+            out.close();
+#endif
         }
     }
 
     if (cycle >= _sample_period) {
         std::cerr << "WARNING: Simulation is not finished. Please enlarge the sample period. " << std::endl;
-        if (terminate == 1) {
+        if (terminate == Monitor::STATE::NETWORK_UNDRAINED) {
             std::cerr << "Communication hasn't been finished" << std::endl;
-        } else if (terminate == 2) {
+        } else if (terminate == Monitor::STATE::NODE_UNCOLSED) {
             std::cerr << "Computation hasn't been finished" << std::endl;
         } else {
             std::cerr << "Both communication and computation haven't been finished" << std::endl;
@@ -1717,8 +1733,6 @@ bool TrafficManager::_FOCUS_SingleSim( ) {
         UpdateStats();
         return false;
     }
-
-    // std::cout << "INFO: Simulation completes, using " << cycle << " cycles in total" << std::endl;
 
     UpdateStats();
     // DisplayStats();

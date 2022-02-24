@@ -40,6 +40,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <fstream>
+#include <stdlib.h>
 
 
 
@@ -155,7 +156,7 @@ int main( int argc, char **argv )
 {
 
   BookSimConfig config;
-
+  std::srand(1234);
 
   if ( !ParseArgs( &config, argc - 1, argv ) ) {
     cerr << "Usage: " << argv[0] << " configfile... [param=value...]" << endl;

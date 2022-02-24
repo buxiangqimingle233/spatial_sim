@@ -23,6 +23,7 @@ protected:
     static std::shared_ptr<Monitor> _monitor;
 
 public:
+    enum STATE { FINISHED, NETWORK_UNDRAINED, NODE_UNCOLSED, RUNNING };
     Monitor() { reset(); }
 
     static std::shared_ptr<Monitor> getMonitor() {
@@ -52,17 +53,13 @@ public:
         _enable = false;
     }
 
-    int update(std::shared_ptr<FocusInjectionKernel> injection_kernel, 
+    STATE update(std::shared_ptr<FocusInjectionKernel> injection_kernel, 
                 const std::vector<std::map<int, Flit *>>& _total_in_flight_flits,
                 int time)
     {
         // computation of node is finished && no flits are in flight
 
-        bool compute_finished = injection_kernel->allNodesClosed();
-        // if (compute_finished) {
-        //     std::cout << "WUHU" << std::endl;
-        //     return 0;
-        // }
+        bool compute_finished = injection_kernel->allNodesClosed(time);
         bool traffic_drained = true;
         for (auto& c: _total_in_flight_flits) {
             traffic_drained &= c.empty();
@@ -71,14 +68,14 @@ public:
 
         if (traffic_drained && credit_drained && compute_finished) {
             finish_monitor(time);
-            return 0;
+            return STATE::FINISHED;
         } else if ((!traffic_drained || !credit_drained) && compute_finished) {
-            return 1;
+            return STATE::NETWORK_UNDRAINED;
         } else if ((traffic_drained && credit_drained) && !compute_finished) {
-            return 2;
+            return STATE::NODE_UNCOLSED;
         }
 
-        return 3;
+        return STATE::RUNNING;
     }
 
 };

@@ -6,21 +6,50 @@ This project is the cycle-accurate spatial architecture simulator. This project 
 
 ### Traffic Specs
 
-The trace file describes a communication graph, where each node denotes a computation core alongwith its attached router, and edges are traffic flows between cores. We support two methods to specifiy a communication. 
+The trace file specifies traffic in the node-centric way. We use a `node` to denote the injection process of a single router. 
+Node is futher composed of a list of `flows` that represent a fixed-interval packet stream. 
 
-The first way to describe a communication graph is to build multiple Finite State Machines (FSM) for nodes. The FSM specifies a bunch of discrete packets with equally space. The details are described as follows: 
+To describe a flow, you should provide the following attributes: 
+* `fid`: an unique number to mark this flow ( in int32 )
+* `interval / computing time`: the time duration to compute after all dependent packets arrive
+* `counts`: the number of packets within the stream
+* `depend`: the number of dependent packets
+* `flit`: the packet size
+* `dest`: nid of its destination
+* `src`: nid of its source
 
+List these attributes in a line and seperate them with space, for example, 
 ```pseudocode
-0 2
-4608 32 2 17 51 0
-4608 32 2 17 143 0
+413 6 512 2 1 19 3
 ```
 
-The first line is the global id of the node along with its attached flow number. If a flow is attached to a node, it's injected by the node. The two subsequent lines describe the traffic flows attached to node $0$, which are given by **interval, max_iteration_cnt, waiting_flow_cnt, flits_per_message, dest_id, source_id** 
+After each flow-specification line, the list of dependent flows should be provided. Each dependency contains two attributes, `fid` and `ratio`. 
+* `fid`: marks which packets it takes as the input
+* `ratio`: denotes how much packets it consumes at once ( for each packet ), can be a float
 
+Here's the complete description of one flow: 
+```pseudocode
+413 6 512 2 1 19 3
+104    0.0020136
+109    0.9900000
+```
 
+A node can contain various flows. First, head the node's specification with a line of node's information. You should provide two 
+attributes at this line: 
+* `nid`: the unique number to mark this node ( different with `fid` )
+* `flow_cnt`: the number of flows in this node. 
 
-The second way to describe traffic is to maintain a look up table of packet issuing time for each node. The details are described as follows. Each entry denotes when to issue a bit. 
+Here's the complete description of one node: 
+```pseudocode
+3 1
+413 6 512 2 1 19 3
+104    0.0020136
+109    0.9900000
+```
+
+You can also describe the traffic in a cycle-accurate way ( It is not fully supported yet. ).
+
+In this way, the trace file specifies packet issuing time at each node. The details are described as follows. Each entry denotes when to issue a bit. 
 
 ```pseudocode
 1 7
@@ -33,11 +62,13 @@ The second way to describe traffic is to maintain a look up table of packet issu
 1023 6
 ```
 
+### Runfiles
+
 * We model the collective communication as set of point-to-point traffic flows between all source nodes and all destinations. 
 
 * Set `traffic = focus` and `injection_process = focus` in the config files, the example configuration file is ***runfiles/focusconfig***
 
-* We just support repeated traffic flows now.
+* When the cycle insufficiency error arises, please enlarge the `sample_period` at the runfile. 
 
 ### Prerequisites
 
