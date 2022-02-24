@@ -1,0 +1,94 @@
+BEGIN Configuration File: runfiles/focusconfig
+topology = mesh;
+k = 16;
+n = 2;
+
+sim_type = throughput;
+
+packet_size = 1;
+warmup_periods = 1;
+// sample_period = 30000;
+// max_samples = 20;
+
+sample_period = 1000000;
+max_samples = 5;
+
+// Well ... dummy parameters 
+// for deprecated codes ...
+burst_alpha = 0.5;
+burst_beta = -1.0;
+
+sim_power = 1;
+channel_width = 256;
+
+// Routing
+// routing_function = dim_order;
+// routing_function = min_adapt;
+
+// routing_function = xy_yx;
+routing_function = romm;
+
+
+// Flow control
+num_vcs = 2;
+// num_vcs = 8;
+vc_buf_size = 2;
+
+// Traffic
+traffic = focus;
+injection_process = focus;
+
+END Configuration File: runfiles/focusconfig
+Trace file: benchmark/resnet50_resnext50_32x4d_vgg16_wide_resnet50_2/trace_1024.txt
+INFO: injection kernel is renewed
+INFO: injection kernel is renewed
+Simulate 10000 cycles
+Remain 0.253906 unclosed nodes
+Simulate 20000 cycles
+Remain 0.226562 unclosed nodes
+Simulate 30000 cycles
+Remain 0.148438 unclosed nodes
+Simulate 40000 cycles
+Remain 0.109375 unclosed nodes
+Simulate 50000 cycles
+Remain 0.0585938 unclosed nodes
+Simulate 60000 cycles
+Remain 0.0273438 unclosed nodes
+Simulate 70000 cycles
+Remain 0.0234375 unclosed nodes
+Simulate 80000 cycles
+Remain 0.0234375 unclosed nodes
+Simulate 90000 cycles
+Remain 0.0234375 unclosed nodes
+Draining remaining packets ...
+Time taken is 95379 cycles
+Total run time 37.3735
+L = 2 K = 1 M = 1 N = 1
+-----------------------------------------
+- OCN Power Summary
+- Completion Time:         95379
+- Flit Widths:            256
+- Channel Wire Power:      51.9596
+- Channel Clock Power:     23.9569
+- Channel Retiming Power:  0.328291
+- Channel Leakage Power:   0.541458
+- Input Read Power:        0.887764
+- Input Write Power:       0.887764
+- Input Leakage Power:     0.377487
+- Switch Power:            10.9078
+- Switch Control Power:    4.36069
+- Switch Leakage Power:    29.9854
+- Output DFF Power:        0.291443
+- Output Clk Power:        19.9641
+- Output Control Power:    0.150409
+- Total Power:             144.599
+-----------------------------------------
+
+-----------------------------------------
+- OCN Area Summary
+- Channel Area:  0.442919
+- Switch  Area:  10.7374
+- Input  Area:   0.402653
+- Output  Area:  0.268435
+- Total Area:    11.8514
+-----------------------------------------
