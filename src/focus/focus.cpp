@@ -145,54 +145,6 @@ void Node::dump(std::ofstream& ofs) {
     }
 }
 
-SyncNode::SyncNode(std::ifstream& ifs, int node_id): Node(), _flits_to_issue(-1), _dst_to_issue(-1) {
-    _node_id = node_id;
-
-    int pkt_num;
-    ifs >> pkt_num;
-
-    for (int _ = 0; _ < pkt_num; ++_) {
-        int offset, dest_id;
-        ifs >> offset >> dest_id;
-        _lut.push(std::make_pair(offset, dest_id));
-    }
-}
-
-bool SyncNode::isClosed() {
-    return _lut.empty();
-}
-
-int SyncNode::test(int time) {
-
-    if (isClosed()) {
-        return 0;
-    }
-
-    int bits_to_issue = 0;
-    int dest = _lut.front().second;
-
-    while (!_lut.empty() && _lut.front().first <= time && _lut.front().second == dest) {
-        bits_to_issue++;
-        _lut.pop();
-    }
-
-    if (bits_to_issue > 0) {
-        _flits_to_issue = ceil(bits_to_issue / (double) channel_width);
-        _dst_to_issue = dest;
-        return 1;
-    } else {
-        return 0;
-    }
-}
-
-int SyncNode::getDestination() {
-    return _dst_to_issue;
-}
-
-int SyncNode::getFlowSize() {
-    return _flits_to_issue;
-}
-
 FocusInjectionKernel::FocusInjectionKernel(int nodes) {
     _nodes.resize(nodes, NULL);
     _send_queues.resize(nodes, std::queue<PktHeader>());
@@ -236,11 +188,7 @@ FocusInjectionKernel::FocusInjectionKernel(int nodes) {
 
     for (Node*& node : _nodes) {
         if (node == NULL) {
-#ifdef SYNC_SIM
-            node = new SyncNode();
-#else
             node = new Node();
-#endif  
         }
     }
 }
@@ -335,21 +283,6 @@ float FocusInjectionKernel::closeRatio(int cycle) {
         }
     }
     return (float) cnt / _nodes.size();
-}
-
-bool FocusInjectionKernel::sync_test(int source, int time) {
-    checkNodes(source);
-    return dynamic_cast<SyncNode*>(_nodes[source])->test(time);
-}
-
-int FocusInjectionKernel::sync_dest(int source, int time) {
-    checkNodes(source);
-    return dynamic_cast<SyncNode*>(_nodes[source])->getDestination();
-}
-
-int FocusInjectionKernel::sync_flowSize(int source, int time) {
-    checkNodes(source);
-    return dynamic_cast<SyncNode*>(_nodes[source])->getFlowSize();
 }
 
 

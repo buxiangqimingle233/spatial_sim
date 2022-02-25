@@ -38,14 +38,9 @@ LFLAGS +=
 PROG := simulator
 
 # Define macros to set working modes of simulator
-# SYNC_SIM: enable snn simluation
 # SIM_ONCE: run the trace only once for accurate processing time
 # DUMP_WAITING_FLITS: dump number of waiting flits at each cycle ( from 10k to 20k )
 # DUMP_NODE_STATE: dump node states at each cycle
-
-SNN := snnn
-$(SNN): $(PROG) 
-$(SNN): CPPFLAGS += -DSIM_ONCE -DSYNC_SIM
 
 ANN := annn
 $(ANN): $(PROG)
@@ -70,8 +65,6 @@ OBJS :=  $(CPP_OBJS) $(LEX_OBJS) $(YACC_OBJS)
 
 # all: $(PROG)
 all: $(ANN)
-
-snn: $(SNN)
 
 ann: $(ANN)
 

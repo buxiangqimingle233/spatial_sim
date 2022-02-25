@@ -50,7 +50,6 @@ class FocusInjectionProcess : public InjectionProcess {
 public:
   FocusInjectionProcess(int nodes, double rate);
   virtual bool test(int source);
-  virtual bool sync_test(int source, int time);
   virtual void reset();
 };
 

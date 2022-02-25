@@ -100,10 +100,6 @@ public:
     // Producer
     virtual void step(std::queue<PktHeader>& _send_queue);
 
-    // virtual int getDestination(); // the destination of active flow with token
-    // virtual int getFlowSize();
-    // virtual int getFlowID();
-
     // General API
     virtual bool isClosed();
 
@@ -113,22 +109,6 @@ public:
 public:
     // for debugging
     void dump(std::ofstream& ofs);
-};
-
-class SyncNode: public Node {
-
-protected:
-    std::queue<std::pair<int, int> > _lut;
-    int _flits_to_issue, _dst_to_issue;
-
-public:
-    SyncNode(): Node(), _flits_to_issue(-1), _dst_to_issue(-1) { }
-    SyncNode(std::ifstream& ifs, int node_id);
-
-    int test(int time);
-    virtual bool isClosed();
-    virtual int getDestination(); 
-    virtual int getFlowSize();
 };
 
 
@@ -149,13 +129,10 @@ public:
 
 // Producer
 public:
-    void step();  // TODO: maintain a flag for each node [ producer-consumer buffer ]
+    void step();                // Should be invoked at each cycle
 
-// Consumer APIs for async simulation
-public:
-    // API for InjectionProcess
-    bool test(int source);      // Check the flag, revert it if true
-    void dequeue(int source);
+    bool test(int source);      // Check the pending queue if its empty
+    void dequeue(int source);   // pop
 
     // API for TrafficPattern
     int dest(int source);       // invoke the Node for flows_to_inject
@@ -163,12 +140,6 @@ public:
     int flowSize(int source);   // Bare
     // API for generating flows
     int flowID(int source);
-
-// APIs for sync simulation
-public:
-    bool sync_test(int source, int time);
-    int sync_dest(int source, int time);
-    int sync_flowSize(int source, int time);
 
 // For iteration with the booksim kernels
 public:

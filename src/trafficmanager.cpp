@@ -732,11 +732,7 @@ void TrafficManager::_RetireFlit( Flit *f, int dest )
             }
       
         }
-
-#ifndef SYNC_SIM
         focus::FocusInjectionKernel::getKernel()->retirePacket(head->src, head->dest, head->_flow_id);
-#endif
-
         // Only record statistics once per packet (at tail)
         // and based on the simulation state
         if ( ( _sim_state == warming_up ) || f->record ) {
@@ -746,11 +742,6 @@ void TrafficManager::_RetireFlit( Flit *f, int dest )
             if((_slowest_packet[f->cl] < 0) ||
                (_plat_stats[f->cl]->Max() < (f->atime - head->itime)))
                 _slowest_packet[f->cl] = f->pid;
-
-#ifndef SYNC_SIM
-            // WZ: added analysis for focus 
-            // _plat_stats[f->cl]->AddNodeSample( f->atime - head->ctime, dest, interval );
-#endif
             _plat_stats[f->cl]->AddSample( f->atime - head->ctime);
             _nlat_stats[f->cl]->AddSample( f->atime - head->itime);
             _frag_stats[f->cl]->AddSample( (f->atime - head->atime) - (f->id - head->id) );
@@ -787,11 +778,8 @@ int TrafficManager::_IssuePacket( int source, int cl )
         } else {
             
             //produce a packet
-#ifdef SYNC_SIM
-            if (dynamic_cast<FocusInjectionProcess*>(_injection_process[cl])->sync_test(source, _time)) {
-#else     
+            
             if(_injection_process[cl]->test(source)) {
-#endif
                 //coin toss to determine request type.
                 result = (RandomFloat() < _write_fraction[cl]) ? 2 : 1;
 
@@ -799,11 +787,7 @@ int TrafficManager::_IssuePacket( int source, int cl )
             }
         }
     } else { //normal mode
-#ifdef SYNC_SIM
-        result = dynamic_cast<FocusInjectionProcess*>(_injection_process[cl])->sync_test(source, _time);
-#else
         result = _injection_process[cl]->test(source) ? 1 : 0;
-#endif
         _requestsOutstanding[source]++;
     } 
     if(result != 0) {
@@ -824,23 +808,15 @@ void TrafficManager::_GeneratePacket( int source, int stype,
     // FIXME: use some macros to recover this booksim method
     // int size = _GetNextPacketSize(cl); // input size 
 
-#ifdef SYNC_SIM
-    int size = focus::FocusInjectionKernel::getKernel()->sync_flowSize(source, time);
-#else
     auto injection_kernel = focus::FocusInjectionKernel::getKernel();
     int size = injection_kernel->flowSize(source);
-#endif
 
     // Flow id
     int pid = _cur_pid++;
     assert(_cur_pid);
 
     // Flow size
-#ifdef SYNC_SIM
-    int packet_destination = dynamic_cast<FocusTrafficPattern*>(_traffic_pattern[cl])->sync_dest(source, time);
-#else
     int packet_destination = _traffic_pattern[cl]->dest(source);
-#endif
 
     bool record = false;
     bool watch = gWatchOut && (_packets_to_watch.count(pid) > 0);
@@ -915,10 +891,7 @@ void TrafficManager::_GeneratePacket( int source, int stype,
         f->ctime  = time;
         f->record = record;
         f->cl     = cl;
-
-#ifndef SYNC_SIM
         f->setFlowID(focus::FocusInjectionKernel::getKernel()->flowID(source));
-#endif
 
         _total_in_flight_flits[f->cl].insert(make_pair(f->id, f));
         if(record) {
@@ -974,9 +947,7 @@ void TrafficManager::_GeneratePacket( int source, int stype,
         _partial_packets[source][cl].push_back( f );
     }
 
-#ifndef SYNC_SIM
     injection_kernel->dequeue(source);
-#endif
 }
 
 void TrafficManager::_Inject() {
