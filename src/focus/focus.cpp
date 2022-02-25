@@ -8,21 +8,19 @@ namespace focus
 
 std::shared_ptr<FocusInjectionKernel> FocusInjectionKernel::_kernel = NULL;
 
-int Flow::forward(bool grant_arbit, bool grant_alloc) {
+void Flow::forward(bool grant_arbit) {
     FlowState next_state = FlowState::Closed;
-    int issue = false;
 
     switch (_state) {
+
         case FlowState::Init: {
             next_state = FlowState::Waiting;
-            issue = false;
             break;
         }
+
         case FlowState::Waiting: {
-            // FIXME: > or >=
             if (_iter >= _max_iter) {
                 next_state = FlowState::Closed;
-                issue = false;
             } else {
                 auto it = _received_packet.begin();
                 for (; it != _received_packet.end(); ++it) {
@@ -33,10 +31,8 @@ int Flow::forward(bool grant_arbit, bool grant_alloc) {
                 }
                 if (it != _received_packet.end()) {
                     next_state = FlowState::Waiting;
-                    issue = false;
                 } else {
                     next_state = FlowState::Computing;
-                    issue = false;
                     // Comsume the received packets
                     it = _received_packet.begin();
                     for (; it != _received_packet.end(); ++it) {
@@ -46,59 +42,38 @@ int Flow::forward(bool grant_arbit, bool grant_alloc) {
             }
             break;
         }
-        // We're doing computing now, the flow is sleeping ...
+
+        // It's computing now, the flow is sleeping ...
         case FlowState::Computing: {
             // We should issue the flow at the first iteration without waiting
             if (_iter == 0) {
                 _slept_time = 0;
                 next_state = FlowState::Arbitrating;
-                issue = false;
             } else if (_slept_time < _interval) {
                 _slept_time++;
                 next_state = FlowState::Computing;
-                issue = false;
             } else {
                 _slept_time = 0;
                 next_state = FlowState::Arbitrating;
-                issue = false;
             }
             break;
         }
+
         // Computation is done, waiting for arbitration flag
         case FlowState::Arbitrating: {
-            if (grant_arbit && grant_alloc) {
-                next_state = FlowState::Commiting;
-                issue = true;
-            } else if (grant_arbit && !grant_alloc) {
-                next_state = FlowState::Arbitrating;
-                issue = false;
-            } else if (!grant_arbit) {
-                next_state = FlowState::Arbitrating;
-                issue = false;
-            }
+            next_state = grant_arbit ? FlowState::Waiting : FlowState::Arbitrating;
+            _iter += grant_arbit ? 1 : 0;
             break;
         }
-        case FlowState::Commiting: {
-            if (grant_alloc) {
-                ++_iter;
-                next_state = FlowState::Waiting;
-                issue = false;
-            } else {
-                next_state = FlowState::Commiting;
-                issue = false;
-            }
-            break;
-        }
+
         // Dead here
         default: {
             next_state = FlowState::Closed;
-            issue = false;
             break;
         }
     }
 
     _state = next_state;
-    return issue;
 }
 
 void Flow::receiveDependentPacket(int flow_id) {
@@ -108,9 +83,9 @@ void Flow::receiveDependentPacket(int flow_id) {
     _received_packet[flow_id] += 1;
 }
 
-bool Node::step(bool buffer_empty) {
+void Node::step(std::queue<PktHeader>& send_queue) {
     if (_out_flows.size() == 0) {
-        return false;
+        return;
     }
 
     int size_ = _out_flows.size();
@@ -120,53 +95,16 @@ bool Node::step(bool buffer_empty) {
             ready_flows.push_back(i);
         }
     }
-    std::random_shuffle(ready_flows.begin(), ready_flows.end());
 
-    if (!buffer_empty) {
-        _flow_to_inject = _flow_to_inject;
-    } else if (buffer_empty && !ready_flows.empty()) {
-        _flow_to_inject = ready_flows[0];
-    } else {
-        _flow_to_inject = INVALID;
+    int flow_to_inject = INVALID;
+    if (send_queue.empty() && !ready_flows.empty()) {
+        std::random_shuffle(ready_flows.begin(), ready_flows.end());
+        flow_to_inject = ready_flows[0];
+        send_queue.push(_out_flows[flow_to_inject].genPacketHeader());
     }
 
-    bool issue = false;
     for (int i = 0; i < size_; ++i) {
-        issue |= _out_flows[i].forward(i == _flow_to_inject, buffer_empty);
-    }
-
-    return issue;
-}
-
-int Node::getDestination() {
-    if (_flow_to_inject != INVALID) {
-        return _out_flows[_flow_to_inject].getDestination();
-    } else {
-        return INVALID;
-    }
-}
-
-int Node::getFlowSize() {
-    if (_flow_to_inject != INVALID) {
-        return _out_flows[_flow_to_inject].getFlowSize();
-    } else {
-        return INVALID;
-    }
-}
-
-int Node::getFlowID() {
-    if (_flow_to_inject != INVALID) {
-        return _out_flows[_flow_to_inject].getFlowID();
-    } else {
-        return INVALID;
-    }
-}
-
-int Node::getComputingTime(int flow_id) {
-    if (_flow_to_inject != INVALID) {
-        return _out_flows[flow_id].getComputingTime();
-    } else {
-        return INVALID;
+        _out_flows[i].forward(i == flow_to_inject);
     }
 }
 
@@ -188,6 +126,23 @@ bool Node::isClosed() {
         }
     }
     return true;
+}
+
+void Node::dump(std::ofstream& ofs) {
+    if (_out_flows.empty()) {
+            return;
+    }
+    ofs << "node " << _node_id << ": " << std::endl;
+    for (auto f : _out_flows) { 
+        ofs << "fid: " << f._flow_id << ", state: " << f._state << ", comp-slept: " \
+            << f._computing_time << "-" << f._slept_time << ", iter-max_iter: " \
+            << f._iter << "-" << f._max_iter;
+        ofs << ", received packets: ";
+        for (auto p: f._received_packet) {
+            ofs << p.first << "-" << p.second << " ";
+        }
+        ofs << std::endl;
+    }
 }
 
 SyncNode::SyncNode(std::ifstream& ifs, int node_id): Node(), _flits_to_issue(-1), _dst_to_issue(-1) {
@@ -240,7 +195,7 @@ int SyncNode::getFlowSize() {
 
 FocusInjectionKernel::FocusInjectionKernel(int nodes) {
     _nodes.resize(nodes, NULL);
-    _buffer_empty.resize(nodes, true);
+    _send_queues.resize(nodes, std::queue<PktHeader>());
     
     std::ifstream ifs;
     ifs.open(trace, std::ios::in);
@@ -316,43 +271,36 @@ void FocusInjectionKernel::checkNodes(int nid) {
 
 // Producer methods 
 void FocusInjectionKernel::step() {
-    int _size = _nodes.size();
-    for (int i = 0; i < _size; ++i) {
-        if (_nodes[i]->step(_buffer_empty[i])) {
-            _buffer_empty[i] = false;
-        }
+    int node_cnt = _nodes.size();
+    for (int i = 0; i < node_cnt; ++i) {
+        _nodes[i]->step(_send_queues[i]);
     }
 }
 
 // Consumer methods
 bool FocusInjectionKernel::test(int source) {
     checkNodes(source);
-    if (!_buffer_empty[source]) {
-        _buffer_empty[source] = true;
-        return true;
-    } else {
-        return false;
-    }
+    return !_send_queues[source].empty();
 }
 
 int FocusInjectionKernel::dest(int source) {
     checkNodes(source);
-    return _nodes[source]->getDestination();
+    return _send_queues[source].front().dst;
 }
 
 int FocusInjectionKernel::flowSize(int source) {
     checkNodes(source);
-    return _nodes[source]->getFlowSize();
+    return _send_queues[source].front().size;
 }
 
 int FocusInjectionKernel::flowID(int source) {
     checkNodes(source);
-    return _nodes[source]->getFlowID();
+    return _send_queues[source].front().flow_id;
 }
 
-int FocusInjectionKernel::interval(int source, int flow_id) {
+void FocusInjectionKernel::dequeue(int source) {
     checkNodes(source);
-    return _nodes[source]->getComputingTime(flow_id);
+    _send_queues[source].pop();
 }
 
 void FocusInjectionKernel::retirePacket(int source, int dest, int flow_id) {

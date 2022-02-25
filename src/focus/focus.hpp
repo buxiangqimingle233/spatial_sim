@@ -22,12 +22,20 @@ extern std::string trace;
 #define INVALID -1
 typedef int FlowID;
 
-class Node;
+
+struct PktHeader {
+    int flow_id;
+    int size;
+    int dst;
+    int src;
+
+    PktHeader(int flow_id_, int size_, int dst_, int src_): flow_id(flow_id_), size(size_), dst(dst_), src(src_) { };
+};
 
 class Flow {
 
 // Unchangable features
-protected:
+public:
     int _flow_id;        // An unique flow id
     int _computing_time; // computing time
     int _interval;
@@ -39,8 +47,8 @@ protected:
     int _src;
 
 // DFA attributes
-protected:
-    enum FlowState { Waiting, Computing, Arbitrating, Commiting, Closed, Init };
+public:
+    enum FlowState { Waiting, Computing, Arbitrating, Closed, Init };
     int _slept_time;
     long long _iter;
     FlowState _state;
@@ -57,73 +65,54 @@ public:
             }
         };
 
+    PktHeader genPacketHeader() { return PktHeader(_flow_id, _size, _dst, _src); };
+
     // For the nodes with multiple flows to issue to check which
-    void setState(FlowState state) { _state = state; }
     bool canIssue() { return _state == FlowState::Arbitrating; };
     bool isClosed() { return _state == FlowState::Closed; };
-    int getDestination() { 
-        return _dst; 
-    };
-    int getFlowSize() { return _size; };
+
+    // Just for debugging
     int getComputingTime() { return _computing_time; };
     int getState() { return _state; };
-    int getFlowID() { return _flow_id; };
     int getSleptTime() { return _slept_time; };
     int getIter() { return _iter; };
     int getMaxIter() { return _max_iter; };
     std::map<int, double> getReceivedPacket() { return _received_packet; }
 
+    // Drive the DFM
+    void forward(bool arbitration);
     void receiveDependentPacket(int flow_id);
-    int forward(bool arbitration, bool allocation);    // return whether this flow is active
 
 };
+
 
 // The computing core or the processing elements which directly attatch to the NoC.
 class Node {
 
 protected:
     int _node_id;
-    int _flow_to_inject; // if a flow is to inject, it dictates which one
     std::vector<Flow> _out_flows;
 
 public:
-    Node(): _node_id(-1), _flow_to_inject(0), _out_flows(std::vector<Flow>()) { };
-    Node(std::vector<Flow> flows, int node_id): _out_flows(flows), _node_id(node_id), 
-                                                _flow_to_inject(0) { }; 
+    Node(): _node_id(-1), _out_flows(std::vector<Flow>()) { };
+    Node(std::vector<Flow> flows, int node_id): _out_flows(flows), _node_id(node_id) { }; 
 
     // Producer
-    virtual bool step(bool buffer_empty);    // TODO: forward flows, maintain which flow should be issued, return whether to reverse the flag.
-                                    // if the buffer full, do not give the flag to any flow;
-                                    // on the contray, if we give the flag to a flow, the buffer must be empty
+    virtual void step(std::queue<PktHeader>& _send_queue);
+
+    // virtual int getDestination(); // the destination of active flow with token
+    // virtual int getFlowSize();
+    // virtual int getFlowID();
 
     // General API
-    virtual int getDestination(); // the destination of active flow with token
-    virtual int getFlowSize();
-    virtual int getFlowID();
     virtual bool isClosed();
 
     // Optional for Async
-    int getComputingTime(int flow_id);
     void receivePacket(int flow_id);
 
 public:
     // for debugging
-    void dump(std::ofstream& ofs) {
-        if (_out_flows.empty()) {
-            return;
-        }
-        ofs << "node " << _node_id << ": " << "flow_to_inject: " << _flow_to_inject << std::endl;
-        for (auto f : _out_flows) { 
-            ofs << "fid: " << f.getFlowID() << ", state: " << f.getState() << ", comp-slept: " \
-                << f.getComputingTime() << "-" << f.getSleptTime() << ", iter-max_iter: " \
-                << f.getIter() << "-" << f.getMaxIter();
-            ofs << ", received packets: ";
-            for (auto p: f.getReceivedPacket()) {
-                ofs << p.first << "-" << p.second << " ";
-            }
-            ofs << std::endl;
-        }
-    }
+    void dump(std::ofstream& ofs);
 };
 
 class SyncNode: public Node {
@@ -147,7 +136,8 @@ class FocusInjectionKernel {
 
 protected:
     std::vector<Node*> _nodes;
-    std::vector<bool> _buffer_empty;
+    std::vector<std::queue<PktHeader> > _send_queues;
+
     static std::shared_ptr<FocusInjectionKernel> _kernel;
     void checkNodes(int nid);
 
@@ -165,14 +155,14 @@ public:
 public:
     // API for InjectionProcess
     bool test(int source);      // Check the flag, revert it if true
+    void dequeue(int source);
+
     // API for TrafficPattern
     int dest(int source);       // invoke the Node for flows_to_inject
     // API for getting flow size
     int flowSize(int source);   // Bare
     // API for generating flows
     int flowID(int source);
-    // API for getting interval
-    int interval(int source, int flow_id);
 
 // APIs for sync simulation
 public:

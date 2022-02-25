@@ -749,8 +749,7 @@ void TrafficManager::_RetireFlit( Flit *f, int dest )
 
 #ifndef SYNC_SIM
             // WZ: added analysis for focus 
-            double interval = focus::FocusInjectionKernel::getKernel()->interval(head->src, head->_flow_id);
-            _plat_stats[f->cl]->AddNodeSample( f->atime - head->ctime, dest, interval );
+            // _plat_stats[f->cl]->AddNodeSample( f->atime - head->ctime, dest, interval );
 #endif
             _plat_stats[f->cl]->AddSample( f->atime - head->ctime);
             _nlat_stats[f->cl]->AddSample( f->atime - head->itime);
@@ -974,6 +973,10 @@ void TrafficManager::_GeneratePacket( int source, int stype,
 
         _partial_packets[source][cl].push_back( f );
     }
+
+#ifndef SYNC_SIM
+    injection_kernel->dequeue(source);
+#endif
 }
 
 void TrafficManager::_Inject() {
