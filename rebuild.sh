@@ -1,3 +1,7 @@
 cd src
-make clean && make ann -j >/dev/null 2>&1
-make clean && make ann -j
+
+# build 
+make clean && make -j >/dev/null 2>&1
+rm libparser.a
+ar crf libparser.a lex.yy.o y.tab.o
+make clean && make -j
