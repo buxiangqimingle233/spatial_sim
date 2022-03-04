@@ -1,5 +1,5 @@
 topology = mesh;
-k = 16;
+k = 4;
 n = 2;
 
 sim_type = throughput;
@@ -12,18 +12,12 @@ warmup_periods = 1;
 sample_period = 1000000;
 max_samples = 5;
 
-// Well ... dummy parameters 
-// for deprecated codes ...
-burst_alpha = 0.5;
-burst_beta = -1.0;
-
 sim_power = 1;
 channel_width = 256;
 
 // Routing
 // routing_function = dim_order;
 // routing_function = min_adapt;
-
 // routing_function = xy_yx;
 routing_function = romm;
 
@@ -34,7 +28,9 @@ num_vcs = 2;
 vc_buf_size = 2;
 
 // Traffic
-traffic = focus;
-injection_process = focus;
+// traffic = focus;
+// injection_process = focus;
 
 tech_file = runfiles/noc_spec/techfile.txt;
+watch_out = -;
+watch_flits = {0,1,2,3,4,5,6};
