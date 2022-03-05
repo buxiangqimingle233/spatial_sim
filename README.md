@@ -18,6 +18,12 @@
 
 ## How to Use ? 
 
+Setup submodules: 
+
+```bash
+git submodule update --init --recursive
+```
+
 ```bash
 # build
 mkdir build
@@ -25,9 +31,10 @@ cd build
 cmake .. && make -j
 ```
 
-The executable file is build/bin/spatialsim. Run it without any paramters, we encode the runfile now. 
+The executable file is build/bin/spatialsim. Run it without any paramters, we encode the runfile path with codes now. 
 
 
 ## Notes
 
-We haven't integrated `core` yet, it still needs some efforts ... 
+* Use `git submodule update --init --recursive --remote` to track submodules with the latest version. 
+* WARNING: The above command will NOT pull & merge submodules to their master branches, but create NULL branches instead. You should enter the submodule and create a temporal branch using ``git checkout -b temp`` to hold the commit you just pulled. You can work on that branch, and push `temp` to the `master` branch in remote.
