@@ -2,6 +2,9 @@
 #define __PACKET_H__
 
 #include <memory>
+#include <queue>
+#include <vector>
+
 namespace spatial {
 
 struct Packet {
@@ -15,10 +18,12 @@ struct Packet {
 public:
     Packet(int type_, int fid_, int size_, int dest_, int source_, std::shared_ptr<char[]> data_) : 
         type(type_), fid(fid_), size(size_), dest(dest_), source(source_), data(data_) { };
+    Packet() { };
 };
 
 };
 
-#define CNInterface std::queue<spatial::Packet> 
+typedef std::queue<spatial::Packet> CNInterface;
+typedef std::shared_ptr<std::vector<CNInterface>> CNInterfaceSet;
 
 #endif

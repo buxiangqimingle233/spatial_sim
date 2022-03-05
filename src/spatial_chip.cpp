@@ -4,14 +4,14 @@
 #include "noc.hpp"
 #include "core_array.hpp"
 #include "spatial_chip.hpp"
-#include "spatial_sim_config.hpp"
+#include "custom_configs.hpp"
 
 namespace spatial {
 
 SpatialChip::SpatialChip(std::string spatial_chip_spec) {
     SpatialSimConfig config;
 
-    // TODO: modify this to ArgParse() with outputs;
+    // TODO: call ArgParse to get outputs
     config.ParseFile(spatial_chip_spec);
 
     _config = config;
@@ -23,16 +23,16 @@ SpatialChip::SpatialChip(std::string spatial_chip_spec) {
     int core_array_size = config.GetInt("array_size"), network_size = config.GetInt("network_size");
     int queue_size = core_array_size > network_size ? core_array_size : network_size;
 
-    // FIXME: test the initialization
-    _send_queues = std::make_shared<std::vector<CNInterface>>();
-    _received_queues = std::make_shared<std::vector<CNInterface>>();
-    _send_queues->resize(queue_size);
-    _received_queues->resize(queue_size);
+    _send_queues = std::make_shared<std::vector<CNInterface> >();
+    _received_queues = std::make_shared<std::vector<CNInterface> >();
+
+    _send_queues->resize(queue_size, std::queue<spatial::Packet>());
+    _received_queues->resize(queue_size, std::queue<spatial::Packet>());
+
 
     // Instantiate Core Array
     std::string core_array_spec = config.GetStr("core_array_spec");
-    // TODO: do sth
-    // core = 
+    core_array = CoreArray::New(core_array_spec, _send_queues, _received_queues);
 
     // Instantiate NoC
     std::string noc_spec = config.GetStr("noc_spec");
@@ -65,6 +65,7 @@ void SpatialChip::run() {
 
     for (; _clock < 10000; ++_clock) {
         noc->step(_clock);
+        core_array->step(_clock);
     }
 
 }

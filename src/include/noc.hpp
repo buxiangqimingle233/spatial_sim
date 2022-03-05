@@ -17,7 +17,7 @@ private:
 
 public:
     static std::shared_ptr<NoC> New(int argc, char** argv, \
-        std::shared_ptr<std::vector<CNInterface>> sq, std::shared_ptr<std::vector<CNInterface>> rq);
+        CNInterfaceSet sqs, CNInterfaceSet rqs);
 
     void step(clock_t clock);
     void printStats();

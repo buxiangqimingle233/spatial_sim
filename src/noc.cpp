@@ -29,12 +29,12 @@ int gNodes;
 bool gTrace;
 ostream * gWatchOut;
 
-// Well ... some old troublesome of booksim2
+// Well ... some old troublesomes of booksim2
 TrafficManager* trafficManager = NULL;
 
 std::shared_ptr<spatial::NoC> spatial::NoC::New(
-    int argc, char** argv, std::shared_ptr<std::vector<CNInterface>> sq, 
-    std::shared_ptr<std::vector<CNInterface>> rq
+    int argc, char** argv, CNInterfaceSet sqs, 
+    CNInterfaceSet rqs
 ) {
 
     BookSimConfig config;
@@ -79,7 +79,7 @@ std::shared_ptr<spatial::NoC> spatial::NoC::New(
     }
 
     TrafficManager* _traffic_manager = TrafficManager::New(config, net);
-    _traffic_manager->SetupSim(sq, rq);
+    _traffic_manager->SetupSim(sqs, rqs);
 
     trafficManager = _traffic_manager;
 

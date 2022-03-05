@@ -1,7 +1,7 @@
-log_file = fk.log;
+log_file = out.log;
 
-array_size = 16;
-network_size = 16;
+array_size = 4;
+network_size = 4;
 
-core_array_spec = TBD;
+core_array_spec = runfiles/core_array_spec/test;
 noc_spec = runfiles/noc_spec/focusconfig;

@@ -1,5 +1,5 @@
-#ifndef __SPATIAL_SIM_CONFIG_H__
-#define __SPATIAL_SIM_CONFIG_H__
+#ifndef __CUSTOM_CONFIGS_H__
+#define __CUSTOM_CONFIGS_H__
 
 #include "config_utils.hpp"
 
@@ -15,6 +15,20 @@ public:
         AddStrField("noc_spec", "ns");          // relative path of the noc specification file
     }
 };
+
+
+class CoreArrayConfig : public Configuration {
+
+public: 
+    CoreArrayConfig() {
+        AddStrField("inst_file_names", "");
+        AddStrField("assigned_cores", "");
+        AddStrField("inst_dir", "instructions");
+
+        _int_map["array_size"] = 16;
+    }
+};
+
 
 
 #endif

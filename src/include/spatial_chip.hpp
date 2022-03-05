@@ -7,7 +7,7 @@
 #include <string>
 #include <memory>
 #include "config_utils.hpp"
-#include "packet.hpp"
+#include "bridge.hpp"
 #include "noc.hpp"
 #include "core_array.hpp"
 
@@ -24,8 +24,8 @@ private:
     unsigned int _clock;
     Configuration _config;
 
-    std::shared_ptr<std::vector<CNInterface>> _send_queues;      // the interface between core and noc: send packets
-    std::shared_ptr<std::vector<CNInterface>> _received_queues;  // the interface between core and noc: receive packets
+    CNInterfaceSet _send_queues;      // the interface between core and noc: send packets
+    CNInterfaceSet _received_queues;  // the interface between core and noc: receive packets
     std::ofstream _log_file;
 
     // Two hardware components, interacting with each other only via the queeue pair
