@@ -24,8 +24,10 @@ private:
     unsigned int _clock;
     Configuration _config;
 
-    CNInterfaceSet _send_queues;      // the interface between core and noc: send packets
-    CNInterfaceSet _received_queues;  // the interface between core and noc: receive packets
+    PCNInterfaceSet _send_queues;      // the interface between core and noc: send packets
+    PCNInterfaceSet _received_queues;  // the interface between core and noc: receive packets
+    std::shared_ptr<std::vector<bool> > _credit_board;
+
     std::ofstream _log_file;
 
     // Two hardware components, interacting with each other only via the queeue pair

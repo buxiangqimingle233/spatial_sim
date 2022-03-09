@@ -17,7 +17,7 @@ private:
 
 public:
     static std::shared_ptr<NoC> New(int argc, char** argv, \
-        CNInterfaceSet sqs, CNInterfaceSet rqs);
+        PCNInterfaceSet sqs, PCNInterfaceSet rqs);
 
     void step(clock_t clock);
     void printStats();
@@ -30,4 +30,4 @@ public:
 
 };
 
-#endif
+#endif  

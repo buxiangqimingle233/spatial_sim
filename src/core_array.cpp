@@ -6,7 +6,8 @@
 namespace spatial {
 
 
-CoreArray::CoreArray(Configuration config, CNInterfaceSet send_queues_, CNInterfaceSet receive_queues_) 
+CoreArray::CoreArray(Configuration config, PCNInterfaceSet send_queues_, PCNInterfaceSet receive_queues_, \
+    std::shared_ptr<std::vector<bool>> open_pipes): _config(config), _pipe_open(open_pipes)
 {
     int size = config.GetInt("array_size");
     std::vector<std::string> inst_file_names = config.GetStrArray("inst_file_names");
@@ -23,22 +24,30 @@ CoreArray::CoreArray(Configuration config, CNInterfaceSet send_queues_, CNInterf
         }
         std::string inst_file = inst_dir + "/" + inst_file_names[core];
         std::shared_ptr<CNInterface> sq(&(*send_queues_)[i]), rq(&(*receive_queues_)[i]);
-        _cores.push_back(CORE(inst_file, sq, rq));
+        _cores.push_back(CORE(inst_file, sq, rq, open_pipes));
     }
 }
 
 
 
-std::shared_ptr<CoreArray> CoreArray::New(std::string spec_file, CNInterfaceSet sqs, CNInterfaceSet rqs) {
+std::shared_ptr<CoreArray> CoreArray::New(std::string spec_file, PCNInterfaceSet sqs, PCNInterfaceSet rqs, \
+    std::shared_ptr<std::vector<bool>> open_pipe) 
+{
     CoreArrayConfig config;
     // TODO: Replace this with ParseArgs
     config.ParseFile(spec_file);
-    return std::make_shared<CoreArray>(config, sqs, rqs);
+    return std::make_shared<CoreArray>(config, sqs, rqs, open_pipe);
 }
 
 void CoreArray::step(int clock) {
     for (CORE& core : _cores) {
         core.ClockTick();
+    }
+
+    int threshold = _config.GetInt("threshold");
+    int size = _cores.size();
+    for (int i = 0; i < size; ++i) {
+        (*_pipe_open)[i] = (_cores[i].rq)->size() > threshold;
     }
 }
 

@@ -33,8 +33,8 @@ ostream * gWatchOut;
 TrafficManager* trafficManager = NULL;
 
 std::shared_ptr<spatial::NoC> spatial::NoC::New(
-    int argc, char** argv, CNInterfaceSet sqs, 
-    CNInterfaceSet rqs
+    int argc, char** argv, PCNInterfaceSet sqs, 
+    PCNInterfaceSet rqs
 ) {
 
     BookSimConfig config;

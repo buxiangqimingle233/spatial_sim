@@ -25,14 +25,15 @@ SpatialChip::SpatialChip(std::string spatial_chip_spec) {
 
     _send_queues = std::make_shared<std::vector<CNInterface> >();
     _received_queues = std::make_shared<std::vector<CNInterface> >();
+    _credit_board = std::make_shared<std::vector<bool> >();
 
     _send_queues->resize(queue_size, std::queue<spatial::Packet>());
     _received_queues->resize(queue_size, std::queue<spatial::Packet>());
-
+    _credit_board->resize(core_array_size, true);
 
     // Instantiate Core Array
     std::string core_array_spec = config.GetStr("core_array_spec");
-    core_array = CoreArray::New(core_array_spec, _send_queues, _received_queues);
+    core_array = CoreArray::New(core_array_spec, _send_queues, _received_queues, _credit_board);
 
     // Instantiate NoC
     std::string noc_spec = config.GetStr("noc_spec");

@@ -15,12 +15,16 @@ class CoreArray {
 
 private:
     std::vector<CORE> _cores;
+    std::shared_ptr<std::vector<bool>> _pipe_open;
     Configuration _config;
 
 public:
-    CoreArray(Configuration config, CNInterfaceSet send_queues_, CNInterfaceSet receive_queues_);
+    CoreArray(Configuration config, PCNInterfaceSet send_queues_, PCNInterfaceSet receive_queues_, \
+        std::shared_ptr<std::vector<bool>> open_pipe);
 
-    static std::shared_ptr<CoreArray> New(std::string spec_file, CNInterfaceSet sqs, CNInterfaceSet rqs);
+    static std::shared_ptr<CoreArray> New(std::string spec_file, PCNInterfaceSet sqs, PCNInterfaceSet rqs, \
+        std::shared_ptr<std::vector<bool>> open_pipe);
+
     void step(int clock);
     void printStats();
 
