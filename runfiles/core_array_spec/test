@@ -1,4 +1,7 @@
 array_size = 4;
+threshold = 3;
+
 inst_dir = instructions;
 inst_file_names = {c0.inst,c1.inst,c2.inst,c3.inst};
 assigned_cores = {0,1,2,3};
+subinstr_latency_file_name = runfiles/core_array_spec/latency;

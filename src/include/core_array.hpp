@@ -21,6 +21,7 @@ private:
 public:
     CoreArray(Configuration config, PCNInterfaceSet send_queues_, PCNInterfaceSet receive_queues_, \
         std::shared_ptr<std::vector<bool>> open_pipe);
+    ~CoreArray() {}
 
     static std::shared_ptr<CoreArray> New(std::string spec_file, PCNInterfaceSet sqs, PCNInterfaceSet rqs, \
         std::shared_ptr<std::vector<bool>> open_pipe);

@@ -24,8 +24,9 @@ public:
         AddStrField("inst_file_names", "");
         AddStrField("assigned_cores", "");
         AddStrField("inst_dir", "instructions");
-
+        AddStrField("subinstr_latency_file_name", "runfiles/core_array_spec/latency");
         _int_map["array_size"] = 16;
+        _int_map["threshold"] = 2;
     }
 };
 

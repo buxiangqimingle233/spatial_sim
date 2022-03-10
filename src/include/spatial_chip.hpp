@@ -40,6 +40,7 @@ public:
     bool test_finish();
 
     SpatialChip(std::string spatial_chip_spec);
+    ~SpatialChip() { }
 };
 
 };

@@ -13,6 +13,8 @@ CoreArray::CoreArray(Configuration config, PCNInterfaceSet send_queues_, PCNInte
     std::vector<std::string> inst_file_names = config.GetStrArray("inst_file_names");
     std::vector<int> assigned_cores = config.GetIntArray("assigned_cores");
     std::string inst_dir = config.GetStr("inst_dir");
+    std::string latency_file = config.GetStr("subinstr_latency_file_name");
+    
     if (assigned_cores.size() < size) {
         throw "Please specify an instruction file to every core !";
     }
@@ -23,20 +25,19 @@ CoreArray::CoreArray(Configuration config, PCNInterfaceSet send_queues_, PCNInte
             throw "The instruction file of node " + std::to_string(i) + " is not specified !!";
         }
         std::string inst_file = inst_dir + "/" + inst_file_names[core];
-        std::shared_ptr<CNInterface> sq(&(*send_queues_)[i]), rq(&(*receive_queues_)[i]);
-        _cores.push_back(CORE(inst_file, sq, rq, open_pipes));
+        _cores.push_back(CORE(inst_file, latency_file, (*send_queues_)[i], (*receive_queues_)[i], open_pipes));
     }
 }
 
 
 
 std::shared_ptr<CoreArray> CoreArray::New(std::string spec_file, PCNInterfaceSet sqs, PCNInterfaceSet rqs, \
-    std::shared_ptr<std::vector<bool>> open_pipe) 
+    std::shared_ptr<std::vector<bool>> open_pipes) 
 {
     CoreArrayConfig config;
     // TODO: Replace this with ParseArgs
     config.ParseFile(spec_file);
-    return std::make_shared<CoreArray>(config, sqs, rqs, open_pipe);
+    return std::make_shared<CoreArray>(config, sqs, rqs, open_pipes);
 }
 
 void CoreArray::step(int clock) {
