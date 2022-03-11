@@ -28,8 +28,13 @@ SpatialChip::SpatialChip(std::string spatial_chip_spec) {
     _credit_board = std::make_shared<std::vector<bool> >();
     typedef std::queue<spatial::Packet> T;
 
-    _send_queues->resize(queue_size, std::make_shared<T>(T()));
-    _received_queues->resize(queue_size, std::make_shared<T>(T()));
+    // _send_queues->resize(queue_size, std::make_shared<T>(T()));
+    // _received_queues->resize(queue_size, std::make_shared<T>(T()));
+    for (int i = 0; i < queue_size; ++i) {
+        _send_queues->push_back(std::make_shared<T>(T()));
+        _received_queues->push_back(std::make_shared<T>(T()));
+    }
+
     _credit_board->resize(core_array_size, true);
 
     // Instantiate Core Array
@@ -58,16 +63,16 @@ void SpatialChip::reset() {
 void SpatialChip::run() {
 
     reset();
-    (*_send_queues)[0]->push(
-        Packet(1, 1, 3, 1, 0, nullptr)
-    );
-    (*_send_queues)[0]->push(
-        Packet(1, 2, 2, 2, 0, nullptr)
-    );
+    // (*_send_queues)[0]->push(
+    //     Packet(1, 1, 3, 1, 0, nullptr)
+    // );
+    // (*_send_queues)[0]->push(
+    //     Packet(1, 2, 2, 2, 0, nullptr)
+    // );
 
     for (; _clock < 1000; ++_clock) {
-        noc->step(_clock);
         core_array->step(_clock);
+        noc->step(_clock);
     }
 
 }

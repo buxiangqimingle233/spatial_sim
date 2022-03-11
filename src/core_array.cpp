@@ -25,7 +25,7 @@ CoreArray::CoreArray(Configuration config, PCNInterfaceSet send_queues_, PCNInte
             throw "The instruction file of node " + std::to_string(i) + " is not specified !!";
         }
         std::string inst_file = inst_dir + "/" + inst_file_names[core];
-        _cores.push_back(CORE(inst_file, latency_file, (*send_queues_)[i], (*receive_queues_)[i], open_pipes));
+        _cores.push_back(CORE(inst_file, latency_file, core, (*send_queues_)[i], (*receive_queues_)[i], open_pipes));
     }
 }
 
@@ -48,7 +48,7 @@ void CoreArray::step(int clock) {
     int threshold = _config.GetInt("threshold");
     int size = _cores.size();
     for (int i = 0; i < size; ++i) {
-        (*_pipe_open)[i] = (_cores[i].rq)->size() > threshold;
+        (*_pipe_open)[i] = (_cores[i].rq)->size() <= threshold;
     }
 }
 
