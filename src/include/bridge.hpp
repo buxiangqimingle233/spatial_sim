@@ -10,11 +10,10 @@ namespace spatial {
 
 struct Tensor {
     std::vector<int> dims;
-    std::string type;
     int tid;
 
-    Tensor(std::vector<int> dims_, std::string type_, int tid_): dims(dims_), type(type_), tid(tid_) { };
-    Tensor(): dims(std::vector<int>()), type(""), tid(-1) { };
+    Tensor(std::vector<int> dims_, int tid_): dims(dims_), tid(tid_) { };
+    Tensor(): dims(std::vector<int>()), tid(-1) { };
 };
 
 struct Packet {
