@@ -32,21 +32,12 @@ ostream * gWatchOut;
 // Well ... some old troublesomes of booksim2
 TrafficManager* trafficManager = NULL;
 
-std::shared_ptr<spatial::NoC> spatial::NoC::New(
-    int argc, char** argv, PCNInterfaceSet sqs, 
-    PCNInterfaceSet rqs
-) {
 
-    BookSimConfig config;
-    std::srand(1234);
-
-    if ( !ParseArgs( &config, argc, argv ) ) {
-        cerr << "Usage: " << argv[0] << " configfile... [param=value...]" << endl;
-        return nullptr;
-    } 
-
+spatial::NoC::NoC(BookSimConfig config, PCNInterfaceSet send_queues_, PCNInterfaceSet receive_queues_) {
     /*initialize routing, traffic, injection functions
    */
+
+    _config = config;
     InitializeRoutingMap(config);
 
     gPrintActivity = (config.GetInt("print_activity") > 0);
@@ -78,13 +69,9 @@ std::shared_ptr<spatial::NoC> spatial::NoC::New(
         net[i] = Network::New( config, name.str() );
     }
 
-    TrafficManager* _traffic_manager = TrafficManager::New(config, net);
-    _traffic_manager->SetupSim(sqs, rqs);
-
+    _traffic_manager = TrafficManager::New(config, net);
+    _traffic_manager->SetupSim(send_queues_, receive_queues_);
     trafficManager = _traffic_manager;
-
-    return std::make_shared<NoC>(_traffic_manager, config);
-
 }
 
 

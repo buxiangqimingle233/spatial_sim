@@ -16,14 +16,11 @@ private:
     BookSimConfig _config;
 
 public:
-    static std::shared_ptr<NoC> New(int argc, char** argv, \
-        PCNInterfaceSet sqs, PCNInterfaceSet rqs);
-
     void step(clock_t clock);
     void printStats();
 
 public:
-    NoC(TrafficManager* traffic_manager_, BookSimConfig config_): _traffic_manager(traffic_manager_), _config(config_) { };
+    NoC(BookSimConfig config, PCNInterfaceSet send_queues_, PCNInterfaceSet receive_queues_);
     ~NoC() { delete _traffic_manager; };
 };
 

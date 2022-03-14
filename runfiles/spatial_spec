@@ -1,7 +1,41 @@
 log_file = out.log;
 
+// Core array speficication
 array_size = 4;
-network_size = 4;
+threshold = 3;
+tasks = {c0.inst,c1.inst,c2.inst,c3.inst};
+micro_instr_latency = runfiles/micro_instr_latency;
 
-core_array_spec = runfiles/core_array_spec/core_array;
-noc_spec = runfiles/noc_spec/focusconfig;
+
+// NoC speficication
+topology = mesh;
+k = 2;
+n = 2;
+
+sim_type = throughput;
+
+packet_size = 1;
+warmup_periods = 1;
+// sample_period = 30000;
+// max_samples = 20;
+
+sample_period = 1000000;
+max_samples = 5;
+
+sim_power = 1;
+channel_width = 256;
+
+// Routing
+// routing_function = dim_order;
+// routing_function = min_adapt;
+// routing_function = xy_yx;
+routing_function = romm;
+
+// Flow control
+num_vcs = 2;
+vc_buf_size = 2;
+
+tech_file = runfiles/noc_spec/techfile.txt;
+watch_out = -;
+// watch_flits = {0,1,2,3,4,5,6,7,8,9,10};
+watch_packets = {0,1,2,3,4};

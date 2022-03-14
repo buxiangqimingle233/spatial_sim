@@ -4,49 +4,49 @@
 #include "noc.hpp"
 #include "core_array.hpp"
 #include "spatial_chip.hpp"
-#include "custom_configs.hpp"
+#include "spatial_config.hpp"
 
 namespace spatial {
 
 SpatialChip::SpatialChip(std::string spatial_chip_spec) {
+
     SpatialSimConfig config;
 
-    // TODO: call ArgParse to get outputs
-    config.ParseFile(spatial_chip_spec);
-
+    // Parse config file
+    std::string dummy = "spatialsim";
+    char* argv[2] = {const_cast<char *>(dummy.c_str()), const_cast<char *>(spatial_chip_spec.c_str())};
+    int argc = 2;
+    if ( !ParseArgs( &config, argc, argv ) ) {
+        cerr << "Usage: " << argv[0] << " configfile... [param=value...]" << endl;
+        exit(0);
+    } 
     _config = config;
+
+    // Check log file
     _log_file = std::ofstream(config.GetStr("log_file"), std::ios::out);
     if (!_log_file) {
         throw "Log file doesn't exist !! ";
     }
     
-    int core_array_size = config.GetInt("array_size"), network_size = config.GetInt("network_size");
-    int queue_size = core_array_size > network_size ? core_array_size : network_size;
-
+    // Initialize the interface queues between cores and nocs
+    int array_size = config.GetInt("array_size");
+    
     _send_queues = std::make_shared<std::vector<CNInterface> >();
     _received_queues = std::make_shared<std::vector<CNInterface> >();
     _credit_board = std::make_shared<std::vector<bool> >();
-    typedef std::queue<spatial::Packet> T;
 
-    // _send_queues->resize(queue_size, std::make_shared<T>(T()));
-    // _received_queues->resize(queue_size, std::make_shared<T>(T()));
-    for (int i = 0; i < queue_size; ++i) {
+    typedef std::queue<spatial::Packet> T;
+    for (int i = 0; i < array_size; ++i) {
         _send_queues->push_back(std::make_shared<T>(T()));
         _received_queues->push_back(std::make_shared<T>(T()));
     }
-
-    _credit_board->resize(core_array_size, true);
-
-    // Instantiate Core Array
-    std::string core_array_spec = config.GetStr("core_array_spec");
-    core_array = CoreArray::New(core_array_spec, _send_queues, _received_queues, _credit_board);
+    _credit_board->resize(array_size, true);
 
     // Instantiate NoC
-    std::string noc_spec = config.GetStr("noc_spec");
-    std::string dummy = "spatialsim";
-    char* argv[2] = {const_cast<char *>(dummy.c_str()), const_cast<char *>(noc_spec.c_str())};
-    int argc = 2;
-    noc = NoC::New(argc, argv, _send_queues, _received_queues);
+    noc = std::make_shared<NoC>(config, _send_queues, _received_queues);
+
+    // Instantiate Core Array
+    core_array = std::make_shared<CoreArray>(config, _send_queues, _received_queues, _credit_board);
 
     // setup clock
     _clock = 0;
