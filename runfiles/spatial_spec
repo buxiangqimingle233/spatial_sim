@@ -14,16 +14,8 @@ n = 2;
 
 sim_type = throughput;
 
-packet_size = 1;
-warmup_periods = 1;
-// sample_period = 30000;
-// max_samples = 20;
-
-sample_period = 1000000;
-max_samples = 5;
-
 sim_power = 1;
-channel_width = 256;
+channel_width = 256;    // Only work for power simulation
 
 // Routing
 // routing_function = dim_order;
@@ -31,11 +23,10 @@ channel_width = 256;
 // routing_function = xy_yx;
 routing_function = romm;
 
-// Flow control
 num_vcs = 2;
 vc_buf_size = 2;
 
-tech_file = runfiles/noc_spec/techfile.txt;
+tech_file = runfiles/noc/techfile.txt;
 watch_out = -;
 // watch_flits = {0,1,2,3,4,5,6,7,8,9,10};
 watch_packets = {0,1,2,3,4};

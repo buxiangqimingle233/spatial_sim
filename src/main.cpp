@@ -1,8 +1,8 @@
 #include "spatial_chip.hpp"
 
-int main() {
+int main(int argc, char **argv) {
     try {
-        spatial::SpatialChip test_chip("runfiles/spatial_spec");
+        spatial::SpatialChip test_chip(argv[1]);
         test_chip.run();
     }
     catch (const char* msg) {
