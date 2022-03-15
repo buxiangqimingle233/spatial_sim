@@ -15,6 +15,9 @@ struct Tensor {
     Tensor(std::vector<int> dims_, int tid_): dims(dims_), tid(tid_) { };
     Tensor(): dims(std::vector<int>()), tid(-1) { };
     int size() {
+        if (dims.empty()) {
+            return -1;
+        }
         int size = 1;
         for (int d: dims) {
             size *= d;

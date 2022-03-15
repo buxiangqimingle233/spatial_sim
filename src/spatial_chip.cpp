@@ -63,6 +63,7 @@ void SpatialChip::reset() {
 void SpatialChip::run() {
 
     reset();
+
     // (*_send_queues)[0]->push(
     //     Packet(1, 1, 3, 1, 0, nullptr)
     // );

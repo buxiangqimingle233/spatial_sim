@@ -1,3 +1,3 @@
 #!/bin/bash
 
-build/bin/spatialsim
+build/bin/spatialsim runfiles/spatial_spec
