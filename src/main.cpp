@@ -5,7 +5,7 @@ int main(int argc, char **argv) {
         spatial::SpatialChip test_chip(argv[1]);
         test_chip.run();
     }
-    catch (const char* msg) {
+    catch (const std::string msg) {
         std::cerr << msg << std::endl;
         return -1;
     }
