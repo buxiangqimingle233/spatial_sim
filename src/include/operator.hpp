@@ -23,7 +23,7 @@ public:
     std::vector<int> outputs;
 
     // Set by joint analysis
-    std::vector<std::vector<int> > dest_nodes;
+    std::map<int, std::vector<int> > dest_nodes;
     std::vector<bool> input_stationary;
     std::vector<bool> output_stationary;
 
@@ -44,9 +44,14 @@ public:
 
     Operator() { };
 
+    std::vector<int> getOutputCopy() {
+        return outputs;
+    }
+
     void setDestNodes(std::map<int, std::vector<int>>& destinations) {
         for (int o: outputs) {
-            dest_nodes.push_back(destinations[o]);
+            assert(destinations.find(o) != destinations.end());
+            dest_nodes[o] = destinations[o];
         }
     }
 
@@ -106,8 +111,8 @@ class CompOperator : public Operator {
                 // Ni.receive
 
                 // FIXME: recover this
-                // sprintf(buf, "NI.recv %d", tid);    // config the tensor
-                // mi.push(std::string(buf));
+                sprintf(buf, "NI.recv %d", tid);    // config the tensor
+                mi.push(std::string(buf));
 
                 // Bus.transaction
                 sprintf(buf, "BUS.trans %d", tid);
@@ -144,7 +149,7 @@ class CompOperator : public Operator {
 
             // Transmit outputs
             if (!output_stationary[o]) {
-                std::vector<int> dests = dest_nodes[o];
+                std::vector<int> dests = dest_nodes[tid];
                 // TODO: We just support unicast now
                 for (int dest: dests) {
                     sprintf(buf, "BUFFER.read %d", tid);
@@ -203,7 +208,6 @@ protected:
                 for (int dest: dest_nodes[tid]) {
                     sprintf(buf, "NI.send %d %d", dest, tid);
                     mi.push(std::string(buf));
-
                 }
             }
 

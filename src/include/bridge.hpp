@@ -14,6 +14,10 @@ struct Tensor {
 
     Tensor(std::vector<int> dims_, int tid_): dims(dims_), tid(tid_) { };
     Tensor(): dims(std::vector<int>()), tid(-1) { };
+    void explicitCopy(const Tensor& other) {
+        tid = other.tid;
+        dims = other.dims;
+    }
     int size() {
         if (dims.empty()) {
             return -1;

@@ -3,7 +3,7 @@ log_file = out.log;
 // Core array speficication
 array_size = 4;
 threshold = 3;
-task_dir = tasks/1-core-p-c;
+task_dir = tasks/4-core-1-gemm;
 tasks = {c0.inst,c1.inst,c2.inst,c3.inst};
 micro_instr_latency = runfiles/micro_instr_latency;
 

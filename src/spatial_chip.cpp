@@ -30,7 +30,7 @@ SpatialChip::SpatialChip(std::string spatial_chip_spec) {
     
     // Initialize the interface queues between cores and nocs
     int array_size = config.GetInt("array_size");
-    
+
     _send_queues = std::make_shared<std::vector<CNInterface> >();
     _received_queues = std::make_shared<std::vector<CNInterface> >();
     _credit_board = std::make_shared<std::vector<bool> >();
@@ -55,27 +55,24 @@ SpatialChip::SpatialChip(std::string spatial_chip_spec) {
 
 void SpatialChip::reset() {
     // reset clock
+    _clock = 0;
     // reset queue pairs
     // reset noc & core
 }
 
 
 void SpatialChip::run() {
-
     reset();
-
-    // (*_send_queues)[0]->push(
-    //     Packet(1, 1, 3, 1, 0, nullptr)
-    // );
-    // (*_send_queues)[0]->push(
-    //     Packet(1, 2, 2, 2, 0, nullptr)
-    // );
-
-    for (; _clock < 1000; ++_clock) {
+    while (!task_finished()) {
         core_array->step(_clock);
         noc->step(_clock);
+        _clock++;
     }
+    std::cout << _clock << " | " << "Task Is Finished " << std::endl;
+}
 
+bool SpatialChip::task_finished() {
+    return noc->traffic_drained() && core_array->allCoreClosed();
 }
 
 };

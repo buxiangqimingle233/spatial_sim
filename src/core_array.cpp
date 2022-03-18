@@ -13,6 +13,7 @@ CoreArray::CoreArray(Configuration config, PCNInterfaceSet send_queues_, PCNInte
     std::vector<std::string> inst_file_names = config.GetStrArray("tasks");
     std::string inst_dir = config.GetStr("task_dir");
     std::string latency_file = config.GetStr("micro_instr_latency");
+    int width = config.GetInt("channel_width");
 
     for (int i = 0; i < size; ++i) {
         int core = i;
@@ -20,7 +21,7 @@ CoreArray::CoreArray(Configuration config, PCNInterfaceSet send_queues_, PCNInte
             throw "The instruction file of node " + std::to_string(i) + " is not specified !!";
         }
         std::string inst_file = inst_dir + "/" + inst_file_names[core];
-        _cores.push_back(CORE(inst_file, latency_file, core, (*send_queues_)[i], (*receive_queues_)[i], open_pipes));
+        _cores.push_back(CORE(inst_file, latency_file, core, (*send_queues_)[i], (*receive_queues_)[i], open_pipes, width));
     }
 }
 

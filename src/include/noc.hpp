@@ -18,6 +18,9 @@ private:
 public:
     void step(clock_t clock);
     void printStats();
+    bool traffic_drained() {
+        return _traffic_manager->flitsDrained();
+    }
 
 public:
     NoC(BookSimConfig config, PCNInterfaceSet send_queues_, PCNInterfaceSet receive_queues_);

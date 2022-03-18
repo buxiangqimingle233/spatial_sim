@@ -37,7 +37,7 @@ private:
 public:
     void reset();
     void run();
-    bool test_finish();
+    bool task_finished();
 
     SpatialChip(std::string spatial_chip_spec);
     ~SpatialChip() { }

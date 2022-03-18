@@ -1,3 +1,3 @@
 #!/bin/bash
 
-build/bin/spatialsim runfiles/spatial_spec
+build/bin/spatialsim tasks/4-core-1-gemm/spatial_spec

@@ -25,6 +25,13 @@ public:
 
     void step(int clock);
     void printStats();
+    bool allCoreClosed() {
+        bool core_closed = true;
+        for (auto& c: _cores) {
+            core_closed &= c.closed();
+        }
+        return core_closed;
+    }
 
 };
 
