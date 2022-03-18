@@ -21,9 +21,10 @@
 Setup submodules: 
 
 ```bash
-git submodule update --init --recursive
+git submodule update --init --recursive --remote
 ```
 
+Build the project:
 ```bash
 # build
 mkdir build
@@ -31,8 +32,12 @@ cd build
 cmake .. && make -j
 ```
 
-The executable file is build/bin/spatialsim. Run it without any paramters, we encode the runfile path with codes now. 
+Run the demo benchmark: 
+```
+build/bin/spatialsim tasks/4-core-1-gemm/spatial_spec
+```
 
+You should only pass the path of top configuration file to the program, detailed settings are done within that file. 
 
 ## Notes
 
