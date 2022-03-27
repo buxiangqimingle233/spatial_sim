@@ -37,9 +37,10 @@ Run the demo benchmark:
 build/bin/spatialsim tasks/4-core-1-gemm/spatial_spec
 ```
 
-You should only pass the path of top configuration file to the program, detailed settings are done within that file. 
+Configurations of this simulator are specified in this file. 
 
 ## Notes
 
 * Use `git submodule update --init --recursive --remote` to track submodules with the latest version. 
-* WARNING: The above command will NOT pull & merge submodules to their master branches, but create NULL branches instead. You should enter the submodule and create a temporal branch using ``git checkout -b temp`` to hold the commit you just pulled. You can work on that branch, and push `temp` to the `master` branch in remote.
+* WARNING: The above command will NOT pull & merge submodules to their master branches, but create NULL branches instead. You should enter the submodule and create a temporal branch using ``git checkout -b temp`` to hold the commit you just pulled. You can work on this branch, and merge it to the `master` branch.
+

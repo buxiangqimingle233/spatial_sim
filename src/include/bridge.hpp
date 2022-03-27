@@ -5,6 +5,8 @@
 #include <queue>
 #include <vector>
 #include <iostream>
+#include <map>
+#include <assert.h>
 
 namespace spatial {
 
@@ -36,11 +38,23 @@ struct Packet {
     int dest = -1;
     int source = -1;
     Tensor data;
-    // FIXME: fix noc type & fid, Packet -> Flit
+    std::queue<int> im_nodes;  // intermediate nodes
+
 public:
     Packet(int fid_, int size_, int dest_, int source_, Tensor data_) : 
         fid(fid_), size(size_), dest(dest_), source(source_), data(data_) { };
     Packet() { };
+
+    std::queue<int> getIntermediateNodes() {
+        return im_nodes;
+    }
+
+    void setIntermediateNodes(const std::vector<int>& list) {
+        for (int i: list) {
+            im_nodes.push(i);
+        }
+        im_nodes.push(dest);
+    }
 };
 
 }; 

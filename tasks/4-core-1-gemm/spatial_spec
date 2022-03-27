@@ -8,7 +8,7 @@ tasks = {c0.inst,c1.inst,c2.inst,c3.inst};
 micro_instr_latency = runfiles/micro_instr_latency;
 
 
-// NoC speficication
+// NoC speficication, copied from booksim
 topology = mesh;
 k = 2;
 n = 2;
@@ -22,7 +22,9 @@ channel_width = 256;    // Only work for power simulation
 // routing_function = dim_order;
 // routing_function = min_adapt;
 // routing_function = xy_yx;
-routing_function = romm;
+// routing_function = romm;
+routing_function = src_routing;
+
 
 num_vcs = 2;
 vc_buf_size = 2;
