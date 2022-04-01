@@ -5,11 +5,13 @@
 
 namespace spatial {
 
+int array_size;
 
 CoreArray::CoreArray(Configuration config, PCNInterfaceSet send_queues_, PCNInterfaceSet receive_queues_, \
     std::shared_ptr<std::vector<bool>> open_pipes): _config(config), _pipe_open(open_pipes)
 {
     int size = config.GetInt("array_size");
+    array_size = size;  // A hack for NI checking packets' destinations
     std::vector<std::string> inst_file_names = config.GetStrArray("tasks");
     std::string inst_dir = config.GetStr("task_dir");
     std::string latency_file = config.GetStr("micro_instr_latency");

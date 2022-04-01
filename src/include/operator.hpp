@@ -114,13 +114,13 @@ class CompOperator : public Operator {
                 sprintf(buf, "NI.recv %d", tid);    // config the tensor
                 mi.push(std::string(buf));
 
-                // // Bus.transaction
-                // sprintf(buf, "BUS.trans %d", tid);
-                // mi.push(std::string(buf));
+                // Bus.transaction
+                sprintf(buf, "BUS.trans %d", tid);
+                mi.push(std::string(buf));
 
-                // // Buffer.write
-                // sprintf(buf, "BUFFER.write %d", tid);
-                // mi.push(std::string(buf));
+                // Buffer.write
+                sprintf(buf, "BUFFER.write %d", tid);
+                mi.push(std::string(buf));
             }
         }
 
@@ -128,35 +128,40 @@ class CompOperator : public Operator {
             std::stringstream ss;
             // Read inputs
             for (int dep: inputs) {
-                // sprintf(buf, "BUFFER.read %d", dep);
-                // mi.push(std::string(buf));
+                sprintf(buf, "BUFFER.read %d", dep);
+                mi.push(std::string(buf));
                 
-                // sprintf(buf, "BUS.trans %d", dep);
-                // mi.push(std::string(buf));
-                // ss << dep << " ";
+                sprintf(buf, "BUS.trans %d", dep);
+                mi.push(std::string(buf));
+                ss << dep << " ";
             }
 
             int tid = outputs[o];
-            // // TODO: generate computation micro instructions, check which hd component do we need
-            // sprintf(buf, "ACC.cal %s %d %s", config.c_str(), tid, ss.str().c_str());
-            // mi.push(std::string(buf));
+            // TODO: generate computation micro instructions, check which hd component do we need
+            if (config.empty()) {
+                sprintf(buf, "CPU.sleep %d", 1);
+                mi.push(std::string(buf));
+            } else {
+                sprintf(buf, "ACC.cal %s %d %s", config.c_str(), tid, ss.str().c_str());
+                mi.push(std::string(buf));
+            }
 
-            // sprintf(buf, "BUS.trans %d", tid);
-            // mi.push(std::string(buf));
+            sprintf(buf, "BUS.trans %d", tid);
+            mi.push(std::string(buf));
 
-            // sprintf(buf, "BUFFER.write %d", tid);
-            // mi.push(std::string(buf));
+            sprintf(buf, "BUFFER.write %d", tid);
+            mi.push(std::string(buf));
 
             // Transmit outputs
             if (!output_stationary[o]) {
                 std::vector<int> dests = dest_nodes[tid];
                 // TODO: We just support unicast now
                 for (int dest: dests) {
-                    // sprintf(buf, "BUFFER.read %d", tid);
-                    // mi.push(std::string(buf));
+                    sprintf(buf, "BUFFER.read %d", tid);
+                    mi.push(std::string(buf));
                     
-                    // sprintf(buf, "BUS.trans %d", tid);
-                    // mi.push(std::string(buf));
+                    sprintf(buf, "BUS.trans %d", tid);
+                    mi.push(std::string(buf));
                     
                     sprintf(buf, "NI.send %d %d", dest, tid);
                     mi.push(std::string(buf));

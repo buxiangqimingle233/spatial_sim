@@ -12,8 +12,8 @@ micro_instr_latency = runfiles/micro_instr_latency;
 
 // NoC speficication
 topology = mesh;
-k = 2;
-n = 16;
+k = 16;
+n = 2;
 
 sim_type = throughput;
 
