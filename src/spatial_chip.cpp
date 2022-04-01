@@ -20,6 +20,7 @@ SpatialChip::SpatialChip(std::string spatial_chip_spec) {
         cerr << "Usage: " << argv[0] << " configfile... [param=value...]" << endl;
         exit(0);
     } 
+    config.checkConsistency();
     _config = config;
 
     // Check log file
@@ -63,16 +64,50 @@ void SpatialChip::reset() {
 
 void SpatialChip::run() {
     reset();
+    int check_frequency = _config.GetInt("deadlock_check_freq");
+
     while (!task_finished()) {
         core_array->step(_clock);
         noc->step(_clock);
         _clock++;
+
+        if (_clock % check_frequency  == 0) {
+            std::cout << "Simulate " << _clock << " cycles" << std::endl;
+            if (check_deadlock()) {
+                std::cerr << "Deadlock detected: the chip state keeps unchanged over " << check_frequency << " cycles" << std::endl;
+                exit(1); 
+            }
+#ifdef DUMP_NODE_STATE
+            std::ofstream out("dump.log", std::ios::out|std::ios::app);
+            out.close();
+#endif
+        }
+
     }
     std::cout << _clock << " | " << "Task Is Finished " << std::endl;
 }
 
 bool SpatialChip::task_finished() {
     return noc->traffic_drained() && core_array->allCoreClosed();
+}
+
+bool SpatialChip::check_deadlock() {
+
+    static std::pair<PCNInterfaceSet, PCNInterfaceSet> queue_pair_backup = std::make_pair(nullptr, nullptr);
+    bool deadlock = true;
+
+    if (queue_pair_backup.first == nullptr) {
+        deadlock = false;
+    } else {
+        deadlock &= !core_array->stateChanged();
+        deadlock &= (*(queue_pair_backup.first) == *_send_queues) && (*(queue_pair_backup.second) == *_received_queues);
+    }
+
+    std::vector<CNInterface> sq_bu = *_send_queues, rq_bu = *_received_queues;
+    queue_pair_backup.first = std::make_shared<vector<CNInterface> >(sq_bu);
+    queue_pair_backup.second = std::make_shared<vector<CNInterface> >(rq_bu);
+
+    return deadlock;
 }
 
 };

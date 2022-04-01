@@ -138,8 +138,13 @@ class CompOperator : public Operator {
 
             int tid = outputs[o];
             // TODO: generate computation micro instructions, check which hd component do we need
-            sprintf(buf, "ACC.cal %s %d %s", config.c_str(), tid, ss.str().c_str());
-            mi.push(std::string(buf));
+            if (config.empty()) {
+                sprintf(buf, "CPU.sleep %d", 1);
+                mi.push(std::string(buf));
+            } else {
+                sprintf(buf, "ACC.cal %s %d %s", config.c_str(), tid, ss.str().c_str());
+                mi.push(std::string(buf));
+            }
 
             sprintf(buf, "BUS.trans %d", tid);
             mi.push(std::string(buf));

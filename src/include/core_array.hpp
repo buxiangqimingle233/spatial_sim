@@ -25,6 +25,7 @@ public:
 
     void step(int clock);
     void printStats();
+    
     bool allCoreClosed() {
         bool core_closed = true;
         for (auto& c: _cores) {
@@ -32,6 +33,8 @@ public:
         }
         return core_closed;
     }
+
+    bool stateChanged();
 
 };
 

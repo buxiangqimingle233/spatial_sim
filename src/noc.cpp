@@ -77,12 +77,4 @@ spatial::NoC::NoC(BookSimConfig config, PCNInterfaceSet send_queues_, PCNInterfa
 
 void spatial::NoC::step(clock_t clock) {
     _traffic_manager->_Step();
-
-    if (clock % 1000  == 0) {
-        std::cout << "Simulate " << clock << " cycles" << std::endl;
-#ifdef DUMP_NODE_STATE
-        std::ofstream out("dump.log", std::ios::out|std::ios::app);
-        out.close();
-#endif
-    }
 }
