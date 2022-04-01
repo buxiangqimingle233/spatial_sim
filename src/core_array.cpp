@@ -40,4 +40,27 @@ void CoreArray::step(int clock) {
     }
 }
 
+
+bool CoreArray::stateChanged() {
+    
+    static std::vector<CORE> cores_backup = std::vector<CORE>();
+
+    bool change = false;
+
+    if (cores_backup.size() != _cores.size()) {
+        change = true;
+    } else {
+        int size = _cores.size();
+        for (int i = 0; i < size; ++i) {
+            if (!_cores[i].equalTo(cores_backup[i])) {
+                change = true;
+                break;
+            }
+        }
+    }
+
+    cores_backup = _cores;
+    return change;
+}
+
 }

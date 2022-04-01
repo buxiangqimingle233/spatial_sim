@@ -6,12 +6,12 @@ threshold = 3;
 task_dir = tasks/4-core-1-gemm;
 tasks = {c0.inst,c1.inst,c2.inst,c3.inst};
 micro_instr_latency = runfiles/micro_instr_latency;
-
+deadlock_check_freq = 10000;
 
 // NoC speficication
 topology = mesh;
-k = 2;
-n = 2;
+k = 2;      // # nodes per dim
+n = 2;      // # dims
 
 sim_type = throughput;
 

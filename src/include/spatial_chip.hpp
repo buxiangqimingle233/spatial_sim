@@ -38,12 +38,14 @@ public:
     void reset();
     void run();
     bool task_finished();
+    bool check_deadlock();
 
     SpatialChip(std::string spatial_chip_spec);
     ~SpatialChip() { }
 };
 
 };
+
 
 
 #endif

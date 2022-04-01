@@ -22,6 +22,7 @@ public:
         return _traffic_manager->flitsDrained();
     }
 
+
 public:
     NoC(BookSimConfig config, PCNInterfaceSet send_queues_, PCNInterfaceSet receive_queues_);
     ~NoC() { delete _traffic_manager; };
