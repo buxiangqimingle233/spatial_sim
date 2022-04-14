@@ -13,17 +13,21 @@ CoreArray::CoreArray(Configuration config, PCNInterfaceSet send_queues_, PCNInte
     int size = config.GetInt("array_size");
     array_size = size;  // A hack for NI checking packets' destinations
     std::vector<std::string> inst_file_names = config.GetStrArray("tasks");
-    std::string inst_dir = config.GetStr("task_dir");
+    std::string working_dir = config.GetStr("working_directory");
     std::string latency_file = config.GetStr("micro_instr_latency");
+
     int width = config.GetInt("channel_width");
+    int threshold = _config.GetInt("threshold");
 
     for (int i = 0; i < size; ++i) {
         int core = i;
         if (core >= inst_file_names.size()) {
             throw "The instruction file of node " + std::to_string(i) + " is not specified !!";
         }
-        std::string inst_file = inst_dir + "/" + inst_file_names[core];
-        _cores.push_back(CORE(inst_file, latency_file, core, (*send_queues_)[i], (*receive_queues_)[i], open_pipes, width));
+        std::string inst_file = working_dir + "/" + inst_file_names[core];
+        std::string routing_board_file = config.GetStr("routing_board");
+        routing_board_file = working_dir + "/" + routing_board_file;
+        _cores.push_back(CORE(inst_file, latency_file, routing_board_file, core, (*send_queues_)[i], (*receive_queues_)[i], open_pipes, threshold, width));
     }
 }
 
@@ -31,12 +35,6 @@ CoreArray::CoreArray(Configuration config, PCNInterfaceSet send_queues_, PCNInte
 void CoreArray::step(int clock) {
     for (CORE& core : _cores) {
         core.ClockTick();
-    }
-
-    int threshold = _config.GetInt("threshold");
-    int size = _cores.size();
-    for (int i = 0; i < size; ++i) {
-        (*_pipe_open)[i] = (_cores[i].rq)->size() <= threshold;
     }
 }
 

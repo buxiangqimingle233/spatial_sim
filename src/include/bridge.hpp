@@ -8,6 +8,8 @@
 #include <map>
 #include <assert.h>
 
+#include "path.hpp"
+
 namespace spatial {
 
 struct Tensor {
@@ -22,7 +24,7 @@ struct Tensor {
     }
     int size() {
         if (dims.empty()) {
-            return -1;
+            return 0;
         }
         int size = 1;
         for (int d: dims) {
@@ -33,28 +35,17 @@ struct Tensor {
 };
 
 struct Packet {
-    int fid = -1;
-    int size = -1;
-    int dest = -1;
-    int source = -1;
+    enum TransferType { UNICAST, MULTICAST, REDUCE } type;
+    int fid;
+    int size;
+    shared_ptr<MCTree> path;
     Tensor data;
-    std::queue<int> im_nodes;  // intermediate nodes
 
 public:
-    Packet(int fid_, int size_, int dest_, int source_, Tensor data_) : 
-        fid(fid_), size(size_), dest(dest_), source(source_), data(data_) { };
-    Packet() { };
 
-    std::queue<int> getIntermediateNodes() {
-        return im_nodes;
-    }
-
-    void setIntermediateNodes(const std::vector<int>& list) {
-        for (int i: list) {
-            im_nodes.push(i);
-        }
-        im_nodes.push(dest);
-    }
+    // Packet(int fid_, TransferType type_, int size_, Tensor data_, shared_ptr<MCTree> path_)
+    //     : fid(fid_), type(type_), size(size_), data(data_), path(path_) { };
+    Packet(): type(TransferType::UNICAST), fid(-1), size(-1), path(nullptr), data() { };
 };
 
 }; 

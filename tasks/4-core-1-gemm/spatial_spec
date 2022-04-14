@@ -3,10 +3,11 @@ log_file = out.log;
 // Core array speficication
 array_size = 4;
 threshold = 3;
-task_dir = tasks/4-core-1-gemm;
+working_directory = tasks/4-core-1-gemm;
 tasks = {c0.inst,c1.inst,c2.inst,c3.inst};
 micro_instr_latency = runfiles/micro_instr_latency;
-deadlock_check_freq = 10000;
+routing_board = routing_board;
+deadlock_check_freq = 1000;
 
 // NoC speficication, copied from booksim
 topology = mesh;
@@ -31,5 +32,5 @@ vc_buf_size = 2;
 
 tech_file = runfiles/noc/techfile.txt;
 watch_out = -;
-// watch_flits = {0,1,2,3,4,5,6,7,8,9,10};
-watch_packets = {0,1,2,3,4,5,6,7,8,9,10};
+// watch_flits = {21,22,23,24,25,26};
+// watch_packets = {0,1,2,3,4,5,6,7,8,9,10};

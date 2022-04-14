@@ -62,7 +62,7 @@ public:
 
     virtual void parse(const std::string& line) = 0;
 
-    virtual std::queue<std::string> lower(const std::map<int, spatial::Tensor>& data) = 0;
+    virtual void lower(const std::map<int, spatial::Tensor>& data, std::queue<std::string>& out) = 0;
 };
 
 
@@ -100,8 +100,7 @@ class CompOperator : public Operator {
         }
     }
 
-    virtual std::queue<std::string> lower(const std::map<int, spatial::Tensor>& data) override {
-        std::queue<std::string> mi;
+    virtual void lower(const std::map<int, spatial::Tensor>& data, std::queue<std::string>& out) override {
         char buf[1000] = "";
 
         // get input messages
@@ -110,17 +109,16 @@ class CompOperator : public Operator {
             if (!input_stationary[i]) {
                 // Ni.receive
 
-                // FIXME: recover this
                 sprintf(buf, "NI.recv %d", tid);    // config the tensor
-                mi.push(std::string(buf));
+                out.push(std::string(buf));
 
                 // Bus.transaction
                 sprintf(buf, "BUS.trans %d", tid);
-                mi.push(std::string(buf));
+                out.push(std::string(buf));
 
                 // Buffer.write
                 sprintf(buf, "BUFFER.write %d", tid);
-                mi.push(std::string(buf));
+                out.push(std::string(buf));
             }
         }
 
@@ -129,10 +127,10 @@ class CompOperator : public Operator {
             // Read inputs
             for (int dep: inputs) {
                 sprintf(buf, "BUFFER.read %d", dep);
-                mi.push(std::string(buf));
+                out.push(std::string(buf));
                 
                 sprintf(buf, "BUS.trans %d", dep);
-                mi.push(std::string(buf));
+                out.push(std::string(buf));
                 ss << dep << " ";
             }
 
@@ -140,35 +138,37 @@ class CompOperator : public Operator {
             // TODO: generate computation micro instructions, check which hd component do we need
             if (config.empty()) {
                 sprintf(buf, "CPU.sleep %d", 1);
-                mi.push(std::string(buf));
+                out.push(std::string(buf));
             } else {
                 sprintf(buf, "ACC.cal %s %d %s", config.c_str(), tid, ss.str().c_str());
-                mi.push(std::string(buf));
+                out.push(std::string(buf));
             }
 
             sprintf(buf, "BUS.trans %d", tid);
-            mi.push(std::string(buf));
+            out.push(std::string(buf));
 
             sprintf(buf, "BUFFER.write %d", tid);
-            mi.push(std::string(buf));
+            out.push(std::string(buf));
 
             // Transmit outputs
             if (!output_stationary[o]) {
                 std::vector<int> dests = dest_nodes[tid];
-                // TODO: We just support unicast now
+
+                sprintf(buf, "BUFFER.read %d", tid);
+                out.push(std::string(buf));
+
+                sprintf(buf, "BUS.trans %d", tid);
+                out.push(std::string(buf));
+                
+                // Unicast & multicast
+                std::stringstream ss;
+                ss << "NI.send " << tid;
                 for (int dest: dests) {
-                    sprintf(buf, "BUFFER.read %d", tid);
-                    mi.push(std::string(buf));
-                    
-                    sprintf(buf, "BUS.trans %d", tid);
-                    mi.push(std::string(buf));
-                    
-                    sprintf(buf, "NI.send %d %d", dest, tid);
-                    mi.push(std::string(buf));
+                    ss << " " << dest;
                 }
+                out.push(ss.str());
             }
         }
-        return mi;
     }
 
 };
@@ -200,26 +200,26 @@ protected:
         }
     }
 
-    virtual std::queue<std::string> lower(const std::map<int, spatial::Tensor>& data) override {
+    virtual void lower(const std::map<int, spatial::Tensor>& data, std::queue<std::string>& out) override {
         auto casted = const_cast<std::map<int, spatial::Tensor>&>(data);
         for (int o: outputs) {
             casted.find(o)->second.size();
         }
 
-        std::queue<std::string> mi;
         char buf[1000] = "";
         for (int cnt = 0; cnt < iter_cnt; ++cnt) {
             for (int tid: outputs) {
+                std::stringstream ss;
+                ss << "NI.send " << tid;
                 for (int dest: dest_nodes[tid]) {
-                    sprintf(buf, "NI.send %d %d", dest, tid);
-                    mi.push(std::string(buf));
+                    ss << " " << dest;
                 }
+                out.push(ss.str());
             }
 
             sprintf(buf, "CPU.sleep %d", interval);
-            mi.push(std::string(buf));
+            out.push(std::string(buf));
         }
-        return mi;
     }
 
 };

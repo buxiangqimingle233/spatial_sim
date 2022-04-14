@@ -12,12 +12,15 @@ public:
 
         AddStrField("log_file", "log.txt");
 
-        // task specification files
+        // tasks
         AddStrField("tasks", "");
-        AddStrField("task_dir", "tasks");
+        AddStrField("working_directory", "tasks");
 
         // micro-instruction latencies
         AddStrField("micro_instr_latency", "runfiles/micro_instr_latency");
+
+        // routing-boards
+        AddStrField("routing_board", "routing_board");
 
         _int_map["threshold"] = 2;      // When to reject accepting packets
         _int_map["array_size"] = 16;    // The size of core array
