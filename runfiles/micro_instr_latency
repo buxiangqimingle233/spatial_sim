@@ -1,10 +1,10 @@
-NI.send 100
-NI.recv 100
-ACC.cal 100
+NI.send 64
+NI.recv 64
 CPU.poll 1
 CPU.relu 1
 CPU.vector 1
 CPU.sleep 1
-BUS.trans 100
-BUFFER.read 100
-BUFFER.write 100
+ACC.cal 10240
+BUS.trans 10240
+BUFFER.read 10240
+BUFFER.write 10240

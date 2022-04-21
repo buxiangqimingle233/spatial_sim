@@ -29,7 +29,7 @@ int gNodes;
 bool gTrace;
 ostream * gWatchOut;
 
-// Well ... some old troublesomes of booksim2
+// Well ... old troublesomes from booksim2
 TrafficManager* trafficManager = NULL;
 
 
@@ -77,4 +77,9 @@ spatial::NoC::NoC(BookSimConfig config, PCNInterfaceSet send_queues_, PCNInterfa
 
 void spatial::NoC::step(clock_t clock) {
     _traffic_manager->_Step();
+}
+
+
+void spatial::NoC::DisplayStats(std::ostream & os) {
+    _traffic_manager->_DisplayRemaining(os);
 }

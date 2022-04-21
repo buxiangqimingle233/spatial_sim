@@ -23,7 +23,7 @@ public:
         AddStrField("routing_board", "routing_board");
 
         _int_map["threshold"] = 2;      // When to reject accepting packets
-        _int_map["array_size"] = 16;    // The size of core array
+        _int_map["array_size"] = 16;    // The size of core array, FIXME: Deprecated now
         _int_map["deadlock_check_freq"] = 1000;     // How much cycles do we check deadlocks
 
     }

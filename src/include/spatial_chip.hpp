@@ -39,6 +39,7 @@ public:
     void run();
     bool task_finished();
     bool check_deadlock();
+    void display_stats(std::ostream& os = std::cout);
 
     SpatialChip(std::string spatial_chip_spec);
     ~SpatialChip() { }

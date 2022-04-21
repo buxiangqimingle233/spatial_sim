@@ -1,5 +1,6 @@
 #include "core_array.hpp"
 #include "bridge.hpp"
+#include "math.h"
 #include "core.h"
 #include "spatial_config.hpp"
 
@@ -10,8 +11,11 @@ int array_size;
 CoreArray::CoreArray(Configuration config, PCNInterfaceSet send_queues_, PCNInterfaceSet receive_queues_, \
     std::shared_ptr<std::vector<bool>> open_pipes): _config(config), _pipe_open(open_pipes)
 {
-    int size = config.GetInt("array_size");
-    array_size = size;  // A hack for NI checking packets' destinations
+    // int size = config.GetInt("array_size");
+    int k = config.GetInt("k");
+    int n = config.GetInt("n");
+    array_size = (int)std::pow(k, n);
+
     std::vector<std::string> inst_file_names = config.GetStrArray("tasks");
     std::string working_dir = config.GetStr("working_directory");
     std::string latency_file = config.GetStr("micro_instr_latency");
@@ -19,7 +23,7 @@ CoreArray::CoreArray(Configuration config, PCNInterfaceSet send_queues_, PCNInte
     int width = config.GetInt("channel_width");
     int threshold = _config.GetInt("threshold");
 
-    for (int i = 0; i < size; ++i) {
+    for (int i = 0; i < array_size; ++i) {
         int core = i;
         if (core >= inst_file_names.size()) {
             throw "The instruction file of node " + std::to_string(i) + " is not specified !!";
@@ -38,19 +42,16 @@ void CoreArray::step(int clock) {
     }
 }
 
-
 bool CoreArray::stateChanged() {
     
     static std::vector<CORE> cores_backup = std::vector<CORE>();
-
     bool change = false;
-
     if (cores_backup.size() != _cores.size()) {
         change = true;
     } else {
         int size = _cores.size();
         for (int i = 0; i < size; ++i) {
-            if (!_cores[i].equalTo(cores_backup[i])) {
+            if (!_cores[i].EqualTo(cores_backup[i])) {
                 change = true;
                 break;
             }
@@ -59,6 +60,20 @@ bool CoreArray::stateChanged() {
 
     cores_backup = _cores;
     return change;
+}
+
+bool CoreArray::allCoreClosed() {
+    bool core_closed = true;
+    for (auto& c: _cores) {
+        core_closed &= c.AllInstFinished();
+    }
+    return core_closed;
+}
+
+void CoreArray::DisplayStats(std::ostream& os) {
+    for (const CORE& c : _cores) {
+        c.DisplayStats(os);
+    }
 }
 
 }

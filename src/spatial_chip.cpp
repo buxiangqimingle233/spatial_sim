@@ -1,5 +1,6 @@
 #include <string>
 #include <fstream>
+#include "math.h"
 #include "config_utils.hpp"
 #include "noc.hpp"
 #include "core_array.hpp"
@@ -30,7 +31,9 @@ SpatialChip::SpatialChip(std::string spatial_chip_spec) {
     }
     
     // Initialize the interface queues between cores and nocs
-    int array_size = config.GetInt("array_size");
+    int k = config.GetInt("k");
+    int n = config.GetInt("n");
+    array_size = (int)std::pow(k, n);
 
     _send_queues = std::make_shared<std::vector<CNInterface> >();
     _received_queues = std::make_shared<std::vector<CNInterface> >();
@@ -75,6 +78,7 @@ void SpatialChip::run() {
             std::cout << "Simulate " << _clock << " cycles" << std::endl;
             if (check_deadlock()) {
                 std::cerr << "Deadlock detected: the chip state keeps unchanged over " << check_frequency << " cycles" << std::endl;
+                display_stats();
                 exit(1); 
             }
 #ifdef DUMP_NODE_STATE
@@ -108,6 +112,16 @@ bool SpatialChip::check_deadlock() {
     queue_pair_backup.second = std::make_shared<vector<CNInterface> >(rq_bu);
 
     return deadlock;
+}
+
+
+void SpatialChip::display_stats(std::ostream & os) {
+
+    os << std::endl << " ================== Dumped Stats ================== " << std::endl;
+    core_array->DisplayStats(os);
+    noc->DisplayStats(os);
+
+    os << std::endl << " ================================================= " << std::endl;
 }
 
 };

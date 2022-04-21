@@ -4,6 +4,7 @@
 #include "spatial_chip.hpp"
 #include "trafficmanager.hpp"
 #include "booksim_config.hpp"
+#include <iostream>
 #include <queue>
 #include <memory>
 
@@ -17,10 +18,10 @@ private:
 
 public:
     void step(clock_t clock);
-    void printStats();
     bool traffic_drained() {
         return _traffic_manager->flitsDrained();
     }
+    void DisplayStats(std::ostream & os = std::cout);
 
 
 public:

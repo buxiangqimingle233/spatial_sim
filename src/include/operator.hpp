@@ -8,6 +8,8 @@
 #include <map>
 #include <sstream>
 #include <algorithm>
+#include <set>
+#include <iterator>
 #include "common.h"
 #include "bridge.hpp"
 
@@ -18,14 +20,11 @@ class Operator {
 
 public:
     // Set by primary parsing
-    std::string config;
     std::vector<int> inputs;
     std::vector<int> outputs;
 
     // Set by joint analysis
     std::map<int, std::vector<int> > dest_nodes;
-    std::vector<bool> input_stationary;
-    std::vector<bool> output_stationary;
 
 public:
 
@@ -55,11 +54,6 @@ public:
         }
     }
 
-    void setStationary(const std::vector<bool>& is, const std::vector<bool>& os) {
-        input_stationary = is;
-        output_stationary = os;
-    }
-
     virtual void parse(const std::string& line) = 0;
 
     virtual void lower(const std::map<int, spatial::Tensor>& data, std::queue<std::string>& out) = 0;
@@ -67,6 +61,10 @@ public:
 
 
 class CompOperator : public Operator {
+
+public:
+    std::map<int, bool> input_stationary;
+    std::string config;
 
     virtual void parse(const std::string& line) override {
         // ij, jk -> i # 1, 2, 5, 7 # 8, 9, 10
@@ -106,9 +104,8 @@ class CompOperator : public Operator {
         // get input messages
         for (int i = 0; i < inputs.size(); ++i) {
             int tid = inputs[i];
-            if (!input_stationary[i]) {
+            if (!input_stationary[tid]) {
                 // Ni.receive
-
                 sprintf(buf, "NI.recv %d", tid);    // config the tensor
                 out.push(std::string(buf));
 
@@ -151,24 +148,40 @@ class CompOperator : public Operator {
             out.push(std::string(buf));
 
             // Transmit outputs
-            if (!output_stationary[o]) {
-                std::vector<int> dests = dest_nodes[tid];
+            std::vector<int> dests = dest_nodes[tid];
 
-                sprintf(buf, "BUFFER.read %d", tid);
-                out.push(std::string(buf));
+            sprintf(buf, "BUFFER.read %d", tid);
+            out.push(std::string(buf));
 
-                sprintf(buf, "BUS.trans %d", tid);
-                out.push(std::string(buf));
-                
-                // Unicast & multicast
-                std::stringstream ss;
-                ss << "NI.send " << tid;
-                for (int dest: dests) {
-                    ss << " " << dest;
+            sprintf(buf, "BUS.trans %d", tid);
+            out.push(std::string(buf));
+            
+            // Unicast & multicast
+            ss.str("");
+            ss << "NI.send " << tid;
+            for (int dest: dests) {
+                ss << " " << dest;
+            }
+            out.push(ss.str());
+        }
+    }
+
+    static void DiscoverStationary(std::vector<std::shared_ptr<Operator>>& op_list) {
+        // Input stationary
+        set<int> vis_tid;
+        for (shared_ptr<Operator> op: op_list) {
+            for (int dep: op->inputs) {
+                if (vis_tid.count(dep) == 0) {
+                    dynamic_pointer_cast<CompOperator>(op)->input_stationary.insert(make_pair(dep, false));
+                    vis_tid.insert(dep);
+                } else {
+                    dynamic_pointer_cast<CompOperator>(op)->input_stationary.insert(make_pair(dep, false));
                 }
-                out.push(ss.str());
             }
         }
+
+        // TODO: We do not support output stationary at present.
+
     }
 
 };
@@ -206,17 +219,19 @@ protected:
             casted.find(o)->second.size();
         }
 
-        char buf[1000] = "";
         for (int cnt = 0; cnt < iter_cnt; ++cnt) {
             for (int tid: outputs) {
                 std::stringstream ss;
-                ss << "NI.send " << tid;
-                for (int dest: dest_nodes[tid]) {
-                    ss << " " << dest;
-                }
-                out.push(ss.str());
+                std::copy(dest_nodes[tid].begin(), dest_nodes[tid].end(), std::ostream_iterator<int>(ss, " "));
+                out.push("NI.send " + std::to_string(tid) + " " + ss.str());
+                // std::stringstream ss;
+                // ss << "NI.send " << tid;
+                // for (int dest: dest_nodes[tid]) {
+                //     ss << " " << dest;
+                // }
             }
 
+            char buf[1000] = "";
             sprintf(buf, "CPU.sleep %d", interval);
             out.push(std::string(buf));
         }
