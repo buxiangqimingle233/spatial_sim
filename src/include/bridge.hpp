@@ -18,7 +18,7 @@ struct Tensor {
 
     Tensor(std::vector<int> dims_, int tid_): dims(dims_), tid(tid_) { };
     Tensor(): dims(std::vector<int>()), tid(-1) { };
-    void explicitCopy(const Tensor& other) {
+    void copyFrom(const Tensor& other) {
         tid = other.tid;
         dims = other.dims;
     }

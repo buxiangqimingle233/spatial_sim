@@ -1,0 +1,94 @@
+operators:
+assemble # NI.recv 36
+assemble # NI.recv 0
+assemble # CPU.sleep 64
+assemble # NI.send 90 5
+assemble # NI.recv 38
+assemble # NI.recv 2
+assemble # CPU.sleep 64
+assemble # NI.send 91 5
+assemble # NI.recv 40
+assemble # NI.recv 4
+assemble # CPU.sleep 64
+assemble # NI.send 92 5
+assemble # NI.recv 42
+assemble # NI.recv 6
+assemble # CPU.sleep 64
+assemble # NI.send 93 5
+assemble # NI.recv 44
+assemble # NI.recv 8
+assemble # CPU.sleep 64
+assemble # NI.send 94 5
+assemble # NI.recv 46
+assemble # NI.recv 10
+assemble # CPU.sleep 64
+assemble # NI.send 95 5
+assemble # NI.recv 48
+assemble # NI.recv 12
+assemble # CPU.sleep 64
+assemble # NI.send 96 5
+assemble # NI.recv 50
+assemble # NI.recv 14
+assemble # CPU.sleep 64
+assemble # NI.send 97 5
+assemble # NI.recv 52
+assemble # NI.recv 16
+assemble # CPU.sleep 64
+assemble # NI.send 98 5
+assemble # NI.recv 54
+assemble # NI.recv 18
+assemble # CPU.sleep 64
+assemble # NI.send 99 5
+assemble # NI.recv 56
+assemble # NI.recv 20
+assemble # CPU.sleep 64
+assemble # NI.send 100 5
+assemble # NI.recv 58
+assemble # NI.recv 22
+assemble # CPU.sleep 64
+assemble # NI.send 101 5
+assemble # NI.recv 60
+assemble # NI.recv 24
+assemble # CPU.sleep 64
+assemble # NI.send 102 5
+assemble # NI.recv 62
+assemble # NI.recv 26
+assemble # CPU.sleep 64
+assemble # NI.send 103 5
+assemble # NI.recv 64
+assemble # NI.recv 28
+assemble # CPU.sleep 64
+assemble # NI.send 104 5
+assemble # NI.recv 66
+assemble # NI.recv 30
+assemble # CPU.sleep 64
+assemble # NI.send 105 5
+assemble # NI.recv 68
+assemble # NI.recv 32
+assemble # CPU.sleep 64
+assemble # NI.send 106 5
+assemble # NI.recv 70
+assemble # NI.recv 34
+assemble # CPU.sleep 64
+assemble # NI.send 107 5
+
+
+data:
+90 # 5 # 3
+91 # 5 # 3
+92 # 5 # 3
+93 # 5 # 3
+94 # 5 # 3
+95 # 5 # 3
+96 # 5 # 3
+97 # 5 # 3
+98 # 5 # 3
+99 # 5 # 3
+100 # 5 # 3
+101 # 5 # 3
+102 # 5 # 3
+103 # 5 # 3
+104 # 5 # 3
+105 # 5 # 3
+106 # 5 # 3
+107 # 5 # 3

@@ -15,6 +15,7 @@
 
 class CompOperator;
 class ManOperator;
+class AssembleOperator;
 
 class Operator {
 
@@ -31,9 +32,11 @@ public:
     static std::shared_ptr<Operator> getOperator(std::string type) {
         std::shared_ptr<Operator> ptr;
         if (type.find("compute") != type.npos) {
-            ptr = std::dynamic_pointer_cast<Operator>(std::make_shared<CompOperator>());
+            ptr = dynamic_pointer_cast<Operator>(make_shared<CompOperator>());
         } else if (type.find("manipulate") != type.npos) {
-            ptr = std::dynamic_pointer_cast<Operator>(std::make_shared<ManOperator>());
+            ptr = dynamic_pointer_cast<Operator>(make_shared<ManOperator>());
+        } else if (type.find("assemble") != type.npos) {
+            ptr = dynamic_pointer_cast<Operator>(make_shared<AssembleOperator>());
         } else {
             // ptr = std::make_shared<Operator>();
             throw "Please specify operator type !";
@@ -59,6 +62,23 @@ public:
     virtual void lower(const std::map<int, spatial::Tensor>& data, std::queue<std::string>& out) = 0;
 };
 
+class AssembleOperator : public Operator {
+
+protected:
+    std::string inst;
+
+public:
+
+    virtual void parse(const std::string& line) override {
+        inst = line;
+    }
+
+    virtual void lower(const std::map<int, spatial::Tensor>& data, queue<string>& out) override {
+        out.push(inst);
+    }
+
+};
+
 
 class CompOperator : public Operator {
 
@@ -69,9 +89,7 @@ public:
     virtual void parse(const std::string& line) override {
         // ij, jk -> i # 1, 2, 5, 7 # 8, 9, 10
 
-        // remove spaces
         std::string remain = line;
-        remain.erase(std::remove_if(remain.begin(), remain.end(), ::isspace), remain.end());
 
         // divide the line
         std::vector<std::string> fields = spatial::split(remain, "#");
@@ -79,9 +97,11 @@ public:
 
         // Extract op configs
         config = fields[0];
+        config.erase(std::remove_if(config.begin(), config.end(), ::isspace), config.end());
 
         // Extract op outputs
         std::string output = fields[1];
+        output.erase(std::remove_if(output.begin(), output.end(), ::isspace), output.end());
         std::replace(output.begin(), output.end(), ',', ' ');
         std::stringstream oss(output);
         int id;
@@ -91,6 +111,7 @@ public:
 
         // Extract op inputs
         std::string input = fields[2];
+        input.erase(std::remove_if(input.begin(), input.end(), ::isspace), input.end());
         std::replace(input.begin(), input.end(), ',', ' ');
         std::stringstream iss(input);
         while (iss >> id) {

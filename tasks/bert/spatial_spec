@@ -1,23 +1,23 @@
 log_file = out.log;
 
+
 // Core array speficication
-array_size = 4;
-threshold = 3;
-working_directory = tasks/4-core-1-gemm;
-tasks = {c0.inst,c1.inst,c2.inst,c3.inst};
+threshold = 1024;
+working_directory = tasks/bert;
+tasks = {c0.inst,c1.inst,c2.inst,c3.inst,c4.inst,c5.inst,c6.inst,c7.inst,c8.inst,c9.inst,c10.inst,c11.inst,c12.inst,c13.inst,c14.inst,c15.inst};
 micro_instr_latency = runfiles/micro_instr_latency;
 routing_board = routing_board;
 deadlock_check_freq = 1000;
 
 // NoC speficication, copied from booksim
 topology = mesh;
-k = 2;      // # nodes per dim
+k = 4;      // # nodes per dim
 n = 2;      // # dims
 
 sim_type = throughput;
 
 sim_power = 1;
-channel_width = 64;    // Only work for power simulation
+channel_width = 128;    // Only work for power simulation
 
 // Routing
 // routing_function = dim_order;
@@ -32,6 +32,6 @@ vc_buf_size = 2;
 
 tech_file = runfiles/noc/techfile.txt;
 watch_out = -;
-watch_flits = {54};
-// watch_flits = {21,22,23,24,25,26};
+// watch_flits = {571};
+// watch_flits = {19,20,21,22,23,24,25,26};
 // watch_packets = {0,1,2,3,4,5,6,7,8,9,10};
