@@ -1,58 +1,28 @@
 operators:
-assemble # CPU.sleep 64
+assemble # CPU.sleep 144
 assemble # NI.send 407 10
 assemble # NI.send 408 15
-assemble # CPU.sleep 64
+assemble # CPU.sleep 144
 assemble # NI.send 409 10
 assemble # NI.send 410 15
-assemble # CPU.sleep 64
+assemble # CPU.sleep 144
 assemble # NI.send 411 10
 assemble # NI.send 412 15
-assemble # CPU.sleep 64
+assemble # CPU.sleep 144
 assemble # NI.send 413 10
 assemble # NI.send 414 15
-assemble # CPU.sleep 64
+assemble # CPU.sleep 144
 assemble # NI.send 415 10
 assemble # NI.send 416 15
-assemble # CPU.sleep 64
+assemble # CPU.sleep 144
 assemble # NI.send 417 10
 assemble # NI.send 418 15
-assemble # CPU.sleep 64
+assemble # CPU.sleep 144
 assemble # NI.send 419 10
 assemble # NI.send 420 15
-assemble # CPU.sleep 64
+assemble # CPU.sleep 144
 assemble # NI.send 421 10
 assemble # NI.send 422 15
-assemble # CPU.sleep 64
-assemble # NI.send 423 10
-assemble # NI.send 424 15
-assemble # CPU.sleep 64
-assemble # NI.send 425 10
-assemble # NI.send 426 15
-assemble # CPU.sleep 64
-assemble # NI.send 427 10
-assemble # NI.send 428 15
-assemble # CPU.sleep 64
-assemble # NI.send 429 10
-assemble # NI.send 430 15
-assemble # CPU.sleep 64
-assemble # NI.send 431 10
-assemble # NI.send 432 15
-assemble # CPU.sleep 64
-assemble # NI.send 433 10
-assemble # NI.send 434 15
-assemble # CPU.sleep 64
-assemble # NI.send 435 10
-assemble # NI.send 436 15
-assemble # CPU.sleep 64
-assemble # NI.send 437 10
-assemble # NI.send 438 15
-assemble # CPU.sleep 64
-assemble # NI.send 439 10
-assemble # NI.send 440 15
-assemble # CPU.sleep 64
-assemble # NI.send 441 10
-assemble # NI.send 442 15
 
 
 data:
@@ -64,16 +34,6 @@ data:
 417 # 10 # 3
 419 # 10 # 3
 421 # 10 # 3
-423 # 10 # 3
-425 # 10 # 3
-427 # 10 # 3
-429 # 10 # 3
-431 # 10 # 3
-433 # 10 # 3
-435 # 10 # 3
-437 # 10 # 3
-439 # 10 # 3
-441 # 10 # 3
 408 # 15 # 3
 410 # 15 # 3
 412 # 15 # 3
@@ -82,13 +42,3 @@ data:
 418 # 15 # 3
 420 # 15 # 3
 422 # 15 # 3
-424 # 15 # 3
-426 # 15 # 3
-428 # 15 # 3
-430 # 15 # 3
-432 # 15 # 3
-434 # 15 # 3
-436 # 15 # 3
-438 # 15 # 3
-440 # 15 # 3
-442 # 15 # 3
