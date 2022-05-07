@@ -18,6 +18,7 @@
 #include "injection.hpp"
 #include "power_module.hpp"
 #include "globals.hpp"
+#include "flit.hpp"
 
 /* printing activity factor*/
 bool gPrintActivity;
@@ -77,6 +78,11 @@ spatial::NoC::NoC(BookSimConfig config, PCNInterfaceSet send_queues_, PCNInterfa
 
 void spatial::NoC::step(clock_t clock) {
     _traffic_manager->_Step();
+
+    // Frequently clean the garbage flits
+    if (clock % 20000 == 0) {
+        Flit::GC();
+    }
 }
 
 

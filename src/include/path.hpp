@@ -16,7 +16,7 @@ const int INVALID = -3;
 // The tree-based multicast path. It enables individual non-optimal
 // routing for each edge within the tree. 
 class MCTree {
-private:
+public:
     map<Segment, shared_ptr<queue<int>> > _path;   // detour: [src, dst]=intermediate_nodes
     multimap<int, int> _tree;                       // branch tree: start-end
     set<int> _leafs;                                // destination nodes

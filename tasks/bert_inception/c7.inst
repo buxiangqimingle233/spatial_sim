@@ -1,65 +1,29 @@
 operators:
-assemble # NI.sync 455
-assemble # CPU.sleep 96
-assemble # NI.send 481 9
-assemble # NI.send 482 12
-assemble # CPU.sleep 96
-assemble # NI.send 483 9
-assemble # NI.send 484 12
-assemble # CPU.sleep 96
-assemble # NI.send 485 9
-assemble # NI.send 486 12
-assemble # CPU.sleep 96
-assemble # NI.send 487 9
-assemble # NI.send 488 12
-assemble # CPU.sleep 96
-assemble # NI.send 489 9
-assemble # NI.send 490 12
-assemble # CPU.sleep 96
-assemble # NI.send 491 9
-assemble # NI.send 492 12
-assemble # CPU.sleep 96
-assemble # NI.send 493 9
-assemble # NI.send 494 12
-assemble # CPU.sleep 96
-assemble # NI.send 495 9
-assemble # NI.send 496 12
-assemble # CPU.sleep 96
-assemble # NI.send 497 9
-assemble # NI.send 498 12
-assemble # CPU.sleep 96
-assemble # NI.send 499 9
-assemble # NI.send 500 12
-assemble # CPU.sleep 96
-assemble # NI.send 501 9
-assemble # NI.send 502 12
-assemble # CPU.sleep 96
-assemble # NI.send 503 9
-assemble # NI.send 504 12
+assemble # NI.recv 516
+assemble # NI.recv 517
+assemble # NI.recv 518
+assemble # NI.recv 519
+assemble # NI.recv 520
+assemble # NI.recv 521
+assemble # NI.recv 522
+assemble # NI.recv 523
+assemble # NI.recv 524
+assemble # NI.recv 525
+assemble # NI.recv 526
+assemble # NI.recv 527
+assemble # NI.recv 504
+assemble # NI.recv 505
+assemble # NI.recv 506
+assemble # NI.recv 507
+assemble # NI.recv 508
+assemble # NI.recv 509
+assemble # NI.recv 510
+assemble # NI.recv 511
+assemble # NI.recv 512
+assemble # NI.recv 513
+assemble # NI.recv 514
+assemble # NI.recv 515
+assemble # CPU.sleep 0
 
 
 data:
-481 # 9 # 195
-483 # 9 # 195
-485 # 9 # 195
-487 # 9 # 195
-489 # 9 # 195
-491 # 9 # 195
-493 # 9 # 195
-495 # 9 # 195
-497 # 9 # 195
-499 # 9 # 195
-501 # 9 # 195
-503 # 9 # 195
-482 # 12 # 195
-484 # 12 # 195
-486 # 12 # 195
-488 # 12 # 195
-490 # 12 # 195
-492 # 12 # 195
-494 # 12 # 195
-496 # 12 # 195
-498 # 12 # 195
-500 # 12 # 195
-502 # 12 # 195
-504 # 12 # 195

@@ -7,4 +7,6 @@
 # build/bin/spatialsim tasks/4-core-p-c/spatial_spec
 # build/bin/spatialsim tasks/9-core-1-conv/spatial_spec
 # build/bin/spatialsim tasks/bert/spatial_spec
-build/bin/spatialsim tasks/bert_inception/spatial_spec
+# build/bin/spatialsim tasks/bert_inception/spatial_spec
+build/bin/spatialsim tasks/bert_inception_wide_resnet50_2/spatial_spec
+# build/bin/spatialsim tasks/bert_wide_resnet50_2/spatial_spec

@@ -7,7 +7,7 @@ working_directory = tasks/bert;
 tasks = {c0.inst,c1.inst,c2.inst,c3.inst,c4.inst,c5.inst,c6.inst,c7.inst,c8.inst,c9.inst,c10.inst,c11.inst,c12.inst,c13.inst,c14.inst,c15.inst};
 micro_instr_latency = runfiles/micro_instr_latency;
 routing_board = routing_board;
-deadlock_check_freq = 1000;
+deadlock_check_freq = 10000;
 
 // NoC speficication, copied from booksim
 topology = mesh;

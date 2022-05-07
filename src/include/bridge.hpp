@@ -35,7 +35,7 @@ struct Tensor {
 };
 
 struct Packet {
-    enum TransferType { UNICAST, MULTICAST, REDUCE } type;
+    enum TransferType { _UNICAST, _MULTICAST, _REDUCE } type;
     int fid;
     int size;
     shared_ptr<MCTree> path;
@@ -45,7 +45,13 @@ public:
 
     // Packet(int fid_, TransferType type_, int size_, Tensor data_, shared_ptr<MCTree> path_)
     //     : fid(fid_), type(type_), size(size_), data(data_), path(path_) { };
-    Packet(): type(TransferType::UNICAST), fid(-1), size(-1), path(nullptr), data() { };
+    Packet(): type(TransferType::_UNICAST), fid(-1), size(-1), path(nullptr), data() { };
+    void dumpStat(std::ostream & os) {
+        os << "pkt " << fid << ": size-" << size << " tensor-" << data.tid << " to-";
+        for (auto i = path->_leafs.begin(); i != path->_leafs.end(); ++i) {
+            os << *i << ',';
+        }
+    }
 };
 
 }; 

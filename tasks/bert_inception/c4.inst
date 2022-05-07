@@ -1,44 +1,44 @@
 operators:
+assemble # NI.recv 423
+assemble # NI.recv 407
 assemble # CPU.sleep 144
-assemble # NI.send 423 10
-assemble # NI.send 424 15
+assemble # NI.send 447 11
+assemble # NI.recv 425
+assemble # NI.recv 409
 assemble # CPU.sleep 144
-assemble # NI.send 425 10
-assemble # NI.send 426 15
+assemble # NI.send 448 11
+assemble # NI.recv 427
+assemble # NI.recv 411
 assemble # CPU.sleep 144
-assemble # NI.send 427 10
-assemble # NI.send 428 15
+assemble # NI.send 449 11
+assemble # NI.recv 429
+assemble # NI.recv 413
 assemble # CPU.sleep 144
-assemble # NI.send 429 10
-assemble # NI.send 430 15
+assemble # NI.send 450 11
+assemble # NI.recv 431
+assemble # NI.recv 415
 assemble # CPU.sleep 144
-assemble # NI.send 431 10
-assemble # NI.send 432 15
+assemble # NI.send 451 11
+assemble # NI.recv 433
+assemble # NI.recv 417
 assemble # CPU.sleep 144
-assemble # NI.send 433 10
-assemble # NI.send 434 15
+assemble # NI.send 452 11
+assemble # NI.recv 435
+assemble # NI.recv 419
 assemble # CPU.sleep 144
-assemble # NI.send 435 10
-assemble # NI.send 436 15
+assemble # NI.send 453 11
+assemble # NI.recv 437
+assemble # NI.recv 421
 assemble # CPU.sleep 144
-assemble # NI.send 437 10
-assemble # NI.send 438 15
+assemble # NI.send 454 11
 
 
 data:
-423 # 10 # 291
-425 # 10 # 291
-427 # 10 # 291
-429 # 10 # 291
-431 # 10 # 291
-433 # 10 # 291
-435 # 10 # 291
-437 # 10 # 291
-424 # 15 # 291
-426 # 15 # 291
-428 # 15 # 291
-430 # 15 # 291
-432 # 15 # 291
-434 # 15 # 291
-436 # 15 # 291
-438 # 15 # 291
+447 # 11 # 2
+448 # 11 # 2
+449 # 11 # 2
+450 # 11 # 2
+451 # 11 # 2
+452 # 11 # 2
+453 # 11 # 2
+454 # 11 # 2

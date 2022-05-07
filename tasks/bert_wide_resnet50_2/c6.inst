@@ -1,0 +1,49 @@
+operators:
+assemble # CPU.sleep 1470
+assemble # NI.send 980 25
+assemble # NI.send 981 17
+assemble # NI.send 982 18
+assemble # NI.send 983 26
+assemble # CPU.sleep 1470
+assemble # NI.send 984 25
+assemble # NI.send 985 17
+assemble # NI.send 986 18
+assemble # NI.send 987 26
+assemble # CPU.sleep 1470
+assemble # NI.send 988 25
+assemble # NI.send 989 17
+assemble # NI.send 990 18
+assemble # NI.send 991 26
+assemble # CPU.sleep 1470
+assemble # NI.send 992 25
+assemble # NI.send 993 17
+assemble # NI.send 994 18
+assemble # NI.send 995 26
+assemble # CPU.sleep 1470
+assemble # NI.send 996 25
+assemble # NI.send 997 17
+assemble # NI.send 998 18
+assemble # NI.send 999 26
+
+
+data:
+980 # 25 # 63
+984 # 25 # 63
+988 # 25 # 63
+992 # 25 # 63
+996 # 25 # 63
+981 # 17 # 63
+985 # 17 # 63
+989 # 17 # 63
+993 # 17 # 63
+997 # 17 # 63
+982 # 18 # 63
+986 # 18 # 63
+990 # 18 # 63
+994 # 18 # 63
+998 # 18 # 63
+983 # 26 # 63
+987 # 26 # 63
+991 # 26 # 63
+995 # 26 # 63
+999 # 26 # 63

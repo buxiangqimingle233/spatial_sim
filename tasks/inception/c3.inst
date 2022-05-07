@@ -1,337 +1,226 @@
 operators:
-assemble # NI.recv 111
-assemble # NI.recv 1
 assemble # CPU.sleep 999
-assemble # NI.send 259 2
-assemble # NI.recv 112
+assemble # NI.send 111 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 260 2
-assemble # NI.recv 113
-assemble # NI.recv 4
+assemble # NI.send 112 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 261 2
-assemble # NI.recv 114
+assemble # NI.send 113 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 262 2
-assemble # NI.recv 115
-assemble # NI.recv 7
+assemble # NI.send 114 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 263 2
-assemble # NI.recv 116
+assemble # NI.send 115 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 264 2
-assemble # NI.recv 117
-assemble # NI.recv 10
+assemble # NI.send 116 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 265 2
-assemble # NI.recv 118
+assemble # NI.send 117 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 266 2
-assemble # NI.recv 119
-assemble # NI.recv 13
+assemble # NI.send 118 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 267 2
-assemble # NI.recv 120
+assemble # NI.send 119 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 268 2
-assemble # NI.recv 121
-assemble # NI.recv 16
+assemble # NI.send 120 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 269 2
-assemble # NI.recv 122
+assemble # NI.send 121 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 270 2
-assemble # NI.recv 123
-assemble # NI.recv 19
+assemble # NI.send 122 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 271 2
-assemble # NI.recv 124
+assemble # NI.send 123 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 272 2
-assemble # NI.recv 125
-assemble # NI.recv 22
+assemble # NI.send 124 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 273 2
-assemble # NI.recv 126
+assemble # NI.send 125 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 274 2
-assemble # NI.recv 127
-assemble # NI.recv 25
+assemble # NI.send 126 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 275 2
-assemble # NI.recv 128
+assemble # NI.send 127 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 276 2
-assemble # NI.recv 129
-assemble # NI.recv 28
+assemble # NI.send 128 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 277 2
-assemble # NI.recv 130
+assemble # NI.send 129 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 278 2
-assemble # NI.recv 131
-assemble # NI.recv 31
+assemble # NI.send 130 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 279 2
-assemble # NI.recv 132
+assemble # NI.send 131 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 280 2
-assemble # NI.recv 133
-assemble # NI.recv 34
+assemble # NI.send 132 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 281 2
-assemble # NI.recv 134
+assemble # NI.send 133 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 282 2
-assemble # NI.recv 135
-assemble # NI.recv 37
+assemble # NI.send 134 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 283 2
-assemble # NI.recv 136
+assemble # NI.send 135 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 284 2
-assemble # NI.recv 137
-assemble # NI.recv 40
+assemble # NI.send 136 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 285 2
-assemble # NI.recv 138
+assemble # NI.send 137 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 286 2
-assemble # NI.recv 139
-assemble # NI.recv 43
+assemble # NI.send 138 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 287 2
-assemble # NI.recv 140
+assemble # NI.send 139 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 288 2
-assemble # NI.recv 141
-assemble # NI.recv 46
+assemble # NI.send 140 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 289 2
-assemble # NI.recv 142
+assemble # NI.send 141 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 290 2
-assemble # NI.recv 143
-assemble # NI.recv 49
+assemble # NI.send 142 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 291 2
-assemble # NI.recv 144
+assemble # NI.send 143 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 292 2
-assemble # NI.recv 145
-assemble # NI.recv 52
+assemble # NI.send 144 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 293 2
-assemble # NI.recv 146
+assemble # NI.send 145 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 294 2
-assemble # NI.recv 147
-assemble # NI.recv 55
+assemble # NI.send 146 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 295 2
-assemble # NI.recv 148
+assemble # NI.send 147 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 296 2
-assemble # NI.recv 149
-assemble # NI.recv 58
+assemble # NI.send 148 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 297 2
-assemble # NI.recv 150
+assemble # NI.send 149 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 298 2
-assemble # NI.recv 151
-assemble # NI.recv 61
+assemble # NI.send 150 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 299 2
-assemble # NI.recv 152
+assemble # NI.send 151 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 300 2
-assemble # NI.recv 153
-assemble # NI.recv 64
+assemble # NI.send 152 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 301 2
-assemble # NI.recv 154
+assemble # NI.send 153 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 302 2
-assemble # NI.recv 155
-assemble # NI.recv 67
+assemble # NI.send 154 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 303 2
-assemble # NI.recv 156
+assemble # NI.send 155 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 304 2
-assemble # NI.recv 157
-assemble # NI.recv 70
+assemble # NI.send 156 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 305 2
-assemble # NI.recv 158
+assemble # NI.send 157 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 306 2
-assemble # NI.recv 159
-assemble # NI.recv 73
+assemble # NI.send 158 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 307 2
-assemble # NI.recv 160
+assemble # NI.send 159 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 308 2
-assemble # NI.recv 161
-assemble # NI.recv 76
+assemble # NI.send 160 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 309 2
-assemble # NI.recv 162
+assemble # NI.send 161 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 310 2
-assemble # NI.recv 163
-assemble # NI.recv 79
+assemble # NI.send 162 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 311 2
-assemble # NI.recv 164
+assemble # NI.send 163 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 312 2
-assemble # NI.recv 165
-assemble # NI.recv 82
+assemble # NI.send 164 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 313 2
-assemble # NI.recv 166
+assemble # NI.send 165 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 314 2
-assemble # NI.recv 167
-assemble # NI.recv 85
+assemble # NI.send 166 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 315 2
-assemble # NI.recv 168
+assemble # NI.send 167 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 316 2
-assemble # NI.recv 169
-assemble # NI.recv 88
+assemble # NI.send 168 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 317 2
-assemble # NI.recv 170
+assemble # NI.send 169 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 318 2
-assemble # NI.recv 171
-assemble # NI.recv 91
+assemble # NI.send 170 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 319 2
-assemble # NI.recv 172
+assemble # NI.send 171 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 320 2
-assemble # NI.recv 173
-assemble # NI.recv 94
+assemble # NI.send 172 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 321 2
-assemble # NI.recv 174
+assemble # NI.send 173 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 322 2
-assemble # NI.recv 175
-assemble # NI.recv 97
+assemble # NI.send 174 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 323 2
-assemble # NI.recv 176
+assemble # NI.send 175 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 324 2
-assemble # NI.recv 177
-assemble # NI.recv 100
+assemble # NI.send 176 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 325 2
-assemble # NI.recv 178
+assemble # NI.send 177 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 326 2
-assemble # NI.recv 179
-assemble # NI.recv 103
+assemble # NI.send 178 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 327 2
-assemble # NI.recv 180
+assemble # NI.send 179 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 328 2
-assemble # NI.recv 181
-assemble # NI.recv 106
+assemble # NI.send 180 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 329 2
-assemble # NI.recv 182
+assemble # NI.send 181 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 330 2
-assemble # NI.recv 183
-assemble # NI.recv 109
+assemble # NI.send 182 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 331 2
-assemble # NI.recv 184
+assemble # NI.send 183 6 9 9
 assemble # CPU.sleep 999
-assemble # NI.send 332 2
+assemble # NI.send 184 6 9 9
 
 
 data:
-259 # 2 # 14
-260 # 2 # 14
-261 # 2 # 14
-262 # 2 # 14
-263 # 2 # 14
-264 # 2 # 14
-265 # 2 # 14
-266 # 2 # 14
-267 # 2 # 14
-268 # 2 # 14
-269 # 2 # 14
-270 # 2 # 14
-271 # 2 # 14
-272 # 2 # 14
-273 # 2 # 14
-274 # 2 # 14
-275 # 2 # 14
-276 # 2 # 14
-277 # 2 # 14
-278 # 2 # 14
-279 # 2 # 14
-280 # 2 # 14
-281 # 2 # 14
-282 # 2 # 14
-283 # 2 # 14
-284 # 2 # 14
-285 # 2 # 14
-286 # 2 # 14
-287 # 2 # 14
-288 # 2 # 14
-289 # 2 # 14
-290 # 2 # 14
-291 # 2 # 14
-292 # 2 # 14
-293 # 2 # 14
-294 # 2 # 14
-295 # 2 # 14
-296 # 2 # 14
-297 # 2 # 14
-298 # 2 # 14
-299 # 2 # 14
-300 # 2 # 14
-301 # 2 # 14
-302 # 2 # 14
-303 # 2 # 14
-304 # 2 # 14
-305 # 2 # 14
-306 # 2 # 14
-307 # 2 # 14
-308 # 2 # 14
-309 # 2 # 14
-310 # 2 # 14
-311 # 2 # 14
-312 # 2 # 14
-313 # 2 # 14
-314 # 2 # 14
-315 # 2 # 14
-316 # 2 # 14
-317 # 2 # 14
-318 # 2 # 14
-319 # 2 # 14
-320 # 2 # 14
-321 # 2 # 14
-322 # 2 # 14
-323 # 2 # 14
-324 # 2 # 14
-325 # 2 # 14
-326 # 2 # 14
-327 # 2 # 14
-328 # 2 # 14
-329 # 2 # 14
-330 # 2 # 14
-331 # 2 # 14
-332 # 2 # 14
+111 # 6, 9, 9 # 6
+112 # 6, 9, 9 # 6
+113 # 6, 9, 9 # 6
+114 # 6, 9, 9 # 6
+115 # 6, 9, 9 # 6
+116 # 6, 9, 9 # 6
+117 # 6, 9, 9 # 6
+118 # 6, 9, 9 # 6
+119 # 6, 9, 9 # 6
+120 # 6, 9, 9 # 6
+121 # 6, 9, 9 # 6
+122 # 6, 9, 9 # 6
+123 # 6, 9, 9 # 6
+124 # 6, 9, 9 # 6
+125 # 6, 9, 9 # 6
+126 # 6, 9, 9 # 6
+127 # 6, 9, 9 # 6
+128 # 6, 9, 9 # 6
+129 # 6, 9, 9 # 6
+130 # 6, 9, 9 # 6
+131 # 6, 9, 9 # 6
+132 # 6, 9, 9 # 6
+133 # 6, 9, 9 # 6
+134 # 6, 9, 9 # 6
+135 # 6, 9, 9 # 6
+136 # 6, 9, 9 # 6
+137 # 6, 9, 9 # 6
+138 # 6, 9, 9 # 6
+139 # 6, 9, 9 # 6
+140 # 6, 9, 9 # 6
+141 # 6, 9, 9 # 6
+142 # 6, 9, 9 # 6
+143 # 6, 9, 9 # 6
+144 # 6, 9, 9 # 6
+145 # 6, 9, 9 # 6
+146 # 6, 9, 9 # 6
+147 # 6, 9, 9 # 6
+148 # 6, 9, 9 # 6
+149 # 6, 9, 9 # 6
+150 # 6, 9, 9 # 6
+151 # 6, 9, 9 # 6
+152 # 6, 9, 9 # 6
+153 # 6, 9, 9 # 6
+154 # 6, 9, 9 # 6
+155 # 6, 9, 9 # 6
+156 # 6, 9, 9 # 6
+157 # 6, 9, 9 # 6
+158 # 6, 9, 9 # 6
+159 # 6, 9, 9 # 6
+160 # 6, 9, 9 # 6
+161 # 6, 9, 9 # 6
+162 # 6, 9, 9 # 6
+163 # 6, 9, 9 # 6
+164 # 6, 9, 9 # 6
+165 # 6, 9, 9 # 6
+166 # 6, 9, 9 # 6
+167 # 6, 9, 9 # 6
+168 # 6, 9, 9 # 6
+169 # 6, 9, 9 # 6
+170 # 6, 9, 9 # 6
+171 # 6, 9, 9 # 6
+172 # 6, 9, 9 # 6
+173 # 6, 9, 9 # 6
+174 # 6, 9, 9 # 6
+175 # 6, 9, 9 # 6
+176 # 6, 9, 9 # 6
+177 # 6, 9, 9 # 6
+178 # 6, 9, 9 # 6
+179 # 6, 9, 9 # 6
+180 # 6, 9, 9 # 6
+181 # 6, 9, 9 # 6
+182 # 6, 9, 9 # 6
+183 # 6, 9, 9 # 6
+184 # 6, 9, 9 # 6

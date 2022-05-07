@@ -1,5 +1,13 @@
 project(spatialsim)
 
+# compiling flags: 
+# MULTICAST: enable tree-based multicasts
+# DUMP_WAITING_FLITS: dump total number of queueing flits from 10k to 20k cycle
+# DUMP_NODE_STATE: dump node states at each cycle
+
+# add_compile_options(-O0 -g -DMULTICAST)
+add_compile_options(-O0 -g)
+
 add_subdirectory(core)
 add_subdirectory(noc)
 

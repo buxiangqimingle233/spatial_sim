@@ -1,4 +1,209 @@
 operators:
+assemble # NI.recv 17
+assemble # NI.recv 1
+assemble # CPU.sleep 144
+assemble # NI.send 32 12
+assemble # NI.recv 19
+assemble # NI.recv 3
+assemble # CPU.sleep 144
+assemble # NI.send 33 12
+assemble # NI.recv 21
+assemble # NI.recv 5
+assemble # CPU.sleep 144
+assemble # NI.send 34 12
+assemble # NI.recv 23
+assemble # NI.recv 7
+assemble # CPU.sleep 144
+assemble # NI.send 35 12
+assemble # NI.recv 25
+assemble # NI.recv 9
+assemble # CPU.sleep 144
+assemble # NI.send 36 12
+assemble # NI.recv 27
+assemble # NI.recv 11
+assemble # CPU.sleep 144
+assemble # NI.send 37 12
+assemble # NI.recv 29
+assemble # NI.recv 13
+assemble # CPU.sleep 144
+assemble # NI.send 38 12
+assemble # NI.recv 31
+assemble # NI.recv 15
+assemble # CPU.sleep 144
+assemble # NI.send 39 12
+assemble # NI.recv 146
+assemble # NI.recv 111
+assemble # CPU.sleep 64
+assemble # NI.recv 148
+assemble # NI.recv 113
+assemble # CPU.sleep 64
+assemble # NI.recv 150
+assemble # NI.recv 115
+assemble # CPU.sleep 64
+assemble # NI.recv 152
+assemble # NI.recv 117
+assemble # CPU.sleep 64
+assemble # NI.recv 154
+assemble # NI.recv 119
+assemble # CPU.sleep 64
+assemble # NI.recv 156
+assemble # NI.recv 121
+assemble # CPU.sleep 64
+assemble # NI.recv 158
+assemble # NI.recv 123
+assemble # CPU.sleep 64
+assemble # NI.recv 160
+assemble # NI.recv 125
+assemble # CPU.sleep 64
+assemble # NI.recv 162
+assemble # NI.recv 127
+assemble # CPU.sleep 64
+assemble # NI.recv 164
+assemble # NI.recv 129
+assemble # CPU.sleep 64
+assemble # NI.recv 166
+assemble # NI.recv 131
+assemble # CPU.sleep 64
+assemble # NI.recv 168
+assemble # NI.recv 133
+assemble # CPU.sleep 64
+assemble # NI.recv 170
+assemble # NI.recv 135
+assemble # CPU.sleep 64
+assemble # NI.recv 172
+assemble # NI.recv 137
+assemble # CPU.sleep 64
+assemble # NI.recv 174
+assemble # NI.recv 139
+assemble # CPU.sleep 64
+assemble # NI.recv 176
+assemble # NI.recv 141
+assemble # CPU.sleep 64
+assemble # NI.recv 178
+assemble # NI.recv 143
+assemble # CPU.sleep 64
+assemble # NI.recv 180
+assemble # NI.recv 145
+assemble # CPU.sleep 64
+assemble # NI.recv 182
+assemble # NI.recv 183
+assemble # NI.recv 184
+assemble # NI.recv 185
+assemble # NI.recv 186
+assemble # NI.recv 187
+assemble # NI.recv 188
+assemble # NI.recv 189
+assemble # NI.recv 190
+assemble # NI.recv 191
+assemble # NI.recv 192
+assemble # NI.recv 193
+assemble # NI.recv 194
+assemble # NI.recv 195
+assemble # NI.recv 196
+assemble # NI.recv 197
+assemble # NI.recv 198
+assemble # NI.recv 199
+assemble # CPU.sleep 0
+assemble # NI.send 200 0
+assemble # CPU.sleep 64
+assemble # NI.send 201 6
+assemble # NI.send 202 13
+assemble # CPU.sleep 64
+assemble # NI.send 203 6
+assemble # NI.send 204 13
+assemble # CPU.sleep 64
+assemble # NI.send 205 6
+assemble # NI.send 206 13
+assemble # CPU.sleep 64
+assemble # NI.send 207 6
+assemble # NI.send 208 13
+assemble # CPU.sleep 64
+assemble # NI.send 209 6
+assemble # NI.send 210 13
+assemble # CPU.sleep 64
+assemble # NI.send 211 6
+assemble # NI.send 212 13
+assemble # CPU.sleep 64
+assemble # NI.send 213 6
+assemble # NI.send 214 13
+assemble # CPU.sleep 64
+assemble # NI.send 215 6
+assemble # NI.send 216 13
+assemble # CPU.sleep 64
+assemble # NI.send 217 6
+assemble # NI.send 218 13
+assemble # CPU.sleep 64
+assemble # NI.send 219 6
+assemble # NI.send 220 13
+assemble # CPU.sleep 64
+assemble # NI.send 221 6
+assemble # NI.send 222 13
+assemble # CPU.sleep 64
+assemble # NI.send 223 6
+assemble # NI.send 224 13
+assemble # CPU.sleep 64
+assemble # NI.send 225 6
+assemble # NI.send 226 13
+assemble # CPU.sleep 64
+assemble # NI.send 227 6
+assemble # NI.send 228 13
+assemble # CPU.sleep 64
+assemble # NI.send 229 6
+assemble # NI.send 230 13
+assemble # CPU.sleep 64
+assemble # NI.send 231 6
+assemble # NI.send 232 13
+assemble # CPU.sleep 64
+assemble # NI.send 233 6
+assemble # NI.send 234 13
+assemble # CPU.sleep 64
+assemble # NI.send 235 6
+assemble # NI.send 236 13
 
 
 data:
+32 # 12 # 2
+33 # 12 # 2
+34 # 12 # 2
+35 # 12 # 2
+36 # 12 # 2
+37 # 12 # 2
+38 # 12 # 2
+39 # 12 # 2
+201 # 6 # 3
+203 # 6 # 3
+205 # 6 # 3
+207 # 6 # 3
+209 # 6 # 3
+211 # 6 # 3
+213 # 6 # 3
+215 # 6 # 3
+217 # 6 # 3
+219 # 6 # 3
+221 # 6 # 3
+223 # 6 # 3
+225 # 6 # 3
+227 # 6 # 3
+229 # 6 # 3
+231 # 6 # 3
+233 # 6 # 3
+235 # 6 # 3
+202 # 13 # 3
+204 # 13 # 3
+206 # 13 # 3
+208 # 13 # 3
+210 # 13 # 3
+212 # 13 # 3
+214 # 13 # 3
+216 # 13 # 3
+218 # 13 # 3
+220 # 13 # 3
+222 # 13 # 3
+224 # 13 # 3
+226 # 13 # 3
+228 # 13 # 3
+230 # 13 # 3
+232 # 13 # 3
+234 # 13 # 3
+236 # 13 # 3
+200 # 0 # 1

@@ -1,9 +1,11 @@
-# rm -rf build/*
+#!/bin/bash
+if [ ! -d "build" ]; then
+  mkdir build
+fi
 cd build
 cmake .. && make -j
 
 # cd src
-
 # # build 
 # make clean && make -j >/dev/null 2>&1
 # rm libparser.a
