@@ -16,7 +16,7 @@ assemble # NI.recv 2699
 assemble # NI.recv 2700
 assemble # NI.recv 2701
 assemble # CPU.sleep 0
-assemble # NI.send 2710 3
+assemble # NI.send 2710 5
 assemble # CPU.sleep 96
 assemble # NI.send 2711 25
 assemble # NI.send 2712 17
@@ -80,4 +80,4 @@ data:
 2730 # 17 # 3
 2732 # 17 # 3
 2734 # 17 # 3
-2710 # 3 # 1
+2710 # 5 # 1

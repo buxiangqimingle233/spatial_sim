@@ -23,12 +23,6 @@ SpatialChip::SpatialChip(std::string spatial_chip_spec) {
     } 
     config.checkConsistency();
     _config = config;
-
-    // Check log file
-    _log_file = std::ofstream(config.GetStr("log_file"), std::ios::out);
-    if (!_log_file) {
-        throw "Log file doesn't exist !! ";
-    }
     
     // Initialize the interface queues between cores and nocs
     int k = config.GetInt("k");
@@ -46,11 +40,25 @@ SpatialChip::SpatialChip(std::string spatial_chip_spec) {
     }
     _credit_board->resize(array_size, true);
 
+    std::streambuf *backup = std::cout.rdbuf();
+    // redirect the standard output stream into log file
+    if (config.GetStr("log_file") != "-") {
+        // Check log file
+        _log_file = std::ofstream(config.GetStr("log_file"), std::ios::out);
+        if (!_log_file) {
+            throw "Log file doesn't exist !! ";
+        }
+        std::cout.rdbuf(_log_file.rdbuf());
+    }
+
     // Instantiate NoC
     noc = std::make_shared<NoC>(config, _send_queues, _received_queues);
 
     // Instantiate Core Array
     core_array = std::make_shared<CoreArray>(config, _send_queues, _received_queues, _credit_board);
+
+    // restore cout's original streambuf
+    std::cout.rdbuf(backup);
 
     // setup clock
     _clock = 0;

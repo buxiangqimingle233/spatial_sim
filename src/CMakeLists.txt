@@ -6,22 +6,29 @@ project(spatialsim)
 # DUMP_NODE_STATE: dump node states at each cycle
 
 # add_compile_options(-O0 -g -DMULTICAST)
-add_compile_options(-O0 -g)
+add_compile_options(-O0 -g -fPIC)
 
 add_subdirectory(core)
 add_subdirectory(noc)
 
-# build spatialsim
-file(GLOB cpp_files *.cpp)
-add_executable(${PROJECT_NAME} ${cpp_files})
-
+# build lib
+file(GLOB lib_files spatial_chip.cpp core_array.cpp noc.cpp)
+add_library(${PROJECT_NAME}_lib ${lib_files})
 # include
-target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
+target_include_directories(${PROJECT_NAME}_lib PUBLIC 
+    ${PARENT_DIRECTORY}
+    ${PROJECT_SOURCE_DIR}/include
+)
+# link sub-projects
+target_link_libraries(${PROJECT_NAME}_lib PUBLIC
+    noc core ${parser}
+)
 
-# link noc
-target_link_libraries(${PROJECT_NAME} PUBLIC noc)
-# link core
-target_link_libraries(${PROJECT_NAME} PUBLIC core)
-# link parser
-file(GLOB parser noc/parser/*.a)
-target_link_libraries(${PROJECT_NAME} PUBLIC ${parser})
+# executable
+file(GLOB cpp_files main.cpp)
+add_executable(${PROJECT_NAME} ${cpp_files})
+target_link_libraries(${PROJECT_NAME} PUBLIC ${PROJECT_NAME}_lib)
+
+# wrapper
+pybind11_add_module(simulator wrapper.cpp)
+target_link_libraries(simulator PUBLIC noc core ${PROJECT_NAME}_lib)
