@@ -23,7 +23,7 @@ SpatialChip::SpatialChip(std::string spatial_chip_spec) {
     } 
     config.checkConsistency();
     _config = config;
-    
+
     // Initialize the interface queues between cores and nocs
     int k = config.GetInt("k");
     int n = config.GetInt("n");
@@ -51,11 +51,16 @@ SpatialChip::SpatialChip(std::string spatial_chip_spec) {
         std::cout.rdbuf(_log_file.rdbuf());
     }
 
-    // Instantiate NoC
-    noc = std::make_shared<NoC>(config, _send_queues, _received_queues);
+    try {
+        // Instantiate NoC
+        noc = std::make_shared<NoC>(config, _send_queues, _received_queues);
 
-    // Instantiate Core Array
-    core_array = std::make_shared<CoreArray>(config, _send_queues, _received_queues, _credit_board);
+        // Instantiate Core Array
+        core_array = std::make_shared<CoreArray>(config, _send_queues, _received_queues, _credit_board);
+    } catch (char const* msg) {
+        std::cerr << msg << std::endl;
+        exit(-1);
+    }
 
     // restore cout's original streambuf
     std::cout.rdbuf(backup);

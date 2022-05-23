@@ -43,4 +43,4 @@ Configurations of this simulator are specified in this file.
 
 * Use `git submodule update --init --recursive --remote` to track submodules with the latest version. 
 * WARNING: The above command will NOT pull & merge submodules to their master branches, but create NULL branches instead. You should enter the submodule and create a temporal branch using ``git checkout -b temp`` to hold the commit you just pulled. You can work on this branch, and merge it to the `master` branch.
-
+* Using wrapper will takes about 6% more times than directly execute the binary

@@ -1,19 +1,4 @@
 operators:
-assemble # CPU.sleep 75
-assemble # NI.send 12 10
-assemble # NI.send 13 12
-assemble # NI.send 14 13
-assemble # NI.send 15 15
-assemble # CPU.sleep 75
-assemble # NI.send 16 10
-assemble # NI.send 17 12
-assemble # NI.send 18 13
-assemble # NI.send 19 15
-assemble # CPU.sleep 75
-assemble # NI.send 20 10
-assemble # NI.send 21 12
-assemble # NI.send 22 13
-assemble # NI.send 23 15
 assemble # NI.sync 274
 assemble # CPU.sleep 1470
 assemble # NI.send 1255 28
@@ -43,18 +28,6 @@ assemble # NI.send 1274 20
 
 
 data:
-12 # 10 # 153
-16 # 10 # 153
-20 # 10 # 153
-13 # 12 # 153
-17 # 12 # 153
-21 # 12 # 153
-14 # 13 # 153
-18 # 13 # 153
-22 # 13 # 153
-15 # 15 # 153
-19 # 15 # 153
-23 # 15 # 153
 1257 # 21 # 63
 1261 # 21 # 63
 1265 # 21 # 63

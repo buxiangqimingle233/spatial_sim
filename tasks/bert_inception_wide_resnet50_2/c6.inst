@@ -1,44 +1,65 @@
 operators:
-assemble # CPU.sleep 144
-assemble # NI.send 2662 8
-assemble # NI.send 2663 16
-assemble # CPU.sleep 144
-assemble # NI.send 2664 8
-assemble # NI.send 2665 16
-assemble # CPU.sleep 144
-assemble # NI.send 2666 8
-assemble # NI.send 2667 16
-assemble # CPU.sleep 144
-assemble # NI.send 2668 8
-assemble # NI.send 2669 16
-assemble # CPU.sleep 144
-assemble # NI.send 2670 8
-assemble # NI.send 2671 16
-assemble # CPU.sleep 144
-assemble # NI.send 2672 8
-assemble # NI.send 2673 16
-assemble # CPU.sleep 144
-assemble # NI.send 2674 8
-assemble # NI.send 2675 16
-assemble # CPU.sleep 144
-assemble # NI.send 2676 8
-assemble # NI.send 2677 16
+assemble # NI.sync 2710
+assemble # CPU.sleep 96
+assemble # NI.send 2735 25
+assemble # NI.send 2736 17
+assemble # CPU.sleep 96
+assemble # NI.send 2737 25
+assemble # NI.send 2738 17
+assemble # CPU.sleep 96
+assemble # NI.send 2739 25
+assemble # NI.send 2740 17
+assemble # CPU.sleep 96
+assemble # NI.send 2741 25
+assemble # NI.send 2742 17
+assemble # CPU.sleep 96
+assemble # NI.send 2743 25
+assemble # NI.send 2744 17
+assemble # CPU.sleep 96
+assemble # NI.send 2745 25
+assemble # NI.send 2746 17
+assemble # CPU.sleep 96
+assemble # NI.send 2747 25
+assemble # NI.send 2748 17
+assemble # CPU.sleep 96
+assemble # NI.send 2749 25
+assemble # NI.send 2750 17
+assemble # CPU.sleep 96
+assemble # NI.send 2751 25
+assemble # NI.send 2752 17
+assemble # CPU.sleep 96
+assemble # NI.send 2753 25
+assemble # NI.send 2754 17
+assemble # CPU.sleep 96
+assemble # NI.send 2755 25
+assemble # NI.send 2756 17
+assemble # CPU.sleep 96
+assemble # NI.send 2757 25
+assemble # NI.send 2758 17
 
 
 data:
-2662 # 8 # 3
-2664 # 8 # 3
-2666 # 8 # 3
-2668 # 8 # 3
-2670 # 8 # 3
-2672 # 8 # 3
-2674 # 8 # 3
-2676 # 8 # 3
-2663 # 16 # 3
-2665 # 16 # 3
-2667 # 16 # 3
-2669 # 16 # 3
-2671 # 16 # 3
-2673 # 16 # 3
-2675 # 16 # 3
-2677 # 16 # 3
+2735 # 25 # 195
+2737 # 25 # 195
+2739 # 25 # 195
+2741 # 25 # 195
+2743 # 25 # 195
+2745 # 25 # 195
+2747 # 25 # 195
+2749 # 25 # 195
+2751 # 25 # 195
+2753 # 25 # 195
+2755 # 25 # 195
+2757 # 25 # 195
+2736 # 17 # 195
+2738 # 17 # 195
+2740 # 17 # 195
+2742 # 17 # 195
+2744 # 17 # 195
+2746 # 17 # 195
+2748 # 17 # 195
+2750 # 17 # 195
+2752 # 17 # 195
+2754 # 17 # 195
+2756 # 17 # 195
+2758 # 17 # 195
