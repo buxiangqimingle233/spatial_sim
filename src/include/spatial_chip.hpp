@@ -28,7 +28,7 @@ private:
     PCNInterfaceSet _received_queues;  // the interface between core and noc: receive packets
     std::shared_ptr<std::vector<bool> > _credit_board;
 
-    std::ofstream _log_file;
+    std::ostream* _log_file;
 
     // Two hardware components, interacting with each other only via the queeue pair
     std::shared_ptr<NoC> noc;
@@ -36,8 +36,8 @@ private:
 
 public:
     void reset();
-    void run();
-    bool task_finished();
+    unsigned int run();
+    bool task_finished(int _clock);
     bool check_deadlock();
     void display_stats(std::ostream& os = std::cout);
 

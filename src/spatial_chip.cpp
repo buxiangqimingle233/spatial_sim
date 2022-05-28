@@ -6,6 +6,7 @@
 #include "core_array.hpp"
 #include "spatial_chip.hpp"
 #include "spatial_config.hpp"
+#include "time.h"
 
 namespace spatial {
 
@@ -43,12 +44,15 @@ SpatialChip::SpatialChip(std::string spatial_chip_spec) {
     std::streambuf *backup = std::cout.rdbuf();
     // redirect the standard output stream into log file
     if (config.GetStr("log_file") != "-") {
-        // Check log file
-        _log_file = std::ofstream(config.GetStr("log_file"), std::ios::out);
-        if (!_log_file) {
-            throw "Log file doesn't exist !! ";
+        _log_file = new ofstream(config.GetStr("log_file"), std::ios::out);
+        if (!(*_log_file)) {
+            std::cerr << "Log file doesn't exist !! " << std::endl;
+            throw "Wrong 1";
         }
-        std::cout.rdbuf(_log_file.rdbuf());
+        // _log_file = std::ofstream(config.GetStr("log_file"), std::ios::out);
+        std::cout.rdbuf(_log_file->rdbuf());
+    } else {
+        _log_file = &std::cout;
     }
 
     try {
@@ -78,13 +82,27 @@ void SpatialChip::reset() {
 }
 
 
-void SpatialChip::run() {
+unsigned int SpatialChip::run() {
     reset();
     int check_frequency = _config.GetInt("deadlock_check_freq");
+    std::streambuf *backup = std::cout.rdbuf();
+    std::cout.rdbuf(_log_file->rdbuf());
+    
+    // clock_t start, end;
+    // unsigned long core_array_time = 0, noc_time = 0;
 
-    while (!task_finished()) {
+    // FIXME: fix here
+    while (!task_finished(_clock)) {
+        // start = clock();
         core_array->step(_clock);
+        // end = clock();
+        // core_array_time += end - start;
+
+        // start = clock();
         noc->step(_clock);
+        // end = clock();
+        // noc_time += end - start;
+
         _clock++;
 
         if (_clock % check_frequency  == 0) {
@@ -102,10 +120,17 @@ void SpatialChip::run() {
 
     }
     std::cout << _clock << " | " << "Task Is Finished " << std::endl;
+
+    // restore cout's original streambuf
+    std::cout.rdbuf(backup);
+    
+    // std::cerr << "array / noc " << (double)core_array_time / (double)noc_time << std::endl;
+
+    return _clock;
 }
 
-bool SpatialChip::task_finished() {
-    return noc->traffic_drained() && core_array->allCoreClosed();
+bool SpatialChip::task_finished(int _clock) {
+    return noc->traffic_drained() && core_array->allCoreClosed(_clock);
 }
 
 bool SpatialChip::check_deadlock() {

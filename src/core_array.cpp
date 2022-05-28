@@ -30,7 +30,7 @@ CoreArray::CoreArray(Configuration config, PCNInterfaceSet send_queues_, PCNInte
         }
         std::string inst_file = working_dir + "/" + inst_file_names[core];
         std::string routing_board_file = config.GetStr("routing_board");
-        routing_board_file = working_dir + "/" + routing_board_file;
+        // routing_board_file = working_dir + "/" + routing_board_file;
         _cores.push_back(CORE(inst_file, latency_file, routing_board_file, core, (*send_queues_)[i], (*receive_queues_)[i], open_pipes, threshold, width));
     }
 }
@@ -38,7 +38,7 @@ CoreArray::CoreArray(Configuration config, PCNInterfaceSet send_queues_, PCNInte
 
 void CoreArray::step(int clock) {
     for (CORE& core : _cores) {
-        core.ClockTick();
+        core.ClockTick(clock);
     }
 }
 
@@ -62,10 +62,10 @@ bool CoreArray::stateChanged() {
     return change;
 }
 
-bool CoreArray::allCoreClosed() {
+bool CoreArray::allCoreClosed(int _clock) {
     bool core_closed = true;
     for (auto& c: _cores) {
-        core_closed &= c.AllInstFinished();
+        core_closed &= c.AllInstFinished(_clock);
     }
     return core_closed;
 }

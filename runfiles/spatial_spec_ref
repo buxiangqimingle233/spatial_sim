@@ -1,8 +1,10 @@
+// log_file = /dev/null;
 log_file = out.log;
+// log_file = -;
 
 
 // Core array speficication
-threshold = 1024;
+threshold = 10240;
 working_directory = tasks/bert_inception;
 tasks = {c0.inst,c1.inst,c2.inst,c3.inst,c4.inst,c5.inst,c6.inst,c7.inst,c8.inst,c9.inst,c10.inst,c11.inst,c12.inst,c13.inst,c14.inst,c15.inst};
 micro_instr_latency = runfiles/micro_instr_latency;

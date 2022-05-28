@@ -10,11 +10,12 @@ class Simulator:
         self.working_dir = working_dir
         self.spec = spec
 
-    def run(self):
+    def run(self) -> int:
         prev_cwd = os.getcwd()
         os.chdir(self.working_dir)
 
         instance = S.SpatialChip(self.spec)
-        instance.run()
+        cycle = instance.run()
         
         os.chdir(prev_cwd)
+        return cycle

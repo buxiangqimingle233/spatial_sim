@@ -27,7 +27,7 @@ public:
     void step(int clock);
     void DisplayStats(std::ostream & os = std::cout);
 
-    bool allCoreClosed();
+    bool allCoreClosed(int _clock);
     bool stateChanged();
 
 };
