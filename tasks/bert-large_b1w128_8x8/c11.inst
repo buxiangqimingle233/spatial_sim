@@ -1,0 +1,96 @@
+operators:
+assemble # NI.recv 179
+assemble # NI.recv 162
+assemble # CPU.sleep 128
+assemble # NI.send 210 10
+assemble # NI.recv 181
+assemble # NI.recv 163
+assemble # CPU.sleep 128
+assemble # NI.send 211 10
+assemble # NI.recv 183
+assemble # NI.recv 164
+assemble # CPU.sleep 128
+assemble # NI.send 212 10
+assemble # NI.recv 185
+assemble # NI.recv 165
+assemble # CPU.sleep 128
+assemble # NI.send 213 10
+assemble # NI.recv 187
+assemble # NI.recv 166
+assemble # CPU.sleep 128
+assemble # NI.send 214 10
+assemble # NI.recv 189
+assemble # NI.recv 167
+assemble # CPU.sleep 128
+assemble # NI.send 215 10
+assemble # NI.recv 191
+assemble # NI.recv 168
+assemble # CPU.sleep 128
+assemble # NI.send 216 10
+assemble # NI.recv 193
+assemble # NI.recv 169
+assemble # CPU.sleep 128
+assemble # NI.send 217 10
+assemble # NI.recv 195
+assemble # NI.recv 170
+assemble # CPU.sleep 128
+assemble # NI.send 218 10
+assemble # NI.recv 197
+assemble # NI.recv 171
+assemble # CPU.sleep 128
+assemble # NI.send 219 10
+assemble # NI.recv 199
+assemble # NI.recv 172
+assemble # CPU.sleep 128
+assemble # NI.send 220 10
+assemble # NI.recv 201
+assemble # NI.recv 173
+assemble # CPU.sleep 128
+assemble # NI.send 221 10
+assemble # NI.recv 203
+assemble # NI.recv 174
+assemble # CPU.sleep 128
+assemble # NI.send 222 10
+assemble # NI.recv 205
+assemble # NI.recv 175
+assemble # CPU.sleep 128
+assemble # NI.send 223 10
+assemble # NI.recv 207
+assemble # NI.recv 176
+assemble # CPU.sleep 128
+assemble # NI.send 224 10
+assemble # NI.recv 209
+assemble # NI.recv 177
+assemble # CPU.sleep 128
+assemble # NI.send 225 10
+assemble # NI.recv 2359
+assemble # NI.recv 2360
+assemble # NI.recv 2357
+assemble # NI.recv 2358
+assemble # CPU.sleep 0
+assemble # NI.send 2361 31
+assemble # CPU.sleep 2048
+assemble # NI.send 2362 10
+assemble # NI.send 2363 2
+
+
+data:
+210 # 10 # 3
+211 # 10 # 3
+212 # 10 # 3
+213 # 10 # 3
+214 # 10 # 3
+215 # 10 # 3
+216 # 10 # 3
+217 # 10 # 3
+218 # 10 # 3
+219 # 10 # 3
+220 # 10 # 3
+221 # 10 # 3
+222 # 10 # 3
+223 # 10 # 3
+224 # 10 # 3
+225 # 10 # 3
+2362 # 10 # 34
+2363 # 2 # 34
+2361 # 31 # 1

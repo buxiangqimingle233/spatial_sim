@@ -1,0 +1,213 @@
+operators:
+assemble # NI.recv 17
+assemble # NI.recv 0
+assemble # CPU.sleep 128
+assemble # NI.send 48 0
+assemble # NI.recv 19
+assemble # NI.recv 1
+assemble # CPU.sleep 128
+assemble # NI.send 49 0
+assemble # NI.recv 21
+assemble # NI.recv 2
+assemble # CPU.sleep 128
+assemble # NI.send 50 0
+assemble # NI.recv 23
+assemble # NI.recv 3
+assemble # CPU.sleep 128
+assemble # NI.send 51 0
+assemble # NI.recv 25
+assemble # NI.recv 4
+assemble # CPU.sleep 128
+assemble # NI.send 52 0
+assemble # NI.recv 27
+assemble # NI.recv 5
+assemble # CPU.sleep 128
+assemble # NI.send 53 0
+assemble # NI.recv 29
+assemble # NI.recv 6
+assemble # CPU.sleep 128
+assemble # NI.send 54 0
+assemble # NI.recv 31
+assemble # NI.recv 7
+assemble # CPU.sleep 128
+assemble # NI.send 55 0
+assemble # NI.recv 33
+assemble # NI.recv 8
+assemble # CPU.sleep 128
+assemble # NI.send 56 0
+assemble # NI.recv 35
+assemble # NI.recv 9
+assemble # CPU.sleep 128
+assemble # NI.send 57 0
+assemble # NI.recv 37
+assemble # NI.recv 10
+assemble # CPU.sleep 128
+assemble # NI.send 58 0
+assemble # NI.recv 39
+assemble # NI.recv 11
+assemble # CPU.sleep 128
+assemble # NI.send 59 0
+assemble # NI.recv 41
+assemble # NI.recv 12
+assemble # CPU.sleep 128
+assemble # NI.send 60 0
+assemble # NI.recv 43
+assemble # NI.recv 13
+assemble # CPU.sleep 128
+assemble # NI.send 61 0
+assemble # NI.recv 45
+assemble # NI.recv 14
+assemble # CPU.sleep 128
+assemble # NI.send 62 0
+assemble # NI.recv 47
+assemble # NI.recv 15
+assemble # CPU.sleep 128
+assemble # NI.send 63 0
+assemble # NI.recv 5482
+assemble # NI.recv 5480
+assemble # CPU.sleep 64
+assemble # NI.send 5578 1
+assemble # NI.recv 5484
+assemble # CPU.sleep 64
+assemble # NI.send 5579 1
+assemble # NI.recv 5486
+assemble # CPU.sleep 64
+assemble # NI.send 5580 1
+assemble # NI.recv 5488
+assemble # CPU.sleep 64
+assemble # NI.send 5581 1
+assemble # NI.recv 5490
+assemble # CPU.sleep 64
+assemble # NI.send 5582 1
+assemble # NI.recv 5492
+assemble # CPU.sleep 64
+assemble # NI.send 5583 1
+assemble # NI.recv 5494
+assemble # CPU.sleep 64
+assemble # NI.send 5584 1
+assemble # NI.recv 5496
+assemble # CPU.sleep 64
+assemble # NI.send 5585 1
+assemble # NI.recv 5498
+assemble # CPU.sleep 64
+assemble # NI.send 5586 1
+assemble # NI.recv 5500
+assemble # CPU.sleep 64
+assemble # NI.send 5587 1
+assemble # NI.recv 5502
+assemble # CPU.sleep 64
+assemble # NI.send 5588 1
+assemble # NI.recv 5504
+assemble # CPU.sleep 64
+assemble # NI.send 5589 1
+assemble # NI.recv 5506
+assemble # CPU.sleep 64
+assemble # NI.send 5590 1
+assemble # NI.recv 5508
+assemble # CPU.sleep 64
+assemble # NI.send 5591 1
+assemble # NI.recv 5510
+assemble # CPU.sleep 64
+assemble # NI.send 5592 1
+assemble # NI.recv 5512
+assemble # CPU.sleep 64
+assemble # NI.send 5593 1
+assemble # NI.recv 5514
+assemble # CPU.sleep 64
+assemble # NI.send 5594 1
+assemble # NI.recv 5516
+assemble # CPU.sleep 64
+assemble # NI.send 5595 1
+assemble # NI.recv 5518
+assemble # CPU.sleep 64
+assemble # NI.send 5596 1
+assemble # NI.recv 5520
+assemble # CPU.sleep 64
+assemble # NI.send 5597 1
+assemble # NI.recv 5522
+assemble # CPU.sleep 64
+assemble # NI.send 5598 1
+assemble # NI.recv 5524
+assemble # CPU.sleep 64
+assemble # NI.send 5599 1
+assemble # NI.recv 5526
+assemble # CPU.sleep 64
+assemble # NI.send 5600 1
+assemble # NI.recv 5528
+assemble # CPU.sleep 64
+assemble # NI.send 5601 1
+assemble # NI.recv 5530
+assemble # CPU.sleep 64
+assemble # NI.send 5602 1
+assemble # NI.recv 5532
+assemble # CPU.sleep 64
+assemble # NI.send 5603 1
+assemble # NI.recv 5534
+assemble # CPU.sleep 64
+assemble # NI.send 5604 1
+assemble # NI.recv 5536
+assemble # CPU.sleep 64
+assemble # NI.send 5605 1
+assemble # NI.recv 5538
+assemble # CPU.sleep 64
+assemble # NI.send 5606 1
+assemble # NI.recv 5540
+assemble # CPU.sleep 64
+assemble # NI.send 5607 1
+assemble # NI.recv 5542
+assemble # CPU.sleep 64
+assemble # NI.send 5608 1
+assemble # NI.recv 5544
+assemble # CPU.sleep 64
+assemble # NI.send 5609 1
+
+
+data:
+48 # 0 # 3
+49 # 0 # 3
+50 # 0 # 3
+51 # 0 # 3
+52 # 0 # 3
+53 # 0 # 3
+54 # 0 # 3
+55 # 0 # 3
+56 # 0 # 3
+57 # 0 # 3
+58 # 0 # 3
+59 # 0 # 3
+60 # 0 # 3
+61 # 0 # 3
+62 # 0 # 3
+63 # 0 # 3
+5578 # 1 # 3
+5579 # 1 # 3
+5580 # 1 # 3
+5581 # 1 # 3
+5582 # 1 # 3
+5583 # 1 # 3
+5584 # 1 # 3
+5585 # 1 # 3
+5586 # 1 # 3
+5587 # 1 # 3
+5588 # 1 # 3
+5589 # 1 # 3
+5590 # 1 # 3
+5591 # 1 # 3
+5592 # 1 # 3
+5593 # 1 # 3
+5594 # 1 # 3
+5595 # 1 # 3
+5596 # 1 # 3
+5597 # 1 # 3
+5598 # 1 # 3
+5599 # 1 # 3
+5600 # 1 # 3
+5601 # 1 # 3
+5602 # 1 # 3
+5603 # 1 # 3
+5604 # 1 # 3
+5605 # 1 # 3
+5606 # 1 # 3
+5607 # 1 # 3
+5608 # 1 # 3
+5609 # 1 # 3

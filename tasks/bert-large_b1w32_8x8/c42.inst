@@ -1,0 +1,16 @@
+operators:
+assemble # NI.recv 5215
+assemble # NI.recv 5216
+assemble # NI.recv 5213
+assemble # NI.recv 5214
+assemble # CPU.sleep 0
+assemble # NI.send 5217 24
+assemble # CPU.sleep 2048
+assemble # NI.send 5218 40
+assemble # NI.send 5219 48
+
+
+data:
+5218 # 40 # 130
+5219 # 48 # 130
+5217 # 24 # 1

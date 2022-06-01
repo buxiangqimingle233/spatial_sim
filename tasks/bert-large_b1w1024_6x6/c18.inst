@@ -1,0 +1,165 @@
+operators:
+assemble # CPU.sleep 128
+assemble # NI.send 16 0
+assemble # NI.send 17 1
+assemble # CPU.sleep 128
+assemble # NI.send 18 0
+assemble # NI.send 19 1
+assemble # CPU.sleep 128
+assemble # NI.send 20 0
+assemble # NI.send 21 1
+assemble # CPU.sleep 128
+assemble # NI.send 22 0
+assemble # NI.send 23 1
+assemble # CPU.sleep 128
+assemble # NI.send 24 0
+assemble # NI.send 25 1
+assemble # CPU.sleep 128
+assemble # NI.send 26 0
+assemble # NI.send 27 1
+assemble # CPU.sleep 128
+assemble # NI.send 28 0
+assemble # NI.send 29 1
+assemble # CPU.sleep 128
+assemble # NI.send 30 0
+assemble # NI.send 31 1
+assemble # CPU.sleep 128
+assemble # NI.send 32 0
+assemble # NI.send 33 1
+assemble # CPU.sleep 128
+assemble # NI.send 34 0
+assemble # NI.send 35 1
+assemble # CPU.sleep 128
+assemble # NI.send 36 0
+assemble # NI.send 37 1
+assemble # CPU.sleep 128
+assemble # NI.send 38 0
+assemble # NI.send 39 1
+assemble # CPU.sleep 128
+assemble # NI.send 40 0
+assemble # NI.send 41 1
+assemble # CPU.sleep 128
+assemble # NI.send 42 0
+assemble # NI.send 43 1
+assemble # CPU.sleep 128
+assemble # NI.send 44 0
+assemble # NI.send 45 1
+assemble # CPU.sleep 128
+assemble # NI.send 46 0
+assemble # NI.send 47 1
+assemble # NI.recv 80
+assemble # CPU.sleep 128
+assemble # NI.send 97 6
+assemble # NI.send 98 19
+assemble # CPU.sleep 128
+assemble # NI.send 99 6
+assemble # NI.send 100 19
+assemble # CPU.sleep 128
+assemble # NI.send 101 6
+assemble # NI.send 102 19
+assemble # CPU.sleep 128
+assemble # NI.send 103 6
+assemble # NI.send 104 19
+assemble # CPU.sleep 128
+assemble # NI.send 105 6
+assemble # NI.send 106 19
+assemble # CPU.sleep 128
+assemble # NI.send 107 6
+assemble # NI.send 108 19
+assemble # CPU.sleep 128
+assemble # NI.send 109 6
+assemble # NI.send 110 19
+assemble # CPU.sleep 128
+assemble # NI.send 111 6
+assemble # NI.send 112 19
+assemble # CPU.sleep 128
+assemble # NI.send 113 6
+assemble # NI.send 114 19
+assemble # CPU.sleep 128
+assemble # NI.send 115 6
+assemble # NI.send 116 19
+assemble # CPU.sleep 128
+assemble # NI.send 117 6
+assemble # NI.send 118 19
+assemble # CPU.sleep 128
+assemble # NI.send 119 6
+assemble # NI.send 120 19
+assemble # CPU.sleep 128
+assemble # NI.send 121 6
+assemble # NI.send 122 19
+assemble # CPU.sleep 128
+assemble # NI.send 123 6
+assemble # NI.send 124 19
+assemble # CPU.sleep 128
+assemble # NI.send 125 6
+assemble # NI.send 126 19
+assemble # CPU.sleep 128
+assemble # NI.send 127 6
+assemble # NI.send 128 19
+
+
+data:
+16 # 0 # 259
+18 # 0 # 259
+20 # 0 # 259
+22 # 0 # 259
+24 # 0 # 259
+26 # 0 # 259
+28 # 0 # 259
+30 # 0 # 259
+32 # 0 # 259
+34 # 0 # 259
+36 # 0 # 259
+38 # 0 # 259
+40 # 0 # 259
+42 # 0 # 259
+44 # 0 # 259
+46 # 0 # 259
+17 # 1 # 259
+19 # 1 # 259
+21 # 1 # 259
+23 # 1 # 259
+25 # 1 # 259
+27 # 1 # 259
+29 # 1 # 259
+31 # 1 # 259
+33 # 1 # 259
+35 # 1 # 259
+37 # 1 # 259
+39 # 1 # 259
+41 # 1 # 259
+43 # 1 # 259
+45 # 1 # 259
+47 # 1 # 259
+97 # 6 # 259
+99 # 6 # 259
+101 # 6 # 259
+103 # 6 # 259
+105 # 6 # 259
+107 # 6 # 259
+109 # 6 # 259
+111 # 6 # 259
+113 # 6 # 259
+115 # 6 # 259
+117 # 6 # 259
+119 # 6 # 259
+121 # 6 # 259
+123 # 6 # 259
+125 # 6 # 259
+127 # 6 # 259
+98 # 19 # 259
+100 # 19 # 259
+102 # 19 # 259
+104 # 19 # 259
+106 # 19 # 259
+108 # 19 # 259
+110 # 19 # 259
+112 # 19 # 259
+114 # 19 # 259
+116 # 19 # 259
+118 # 19 # 259
+120 # 19 # 259
+122 # 19 # 259
+124 # 19 # 259
+126 # 19 # 259
+128 # 19 # 259

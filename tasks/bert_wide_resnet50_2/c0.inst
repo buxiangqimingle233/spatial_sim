@@ -1,0 +1,44 @@
+operators:
+assemble # CPU.sleep 144
+assemble # NI.send 1996 8
+assemble # NI.send 1997 16
+assemble # CPU.sleep 144
+assemble # NI.send 1998 8
+assemble # NI.send 1999 16
+assemble # CPU.sleep 144
+assemble # NI.send 2000 8
+assemble # NI.send 2001 16
+assemble # CPU.sleep 144
+assemble # NI.send 2002 8
+assemble # NI.send 2003 16
+assemble # CPU.sleep 144
+assemble # NI.send 2004 8
+assemble # NI.send 2005 16
+assemble # CPU.sleep 144
+assemble # NI.send 2006 8
+assemble # NI.send 2007 16
+assemble # CPU.sleep 144
+assemble # NI.send 2008 8
+assemble # NI.send 2009 16
+assemble # CPU.sleep 144
+assemble # NI.send 2010 8
+assemble # NI.send 2011 16
+
+
+data:
+1996 # 8 # 291
+1998 # 8 # 291
+2000 # 8 # 291
+2002 # 8 # 291
+2004 # 8 # 291
+2006 # 8 # 291
+2008 # 8 # 291
+2010 # 8 # 291
+1997 # 16 # 291
+1999 # 16 # 291
+2001 # 16 # 291
+2003 # 16 # 291
+2005 # 16 # 291
+2007 # 16 # 291
+2009 # 16 # 291
+2011 # 16 # 291

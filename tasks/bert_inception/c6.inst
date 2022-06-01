@@ -1,0 +1,64 @@
+operators:
+assemble # NI.recv 480
+assemble # NI.recv 456
+assemble # CPU.sleep 96
+assemble # NI.send 516 7
+assemble # NI.recv 482
+assemble # NI.recv 458
+assemble # CPU.sleep 96
+assemble # NI.send 517 7
+assemble # NI.recv 484
+assemble # NI.recv 460
+assemble # CPU.sleep 96
+assemble # NI.send 518 7
+assemble # NI.recv 486
+assemble # NI.recv 462
+assemble # CPU.sleep 96
+assemble # NI.send 519 7
+assemble # NI.recv 488
+assemble # NI.recv 464
+assemble # CPU.sleep 96
+assemble # NI.send 520 7
+assemble # NI.recv 490
+assemble # NI.recv 466
+assemble # CPU.sleep 96
+assemble # NI.send 521 7
+assemble # NI.recv 492
+assemble # NI.recv 468
+assemble # CPU.sleep 96
+assemble # NI.send 522 7
+assemble # NI.recv 494
+assemble # NI.recv 470
+assemble # CPU.sleep 96
+assemble # NI.send 523 7
+assemble # NI.recv 496
+assemble # NI.recv 472
+assemble # CPU.sleep 96
+assemble # NI.send 524 7
+assemble # NI.recv 498
+assemble # NI.recv 474
+assemble # CPU.sleep 96
+assemble # NI.send 525 7
+assemble # NI.recv 500
+assemble # NI.recv 476
+assemble # CPU.sleep 96
+assemble # NI.send 526 7
+assemble # NI.recv 502
+assemble # NI.recv 478
+assemble # CPU.sleep 96
+assemble # NI.send 527 7
+
+
+data:
+516 # 7 # 2
+517 # 7 # 2
+518 # 7 # 2
+519 # 7 # 2
+520 # 7 # 2
+521 # 7 # 2
+522 # 7 # 2
+523 # 7 # 2
+524 # 7 # 2
+525 # 7 # 2
+526 # 7 # 2
+527 # 7 # 2

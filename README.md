@@ -27,9 +27,7 @@ git submodule update --init --recursive --remote
 Build the project:
 ```bash
 # build
-mkdir build
-cd build
-cmake .. && make -j
+./rebuild.sh
 ```
 
 Run the demo benchmark: 

@@ -1,0 +1,98 @@
+operators:
+assemble # CPU.sleep 75
+assemble # NI.send 0 10
+assemble # NI.send 1 12
+assemble # NI.send 2 13
+assemble # NI.send 3 15
+assemble # CPU.sleep 75
+assemble # NI.send 4 10
+assemble # NI.send 5 12
+assemble # NI.send 6 13
+assemble # NI.send 7 15
+assemble # CPU.sleep 75
+assemble # NI.send 8 10
+assemble # NI.send 9 12
+assemble # NI.send 10 13
+assemble # NI.send 11 15
+assemble # CPU.sleep 75
+assemble # NI.send 12 10
+assemble # NI.send 13 12
+assemble # NI.send 14 13
+assemble # NI.send 15 15
+assemble # CPU.sleep 75
+assemble # NI.send 16 10
+assemble # NI.send 17 12
+assemble # NI.send 18 13
+assemble # NI.send 19 15
+assemble # CPU.sleep 75
+assemble # NI.send 20 10
+assemble # NI.send 21 12
+assemble # NI.send 22 13
+assemble # NI.send 23 15
+assemble # CPU.sleep 144
+assemble # NI.send 2662 8
+assemble # NI.send 2663 16
+assemble # CPU.sleep 144
+assemble # NI.send 2664 8
+assemble # NI.send 2665 16
+assemble # CPU.sleep 144
+assemble # NI.send 2666 8
+assemble # NI.send 2667 16
+assemble # CPU.sleep 144
+assemble # NI.send 2668 8
+assemble # NI.send 2669 16
+assemble # CPU.sleep 144
+assemble # NI.send 2670 8
+assemble # NI.send 2671 16
+assemble # CPU.sleep 144
+assemble # NI.send 2672 8
+assemble # NI.send 2673 16
+assemble # CPU.sleep 144
+assemble # NI.send 2674 8
+assemble # NI.send 2675 16
+assemble # CPU.sleep 144
+assemble # NI.send 2676 8
+assemble # NI.send 2677 16
+
+
+data:
+2662 # 8 # 3
+2664 # 8 # 3
+2666 # 8 # 3
+2668 # 8 # 3
+2670 # 8 # 3
+2672 # 8 # 3
+2674 # 8 # 3
+2676 # 8 # 3
+2663 # 16 # 3
+2665 # 16 # 3
+2667 # 16 # 3
+2669 # 16 # 3
+2671 # 16 # 3
+2673 # 16 # 3
+2675 # 16 # 3
+2677 # 16 # 3
+12 # 10 # 153
+16 # 10 # 153
+20 # 10 # 153
+13 # 12 # 153
+17 # 12 # 153
+21 # 12 # 153
+14 # 13 # 153
+18 # 13 # 153
+22 # 13 # 153
+15 # 15 # 153
+19 # 15 # 153
+23 # 15 # 153
+0 # 10 # 3
+4 # 10 # 3
+8 # 10 # 3
+1 # 12 # 3
+5 # 12 # 3
+9 # 12 # 3
+2 # 13 # 3
+6 # 13 # 3
+10 # 13 # 3
+3 # 15 # 3
+7 # 15 # 3
+11 # 15 # 3

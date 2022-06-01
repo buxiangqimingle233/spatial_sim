@@ -1,0 +1,567 @@
+operators:
+assemble # CPU.sleep 128
+assemble # NI.send 16 1
+assemble # NI.send 17 9
+assemble # CPU.sleep 128
+assemble # NI.send 18 1
+assemble # NI.send 19 9
+assemble # CPU.sleep 128
+assemble # NI.send 20 1
+assemble # NI.send 21 9
+assemble # CPU.sleep 128
+assemble # NI.send 22 1
+assemble # NI.send 23 9
+assemble # CPU.sleep 128
+assemble # NI.send 24 1
+assemble # NI.send 25 9
+assemble # CPU.sleep 128
+assemble # NI.send 26 1
+assemble # NI.send 27 9
+assemble # CPU.sleep 128
+assemble # NI.send 28 1
+assemble # NI.send 29 9
+assemble # CPU.sleep 128
+assemble # NI.send 30 1
+assemble # NI.send 31 9
+assemble # CPU.sleep 128
+assemble # NI.send 32 1
+assemble # NI.send 33 9
+assemble # CPU.sleep 128
+assemble # NI.send 34 1
+assemble # NI.send 35 9
+assemble # CPU.sleep 128
+assemble # NI.send 36 1
+assemble # NI.send 37 9
+assemble # CPU.sleep 128
+assemble # NI.send 38 1
+assemble # NI.send 39 9
+assemble # CPU.sleep 128
+assemble # NI.send 40 1
+assemble # NI.send 41 9
+assemble # CPU.sleep 128
+assemble # NI.send 42 1
+assemble # NI.send 43 9
+assemble # CPU.sleep 128
+assemble # NI.send 44 1
+assemble # NI.send 45 9
+assemble # CPU.sleep 128
+assemble # NI.send 46 1
+assemble # NI.send 47 9
+assemble # NI.recv 1326
+assemble # CPU.sleep 64
+assemble # NI.send 1329 16
+assemble # NI.send 1330 25
+assemble # CPU.sleep 64
+assemble # NI.send 1331 16
+assemble # NI.send 1332 25
+assemble # CPU.sleep 64
+assemble # NI.send 1333 16
+assemble # NI.send 1334 25
+assemble # CPU.sleep 64
+assemble # NI.send 1335 16
+assemble # NI.send 1336 25
+assemble # CPU.sleep 64
+assemble # NI.send 1337 16
+assemble # NI.send 1338 25
+assemble # CPU.sleep 64
+assemble # NI.send 1339 16
+assemble # NI.send 1340 25
+assemble # CPU.sleep 64
+assemble # NI.send 1341 16
+assemble # NI.send 1342 25
+assemble # CPU.sleep 64
+assemble # NI.send 1343 16
+assemble # NI.send 1344 25
+assemble # CPU.sleep 64
+assemble # NI.send 1345 16
+assemble # NI.send 1346 25
+assemble # CPU.sleep 64
+assemble # NI.send 1347 16
+assemble # NI.send 1348 25
+assemble # CPU.sleep 64
+assemble # NI.send 1349 16
+assemble # NI.send 1350 25
+assemble # CPU.sleep 64
+assemble # NI.send 1351 16
+assemble # NI.send 1352 25
+assemble # CPU.sleep 64
+assemble # NI.send 1353 16
+assemble # NI.send 1354 25
+assemble # CPU.sleep 64
+assemble # NI.send 1355 16
+assemble # NI.send 1356 25
+assemble # CPU.sleep 64
+assemble # NI.send 1357 16
+assemble # NI.send 1358 25
+assemble # CPU.sleep 64
+assemble # NI.send 1359 16
+assemble # NI.send 1360 25
+assemble # CPU.sleep 64
+assemble # NI.send 1361 16
+assemble # NI.send 1362 25
+assemble # CPU.sleep 64
+assemble # NI.send 1363 16
+assemble # NI.send 1364 25
+assemble # CPU.sleep 64
+assemble # NI.send 1365 16
+assemble # NI.send 1366 25
+assemble # CPU.sleep 64
+assemble # NI.send 1367 16
+assemble # NI.send 1368 25
+assemble # CPU.sleep 64
+assemble # NI.send 1369 16
+assemble # NI.send 1370 25
+assemble # CPU.sleep 64
+assemble # NI.send 1371 16
+assemble # NI.send 1372 25
+assemble # CPU.sleep 64
+assemble # NI.send 1373 16
+assemble # NI.send 1374 25
+assemble # CPU.sleep 64
+assemble # NI.send 1375 16
+assemble # NI.send 1376 25
+assemble # CPU.sleep 64
+assemble # NI.send 1377 16
+assemble # NI.send 1378 25
+assemble # CPU.sleep 64
+assemble # NI.send 1379 16
+assemble # NI.send 1380 25
+assemble # CPU.sleep 64
+assemble # NI.send 1381 16
+assemble # NI.send 1382 25
+assemble # CPU.sleep 64
+assemble # NI.send 1383 16
+assemble # NI.send 1384 25
+assemble # CPU.sleep 64
+assemble # NI.send 1385 16
+assemble # NI.send 1386 25
+assemble # CPU.sleep 64
+assemble # NI.send 1387 16
+assemble # NI.send 1388 25
+assemble # CPU.sleep 64
+assemble # NI.send 1389 16
+assemble # NI.send 1390 25
+assemble # CPU.sleep 64
+assemble # NI.send 1391 16
+assemble # NI.send 1392 25
+assemble # NI.recv 4051
+assemble # CPU.sleep 64
+assemble # NI.send 4054 53
+assemble # NI.send 4055 52
+assemble # CPU.sleep 64
+assemble # NI.send 4056 53
+assemble # NI.send 4057 52
+assemble # CPU.sleep 64
+assemble # NI.send 4058 53
+assemble # NI.send 4059 52
+assemble # CPU.sleep 64
+assemble # NI.send 4060 53
+assemble # NI.send 4061 52
+assemble # CPU.sleep 64
+assemble # NI.send 4062 53
+assemble # NI.send 4063 52
+assemble # CPU.sleep 64
+assemble # NI.send 4064 53
+assemble # NI.send 4065 52
+assemble # CPU.sleep 64
+assemble # NI.send 4066 53
+assemble # NI.send 4067 52
+assemble # CPU.sleep 64
+assemble # NI.send 4068 53
+assemble # NI.send 4069 52
+assemble # CPU.sleep 64
+assemble # NI.send 4070 53
+assemble # NI.send 4071 52
+assemble # CPU.sleep 64
+assemble # NI.send 4072 53
+assemble # NI.send 4073 52
+assemble # CPU.sleep 64
+assemble # NI.send 4074 53
+assemble # NI.send 4075 52
+assemble # CPU.sleep 64
+assemble # NI.send 4076 53
+assemble # NI.send 4077 52
+assemble # CPU.sleep 64
+assemble # NI.send 4078 53
+assemble # NI.send 4079 52
+assemble # CPU.sleep 64
+assemble # NI.send 4080 53
+assemble # NI.send 4081 52
+assemble # CPU.sleep 64
+assemble # NI.send 4082 53
+assemble # NI.send 4083 52
+assemble # CPU.sleep 64
+assemble # NI.send 4084 53
+assemble # NI.send 4085 52
+assemble # CPU.sleep 64
+assemble # NI.send 4086 53
+assemble # NI.send 4087 52
+assemble # CPU.sleep 64
+assemble # NI.send 4088 53
+assemble # NI.send 4089 52
+assemble # CPU.sleep 64
+assemble # NI.send 4090 53
+assemble # NI.send 4091 52
+assemble # CPU.sleep 64
+assemble # NI.send 4092 53
+assemble # NI.send 4093 52
+assemble # CPU.sleep 64
+assemble # NI.send 4094 53
+assemble # NI.send 4095 52
+assemble # CPU.sleep 64
+assemble # NI.send 4096 53
+assemble # NI.send 4097 52
+assemble # CPU.sleep 64
+assemble # NI.send 4098 53
+assemble # NI.send 4099 52
+assemble # CPU.sleep 64
+assemble # NI.send 4100 53
+assemble # NI.send 4101 52
+assemble # CPU.sleep 64
+assemble # NI.send 4102 53
+assemble # NI.send 4103 52
+assemble # CPU.sleep 64
+assemble # NI.send 4104 53
+assemble # NI.send 4105 52
+assemble # CPU.sleep 64
+assemble # NI.send 4106 53
+assemble # NI.send 4107 52
+assemble # CPU.sleep 64
+assemble # NI.send 4108 53
+assemble # NI.send 4109 52
+assemble # CPU.sleep 64
+assemble # NI.send 4110 53
+assemble # NI.send 4111 52
+assemble # CPU.sleep 64
+assemble # NI.send 4112 53
+assemble # NI.send 4113 52
+assemble # CPU.sleep 64
+assemble # NI.send 4114 53
+assemble # NI.send 4115 52
+assemble # CPU.sleep 64
+assemble # NI.send 4116 53
+assemble # NI.send 4117 52
+assemble # NI.recv 6645
+assemble # CPU.sleep 64
+assemble # NI.send 6648 6
+assemble # NI.send 6649 5
+assemble # CPU.sleep 64
+assemble # NI.send 6650 6
+assemble # NI.send 6651 5
+assemble # CPU.sleep 64
+assemble # NI.send 6652 6
+assemble # NI.send 6653 5
+assemble # CPU.sleep 64
+assemble # NI.send 6654 6
+assemble # NI.send 6655 5
+assemble # CPU.sleep 64
+assemble # NI.send 6656 6
+assemble # NI.send 6657 5
+assemble # CPU.sleep 64
+assemble # NI.send 6658 6
+assemble # NI.send 6659 5
+assemble # CPU.sleep 64
+assemble # NI.send 6660 6
+assemble # NI.send 6661 5
+assemble # CPU.sleep 64
+assemble # NI.send 6662 6
+assemble # NI.send 6663 5
+assemble # CPU.sleep 64
+assemble # NI.send 6664 6
+assemble # NI.send 6665 5
+assemble # CPU.sleep 64
+assemble # NI.send 6666 6
+assemble # NI.send 6667 5
+assemble # CPU.sleep 64
+assemble # NI.send 6668 6
+assemble # NI.send 6669 5
+assemble # CPU.sleep 64
+assemble # NI.send 6670 6
+assemble # NI.send 6671 5
+assemble # CPU.sleep 64
+assemble # NI.send 6672 6
+assemble # NI.send 6673 5
+assemble # CPU.sleep 64
+assemble # NI.send 6674 6
+assemble # NI.send 6675 5
+assemble # CPU.sleep 64
+assemble # NI.send 6676 6
+assemble # NI.send 6677 5
+assemble # CPU.sleep 64
+assemble # NI.send 6678 6
+assemble # NI.send 6679 5
+assemble # CPU.sleep 64
+assemble # NI.send 6680 6
+assemble # NI.send 6681 5
+assemble # CPU.sleep 64
+assemble # NI.send 6682 6
+assemble # NI.send 6683 5
+assemble # CPU.sleep 64
+assemble # NI.send 6684 6
+assemble # NI.send 6685 5
+assemble # CPU.sleep 64
+assemble # NI.send 6686 6
+assemble # NI.send 6687 5
+assemble # CPU.sleep 64
+assemble # NI.send 6688 6
+assemble # NI.send 6689 5
+assemble # CPU.sleep 64
+assemble # NI.send 6690 6
+assemble # NI.send 6691 5
+assemble # CPU.sleep 64
+assemble # NI.send 6692 6
+assemble # NI.send 6693 5
+assemble # CPU.sleep 64
+assemble # NI.send 6694 6
+assemble # NI.send 6695 5
+assemble # CPU.sleep 64
+assemble # NI.send 6696 6
+assemble # NI.send 6697 5
+assemble # CPU.sleep 64
+assemble # NI.send 6698 6
+assemble # NI.send 6699 5
+assemble # CPU.sleep 64
+assemble # NI.send 6700 6
+assemble # NI.send 6701 5
+assemble # CPU.sleep 64
+assemble # NI.send 6702 6
+assemble # NI.send 6703 5
+assemble # CPU.sleep 64
+assemble # NI.send 6704 6
+assemble # NI.send 6705 5
+assemble # CPU.sleep 64
+assemble # NI.send 6706 6
+assemble # NI.send 6707 5
+assemble # CPU.sleep 64
+assemble # NI.send 6708 6
+assemble # NI.send 6709 5
+assemble # CPU.sleep 64
+assemble # NI.send 6710 6
+assemble # NI.send 6711 5
+
+
+data:
+16 # 1 # 2051
+18 # 1 # 2051
+20 # 1 # 2051
+22 # 1 # 2051
+24 # 1 # 2051
+26 # 1 # 2051
+28 # 1 # 2051
+30 # 1 # 2051
+32 # 1 # 2051
+34 # 1 # 2051
+36 # 1 # 2051
+38 # 1 # 2051
+40 # 1 # 2051
+42 # 1 # 2051
+44 # 1 # 2051
+46 # 1 # 2051
+17 # 9 # 2051
+19 # 9 # 2051
+21 # 9 # 2051
+23 # 9 # 2051
+25 # 9 # 2051
+27 # 9 # 2051
+29 # 9 # 2051
+31 # 9 # 2051
+33 # 9 # 2051
+35 # 9 # 2051
+37 # 9 # 2051
+39 # 9 # 2051
+41 # 9 # 2051
+43 # 9 # 2051
+45 # 9 # 2051
+47 # 9 # 2051
+1329 # 16 # 1027
+1331 # 16 # 1027
+1333 # 16 # 1027
+1335 # 16 # 1027
+1337 # 16 # 1027
+1339 # 16 # 1027
+1341 # 16 # 1027
+1343 # 16 # 1027
+1345 # 16 # 1027
+1347 # 16 # 1027
+1349 # 16 # 1027
+1351 # 16 # 1027
+1353 # 16 # 1027
+1355 # 16 # 1027
+1357 # 16 # 1027
+1359 # 16 # 1027
+1361 # 16 # 1027
+1363 # 16 # 1027
+1365 # 16 # 1027
+1367 # 16 # 1027
+1369 # 16 # 1027
+1371 # 16 # 1027
+1373 # 16 # 1027
+1375 # 16 # 1027
+1377 # 16 # 1027
+1379 # 16 # 1027
+1381 # 16 # 1027
+1383 # 16 # 1027
+1385 # 16 # 1027
+1387 # 16 # 1027
+1389 # 16 # 1027
+1391 # 16 # 1027
+1330 # 25 # 1027
+1332 # 25 # 1027
+1334 # 25 # 1027
+1336 # 25 # 1027
+1338 # 25 # 1027
+1340 # 25 # 1027
+1342 # 25 # 1027
+1344 # 25 # 1027
+1346 # 25 # 1027
+1348 # 25 # 1027
+1350 # 25 # 1027
+1352 # 25 # 1027
+1354 # 25 # 1027
+1356 # 25 # 1027
+1358 # 25 # 1027
+1360 # 25 # 1027
+1362 # 25 # 1027
+1364 # 25 # 1027
+1366 # 25 # 1027
+1368 # 25 # 1027
+1370 # 25 # 1027
+1372 # 25 # 1027
+1374 # 25 # 1027
+1376 # 25 # 1027
+1378 # 25 # 1027
+1380 # 25 # 1027
+1382 # 25 # 1027
+1384 # 25 # 1027
+1386 # 25 # 1027
+1388 # 25 # 1027
+1390 # 25 # 1027
+1392 # 25 # 1027
+4054 # 53 # 1027
+4056 # 53 # 1027
+4058 # 53 # 1027
+4060 # 53 # 1027
+4062 # 53 # 1027
+4064 # 53 # 1027
+4066 # 53 # 1027
+4068 # 53 # 1027
+4070 # 53 # 1027
+4072 # 53 # 1027
+4074 # 53 # 1027
+4076 # 53 # 1027
+4078 # 53 # 1027
+4080 # 53 # 1027
+4082 # 53 # 1027
+4084 # 53 # 1027
+4086 # 53 # 1027
+4088 # 53 # 1027
+4090 # 53 # 1027
+4092 # 53 # 1027
+4094 # 53 # 1027
+4096 # 53 # 1027
+4098 # 53 # 1027
+4100 # 53 # 1027
+4102 # 53 # 1027
+4104 # 53 # 1027
+4106 # 53 # 1027
+4108 # 53 # 1027
+4110 # 53 # 1027
+4112 # 53 # 1027
+4114 # 53 # 1027
+4116 # 53 # 1027
+4055 # 52 # 1027
+4057 # 52 # 1027
+4059 # 52 # 1027
+4061 # 52 # 1027
+4063 # 52 # 1027
+4065 # 52 # 1027
+4067 # 52 # 1027
+4069 # 52 # 1027
+4071 # 52 # 1027
+4073 # 52 # 1027
+4075 # 52 # 1027
+4077 # 52 # 1027
+4079 # 52 # 1027
+4081 # 52 # 1027
+4083 # 52 # 1027
+4085 # 52 # 1027
+4087 # 52 # 1027
+4089 # 52 # 1027
+4091 # 52 # 1027
+4093 # 52 # 1027
+4095 # 52 # 1027
+4097 # 52 # 1027
+4099 # 52 # 1027
+4101 # 52 # 1027
+4103 # 52 # 1027
+4105 # 52 # 1027
+4107 # 52 # 1027
+4109 # 52 # 1027
+4111 # 52 # 1027
+4113 # 52 # 1027
+4115 # 52 # 1027
+4117 # 52 # 1027
+6649 # 5 # 1027
+6651 # 5 # 1027
+6653 # 5 # 1027
+6655 # 5 # 1027
+6657 # 5 # 1027
+6659 # 5 # 1027
+6661 # 5 # 1027
+6663 # 5 # 1027
+6665 # 5 # 1027
+6667 # 5 # 1027
+6669 # 5 # 1027
+6671 # 5 # 1027
+6673 # 5 # 1027
+6675 # 5 # 1027
+6677 # 5 # 1027
+6679 # 5 # 1027
+6681 # 5 # 1027
+6683 # 5 # 1027
+6685 # 5 # 1027
+6687 # 5 # 1027
+6689 # 5 # 1027
+6691 # 5 # 1027
+6693 # 5 # 1027
+6695 # 5 # 1027
+6697 # 5 # 1027
+6699 # 5 # 1027
+6701 # 5 # 1027
+6703 # 5 # 1027
+6705 # 5 # 1027
+6707 # 5 # 1027
+6709 # 5 # 1027
+6711 # 5 # 1027
+6648 # 6 # 1027
+6650 # 6 # 1027
+6652 # 6 # 1027
+6654 # 6 # 1027
+6656 # 6 # 1027
+6658 # 6 # 1027
+6660 # 6 # 1027
+6662 # 6 # 1027
+6664 # 6 # 1027
+6666 # 6 # 1027
+6668 # 6 # 1027
+6670 # 6 # 1027
+6672 # 6 # 1027
+6674 # 6 # 1027
+6676 # 6 # 1027
+6678 # 6 # 1027
+6680 # 6 # 1027
+6682 # 6 # 1027
+6684 # 6 # 1027
+6686 # 6 # 1027
+6688 # 6 # 1027
+6690 # 6 # 1027
+6692 # 6 # 1027
+6694 # 6 # 1027
+6696 # 6 # 1027
+6698 # 6 # 1027
+6700 # 6 # 1027
+6702 # 6 # 1027
+6704 # 6 # 1027
+6706 # 6 # 1027
+6708 # 6 # 1027
+6710 # 6 # 1027

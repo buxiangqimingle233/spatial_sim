@@ -1,0 +1,52 @@
+operators:
+assemble # NI.recv 20860
+assemble # NI.recv 20861
+assemble # NI.recv 20852
+assemble # NI.recv 20853
+assemble # CPU.sleep 0
+assemble # NI.send 20868 128
+assemble # NI.recv 20862
+assemble # NI.recv 20863
+assemble # NI.recv 20854
+assemble # NI.recv 20855
+assemble # CPU.sleep 0
+assemble # NI.send 20869 128
+assemble # NI.recv 20864
+assemble # NI.recv 20865
+assemble # NI.recv 20856
+assemble # NI.recv 20857
+assemble # CPU.sleep 0
+assemble # NI.send 20870 128
+assemble # NI.recv 20866
+assemble # NI.recv 20867
+assemble # NI.recv 20858
+assemble # NI.recv 20859
+assemble # CPU.sleep 0
+assemble # NI.send 20871 128
+assemble # CPU.sleep 2048
+assemble # NI.send 20872 27
+assemble # NI.send 20873 26
+assemble # CPU.sleep 2048
+assemble # NI.send 20874 27
+assemble # NI.send 20875 26
+assemble # CPU.sleep 2048
+assemble # NI.send 20876 27
+assemble # NI.send 20877 26
+assemble # CPU.sleep 2048
+assemble # NI.send 20878 27
+assemble # NI.send 20879 26
+
+
+data:
+20872 # 27 # 130
+20873 # 26 # 130
+20874 # 27 # 130
+20875 # 26 # 130
+20876 # 27 # 130
+20877 # 26 # 130
+20878 # 27 # 130
+20879 # 26 # 130
+20868 # 128 # 1
+20869 # 128 # 1
+20870 # 128 # 1
+20871 # 128 # 1

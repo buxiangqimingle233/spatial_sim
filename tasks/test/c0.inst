@@ -1,0 +1,11 @@
+operators: 
+// compute # ij, jk -> ik # 2 # 0, 1
+assemble # NI.recv 0
+assemble # CPU.reshape 0 4 1
+assemble # NI.recv 1
+assemble # CPU.reshape 1 1 4
+assemble # ACC.cal ij,jk->ik 2 0 1
+assemble # NI.send 2 3
+
+data: 
+2 # 3 # 

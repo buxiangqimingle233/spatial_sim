@@ -1,0 +1,44 @@
+operators:
+assemble # NI.recv 1997
+assemble # NI.recv 1981
+assemble # CPU.sleep 144
+assemble # NI.send 2012 9
+assemble # NI.recv 1999
+assemble # NI.recv 1983
+assemble # CPU.sleep 144
+assemble # NI.send 2013 9
+assemble # NI.recv 2001
+assemble # NI.recv 1985
+assemble # CPU.sleep 144
+assemble # NI.send 2014 9
+assemble # NI.recv 2003
+assemble # NI.recv 1987
+assemble # CPU.sleep 144
+assemble # NI.send 2015 9
+assemble # NI.recv 2005
+assemble # NI.recv 1989
+assemble # CPU.sleep 144
+assemble # NI.send 2016 9
+assemble # NI.recv 2007
+assemble # NI.recv 1991
+assemble # CPU.sleep 144
+assemble # NI.send 2017 9
+assemble # NI.recv 2009
+assemble # NI.recv 1993
+assemble # CPU.sleep 144
+assemble # NI.send 2018 9
+assemble # NI.recv 2011
+assemble # NI.recv 1995
+assemble # CPU.sleep 144
+assemble # NI.send 2019 9
+
+
+data:
+2012 # 9 # 2
+2013 # 9 # 2
+2014 # 9 # 2
+2015 # 9 # 2
+2016 # 9 # 2
+2017 # 9 # 2
+2018 # 9 # 2
+2019 # 9 # 2
