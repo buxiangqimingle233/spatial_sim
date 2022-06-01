@@ -55,6 +55,9 @@ public:
     }
 
     void addSegment(int src, int dst, shared_ptr<queue<int>> im_nodes, bool eject = false) {
+        if (src == dst) {
+            std::cerr << src << " " << dst << std::endl;
+        }
         assert(src != dst);
         // insert intermediate nodes
         if (im_nodes == nullptr) {
