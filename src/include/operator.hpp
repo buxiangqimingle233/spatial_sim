@@ -196,15 +196,12 @@ public:
                     dynamic_pointer_cast<CompOperator>(op)->input_stationary.insert(make_pair(dep, false));
                     vis_tid.insert(dep);
                 } else {
-                    dynamic_pointer_cast<CompOperator>(op)->input_stationary.insert(make_pair(dep, false));
+                    // FIXME: need test
+                    dynamic_pointer_cast<CompOperator>(op)->input_stationary.insert(make_pair(dep, true));
                 }
             }
         }
-
-        // TODO: We do not support output stationary at present.
-
     }
-
 };
 
 class ManOperator : public Operator {

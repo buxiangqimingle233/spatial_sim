@@ -51,7 +51,7 @@ bool CoreArray::stateChanged() {
     } else {
         int size = _cores.size();
         for (int i = 0; i < size; ++i) {
-            if (!_cores[i].EqualTo(cores_backup[i])) {
+            if (!_cores[i].equalTo(cores_backup[i])) {
                 change = true;
                 break;
             }
@@ -65,7 +65,7 @@ bool CoreArray::stateChanged() {
 bool CoreArray::allCoreClosed(int _clock) {
     bool core_closed = true;
     for (auto& c: _cores) {
-        core_closed &= c.AllInstFinished(_clock);
+        core_closed &= c.finishAllTasks(_clock);
     }
     return core_closed;
 }
