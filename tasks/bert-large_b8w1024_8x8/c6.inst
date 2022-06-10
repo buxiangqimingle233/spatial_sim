@@ -1,0 +1,446 @@
+operators:
+{
+assemble # NI.recv 8248
+assemble # NI.recv 8249
+assemble # NI.recv 8232
+assemble # NI.recv 8233
+assemble # CPU.sleep 0
+assemble # NI.send 8264 31
+assemble # CPU.sleep 128
+assemble # NI.send 8272 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8273 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8274 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8275 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8276 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8277 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8278 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8279 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8280 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8281 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8282 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8283 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8284 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8285 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8286 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8287 22 23
+assemble # NI.recv 8250
+assemble # NI.recv 8251
+assemble # NI.recv 8234
+assemble # NI.recv 8235
+assemble # CPU.sleep 0
+assemble # NI.send 8265 31
+assemble # CPU.sleep 128
+assemble # NI.send 8288 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8289 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8290 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8291 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8292 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8293 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8294 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8295 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8296 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8297 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8298 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8299 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8300 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8301 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8302 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8303 22 23
+assemble # NI.recv 8252
+assemble # NI.recv 8253
+assemble # NI.recv 8236
+assemble # NI.recv 8237
+assemble # CPU.sleep 0
+assemble # NI.send 8266 31
+assemble # CPU.sleep 128
+assemble # NI.send 8304 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8305 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8306 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8307 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8308 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8309 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8310 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8311 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8312 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8313 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8314 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8315 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8316 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8317 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8318 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8319 22 23
+assemble # NI.recv 8254
+assemble # NI.recv 8255
+assemble # NI.recv 8238
+assemble # NI.recv 8239
+assemble # CPU.sleep 0
+assemble # NI.send 8267 31
+assemble # CPU.sleep 128
+assemble # NI.send 8320 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8321 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8322 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8323 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8324 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8325 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8326 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8327 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8328 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8329 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8330 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8331 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8332 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8333 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8334 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8335 22 23
+assemble # NI.recv 8256
+assemble # NI.recv 8257
+assemble # NI.recv 8240
+assemble # NI.recv 8241
+assemble # CPU.sleep 0
+assemble # NI.send 8268 31
+assemble # CPU.sleep 128
+assemble # NI.send 8336 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8337 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8338 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8339 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8340 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8341 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8342 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8343 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8344 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8345 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8346 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8347 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8348 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8349 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8350 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8351 22 23
+assemble # NI.recv 8258
+assemble # NI.recv 8259
+assemble # NI.recv 8242
+assemble # NI.recv 8243
+assemble # CPU.sleep 0
+assemble # NI.send 8269 31
+assemble # CPU.sleep 128
+assemble # NI.send 8352 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8353 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8354 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8355 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8356 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8357 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8358 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8359 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8360 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8361 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8362 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8363 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8364 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8365 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8366 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8367 22 23
+assemble # NI.recv 8260
+assemble # NI.recv 8261
+assemble # NI.recv 8244
+assemble # NI.recv 8245
+assemble # CPU.sleep 0
+assemble # NI.send 8270 31
+assemble # CPU.sleep 128
+assemble # NI.send 8368 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8369 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8370 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8371 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8372 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8373 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8374 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8375 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8376 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8377 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8378 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8379 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8380 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8381 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8382 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8383 22 23
+assemble # NI.recv 8262
+assemble # NI.recv 8263
+assemble # NI.recv 8246
+assemble # NI.recv 8247
+assemble # CPU.sleep 0
+assemble # NI.send 8271 31
+assemble # CPU.sleep 128
+assemble # NI.send 8384 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8385 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8386 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8387 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8388 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8389 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8390 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8391 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8392 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8393 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8394 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8395 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8396 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8397 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8398 22 23
+assemble # CPU.sleep 128
+assemble # NI.send 8399 22 23
+}
+
+
+data:
+8272 # 22, 23 # 10
+8273 # 22, 23 # 10
+8274 # 22, 23 # 10
+8275 # 22, 23 # 10
+8276 # 22, 23 # 10
+8277 # 22, 23 # 10
+8278 # 22, 23 # 10
+8279 # 22, 23 # 10
+8280 # 22, 23 # 10
+8281 # 22, 23 # 10
+8282 # 22, 23 # 10
+8283 # 22, 23 # 10
+8284 # 22, 23 # 10
+8285 # 22, 23 # 10
+8286 # 22, 23 # 10
+8287 # 22, 23 # 10
+8288 # 22, 23 # 10
+8289 # 22, 23 # 10
+8290 # 22, 23 # 10
+8291 # 22, 23 # 10
+8292 # 22, 23 # 10
+8293 # 22, 23 # 10
+8294 # 22, 23 # 10
+8295 # 22, 23 # 10
+8296 # 22, 23 # 10
+8297 # 22, 23 # 10
+8298 # 22, 23 # 10
+8299 # 22, 23 # 10
+8300 # 22, 23 # 10
+8301 # 22, 23 # 10
+8302 # 22, 23 # 10
+8303 # 22, 23 # 10
+8304 # 22, 23 # 10
+8305 # 22, 23 # 10
+8306 # 22, 23 # 10
+8307 # 22, 23 # 10
+8308 # 22, 23 # 10
+8309 # 22, 23 # 10
+8310 # 22, 23 # 10
+8311 # 22, 23 # 10
+8312 # 22, 23 # 10
+8313 # 22, 23 # 10
+8314 # 22, 23 # 10
+8315 # 22, 23 # 10
+8316 # 22, 23 # 10
+8317 # 22, 23 # 10
+8318 # 22, 23 # 10
+8319 # 22, 23 # 10
+8320 # 22, 23 # 10
+8321 # 22, 23 # 10
+8322 # 22, 23 # 10
+8323 # 22, 23 # 10
+8324 # 22, 23 # 10
+8325 # 22, 23 # 10
+8326 # 22, 23 # 10
+8327 # 22, 23 # 10
+8328 # 22, 23 # 10
+8329 # 22, 23 # 10
+8330 # 22, 23 # 10
+8331 # 22, 23 # 10
+8332 # 22, 23 # 10
+8333 # 22, 23 # 10
+8334 # 22, 23 # 10
+8335 # 22, 23 # 10
+8336 # 22, 23 # 10
+8337 # 22, 23 # 10
+8338 # 22, 23 # 10
+8339 # 22, 23 # 10
+8340 # 22, 23 # 10
+8341 # 22, 23 # 10
+8342 # 22, 23 # 10
+8343 # 22, 23 # 10
+8344 # 22, 23 # 10
+8345 # 22, 23 # 10
+8346 # 22, 23 # 10
+8347 # 22, 23 # 10
+8348 # 22, 23 # 10
+8349 # 22, 23 # 10
+8350 # 22, 23 # 10
+8351 # 22, 23 # 10
+8352 # 22, 23 # 10
+8353 # 22, 23 # 10
+8354 # 22, 23 # 10
+8355 # 22, 23 # 10
+8356 # 22, 23 # 10
+8357 # 22, 23 # 10
+8358 # 22, 23 # 10
+8359 # 22, 23 # 10
+8360 # 22, 23 # 10
+8361 # 22, 23 # 10
+8362 # 22, 23 # 10
+8363 # 22, 23 # 10
+8364 # 22, 23 # 10
+8365 # 22, 23 # 10
+8366 # 22, 23 # 10
+8367 # 22, 23 # 10
+8368 # 22, 23 # 10
+8369 # 22, 23 # 10
+8370 # 22, 23 # 10
+8371 # 22, 23 # 10
+8372 # 22, 23 # 10
+8373 # 22, 23 # 10
+8374 # 22, 23 # 10
+8375 # 22, 23 # 10
+8376 # 22, 23 # 10
+8377 # 22, 23 # 10
+8378 # 22, 23 # 10
+8379 # 22, 23 # 10
+8380 # 22, 23 # 10
+8381 # 22, 23 # 10
+8382 # 22, 23 # 10
+8383 # 22, 23 # 10
+8384 # 22, 23 # 10
+8385 # 22, 23 # 10
+8386 # 22, 23 # 10
+8387 # 22, 23 # 10
+8388 # 22, 23 # 10
+8389 # 22, 23 # 10
+8390 # 22, 23 # 10
+8391 # 22, 23 # 10
+8392 # 22, 23 # 10
+8393 # 22, 23 # 10
+8394 # 22, 23 # 10
+8395 # 22, 23 # 10
+8396 # 22, 23 # 10
+8397 # 22, 23 # 10
+8398 # 22, 23 # 10
+8399 # 22, 23 # 10
+8264 # 31 # 1
+8265 # 31 # 1
+8266 # 31 # 1
+8267 # 31 # 1
+8268 # 31 # 1
+8269 # 31 # 1
+8270 # 31 # 1
+8271 # 31 # 1

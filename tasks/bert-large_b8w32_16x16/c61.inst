@@ -1,0 +1,102 @@
+operators:
+{
+assemble # NI.recv 53144
+assemble # NI.recv 53145
+assemble # NI.recv 53128
+assemble # NI.recv 53129
+assemble # CPU.sleep 0
+assemble # NI.send 53160 143
+assemble # CPU.sleep 2048
+assemble # NI.send 53168 76
+assemble # NI.send 53169 92
+assemble # NI.recv 53146
+assemble # NI.recv 53147
+assemble # NI.recv 53130
+assemble # NI.recv 53131
+assemble # CPU.sleep 0
+assemble # NI.send 53161 143
+assemble # CPU.sleep 2048
+assemble # NI.send 53170 76
+assemble # NI.send 53171 92
+assemble # NI.recv 53148
+assemble # NI.recv 53149
+assemble # NI.recv 53132
+assemble # NI.recv 53133
+assemble # CPU.sleep 0
+assemble # NI.send 53162 143
+assemble # CPU.sleep 2048
+assemble # NI.send 53172 76
+assemble # NI.send 53173 92
+assemble # NI.recv 53150
+assemble # NI.recv 53151
+assemble # NI.recv 53134
+assemble # NI.recv 53135
+assemble # CPU.sleep 0
+assemble # NI.send 53163 143
+assemble # CPU.sleep 2048
+assemble # NI.send 53174 76
+assemble # NI.send 53175 92
+assemble # NI.recv 53152
+assemble # NI.recv 53153
+assemble # NI.recv 53136
+assemble # NI.recv 53137
+assemble # CPU.sleep 0
+assemble # NI.send 53164 143
+assemble # CPU.sleep 2048
+assemble # NI.send 53176 76
+assemble # NI.send 53177 92
+assemble # NI.recv 53154
+assemble # NI.recv 53155
+assemble # NI.recv 53138
+assemble # NI.recv 53139
+assemble # CPU.sleep 0
+assemble # NI.send 53165 143
+assemble # CPU.sleep 2048
+assemble # NI.send 53179 76
+assemble # NI.send 53178 92
+assemble # NI.recv 53156
+assemble # NI.recv 53157
+assemble # NI.recv 53140
+assemble # NI.recv 53141
+assemble # CPU.sleep 0
+assemble # NI.send 53166 143
+assemble # CPU.sleep 2048
+assemble # NI.send 53180 76
+assemble # NI.send 53181 92
+assemble # NI.recv 53158
+assemble # NI.recv 53159
+assemble # NI.recv 53142
+assemble # NI.recv 53143
+assemble # CPU.sleep 0
+assemble # NI.send 53167 143
+assemble # CPU.sleep 2048
+assemble # NI.send 53182 76
+assemble # NI.send 53183 92
+}
+
+
+data:
+53168 # 76 # 130
+53169 # 92 # 130
+53170 # 76 # 130
+53171 # 92 # 130
+53172 # 76 # 130
+53173 # 92 # 130
+53174 # 76 # 130
+53175 # 92 # 130
+53176 # 76 # 130
+53177 # 92 # 130
+53179 # 76 # 130
+53178 # 92 # 130
+53180 # 76 # 130
+53181 # 92 # 130
+53182 # 76 # 130
+53183 # 92 # 130
+53160 # 143 # 1
+53161 # 143 # 1
+53162 # 143 # 1
+53163 # 143 # 1
+53164 # 143 # 1
+53165 # 143 # 1
+53166 # 143 # 1
+53167 # 143 # 1

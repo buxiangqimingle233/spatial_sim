@@ -1,0 +1,86 @@
+operators:
+{
+assemble # NI.recv 16
+assemble # NI.recv 0
+assemble # CPU.sleep 128
+assemble # NI.send 64 0
+assemble # NI.recv 18
+assemble # NI.recv 1
+assemble # CPU.sleep 128
+assemble # NI.send 65 0
+assemble # NI.recv 20
+assemble # NI.recv 2
+assemble # CPU.sleep 128
+assemble # NI.send 66 0
+assemble # NI.recv 22
+assemble # NI.recv 3
+assemble # CPU.sleep 128
+assemble # NI.send 67 0
+assemble # NI.recv 24
+assemble # NI.recv 4
+assemble # CPU.sleep 128
+assemble # NI.send 68 0
+assemble # NI.recv 26
+assemble # NI.recv 5
+assemble # CPU.sleep 128
+assemble # NI.send 69 0
+assemble # NI.recv 28
+assemble # NI.recv 6
+assemble # CPU.sleep 128
+assemble # NI.send 70 0
+assemble # NI.recv 30
+assemble # NI.recv 7
+assemble # CPU.sleep 128
+assemble # NI.send 71 0
+assemble # NI.recv 32
+assemble # NI.recv 8
+assemble # CPU.sleep 128
+assemble # NI.send 72 0
+assemble # NI.recv 34
+assemble # NI.recv 9
+assemble # CPU.sleep 128
+assemble # NI.send 73 0
+assemble # NI.recv 36
+assemble # NI.recv 10
+assemble # CPU.sleep 128
+assemble # NI.send 74 0
+assemble # NI.recv 38
+assemble # NI.recv 11
+assemble # CPU.sleep 128
+assemble # NI.send 75 0
+assemble # NI.recv 40
+assemble # NI.recv 12
+assemble # CPU.sleep 128
+assemble # NI.send 76 0
+assemble # NI.recv 42
+assemble # NI.recv 13
+assemble # CPU.sleep 128
+assemble # NI.send 77 0
+assemble # NI.recv 44
+assemble # NI.recv 14
+assemble # CPU.sleep 128
+assemble # NI.send 78 0
+assemble # NI.recv 46
+assemble # NI.recv 15
+assemble # CPU.sleep 128
+assemble # NI.send 79 0
+}
+
+
+data:
+64 # 0 # 2
+65 # 0 # 2
+66 # 0 # 2
+67 # 0 # 2
+68 # 0 # 2
+69 # 0 # 2
+70 # 0 # 2
+71 # 0 # 2
+72 # 0 # 2
+73 # 0 # 2
+74 # 0 # 2
+75 # 0 # 2
+76 # 0 # 2
+77 # 0 # 2
+78 # 0 # 2
+79 # 0 # 2

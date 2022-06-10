@@ -74,6 +74,9 @@ public:
     }
 
     virtual void lower(const std::map<int, spatial::Tensor>& data, queue<string>& out) override {
+        if (inst == "NI.send 15 1 9") {
+            std::cout << "WUHU" << std::endl;
+        }
         out.push(inst);
     }
 

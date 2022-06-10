@@ -1,0 +1,646 @@
+operators:
+{
+assemble # NI.recv 8400
+assemble # NI.recv 8272
+assemble # CPU.sleep 128
+assemble # NI.send 8784 96
+assemble # NI.recv 8402
+assemble # NI.recv 8273
+assemble # CPU.sleep 128
+assemble # NI.send 8785 96
+assemble # NI.recv 8404
+assemble # NI.recv 8274
+assemble # CPU.sleep 128
+assemble # NI.send 8786 96
+assemble # NI.recv 8406
+assemble # NI.recv 8275
+assemble # CPU.sleep 128
+assemble # NI.send 8787 96
+assemble # NI.recv 8408
+assemble # NI.recv 8276
+assemble # CPU.sleep 128
+assemble # NI.send 8788 96
+assemble # NI.recv 8410
+assemble # NI.recv 8277
+assemble # CPU.sleep 128
+assemble # NI.send 8789 96
+assemble # NI.recv 8412
+assemble # NI.recv 8278
+assemble # CPU.sleep 128
+assemble # NI.send 8790 96
+assemble # NI.recv 8414
+assemble # NI.recv 8279
+assemble # CPU.sleep 128
+assemble # NI.send 8791 96
+assemble # NI.recv 8416
+assemble # NI.recv 8280
+assemble # CPU.sleep 128
+assemble # NI.send 8792 96
+assemble # NI.recv 8418
+assemble # NI.recv 8281
+assemble # CPU.sleep 128
+assemble # NI.send 8793 96
+assemble # NI.recv 8420
+assemble # NI.recv 8282
+assemble # CPU.sleep 128
+assemble # NI.send 8794 96
+assemble # NI.recv 8422
+assemble # NI.recv 8283
+assemble # CPU.sleep 128
+assemble # NI.send 8795 96
+assemble # NI.recv 8424
+assemble # NI.recv 8284
+assemble # CPU.sleep 128
+assemble # NI.send 8796 96
+assemble # NI.recv 8426
+assemble # NI.recv 8285
+assemble # CPU.sleep 128
+assemble # NI.send 8797 96
+assemble # NI.recv 8428
+assemble # NI.recv 8286
+assemble # CPU.sleep 128
+assemble # NI.send 8798 96
+assemble # NI.recv 8430
+assemble # NI.recv 8287
+assemble # CPU.sleep 128
+assemble # NI.send 8799 96
+assemble # NI.recv 8432
+assemble # NI.recv 8288
+assemble # CPU.sleep 128
+assemble # NI.send 8800 96
+assemble # NI.recv 8434
+assemble # NI.recv 8289
+assemble # CPU.sleep 128
+assemble # NI.send 8801 96
+assemble # NI.recv 8436
+assemble # NI.recv 8290
+assemble # CPU.sleep 128
+assemble # NI.send 8802 96
+assemble # NI.recv 8438
+assemble # NI.recv 8291
+assemble # CPU.sleep 128
+assemble # NI.send 8803 96
+assemble # NI.recv 8440
+assemble # NI.recv 8292
+assemble # CPU.sleep 128
+assemble # NI.send 8804 96
+assemble # NI.recv 8442
+assemble # NI.recv 8293
+assemble # CPU.sleep 128
+assemble # NI.send 8805 96
+assemble # NI.recv 8444
+assemble # NI.recv 8294
+assemble # CPU.sleep 128
+assemble # NI.send 8806 96
+assemble # NI.recv 8446
+assemble # NI.recv 8295
+assemble # CPU.sleep 128
+assemble # NI.send 8807 96
+assemble # NI.recv 8448
+assemble # NI.recv 8296
+assemble # CPU.sleep 128
+assemble # NI.send 8808 96
+assemble # NI.recv 8450
+assemble # NI.recv 8297
+assemble # CPU.sleep 128
+assemble # NI.send 8809 96
+assemble # NI.recv 8452
+assemble # NI.recv 8298
+assemble # CPU.sleep 128
+assemble # NI.send 8810 96
+assemble # NI.recv 8454
+assemble # NI.recv 8299
+assemble # CPU.sleep 128
+assemble # NI.send 8811 96
+assemble # NI.recv 8456
+assemble # NI.recv 8300
+assemble # CPU.sleep 128
+assemble # NI.send 8812 96
+assemble # NI.recv 8458
+assemble # NI.recv 8301
+assemble # CPU.sleep 128
+assemble # NI.send 8813 96
+assemble # NI.recv 8460
+assemble # NI.recv 8302
+assemble # CPU.sleep 128
+assemble # NI.send 8814 96
+assemble # NI.recv 8462
+assemble # NI.recv 8303
+assemble # CPU.sleep 128
+assemble # NI.send 8815 96
+assemble # NI.recv 8465
+assemble # NI.recv 8304
+assemble # CPU.sleep 128
+assemble # NI.send 8816 96
+assemble # NI.recv 8467
+assemble # NI.recv 8305
+assemble # CPU.sleep 128
+assemble # NI.send 8817 96
+assemble # NI.recv 8469
+assemble # NI.recv 8306
+assemble # CPU.sleep 128
+assemble # NI.send 8818 96
+assemble # NI.recv 8471
+assemble # NI.recv 8307
+assemble # CPU.sleep 128
+assemble # NI.send 8819 96
+assemble # NI.recv 8473
+assemble # NI.recv 8308
+assemble # CPU.sleep 128
+assemble # NI.send 8820 96
+assemble # NI.recv 8475
+assemble # NI.recv 8309
+assemble # CPU.sleep 128
+assemble # NI.send 8821 96
+assemble # NI.recv 8477
+assemble # NI.recv 8310
+assemble # CPU.sleep 128
+assemble # NI.send 8822 96
+assemble # NI.recv 8479
+assemble # NI.recv 8311
+assemble # CPU.sleep 128
+assemble # NI.send 8823 96
+assemble # NI.recv 8481
+assemble # NI.recv 8312
+assemble # CPU.sleep 128
+assemble # NI.send 8824 96
+assemble # NI.recv 8483
+assemble # NI.recv 8313
+assemble # CPU.sleep 128
+assemble # NI.send 8825 96
+assemble # NI.recv 8485
+assemble # NI.recv 8314
+assemble # CPU.sleep 128
+assemble # NI.send 8826 96
+assemble # NI.recv 8487
+assemble # NI.recv 8315
+assemble # CPU.sleep 128
+assemble # NI.send 8827 96
+assemble # NI.recv 8489
+assemble # NI.recv 8316
+assemble # CPU.sleep 128
+assemble # NI.send 8828 96
+assemble # NI.recv 8491
+assemble # NI.recv 8317
+assemble # CPU.sleep 128
+assemble # NI.send 8829 96
+assemble # NI.recv 8493
+assemble # NI.recv 8318
+assemble # CPU.sleep 128
+assemble # NI.send 8830 96
+assemble # NI.recv 8495
+assemble # NI.recv 8319
+assemble # CPU.sleep 128
+assemble # NI.send 8831 96
+assemble # NI.recv 8496
+assemble # NI.recv 8320
+assemble # CPU.sleep 128
+assemble # NI.send 8832 96
+assemble # NI.recv 8498
+assemble # NI.recv 8321
+assemble # CPU.sleep 128
+assemble # NI.send 8833 96
+assemble # NI.recv 8500
+assemble # NI.recv 8322
+assemble # CPU.sleep 128
+assemble # NI.send 8834 96
+assemble # NI.recv 8502
+assemble # NI.recv 8323
+assemble # CPU.sleep 128
+assemble # NI.send 8835 96
+assemble # NI.recv 8504
+assemble # NI.recv 8324
+assemble # CPU.sleep 128
+assemble # NI.send 8836 96
+assemble # NI.recv 8506
+assemble # NI.recv 8325
+assemble # CPU.sleep 128
+assemble # NI.send 8837 96
+assemble # NI.recv 8508
+assemble # NI.recv 8326
+assemble # CPU.sleep 128
+assemble # NI.send 8838 96
+assemble # NI.recv 8510
+assemble # NI.recv 8327
+assemble # CPU.sleep 128
+assemble # NI.send 8839 96
+assemble # NI.recv 8512
+assemble # NI.recv 8328
+assemble # CPU.sleep 128
+assemble # NI.send 8840 96
+assemble # NI.recv 8514
+assemble # NI.recv 8329
+assemble # CPU.sleep 128
+assemble # NI.send 8841 96
+assemble # NI.recv 8516
+assemble # NI.recv 8330
+assemble # CPU.sleep 128
+assemble # NI.send 8842 96
+assemble # NI.recv 8518
+assemble # NI.recv 8331
+assemble # CPU.sleep 128
+assemble # NI.send 8843 96
+assemble # NI.recv 8520
+assemble # NI.recv 8332
+assemble # CPU.sleep 128
+assemble # NI.send 8844 96
+assemble # NI.recv 8522
+assemble # NI.recv 8333
+assemble # CPU.sleep 128
+assemble # NI.send 8845 96
+assemble # NI.recv 8524
+assemble # NI.recv 8334
+assemble # CPU.sleep 128
+assemble # NI.send 8846 96
+assemble # NI.recv 8526
+assemble # NI.recv 8335
+assemble # CPU.sleep 128
+assemble # NI.send 8847 96
+assemble # NI.recv 8528
+assemble # NI.recv 8336
+assemble # CPU.sleep 128
+assemble # NI.send 8848 96
+assemble # NI.recv 8530
+assemble # NI.recv 8337
+assemble # CPU.sleep 128
+assemble # NI.send 8849 96
+assemble # NI.recv 8532
+assemble # NI.recv 8338
+assemble # CPU.sleep 128
+assemble # NI.send 8850 96
+assemble # NI.recv 8534
+assemble # NI.recv 8339
+assemble # CPU.sleep 128
+assemble # NI.send 8851 96
+assemble # NI.recv 8536
+assemble # NI.recv 8340
+assemble # CPU.sleep 128
+assemble # NI.send 8852 96
+assemble # NI.recv 8538
+assemble # NI.recv 8341
+assemble # CPU.sleep 128
+assemble # NI.send 8853 96
+assemble # NI.recv 8540
+assemble # NI.recv 8342
+assemble # CPU.sleep 128
+assemble # NI.send 8854 96
+assemble # NI.recv 8542
+assemble # NI.recv 8343
+assemble # CPU.sleep 128
+assemble # NI.send 8855 96
+assemble # NI.recv 8544
+assemble # NI.recv 8344
+assemble # CPU.sleep 128
+assemble # NI.send 8856 96
+assemble # NI.recv 8546
+assemble # NI.recv 8345
+assemble # CPU.sleep 128
+assemble # NI.send 8857 96
+assemble # NI.recv 8548
+assemble # NI.recv 8346
+assemble # CPU.sleep 128
+assemble # NI.send 8858 96
+assemble # NI.recv 8550
+assemble # NI.recv 8347
+assemble # CPU.sleep 128
+assemble # NI.send 8859 96
+assemble # NI.recv 8552
+assemble # NI.recv 8348
+assemble # CPU.sleep 128
+assemble # NI.send 8860 96
+assemble # NI.recv 8554
+assemble # NI.recv 8349
+assemble # CPU.sleep 128
+assemble # NI.send 8861 96
+assemble # NI.recv 8556
+assemble # NI.recv 8350
+assemble # CPU.sleep 128
+assemble # NI.send 8862 96
+assemble # NI.recv 8558
+assemble # NI.recv 8351
+assemble # CPU.sleep 128
+assemble # NI.send 8863 96
+assemble # NI.recv 8560
+assemble # NI.recv 8352
+assemble # CPU.sleep 128
+assemble # NI.send 8864 96
+assemble # NI.recv 8562
+assemble # NI.recv 8353
+assemble # CPU.sleep 128
+assemble # NI.send 8865 96
+assemble # NI.recv 8564
+assemble # NI.recv 8354
+assemble # CPU.sleep 128
+assemble # NI.send 8866 96
+assemble # NI.recv 8566
+assemble # NI.recv 8355
+assemble # CPU.sleep 128
+assemble # NI.send 8867 96
+assemble # NI.recv 8568
+assemble # NI.recv 8356
+assemble # CPU.sleep 128
+assemble # NI.send 8868 96
+assemble # NI.recv 8570
+assemble # NI.recv 8357
+assemble # CPU.sleep 128
+assemble # NI.send 8869 96
+assemble # NI.recv 8572
+assemble # NI.recv 8358
+assemble # CPU.sleep 128
+assemble # NI.send 8870 96
+assemble # NI.recv 8574
+assemble # NI.recv 8359
+assemble # CPU.sleep 128
+assemble # NI.send 8871 96
+assemble # NI.recv 8576
+assemble # NI.recv 8360
+assemble # CPU.sleep 128
+assemble # NI.send 8872 96
+assemble # NI.recv 8578
+assemble # NI.recv 8361
+assemble # CPU.sleep 128
+assemble # NI.send 8873 96
+assemble # NI.recv 8580
+assemble # NI.recv 8362
+assemble # CPU.sleep 128
+assemble # NI.send 8874 96
+assemble # NI.recv 8582
+assemble # NI.recv 8363
+assemble # CPU.sleep 128
+assemble # NI.send 8875 96
+assemble # NI.recv 8584
+assemble # NI.recv 8364
+assemble # CPU.sleep 128
+assemble # NI.send 8876 96
+assemble # NI.recv 8586
+assemble # NI.recv 8365
+assemble # CPU.sleep 128
+assemble # NI.send 8877 96
+assemble # NI.recv 8588
+assemble # NI.recv 8366
+assemble # CPU.sleep 128
+assemble # NI.send 8878 96
+assemble # NI.recv 8590
+assemble # NI.recv 8367
+assemble # CPU.sleep 128
+assemble # NI.send 8879 96
+assemble # NI.recv 8593
+assemble # NI.recv 8368
+assemble # CPU.sleep 128
+assemble # NI.send 8880 96
+assemble # NI.recv 8595
+assemble # NI.recv 8369
+assemble # CPU.sleep 128
+assemble # NI.send 8881 96
+assemble # NI.recv 8597
+assemble # NI.recv 8370
+assemble # CPU.sleep 128
+assemble # NI.send 8882 96
+assemble # NI.recv 8599
+assemble # NI.recv 8371
+assemble # CPU.sleep 128
+assemble # NI.send 8883 96
+assemble # NI.recv 8601
+assemble # NI.recv 8372
+assemble # CPU.sleep 128
+assemble # NI.send 8884 96
+assemble # NI.recv 8603
+assemble # NI.recv 8373
+assemble # CPU.sleep 128
+assemble # NI.send 8885 96
+assemble # NI.recv 8605
+assemble # NI.recv 8374
+assemble # CPU.sleep 128
+assemble # NI.send 8886 96
+assemble # NI.recv 8607
+assemble # NI.recv 8375
+assemble # CPU.sleep 128
+assemble # NI.send 8887 96
+assemble # NI.recv 8609
+assemble # NI.recv 8376
+assemble # CPU.sleep 128
+assemble # NI.send 8888 96
+assemble # NI.recv 8611
+assemble # NI.recv 8377
+assemble # CPU.sleep 128
+assemble # NI.send 8889 96
+assemble # NI.recv 8613
+assemble # NI.recv 8378
+assemble # CPU.sleep 128
+assemble # NI.send 8890 96
+assemble # NI.recv 8615
+assemble # NI.recv 8379
+assemble # CPU.sleep 128
+assemble # NI.send 8891 96
+assemble # NI.recv 8617
+assemble # NI.recv 8380
+assemble # CPU.sleep 128
+assemble # NI.send 8892 96
+assemble # NI.recv 8619
+assemble # NI.recv 8381
+assemble # CPU.sleep 128
+assemble # NI.send 8893 96
+assemble # NI.recv 8621
+assemble # NI.recv 8382
+assemble # CPU.sleep 128
+assemble # NI.send 8894 96
+assemble # NI.recv 8623
+assemble # NI.recv 8383
+assemble # CPU.sleep 128
+assemble # NI.send 8895 96
+assemble # NI.recv 8624
+assemble # NI.recv 8384
+assemble # CPU.sleep 128
+assemble # NI.send 8896 96
+assemble # NI.recv 8626
+assemble # NI.recv 8385
+assemble # CPU.sleep 128
+assemble # NI.send 8897 96
+assemble # NI.recv 8628
+assemble # NI.recv 8386
+assemble # CPU.sleep 128
+assemble # NI.send 8898 96
+assemble # NI.recv 8630
+assemble # NI.recv 8387
+assemble # CPU.sleep 128
+assemble # NI.send 8899 96
+assemble # NI.recv 8632
+assemble # NI.recv 8388
+assemble # CPU.sleep 128
+assemble # NI.send 8900 96
+assemble # NI.recv 8634
+assemble # NI.recv 8389
+assemble # CPU.sleep 128
+assemble # NI.send 8901 96
+assemble # NI.recv 8636
+assemble # NI.recv 8390
+assemble # CPU.sleep 128
+assemble # NI.send 8902 96
+assemble # NI.recv 8638
+assemble # NI.recv 8391
+assemble # CPU.sleep 128
+assemble # NI.send 8903 96
+assemble # NI.recv 8640
+assemble # NI.recv 8392
+assemble # CPU.sleep 128
+assemble # NI.send 8904 96
+assemble # NI.recv 8642
+assemble # NI.recv 8393
+assemble # CPU.sleep 128
+assemble # NI.send 8905 96
+assemble # NI.recv 8644
+assemble # NI.recv 8394
+assemble # CPU.sleep 128
+assemble # NI.send 8906 96
+assemble # NI.recv 8646
+assemble # NI.recv 8395
+assemble # CPU.sleep 128
+assemble # NI.send 8907 96
+assemble # NI.recv 8648
+assemble # NI.recv 8396
+assemble # CPU.sleep 128
+assemble # NI.send 8908 96
+assemble # NI.recv 8650
+assemble # NI.recv 8397
+assemble # CPU.sleep 128
+assemble # NI.send 8909 96
+assemble # NI.recv 8652
+assemble # NI.recv 8398
+assemble # CPU.sleep 128
+assemble # NI.send 8910 96
+assemble # NI.recv 8654
+assemble # NI.recv 8399
+assemble # CPU.sleep 128
+assemble # NI.send 8911 96
+}
+
+
+data:
+8784 # 96 # 9
+8785 # 96 # 9
+8786 # 96 # 9
+8787 # 96 # 9
+8788 # 96 # 9
+8789 # 96 # 9
+8790 # 96 # 9
+8791 # 96 # 9
+8792 # 96 # 9
+8793 # 96 # 9
+8794 # 96 # 9
+8795 # 96 # 9
+8796 # 96 # 9
+8797 # 96 # 9
+8798 # 96 # 9
+8799 # 96 # 9
+8800 # 96 # 9
+8801 # 96 # 9
+8802 # 96 # 9
+8803 # 96 # 9
+8804 # 96 # 9
+8805 # 96 # 9
+8806 # 96 # 9
+8807 # 96 # 9
+8808 # 96 # 9
+8809 # 96 # 9
+8810 # 96 # 9
+8811 # 96 # 9
+8812 # 96 # 9
+8813 # 96 # 9
+8814 # 96 # 9
+8815 # 96 # 9
+8816 # 96 # 9
+8817 # 96 # 9
+8818 # 96 # 9
+8819 # 96 # 9
+8820 # 96 # 9
+8821 # 96 # 9
+8822 # 96 # 9
+8823 # 96 # 9
+8824 # 96 # 9
+8825 # 96 # 9
+8826 # 96 # 9
+8827 # 96 # 9
+8828 # 96 # 9
+8829 # 96 # 9
+8830 # 96 # 9
+8831 # 96 # 9
+8832 # 96 # 9
+8833 # 96 # 9
+8834 # 96 # 9
+8835 # 96 # 9
+8836 # 96 # 9
+8837 # 96 # 9
+8838 # 96 # 9
+8839 # 96 # 9
+8840 # 96 # 9
+8841 # 96 # 9
+8842 # 96 # 9
+8843 # 96 # 9
+8844 # 96 # 9
+8845 # 96 # 9
+8846 # 96 # 9
+8847 # 96 # 9
+8848 # 96 # 9
+8849 # 96 # 9
+8850 # 96 # 9
+8851 # 96 # 9
+8852 # 96 # 9
+8853 # 96 # 9
+8854 # 96 # 9
+8855 # 96 # 9
+8856 # 96 # 9
+8857 # 96 # 9
+8858 # 96 # 9
+8859 # 96 # 9
+8860 # 96 # 9
+8861 # 96 # 9
+8862 # 96 # 9
+8863 # 96 # 9
+8864 # 96 # 9
+8865 # 96 # 9
+8866 # 96 # 9
+8867 # 96 # 9
+8868 # 96 # 9
+8869 # 96 # 9
+8870 # 96 # 9
+8871 # 96 # 9
+8872 # 96 # 9
+8873 # 96 # 9
+8874 # 96 # 9
+8875 # 96 # 9
+8876 # 96 # 9
+8877 # 96 # 9
+8878 # 96 # 9
+8879 # 96 # 9
+8880 # 96 # 9
+8881 # 96 # 9
+8882 # 96 # 9
+8883 # 96 # 9
+8884 # 96 # 9
+8885 # 96 # 9
+8886 # 96 # 9
+8887 # 96 # 9
+8888 # 96 # 9
+8889 # 96 # 9
+8890 # 96 # 9
+8891 # 96 # 9
+8892 # 96 # 9
+8893 # 96 # 9
+8894 # 96 # 9
+8895 # 96 # 9
+8896 # 96 # 9
+8897 # 96 # 9
+8898 # 96 # 9
+8899 # 96 # 9
+8900 # 96 # 9
+8901 # 96 # 9
+8902 # 96 # 9
+8903 # 96 # 9
+8904 # 96 # 9
+8905 # 96 # 9
+8906 # 96 # 9
+8907 # 96 # 9
+8908 # 96 # 9
+8909 # 96 # 9
+8910 # 96 # 9
+8911 # 96 # 9

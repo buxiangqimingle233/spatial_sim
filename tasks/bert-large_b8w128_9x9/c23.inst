@@ -1,0 +1,102 @@
+operators:
+{
+assemble # NI.recv 30296
+assemble # NI.recv 30297
+assemble # NI.recv 30280
+assemble # NI.recv 30281
+assemble # CPU.sleep 0
+assemble # NI.send 30312 5
+assemble # CPU.sleep 2048
+assemble # NI.send 30320 15
+assemble # NI.send 30321 16
+assemble # NI.recv 30298
+assemble # NI.recv 30299
+assemble # NI.recv 30282
+assemble # NI.recv 30283
+assemble # CPU.sleep 0
+assemble # NI.send 30313 5
+assemble # CPU.sleep 2048
+assemble # NI.send 30322 15
+assemble # NI.send 30323 16
+assemble # NI.recv 30300
+assemble # NI.recv 30301
+assemble # NI.recv 30284
+assemble # NI.recv 30285
+assemble # CPU.sleep 0
+assemble # NI.send 30314 5
+assemble # CPU.sleep 2048
+assemble # NI.send 30324 15
+assemble # NI.send 30325 16
+assemble # NI.recv 30302
+assemble # NI.recv 30303
+assemble # NI.recv 30286
+assemble # NI.recv 30287
+assemble # CPU.sleep 0
+assemble # NI.send 30315 5
+assemble # CPU.sleep 2048
+assemble # NI.send 30326 15
+assemble # NI.send 30327 16
+assemble # NI.recv 30304
+assemble # NI.recv 30305
+assemble # NI.recv 30288
+assemble # NI.recv 30289
+assemble # CPU.sleep 0
+assemble # NI.send 30316 5
+assemble # CPU.sleep 2048
+assemble # NI.send 30328 15
+assemble # NI.send 30329 16
+assemble # NI.recv 30306
+assemble # NI.recv 30307
+assemble # NI.recv 30290
+assemble # NI.recv 30291
+assemble # CPU.sleep 0
+assemble # NI.send 30317 5
+assemble # CPU.sleep 2048
+assemble # NI.send 30331 15
+assemble # NI.send 30330 16
+assemble # NI.recv 30308
+assemble # NI.recv 30309
+assemble # NI.recv 30292
+assemble # NI.recv 30293
+assemble # CPU.sleep 0
+assemble # NI.send 30318 5
+assemble # CPU.sleep 2048
+assemble # NI.send 30332 15
+assemble # NI.send 30333 16
+assemble # NI.recv 30310
+assemble # NI.recv 30311
+assemble # NI.recv 30294
+assemble # NI.recv 30295
+assemble # CPU.sleep 0
+assemble # NI.send 30319 5
+assemble # CPU.sleep 2048
+assemble # NI.send 30334 15
+assemble # NI.send 30335 16
+}
+
+
+data:
+30320 # 15 # 34
+30321 # 16 # 34
+30322 # 15 # 34
+30323 # 16 # 34
+30324 # 15 # 34
+30325 # 16 # 34
+30326 # 15 # 34
+30327 # 16 # 34
+30328 # 15 # 34
+30329 # 16 # 34
+30331 # 15 # 34
+30330 # 16 # 34
+30332 # 15 # 34
+30333 # 16 # 34
+30334 # 15 # 34
+30335 # 16 # 34
+30312 # 5 # 1
+30313 # 5 # 1
+30314 # 5 # 1
+30315 # 5 # 1
+30316 # 5 # 1
+30317 # 5 # 1
+30318 # 5 # 1
+30319 # 5 # 1

@@ -1,0 +1,137 @@
+operators:
+{
+assemble # CPU.sleep 128
+assemble # NI.send 17 9
+assemble # CPU.sleep 128
+assemble # NI.send 19 9
+assemble # CPU.sleep 128
+assemble # NI.send 21 9
+assemble # CPU.sleep 128
+assemble # NI.send 23 9
+assemble # CPU.sleep 128
+assemble # NI.send 25 9
+assemble # CPU.sleep 128
+assemble # NI.send 27 9
+assemble # CPU.sleep 128
+assemble # NI.send 29 9
+assemble # CPU.sleep 128
+assemble # NI.send 31 9
+assemble # CPU.sleep 128
+assemble # NI.send 33 9
+assemble # CPU.sleep 128
+assemble # NI.send 35 9
+assemble # CPU.sleep 128
+assemble # NI.send 37 9
+assemble # CPU.sleep 128
+assemble # NI.send 39 9
+assemble # CPU.sleep 128
+assemble # NI.send 41 9
+assemble # CPU.sleep 128
+assemble # NI.send 43 9
+assemble # CPU.sleep 128
+assemble # NI.send 45 9
+assemble # CPU.sleep 128
+assemble # NI.send 47 9
+}
+{
+assemble # NI.recv 80
+assemble # CPU.sleep 128
+assemble # NI.send 98 25
+assemble # CPU.sleep 128
+assemble # NI.send 100 25
+assemble # CPU.sleep 128
+assemble # NI.send 102 25
+assemble # CPU.sleep 128
+assemble # NI.send 104 25
+assemble # CPU.sleep 128
+assemble # NI.send 106 25
+assemble # CPU.sleep 128
+assemble # NI.send 108 25
+assemble # CPU.sleep 128
+assemble # NI.send 110 25
+assemble # CPU.sleep 128
+assemble # NI.send 112 25
+assemble # CPU.sleep 128
+assemble # NI.send 114 25
+assemble # CPU.sleep 128
+assemble # NI.send 116 25
+assemble # CPU.sleep 128
+assemble # NI.send 118 25
+assemble # CPU.sleep 128
+assemble # NI.send 120 25
+assemble # CPU.sleep 128
+assemble # NI.send 122 25
+assemble # CPU.sleep 128
+assemble # NI.send 124 25
+assemble # CPU.sleep 128
+assemble # NI.send 126 25
+assemble # CPU.sleep 128
+assemble # NI.send 128 25
+}
+
+
+data:
+16 # 1 # 259
+18 # 1 # 259
+20 # 1 # 259
+22 # 1 # 259
+24 # 1 # 259
+26 # 1 # 259
+28 # 1 # 259
+30 # 1 # 259
+32 # 1 # 259
+34 # 1 # 259
+36 # 1 # 259
+38 # 1 # 259
+40 # 1 # 259
+42 # 1 # 259
+44 # 1 # 259
+46 # 1 # 259
+17 # 9 # 259
+19 # 9 # 259
+21 # 9 # 259
+23 # 9 # 259
+25 # 9 # 259
+27 # 9 # 259
+29 # 9 # 259
+31 # 9 # 259
+33 # 9 # 259
+35 # 9 # 259
+37 # 9 # 259
+39 # 9 # 259
+41 # 9 # 259
+43 # 9 # 259
+45 # 9 # 259
+47 # 9 # 259
+97 # 16 # 259
+99 # 16 # 259
+101 # 16 # 259
+103 # 16 # 259
+105 # 16 # 259
+107 # 16 # 259
+109 # 16 # 259
+111 # 16 # 259
+113 # 16 # 259
+115 # 16 # 259
+117 # 16 # 259
+119 # 16 # 259
+121 # 16 # 259
+123 # 16 # 259
+125 # 16 # 259
+127 # 16 # 259
+98 # 25 # 259
+100 # 25 # 259
+102 # 25 # 259
+104 # 25 # 259
+106 # 25 # 259
+108 # 25 # 259
+110 # 25 # 259
+112 # 25 # 259
+114 # 25 # 259
+116 # 25 # 259
+118 # 25 # 259
+120 # 25 # 259
+122 # 25 # 259
+124 # 25 # 259
+126 # 25 # 259
+128 # 25 # 259

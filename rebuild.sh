@@ -3,7 +3,10 @@ if [ ! -d "build" ]; then
   mkdir build
 fi
 cd build
-cmake .. && make -j
+
+cmake -DPYTHON_EXECUTABLE=$(python3 -c "import sys; print(sys.executable)") ..
+make -j
+
 
 # cd src
 # # build 

@@ -1,0 +1,528 @@
+operators:
+{
+assemble # NI.recv 9981
+assemble # NI.recv 9973
+assemble # CPU.sleep 64
+assemble # NI.send 10236 102
+assemble # NI.recv 9983
+assemble # CPU.sleep 64
+assemble # NI.send 10237 102
+assemble # NI.recv 9985
+assemble # CPU.sleep 64
+assemble # NI.send 10238 102
+assemble # NI.recv 9987
+assemble # CPU.sleep 64
+assemble # NI.send 10239 102
+assemble # NI.recv 9989
+assemble # CPU.sleep 64
+assemble # NI.send 10240 102
+assemble # NI.recv 9991
+assemble # CPU.sleep 64
+assemble # NI.send 10241 102
+assemble # NI.recv 9993
+assemble # CPU.sleep 64
+assemble # NI.send 10242 102
+assemble # NI.recv 9995
+assemble # CPU.sleep 64
+assemble # NI.send 10243 102
+assemble # NI.recv 9997
+assemble # CPU.sleep 64
+assemble # NI.send 10244 102
+assemble # NI.recv 9999
+assemble # CPU.sleep 64
+assemble # NI.send 10245 102
+assemble # NI.recv 10001
+assemble # CPU.sleep 64
+assemble # NI.send 10246 102
+assemble # NI.recv 10003
+assemble # CPU.sleep 64
+assemble # NI.send 10247 102
+assemble # NI.recv 10005
+assemble # CPU.sleep 64
+assemble # NI.send 10248 102
+assemble # NI.recv 10007
+assemble # CPU.sleep 64
+assemble # NI.send 10249 102
+assemble # NI.recv 10009
+assemble # CPU.sleep 64
+assemble # NI.send 10250 102
+assemble # NI.recv 10011
+assemble # CPU.sleep 64
+assemble # NI.send 10251 102
+assemble # NI.recv 10013
+assemble # CPU.sleep 64
+assemble # NI.send 10252 102
+assemble # NI.recv 10015
+assemble # CPU.sleep 64
+assemble # NI.send 10253 102
+assemble # NI.recv 10017
+assemble # CPU.sleep 64
+assemble # NI.send 10254 102
+assemble # NI.recv 10019
+assemble # CPU.sleep 64
+assemble # NI.send 10255 102
+assemble # NI.recv 10021
+assemble # CPU.sleep 64
+assemble # NI.send 10256 102
+assemble # NI.recv 10023
+assemble # CPU.sleep 64
+assemble # NI.send 10257 102
+assemble # NI.recv 10025
+assemble # CPU.sleep 64
+assemble # NI.send 10258 102
+assemble # NI.recv 10027
+assemble # CPU.sleep 64
+assemble # NI.send 10259 102
+assemble # NI.recv 10029
+assemble # CPU.sleep 64
+assemble # NI.send 10260 102
+assemble # NI.recv 10031
+assemble # CPU.sleep 64
+assemble # NI.send 10261 102
+assemble # NI.recv 10033
+assemble # CPU.sleep 64
+assemble # NI.send 10262 102
+assemble # NI.recv 10035
+assemble # CPU.sleep 64
+assemble # NI.send 10263 102
+assemble # NI.recv 10037
+assemble # CPU.sleep 64
+assemble # NI.send 10264 102
+assemble # NI.recv 10039
+assemble # CPU.sleep 64
+assemble # NI.send 10265 102
+assemble # NI.recv 10041
+assemble # CPU.sleep 64
+assemble # NI.send 10266 102
+assemble # NI.recv 10043
+assemble # CPU.sleep 64
+assemble # NI.send 10267 102
+}
+{
+assemble # NI.recv 10045
+assemble # NI.recv 9974
+assemble # CPU.sleep 64
+assemble # NI.send 10268 102
+assemble # NI.recv 10047
+assemble # CPU.sleep 64
+assemble # NI.send 10269 102
+assemble # NI.recv 10049
+assemble # CPU.sleep 64
+assemble # NI.send 10270 102
+assemble # NI.recv 10051
+assemble # CPU.sleep 64
+assemble # NI.send 10271 102
+assemble # NI.recv 10053
+assemble # CPU.sleep 64
+assemble # NI.send 10272 102
+assemble # NI.recv 10055
+assemble # CPU.sleep 64
+assemble # NI.send 10273 102
+assemble # NI.recv 10057
+assemble # CPU.sleep 64
+assemble # NI.send 10274 102
+assemble # NI.recv 10059
+assemble # CPU.sleep 64
+assemble # NI.send 10275 102
+assemble # NI.recv 10061
+assemble # CPU.sleep 64
+assemble # NI.send 10276 102
+assemble # NI.recv 10063
+assemble # CPU.sleep 64
+assemble # NI.send 10277 102
+assemble # NI.recv 10065
+assemble # CPU.sleep 64
+assemble # NI.send 10278 102
+assemble # NI.recv 10067
+assemble # CPU.sleep 64
+assemble # NI.send 10279 102
+assemble # NI.recv 10069
+assemble # CPU.sleep 64
+assemble # NI.send 10280 102
+assemble # NI.recv 10071
+assemble # CPU.sleep 64
+assemble # NI.send 10281 102
+assemble # NI.recv 10073
+assemble # CPU.sleep 64
+assemble # NI.send 10282 102
+assemble # NI.recv 10075
+assemble # CPU.sleep 64
+assemble # NI.send 10283 102
+assemble # NI.recv 10077
+assemble # CPU.sleep 64
+assemble # NI.send 10284 102
+assemble # NI.recv 10079
+assemble # CPU.sleep 64
+assemble # NI.send 10285 102
+assemble # NI.recv 10081
+assemble # CPU.sleep 64
+assemble # NI.send 10286 102
+assemble # NI.recv 10083
+assemble # CPU.sleep 64
+assemble # NI.send 10287 102
+assemble # NI.recv 10085
+assemble # CPU.sleep 64
+assemble # NI.send 10288 102
+assemble # NI.recv 10087
+assemble # CPU.sleep 64
+assemble # NI.send 10289 102
+assemble # NI.recv 10089
+assemble # CPU.sleep 64
+assemble # NI.send 10290 102
+assemble # NI.recv 10091
+assemble # CPU.sleep 64
+assemble # NI.send 10291 102
+assemble # NI.recv 10093
+assemble # CPU.sleep 64
+assemble # NI.send 10292 102
+assemble # NI.recv 10095
+assemble # CPU.sleep 64
+assemble # NI.send 10293 102
+assemble # NI.recv 10097
+assemble # CPU.sleep 64
+assemble # NI.send 10294 102
+assemble # NI.recv 10099
+assemble # CPU.sleep 64
+assemble # NI.send 10295 102
+assemble # NI.recv 10101
+assemble # CPU.sleep 64
+assemble # NI.send 10296 102
+assemble # NI.recv 10103
+assemble # CPU.sleep 64
+assemble # NI.send 10297 102
+assemble # NI.recv 10105
+assemble # CPU.sleep 64
+assemble # NI.send 10298 102
+assemble # NI.recv 10107
+assemble # CPU.sleep 64
+assemble # NI.send 10299 102
+}
+{
+assemble # NI.recv 10109
+assemble # NI.recv 9977
+assemble # CPU.sleep 64
+assemble # NI.send 10300 102
+assemble # NI.recv 10111
+assemble # CPU.sleep 64
+assemble # NI.send 10301 102
+assemble # NI.recv 10113
+assemble # CPU.sleep 64
+assemble # NI.send 10302 102
+assemble # NI.recv 10115
+assemble # CPU.sleep 64
+assemble # NI.send 10303 102
+assemble # NI.recv 10117
+assemble # CPU.sleep 64
+assemble # NI.send 10304 102
+assemble # NI.recv 10119
+assemble # CPU.sleep 64
+assemble # NI.send 10305 102
+assemble # NI.recv 10121
+assemble # CPU.sleep 64
+assemble # NI.send 10306 102
+assemble # NI.recv 10123
+assemble # CPU.sleep 64
+assemble # NI.send 10307 102
+assemble # NI.recv 10125
+assemble # CPU.sleep 64
+assemble # NI.send 10308 102
+assemble # NI.recv 10127
+assemble # CPU.sleep 64
+assemble # NI.send 10309 102
+assemble # NI.recv 10129
+assemble # CPU.sleep 64
+assemble # NI.send 10310 102
+assemble # NI.recv 10131
+assemble # CPU.sleep 64
+assemble # NI.send 10311 102
+assemble # NI.recv 10133
+assemble # CPU.sleep 64
+assemble # NI.send 10312 102
+assemble # NI.recv 10135
+assemble # CPU.sleep 64
+assemble # NI.send 10313 102
+assemble # NI.recv 10137
+assemble # CPU.sleep 64
+assemble # NI.send 10314 102
+assemble # NI.recv 10139
+assemble # CPU.sleep 64
+assemble # NI.send 10315 102
+assemble # NI.recv 10141
+assemble # CPU.sleep 64
+assemble # NI.send 10316 102
+assemble # NI.recv 10143
+assemble # CPU.sleep 64
+assemble # NI.send 10317 102
+assemble # NI.recv 10145
+assemble # CPU.sleep 64
+assemble # NI.send 10318 102
+assemble # NI.recv 10147
+assemble # CPU.sleep 64
+assemble # NI.send 10319 102
+assemble # NI.recv 10149
+assemble # CPU.sleep 64
+assemble # NI.send 10320 102
+assemble # NI.recv 10151
+assemble # CPU.sleep 64
+assemble # NI.send 10321 102
+assemble # NI.recv 10153
+assemble # CPU.sleep 64
+assemble # NI.send 10322 102
+assemble # NI.recv 10155
+assemble # CPU.sleep 64
+assemble # NI.send 10323 102
+assemble # NI.recv 10157
+assemble # CPU.sleep 64
+assemble # NI.send 10324 102
+assemble # NI.recv 10159
+assemble # CPU.sleep 64
+assemble # NI.send 10325 102
+assemble # NI.recv 10161
+assemble # CPU.sleep 64
+assemble # NI.send 10326 102
+assemble # NI.recv 10163
+assemble # CPU.sleep 64
+assemble # NI.send 10327 102
+assemble # NI.recv 10165
+assemble # CPU.sleep 64
+assemble # NI.send 10328 102
+assemble # NI.recv 10167
+assemble # CPU.sleep 64
+assemble # NI.send 10329 102
+assemble # NI.recv 10169
+assemble # CPU.sleep 64
+assemble # NI.send 10330 102
+assemble # NI.recv 10171
+assemble # CPU.sleep 64
+assemble # NI.send 10331 102
+}
+{
+assemble # NI.recv 10173
+assemble # NI.recv 9979
+assemble # CPU.sleep 64
+assemble # NI.send 10332 102
+assemble # NI.recv 10175
+assemble # CPU.sleep 64
+assemble # NI.send 10333 102
+assemble # NI.recv 10177
+assemble # CPU.sleep 64
+assemble # NI.send 10334 102
+assemble # NI.recv 10179
+assemble # CPU.sleep 64
+assemble # NI.send 10335 102
+assemble # NI.recv 10181
+assemble # CPU.sleep 64
+assemble # NI.send 10336 102
+assemble # NI.recv 10183
+assemble # CPU.sleep 64
+assemble # NI.send 10337 102
+assemble # NI.recv 10185
+assemble # CPU.sleep 64
+assemble # NI.send 10338 102
+assemble # NI.recv 10187
+assemble # CPU.sleep 64
+assemble # NI.send 10339 102
+assemble # NI.recv 10189
+assemble # CPU.sleep 64
+assemble # NI.send 10340 102
+assemble # NI.recv 10191
+assemble # CPU.sleep 64
+assemble # NI.send 10341 102
+assemble # NI.recv 10193
+assemble # CPU.sleep 64
+assemble # NI.send 10342 102
+assemble # NI.recv 10195
+assemble # CPU.sleep 64
+assemble # NI.send 10343 102
+assemble # NI.recv 10197
+assemble # CPU.sleep 64
+assemble # NI.send 10344 102
+assemble # NI.recv 10199
+assemble # CPU.sleep 64
+assemble # NI.send 10345 102
+assemble # NI.recv 10201
+assemble # CPU.sleep 64
+assemble # NI.send 10346 102
+assemble # NI.recv 10203
+assemble # CPU.sleep 64
+assemble # NI.send 10347 102
+assemble # NI.recv 10205
+assemble # CPU.sleep 64
+assemble # NI.send 10348 102
+assemble # NI.recv 10207
+assemble # CPU.sleep 64
+assemble # NI.send 10349 102
+assemble # NI.recv 10209
+assemble # CPU.sleep 64
+assemble # NI.send 10350 102
+assemble # NI.recv 10211
+assemble # CPU.sleep 64
+assemble # NI.send 10351 102
+assemble # NI.recv 10213
+assemble # CPU.sleep 64
+assemble # NI.send 10352 102
+assemble # NI.recv 10215
+assemble # CPU.sleep 64
+assemble # NI.send 10353 102
+assemble # NI.recv 10217
+assemble # CPU.sleep 64
+assemble # NI.send 10354 102
+assemble # NI.recv 10219
+assemble # CPU.sleep 64
+assemble # NI.send 10355 102
+assemble # NI.recv 10221
+assemble # CPU.sleep 64
+assemble # NI.send 10356 102
+assemble # NI.recv 10223
+assemble # CPU.sleep 64
+assemble # NI.send 10357 102
+assemble # NI.recv 10225
+assemble # CPU.sleep 64
+assemble # NI.send 10358 102
+assemble # NI.recv 10227
+assemble # CPU.sleep 64
+assemble # NI.send 10359 102
+assemble # NI.recv 10229
+assemble # CPU.sleep 64
+assemble # NI.send 10360 102
+assemble # NI.recv 10231
+assemble # CPU.sleep 64
+assemble # NI.send 10361 102
+assemble # NI.recv 10233
+assemble # CPU.sleep 64
+assemble # NI.send 10362 102
+assemble # NI.recv 10235
+assemble # CPU.sleep 64
+assemble # NI.send 10363 102
+}
+
+
+data:
+10236 # 102 # 9
+10237 # 102 # 9
+10238 # 102 # 9
+10239 # 102 # 9
+10240 # 102 # 9
+10241 # 102 # 9
+10242 # 102 # 9
+10243 # 102 # 9
+10244 # 102 # 9
+10245 # 102 # 9
+10246 # 102 # 9
+10247 # 102 # 9
+10248 # 102 # 9
+10249 # 102 # 9
+10250 # 102 # 9
+10251 # 102 # 9
+10252 # 102 # 9
+10253 # 102 # 9
+10254 # 102 # 9
+10255 # 102 # 9
+10256 # 102 # 9
+10257 # 102 # 9
+10258 # 102 # 9
+10259 # 102 # 9
+10260 # 102 # 9
+10261 # 102 # 9
+10262 # 102 # 9
+10263 # 102 # 9
+10264 # 102 # 9
+10265 # 102 # 9
+10266 # 102 # 9
+10267 # 102 # 9
+10268 # 102 # 9
+10269 # 102 # 9
+10270 # 102 # 9
+10271 # 102 # 9
+10272 # 102 # 9
+10273 # 102 # 9
+10274 # 102 # 9
+10275 # 102 # 9
+10276 # 102 # 9
+10277 # 102 # 9
+10278 # 102 # 9
+10279 # 102 # 9
+10280 # 102 # 9
+10281 # 102 # 9
+10282 # 102 # 9
+10283 # 102 # 9
+10284 # 102 # 9
+10285 # 102 # 9
+10286 # 102 # 9
+10287 # 102 # 9
+10288 # 102 # 9
+10289 # 102 # 9
+10290 # 102 # 9
+10291 # 102 # 9
+10292 # 102 # 9
+10293 # 102 # 9
+10294 # 102 # 9
+10295 # 102 # 9
+10296 # 102 # 9
+10297 # 102 # 9
+10298 # 102 # 9
+10299 # 102 # 9
+10300 # 102 # 9
+10301 # 102 # 9
+10302 # 102 # 9
+10303 # 102 # 9
+10304 # 102 # 9
+10305 # 102 # 9
+10306 # 102 # 9
+10307 # 102 # 9
+10308 # 102 # 9
+10309 # 102 # 9
+10310 # 102 # 9
+10311 # 102 # 9
+10312 # 102 # 9
+10313 # 102 # 9
+10314 # 102 # 9
+10315 # 102 # 9
+10316 # 102 # 9
+10317 # 102 # 9
+10318 # 102 # 9
+10319 # 102 # 9
+10320 # 102 # 9
+10321 # 102 # 9
+10322 # 102 # 9
+10323 # 102 # 9
+10324 # 102 # 9
+10325 # 102 # 9
+10326 # 102 # 9
+10327 # 102 # 9
+10328 # 102 # 9
+10329 # 102 # 9
+10330 # 102 # 9
+10331 # 102 # 9
+10332 # 102 # 9
+10333 # 102 # 9
+10334 # 102 # 9
+10335 # 102 # 9
+10336 # 102 # 9
+10337 # 102 # 9
+10338 # 102 # 9
+10339 # 102 # 9
+10340 # 102 # 9
+10341 # 102 # 9
+10342 # 102 # 9
+10343 # 102 # 9
+10344 # 102 # 9
+10345 # 102 # 9
+10346 # 102 # 9
+10347 # 102 # 9
+10348 # 102 # 9
+10349 # 102 # 9
+10350 # 102 # 9
+10351 # 102 # 9
+10352 # 102 # 9
+10353 # 102 # 9
+10354 # 102 # 9
+10355 # 102 # 9
+10356 # 102 # 9
+10357 # 102 # 9
+10358 # 102 # 9
+10359 # 102 # 9
+10360 # 102 # 9
+10361 # 102 # 9
+10362 # 102 # 9
+10363 # 102 # 9

@@ -1,0 +1,102 @@
+operators:
+{
+assemble # NI.recv 41720
+assemble # NI.recv 41721
+assemble # NI.recv 41704
+assemble # NI.recv 41705
+assemble # CPU.sleep 0
+assemble # NI.send 41736 112
+assemble # CPU.sleep 2048
+assemble # NI.send 41744 10
+assemble # NI.send 41745 11
+assemble # NI.recv 41722
+assemble # NI.recv 41723
+assemble # NI.recv 41706
+assemble # NI.recv 41707
+assemble # CPU.sleep 0
+assemble # NI.send 41737 112
+assemble # CPU.sleep 2048
+assemble # NI.send 41746 10
+assemble # NI.send 41747 11
+assemble # NI.recv 41724
+assemble # NI.recv 41725
+assemble # NI.recv 41708
+assemble # NI.recv 41709
+assemble # CPU.sleep 0
+assemble # NI.send 41738 112
+assemble # CPU.sleep 2048
+assemble # NI.send 41748 10
+assemble # NI.send 41749 11
+assemble # NI.recv 41726
+assemble # NI.recv 41727
+assemble # NI.recv 41710
+assemble # NI.recv 41711
+assemble # CPU.sleep 0
+assemble # NI.send 41739 112
+assemble # CPU.sleep 2048
+assemble # NI.send 41750 10
+assemble # NI.send 41751 11
+assemble # NI.recv 41728
+assemble # NI.recv 41729
+assemble # NI.recv 41712
+assemble # NI.recv 41713
+assemble # CPU.sleep 0
+assemble # NI.send 41740 112
+assemble # CPU.sleep 2048
+assemble # NI.send 41752 10
+assemble # NI.send 41753 11
+assemble # NI.recv 41730
+assemble # NI.recv 41731
+assemble # NI.recv 41714
+assemble # NI.recv 41715
+assemble # CPU.sleep 0
+assemble # NI.send 41741 112
+assemble # CPU.sleep 2048
+assemble # NI.send 41755 10
+assemble # NI.send 41754 11
+assemble # NI.recv 41732
+assemble # NI.recv 41733
+assemble # NI.recv 41716
+assemble # NI.recv 41717
+assemble # CPU.sleep 0
+assemble # NI.send 41742 112
+assemble # CPU.sleep 2048
+assemble # NI.send 41756 10
+assemble # NI.send 41757 11
+assemble # NI.recv 41734
+assemble # NI.recv 41735
+assemble # NI.recv 41718
+assemble # NI.recv 41719
+assemble # CPU.sleep 0
+assemble # NI.send 41743 112
+assemble # CPU.sleep 2048
+assemble # NI.send 41758 10
+assemble # NI.send 41759 11
+}
+
+
+data:
+41744 # 10 # 18
+41745 # 11 # 18
+41746 # 10 # 18
+41747 # 11 # 18
+41748 # 10 # 18
+41749 # 11 # 18
+41750 # 10 # 18
+41751 # 11 # 18
+41752 # 10 # 18
+41753 # 11 # 18
+41755 # 10 # 18
+41754 # 11 # 18
+41756 # 10 # 18
+41757 # 11 # 18
+41758 # 10 # 18
+41759 # 11 # 18
+41736 # 112 # 1
+41737 # 112 # 1
+41738 # 112 # 1
+41739 # 112 # 1
+41740 # 112 # 1
+41741 # 112 # 1
+41742 # 112 # 1
+41743 # 112 # 1
