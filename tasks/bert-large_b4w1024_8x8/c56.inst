@@ -1,0 +1,54 @@
+operators:
+{
+assemble # NI.recv 15148
+assemble # NI.recv 15149
+assemble # NI.recv 15140
+assemble # NI.recv 15141
+assemble # CPU.sleep 0
+assemble # NI.send 15156 4
+assemble # NI.recv 15150
+assemble # NI.recv 15151
+assemble # NI.recv 15142
+assemble # NI.recv 15143
+assemble # CPU.sleep 0
+assemble # NI.send 15157 4
+assemble # NI.recv 15152
+assemble # NI.recv 15153
+assemble # NI.recv 15144
+assemble # NI.recv 15145
+assemble # CPU.sleep 0
+assemble # NI.send 15158 4
+assemble # NI.recv 15154
+assemble # NI.recv 15155
+assemble # NI.recv 15146
+assemble # NI.recv 15147
+assemble # CPU.sleep 0
+assemble # NI.send 15159 4
+assemble # CPU.sleep 2048
+assemble # NI.send 15160 25
+assemble # NI.send 15161 17
+assemble # CPU.sleep 2048
+assemble # NI.send 15163 25
+assemble # NI.send 15162 17
+assemble # CPU.sleep 2048
+assemble # NI.send 15164 25
+assemble # NI.send 15165 17
+assemble # CPU.sleep 2048
+assemble # NI.send 15166 25
+assemble # NI.send 15167 17
+}
+
+
+data:
+15160 # 25 # 6
+15161 # 17 # 6
+15163 # 25 # 6
+15162 # 17 # 6
+15164 # 25 # 6
+15165 # 17 # 6
+15166 # 25 # 6
+15167 # 17 # 6
+15156 # 4 # 1
+15157 # 4 # 1
+15158 # 4 # 1
+15159 # 4 # 1
