@@ -74,6 +74,9 @@ public:
     }
 
     virtual void lower(const std::map<int, spatial::Tensor>& data, queue<string>& out) override {
+        if (inst == "NI.send 15 1 9") {
+            std::cout << "WUHU" << std::endl;
+        }
         out.push(inst);
     }
 
@@ -196,15 +199,12 @@ public:
                     dynamic_pointer_cast<CompOperator>(op)->input_stationary.insert(make_pair(dep, false));
                     vis_tid.insert(dep);
                 } else {
-                    dynamic_pointer_cast<CompOperator>(op)->input_stationary.insert(make_pair(dep, false));
+                    // FIXME: need test
+                    dynamic_pointer_cast<CompOperator>(op)->input_stationary.insert(make_pair(dep, true));
                 }
             }
         }
-
-        // TODO: We do not support output stationary at present.
-
     }
-
 };
 
 class ManOperator : public Operator {
