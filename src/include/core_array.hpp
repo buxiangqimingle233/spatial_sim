@@ -12,8 +12,9 @@
 
 namespace spatial {
 
+class SpatialChip;
 class CoreArray {
-
+    friend SpatialChip;
 private:
     std::vector<CORE> _cores;
     std::shared_ptr<std::vector<bool>> _pipe_open;
@@ -29,7 +30,6 @@ public:
 
     bool allCoreClosed(int _clock);
     bool stateChanged();
-
 };
 
 

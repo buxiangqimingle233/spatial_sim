@@ -148,4 +148,24 @@ void SpatialChip::display_stats(std::ostream & os) {
     os << std::endl << " ================================================= " << std::endl;
 }
 
+std::vector<int> SpatialChip::compute_cycles() {
+    std::vector<int> ret(core_array->_cores.size());
+    std::vector<int>::iterator rit = ret.begin();
+    std::vector<spatial::CORE>::iterator cit = core_array->_cores.begin();
+    for (; rit != ret.end() && cit != core_array->_cores.end(); ++rit, ++cit) {
+        *rit = cit->getBusyCycles();
+    }
+    return ret;
+}
+
+std::vector<int> SpatialChip::communicate_cycles() {
+    std::vector<int> ret(core_array->_cores.size());
+    std::vector<int>::iterator rit = ret.begin();
+    std::vector<spatial::CORE>::iterator cit = core_array->_cores.begin();
+    for (; rit != ret.end() && cit != core_array->_cores.end(); ++rit, ++cit) {
+        *rit = cit->getIdleCycles();
+    }
+    return ret;
+}
+
 };
