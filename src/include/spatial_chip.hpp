@@ -42,6 +42,7 @@ public:
     void display_stats(std::ostream& os = std::cout);
     std::vector<int> compute_cycles();
     std::vector<int> communicate_cycles();
+    std::vector<double> router_conflict_factors();
 
     SpatialChip(std::string spatial_chip_spec);
     ~SpatialChip() { }

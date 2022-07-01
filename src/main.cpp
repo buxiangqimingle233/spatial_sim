@@ -18,6 +18,11 @@ int main(int argc, char **argv) {
             std::cout << c << " ";
         }
         std::cout << std::endl;
+        std::cout << "Router conflict factors: " << std::endl;
+        for (double c: test_chip.router_conflict_factors()) {
+            std::cout << c << " ";
+        }
+        std::cout << std::endl;
     }
     catch (const std::string msg) {
         std::cerr << msg << std::endl;

@@ -168,4 +168,8 @@ std::vector<int> SpatialChip::communicate_cycles() {
     return ret;
 }
 
+std::vector<double> SpatialChip::router_conflict_factors() {
+    return noc->router_conflict_factors();
+}
+
 };

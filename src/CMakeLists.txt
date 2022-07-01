@@ -6,8 +6,8 @@ project(spatialsim)
 # DUMP_NODE_STATE: dump node states at each cycle
 
 # add_compile_options(-O0 -g -DMULTICAST)
-add_compile_options(-O3 -g -fPIC -DMULTICAST)
 # add_compile_options(-O3 -g -fPIC)
+add_compile_options(-O3 -g -fPIC -DMULTICAST -DRT_DETAIL_LOG)
 
 add_subdirectory(core)
 add_subdirectory(noc)

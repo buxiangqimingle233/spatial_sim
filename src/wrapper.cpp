@@ -28,5 +28,6 @@ PYBIND11_MODULE(simulator, m) {
         .def("is_deadlock", &spatial::SpatialChip::check_deadlock)
         .def("reset", &spatial::SpatialChip::reset)
         .def("compute_cycles", &spatial::SpatialChip::compute_cycles)
-        .def("communicate_cycles", &spatial::SpatialChip::communicate_cycles);
+        .def("communicate_cycles", &spatial::SpatialChip::communicate_cycles)
+        .def("router_conflict_factors", &spatial::SpatialChip::router_conflict_factors);
 }
