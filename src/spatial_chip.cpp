@@ -88,23 +88,11 @@ unsigned int SpatialChip::run() {
     std::streambuf *backup = std::cout.rdbuf();
     std::cout.rdbuf(_log_file->rdbuf());
     
-    // clock_t start, end;
-    // unsigned long core_array_time = 0, noc_time = 0;
-
-    // FIXME: fix here
     while (!task_finished(_clock)) {
-        // start = clock();
         core_array->step(_clock);
-        // end = clock();
-        // core_array_time += end - start;
-
-        // start = clock();
         noc->step(_clock);
-        // end = clock();
-        // noc_time += end - start;
 
         _clock++;
-
         if (_clock % check_frequency  == 0) {
             std::cout << "Simulate " << _clock << " cycles" << std::endl;
             if (check_deadlock()) {
@@ -124,8 +112,6 @@ unsigned int SpatialChip::run() {
     // restore cout's original streambuf
     std::cout.rdbuf(backup);
     
-    // std::cerr << "array / noc " << (double)core_array_time / (double)noc_time << std::endl;
-
     return _clock;
 }
 
@@ -160,6 +146,30 @@ void SpatialChip::display_stats(std::ostream & os) {
     noc->DisplayStats(os);
 
     os << std::endl << " ================================================= " << std::endl;
+}
+
+std::vector<int> SpatialChip::compute_cycles() {
+    std::vector<int> ret(core_array->_cores.size());
+    std::vector<int>::iterator rit = ret.begin();
+    std::vector<spatial::CORE>::iterator cit = core_array->_cores.begin();
+    for (; rit != ret.end() && cit != core_array->_cores.end(); ++rit, ++cit) {
+        *rit = cit->getBusyCycles();
+    }
+    return ret;
+}
+
+std::vector<int> SpatialChip::communicate_cycles() {
+    std::vector<int> ret(core_array->_cores.size());
+    std::vector<int>::iterator rit = ret.begin();
+    std::vector<spatial::CORE>::iterator cit = core_array->_cores.begin();
+    for (; rit != ret.end() && cit != core_array->_cores.end(); ++rit, ++cit) {
+        *rit = cit->getIdleCycles();
+    }
+    return ret;
+}
+
+std::vector<double> SpatialChip::router_conflict_factors() {
+    return noc->router_conflict_factors();
 }
 
 };

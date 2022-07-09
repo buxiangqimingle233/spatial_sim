@@ -9,7 +9,7 @@ working_directory = tasks/bert_inception;
 tasks = {c0.inst,c1.inst,c2.inst,c3.inst,c4.inst,c5.inst,c6.inst,c7.inst,c8.inst,c9.inst,c10.inst,c11.inst,c12.inst,c13.inst,c14.inst,c15.inst};
 micro_instr_latency = runfiles/micro_instr_latency;
 routing_board = routing_board;
-deadlock_check_freq = 10000;
+deadlock_check_freq = 100000;
 
 // NoC speficication, copied from booksim
 topology = mesh;
@@ -29,12 +29,12 @@ channel_width = 128;    // Only work for power simulation
 routing_function = src_routing;
 
 
-num_vcs = 8;
+num_vcs = 4;
 vc_buf_size = 2;
 
 tech_file = runfiles/noc/techfile.txt;
 watch_out = booksim.log;
 // watch_packets = {247};
-watch_flits = {297};
+// watch_flits = {297};
 // watch_flits = {19,20,21,22,23,24,25,26};
 // watch_packets = {0,1,2,3,4,5,6,7,8,9,10};

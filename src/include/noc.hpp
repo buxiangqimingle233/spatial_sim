@@ -21,10 +21,10 @@ public:
     bool traffic_drained() {
         return _traffic_manager->flitsDrained();
     }
+
     void DisplayStats(std::ostream & os = std::cout);
+    std::vector<double> router_conflict_factors();
 
-
-public:
     NoC(BookSimConfig config, PCNInterfaceSet send_queues_, PCNInterfaceSet receive_queues_);
     ~NoC() { delete _traffic_manager; };
 };

@@ -8,6 +8,21 @@ int main(int argc, char **argv) {
     try {
         spatial::SpatialChip test_chip(argv[1]);
         test_chip.run();
+        std::cout << "compute cycles:" << std::endl;
+        for (int c: test_chip.compute_cycles()) {
+            std::cout << c << " ";
+        }
+        std::cout << std::endl;
+        std::cout << "communicate cycles: " << std::endl;
+        for (int c: test_chip.communicate_cycles()) {
+            std::cout << c << " ";
+        }
+        std::cout << std::endl;
+        std::cout << "Router conflict factors: " << std::endl;
+        for (double c: test_chip.router_conflict_factors()) {
+            std::cout << c << " ";
+        }
+        std::cout << std::endl;
     }
     catch (const std::string msg) {
         std::cerr << msg << std::endl;

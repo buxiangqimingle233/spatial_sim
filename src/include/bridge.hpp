@@ -22,7 +22,7 @@ struct Tensor {
         tid = other.tid;
         dims = other.dims;
     }
-    int size() {
+    const int size() {
         if (dims.empty()) {
             return 0;
         }
