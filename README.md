@@ -107,7 +107,7 @@ git submodule update --init --recursive --remote
 
 ### Run a Benchmark
 ```bash
-build/bin/spatialsim tasks/4-core-1-gemm/spatial_spec
+./build/bin/spatialsim ./examples/ring/task_spec
 ```
 
 ## Notes
