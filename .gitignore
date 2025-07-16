@@ -4,6 +4,7 @@
 .Apple*
 .DS_Store
 .vscode/
+.cache/
 nohup.*
 test/*
 build/*
@@ -12,3 +13,4 @@ tasks/*
 
 *.log
 out.txt
+**/__pycache__/*
