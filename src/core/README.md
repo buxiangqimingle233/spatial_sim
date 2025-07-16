@@ -4,9 +4,9 @@
 
 Network Interface: 
 * Packet Send: NI.send dest_nid tid
-> Ni.send 0 5 2 1 1
+> Ni.send 0 1
 * Packet Receive: NI.recv tid
-> NI.recv 10 1
+> NI.recv 1
 
 AI Core: 
 * Calculation: ACC.cal command out_tid in_tid1 in_tid2

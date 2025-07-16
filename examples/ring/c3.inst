@@ -1,0 +1,30 @@
+operators:
+{
+assemble # NI.send 400 0
+assemble # NI.recv 300
+assemble # CPU.sleep 50
+assemble # NI.send 401 0
+assemble # NI.recv 301
+assemble # CPU.sleep 50
+assemble # NI.send 402 0
+assemble # NI.recv 302
+assemble # CPU.sleep 50
+assemble # NI.send 403 0
+assemble # NI.recv 303
+assemble # CPU.sleep 50
+assemble # NI.send 404 0
+assemble # NI.recv 304
+assemble # CPU.sleep 50
+}
+
+data:
+300 # 3 # 8.0
+301 # 3 # 8.0
+302 # 3 # 8.0
+303 # 3 # 8.0
+304 # 3 # 8.0
+400 # 0 # 8.0
+401 # 0 # 8.0
+402 # 0 # 8.0
+403 # 0 # 8.0
+404 # 0 # 8.0

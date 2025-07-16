@@ -2579,8 +2579,10 @@ void IQRouter::_SendFlits()
                    << "." << endl;
       if (gTrace)
       {
-        cout << "Outport " << output << endl
-             << "Stop Mark" << endl;
+        cout << GetSimTime() << " | " << FullName() << " | "
+             << "Sending flit " << f->id
+             << " to channel at output " << output
+             << "." << endl;
       }
       _output_channels[output]->Send(f);
     }

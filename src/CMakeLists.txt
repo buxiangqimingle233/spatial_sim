@@ -7,8 +7,8 @@ project(spatialsim)
 
 # add_compile_options(-O0 -g -DMULTICAST)
 # add_compile_options(-O3 -g -fPIC)
-add_compile_options(-O3 -g -fPIC -DMULTICAST -DRT_DETAIL_LOG)
-# add_compile_options(-O3 -g -fPIC -DRT_DETAIL_LOG)
+# add_compile_options(-O3 -g -fPIC -DMULTICAST -DRT_DETAIL_LOG)
+add_compile_options(-O3 -g -fPIC -DRT_DETAIL_LOG)
 
 add_subdirectory(core)
 add_subdirectory(noc)

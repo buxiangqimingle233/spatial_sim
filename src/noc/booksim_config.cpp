@@ -80,8 +80,8 @@ BookSimConfig::BookSimConfig( )
 
   //==== General options ===================================
 
-  AddStrField( "router", "iq" ); 
-  // AddStrField("router", "mc");
+  // AddStrField( "router", "iq" ); 
+  AddStrField("router", "mc");
 
   _int_map["output_delay"] = 0;
   _int_map["credit_delay"] = 0;

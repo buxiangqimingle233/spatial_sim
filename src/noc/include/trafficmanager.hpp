@@ -350,6 +350,11 @@ public:
                  << ")." << endl;
     }
 
+    if (f->head) {
+      spatial::Packet recovered_packet = spatial::Packet(static_cast<FocusFlit*>(f)->pkt);
+      (*_receive_queues)[f->dest]->push(recovered_packet);
+    }
+    
     if ( f->head && ( f->dest != dest ) ) {
       ostringstream err;
       err << "Flit " << f->id << " arrived at incorrect output " << dest;

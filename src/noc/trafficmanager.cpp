@@ -651,6 +651,7 @@ TrafficManager::~TrafficManager( )
 
 void TrafficManager::_RetireFlit( Flit *f, int dest )
 {
+
     _deadlock_timer = 0;
 
     FocusFlit* ff = static_cast<FocusFlit*>(f);
@@ -805,6 +806,7 @@ void TrafficManager::_GeneratePacket( int source, int stype,
 
     spatial::Packet pkt = (*_send_queues)[source]->front();
     int size = pkt.size;
+    
 
 #ifdef DUMP_SENT_TENSOR
     *gWatchOut << GetSimTime() << " | "
@@ -1361,7 +1363,7 @@ void TrafficManager::_Step( )
 #ifdef TRACK_FLOWS
                 ++_ejected_flits[f->cl][n];
 #endif
-	
+                std::cout << "Retiring flit " << f->id << " (packet " << f->pid << ", src = " << f->src << ", dest = " << f->dest << ", hops = " << f->hops << ", flat = " << f->atime - f->itime << ")." << std::endl;
                 _RetireFlit(f, n);
             }
         }
@@ -1372,9 +1374,9 @@ void TrafficManager::_Step( )
 
     ++_time;
     assert(_time);
-    if(gTrace) {
-        cout<<"TIME "<<_time<<endl;
-    }
+    // if(gTrace) {
+    //     cout<<"TIME "<<_time<<endl;
+    // }
 
     // dump waiting flits
 #ifdef DUMP_WAITING_FLITS
